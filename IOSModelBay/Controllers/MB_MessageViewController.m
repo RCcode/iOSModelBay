@@ -36,11 +36,16 @@ static NSString * const identifier = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listArray.count;
+//    return self.listArray.count;
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     cell.usernameLabel.text = @"songge";
     return cell;
 }
@@ -55,6 +60,12 @@ static NSString * const identifier = @"cell";
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        
+        UIView *view =[[UIView alloc] init];
+        [_tableView setTableFooterView:view];
+        [_tableView setTableHeaderView:view];
+        
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_UserTableViewCell" bundle:nil] forCellReuseIdentifier:identifier];
     }
     return _tableView;
 }

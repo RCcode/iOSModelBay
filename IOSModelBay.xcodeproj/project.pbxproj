@@ -767,7 +767,6 @@
 				TargetAttributes = {
 					6F55A4A31B1D7567006DA537 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = QSHGBVZA56;
 					};
 					6F55A4BC1B1D7567006DA537 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -972,6 +971,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1009,6 +1009,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1019,6 +1020,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1030,6 +1032,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1038,6 +1041,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1049,6 +1053,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
