@@ -1,0 +1,22 @@
+//
+//  PrefixHeader.pch
+//  IOSModelBay
+//
+//  Created by lisongrc on 15/6/2.
+//  Copyright (c) 2015年 rcplatform. All rights reserved.
+//
+
+#ifndef IOSModelBay_PrefixHeader_pch
+#define IOSModelBay_PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "MobClick.h"
+#import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "MB_Define.h"
+#import "MB_Utils.h"
+#import "CMethods.h"
+
+#endif
