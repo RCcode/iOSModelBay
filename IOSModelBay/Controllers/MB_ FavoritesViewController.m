@@ -1,18 +1,18 @@
 //
-//  MB_MessageViewController.m
+//  MB_ FavoritesViewController.m
 //  IOSModelBay
 //
 //  Created by lisongrc on 15/6/3.
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_MessageViewController.h"
+#import "MB_ FavoritesViewController.h"
 
-@interface MB_MessageViewController ()
+@interface MB__FavoritesViewController ()
 
 @end
 
-@implementation MB_MessageViewController
+@implementation MB__FavoritesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

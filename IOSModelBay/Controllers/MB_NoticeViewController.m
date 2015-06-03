@@ -1,31 +1,31 @@
 //
-//  MB_SearchViewController.m
+//  MB_MessageViewController.m
 //  IOSModelBay
 //
 //  Created by lisongrc on 15/6/2.
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_SearchViewController.h"
+#import "MB_NoticeViewController.h"
 #import "MB_UserTableViewCell.h"
 
 static NSString * const identifier = @"cell";
 
-@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UITableView *listTableView;
-@property (nonatomic, strong) NSMutableArray *resultArray;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *listArray;
 
 @end
 
-@implementation MB_SearchViewController
+@implementation MB_NoticeViewController
 
 #pragma mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.listTableView];
+    [self.view addSubview:self.tableView];
 }
 
 
@@ -36,7 +36,12 @@ static NSString * const identifier = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resultArray.count;
+//    return self.listArray.count;
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -48,25 +53,28 @@ static NSString * const identifier = @"cell";
 
 #pragma mark - private methods
 
-
 #pragma mark - getters & setters
 
-- (UITableView *)listTableView {
-    if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _listTableView.delegate = self;
-        _listTableView.dataSource = self;
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
         
-        [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:identifier];
+        UIView *view =[[UIView alloc] init];
+        [_tableView setTableFooterView:view];
+        [_tableView setTableHeaderView:view];
+        
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_UserTableViewCell" bundle:nil] forCellReuseIdentifier:identifier];
     }
-    return _listTableView;
+    return _tableView;
 }
 
-- (NSMutableArray *)resultArray {
-    if (_resultArray == nil) {
-        _resultArray = [[NSMutableArray alloc] initWithCapacity:0];
+- (NSMutableArray *)listArray {
+    if (_listArray == nil) {
+        _listArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
-    return _resultArray;
+    return _listArray;
 }
 
 - (void)didReceiveMemoryWarning {

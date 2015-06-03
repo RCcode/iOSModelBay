@@ -10,7 +10,7 @@
 #import "MB_BaseViewController.h"
 #import "MB_FindViewController.h"
 #import "MB_RankingViewController.h"
-#import "MB_MessageViewController.h"
+#import "MB_NoticeViewController.h"
 #import "MB_UserViewController.h"
 
 @interface MB_TabBarViewController ()
@@ -30,7 +30,7 @@
     rankingVC.tabBarItem.image          = [UIImage imageNamed:@"a"];
     MB_BaseViewController *rankingNC   = [[MB_BaseViewController alloc] initWithRootViewController:rankingVC];
     
-    MB_MessageViewController *messageVC = [[MB_MessageViewController alloc] init];
+    MB_NoticeViewController *messageVC = [[MB_NoticeViewController alloc] init];
     messageVC.tabBarItem.image          = [UIImage imageNamed:@"a"];
     MB_BaseViewController *messageNC   = [[MB_BaseViewController alloc] initWithRootViewController:messageVC];
     

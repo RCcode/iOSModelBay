@@ -92,8 +92,25 @@
 		6F8387FD1B1D9239002D2ED3 /* MB_FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8387FC1B1D9239002D2ED3 /* MB_FindViewController.m */; };
 		6F8388041B1D9C18002D2ED3 /* MB_RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */; };
 		6F8388071B1D9C3C002D2ED3 /* MB_UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8388061B1D9C3C002D2ED3 /* MB_UserViewController.m */; };
-		6F83880A1B1D9C7B002D2ED3 /* MB_MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8388091B1D9C7B002D2ED3 /* MB_MessageViewController.m */; };
+		6F83880A1B1D9C7B002D2ED3 /* MB_NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */; };
 		6F83880C1B1D9D6C002D2ED3 /* a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F83880B1B1D9D6C002D2ED3 /* a@2x.png */; };
+		CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */; };
+		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
+		CDA567A31B1EE1BE006FB5C3 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA567A21B1EE1BE006FB5C3 /* MB_AddressBookPeople.m */; };
+		CDCA04E21B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */; };
+		CDCA04E31B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */; };
+		CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */; };
+		CDCA04E81B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */; };
+		CDCA04EC1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04EA1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m */; };
+		CDCA04ED1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04EB1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib */; };
+		CDCA04F41B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04F11B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.m */; };
+		CDCA04F51B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04F31B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m */; };
+		CDCA052D1B1EB993003CCDB2 /* MB_UserSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */; };
+		CDCA05301B1EBA7F003CCDB2 /* MB_SampleReelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA052F1B1EBA7F003CCDB2 /* MB_SampleReelsViewController.m */; };
+		CDCA05331B1EBAA3003CCDB2 /* MB_InstragramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05321B1EBAA3003CCDB2 /* MB_InstragramViewController.m */; };
+		CDCA05361B1EBABA003CCDB2 /* MB_MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */; };
+		CDCA05391B1EBAEB003CCDB2 /* MB_ FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05381B1EBAEB003CCDB2 /* MB_ FavoritesViewController.m */; };
+		CDCA053C1B1EBC1E003CCDB2 /* MB_SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,9 +312,40 @@
 		6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_RankingViewController.m; sourceTree = "<group>"; };
 		6F8388051B1D9C3C002D2ED3 /* MB_UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserViewController.h; sourceTree = "<group>"; };
 		6F8388061B1D9C3C002D2ED3 /* MB_UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserViewController.m; sourceTree = "<group>"; };
-		6F8388081B1D9C7B002D2ED3 /* MB_MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageViewController.h; sourceTree = "<group>"; };
-		6F8388091B1D9C7B002D2ED3 /* MB_MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageViewController.m; sourceTree = "<group>"; };
+		6F8388081B1D9C7B002D2ED3 /* MB_NoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_NoticeViewController.h; sourceTree = "<group>"; };
+		6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_NoticeViewController.m; sourceTree = "<group>"; };
 		6F83880B1B1D9D6C002D2ED3 /* a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "a@2x.png"; sourceTree = "<group>"; };
+		CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InviteViewController.h; sourceTree = "<group>"; };
+		CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InviteViewController.m; sourceTree = "<group>"; };
+		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CDA567A11B1EE1BE006FB5C3 /* MB_AddressBookPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MB_AddressBookPeople.h; path = IOSModelBay/Controllers/MB_AddressBookPeople.h; sourceTree = SOURCE_ROOT; };
+		CDA567A21B1EE1BE006FB5C3 /* MB_AddressBookPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MB_AddressBookPeople.m; path = IOSModelBay/Controllers/MB_AddressBookPeople.m; sourceTree = SOURCE_ROOT; };
+		CDCA04DF1B1EAB7F003CCDB2 /* MB_MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageTableViewCell.h; sourceTree = "<group>"; };
+		CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageTableViewCell.m; sourceTree = "<group>"; };
+		CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MessageTableViewCell.xib; sourceTree = "<group>"; };
+		CDCA04E41B1EADD5003CCDB2 /* MB_AlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AlbumTableViewCell.h; sourceTree = "<group>"; };
+		CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AlbumTableViewCell.m; sourceTree = "<group>"; };
+		CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		CDCA04E91B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SignalImageTableViewCell.h; sourceTree = "<group>"; };
+		CDCA04EA1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SignalImageTableViewCell.m; sourceTree = "<group>"; };
+		CDCA04EB1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_SignalImageTableViewCell.xib; sourceTree = "<group>"; };
+		CDCA04EF1B1EB14F003CCDB2 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		CDCA04F01B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		CDCA04F11B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		CDCA04F21B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		CDCA04F31B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		CDCA052B1B1EB993003CCDB2 /* MB_UserSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserSummaryViewController.h; sourceTree = "<group>"; };
+		CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserSummaryViewController.m; sourceTree = "<group>"; };
+		CDCA052E1B1EBA7F003CCDB2 /* MB_SampleReelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SampleReelsViewController.h; sourceTree = "<group>"; };
+		CDCA052F1B1EBA7F003CCDB2 /* MB_SampleReelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SampleReelsViewController.m; sourceTree = "<group>"; };
+		CDCA05311B1EBAA3003CCDB2 /* MB_InstragramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramViewController.h; sourceTree = "<group>"; };
+		CDCA05321B1EBAA3003CCDB2 /* MB_InstragramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramViewController.m; sourceTree = "<group>"; };
+		CDCA05341B1EBABA003CCDB2 /* MB_MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageViewController.h; sourceTree = "<group>"; };
+		CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageViewController.m; sourceTree = "<group>"; };
+		CDCA05371B1EBAEB003CCDB2 /* MB_ FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MB_ FavoritesViewController.h"; sourceTree = "<group>"; };
+		CDCA05381B1EBAEB003CCDB2 /* MB_ FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MB_ FavoritesViewController.m"; sourceTree = "<group>"; };
+		CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SettingViewController.h; sourceTree = "<group>"; };
+		CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */,
 				6F8387F51B1D8C36002D2ED3 /* SystemConfiguration.framework in Frameworks */,
 				6F8387F31B1D8C29002D2ED3 /* StoreKit.framework in Frameworks */,
 				6F8387F11B1D8C23002D2ED3 /* MessageUI.framework in Frameworks */,
@@ -434,6 +483,8 @@
 		6F83870E1B1D84D8002D2ED3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CDA567A11B1EE1BE006FB5C3 /* MB_AddressBookPeople.h */,
+				CDA567A21B1EE1BE006FB5C3 /* MB_AddressBookPeople.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -441,6 +492,7 @@
 		6F83870F1B1D84D8002D2ED3 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				CDCA04EE1B1EB14F003CCDB2 /* SVPullToRefresh */,
 				6F555CEC1B1DA58F0045A155 /* MBProgressHUD */,
 				6F8387DD1B1D892A002D2ED3 /* Reachability */,
 				6F8387A81B1D8715002D2ED3 /* SDWebImage */,
@@ -473,6 +525,15 @@
 				6F555D0B1B1DBCCB0045A155 /* MB_UserTableViewCell.h */,
 				6F555D0C1B1DBCCB0045A155 /* MB_UserTableViewCell.m */,
 				6F555D0D1B1DBCCB0045A155 /* MB_UserTableViewCell.xib */,
+				CDCA04DF1B1EAB7F003CCDB2 /* MB_MessageTableViewCell.h */,
+				CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */,
+				CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */,
+				CDCA04E41B1EADD5003CCDB2 /* MB_AlbumTableViewCell.h */,
+				CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */,
+				CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */,
+				CDCA04E91B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.h */,
+				CDCA04EA1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m */,
+				CDCA04EB1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -678,6 +739,7 @@
 		6F8387F61B1D8E66002D2ED3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */,
 				6F8387F41B1D8C36002D2ED3 /* SystemConfiguration.framework */,
 				6F8387F21B1D8C29002D2ED3 /* StoreKit.framework */,
 				6F8387F01B1D8C23002D2ED3 /* MessageUI.framework */,
@@ -706,16 +768,42 @@
 				6F8387FC1B1D9239002D2ED3 /* MB_FindViewController.m */,
 				6F8388021B1D9C18002D2ED3 /* MB_RankingViewController.h */,
 				6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */,
-				6F8388081B1D9C7B002D2ED3 /* MB_MessageViewController.h */,
-				6F8388091B1D9C7B002D2ED3 /* MB_MessageViewController.m */,
+				6F8388081B1D9C7B002D2ED3 /* MB_NoticeViewController.h */,
+				6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */,
 				6F8388051B1D9C3C002D2ED3 /* MB_UserViewController.h */,
 				6F8388061B1D9C3C002D2ED3 /* MB_UserViewController.m */,
 				6F555D051B1DB89E0045A155 /* MB_FilterViewController.h */,
 				6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */,
 				6F555D081B1DB8B10045A155 /* MB_SearchViewController.h */,
 				6F555D091B1DB8B10045A155 /* MB_SearchViewController.m */,
+				CDCA052B1B1EB993003CCDB2 /* MB_UserSummaryViewController.h */,
+				CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */,
+				CDCA052E1B1EBA7F003CCDB2 /* MB_SampleReelsViewController.h */,
+				CDCA052F1B1EBA7F003CCDB2 /* MB_SampleReelsViewController.m */,
+				CDCA05311B1EBAA3003CCDB2 /* MB_InstragramViewController.h */,
+				CDCA05321B1EBAA3003CCDB2 /* MB_InstragramViewController.m */,
+				CDCA05341B1EBABA003CCDB2 /* MB_MessageViewController.h */,
+				CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */,
+				CDCA05371B1EBAEB003CCDB2 /* MB_ FavoritesViewController.h */,
+				CDCA05381B1EBAEB003CCDB2 /* MB_ FavoritesViewController.m */,
+				CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */,
+				CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */,
+				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
+				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CDCA04EE1B1EB14F003CCDB2 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				CDCA04EF1B1EB14F003CCDB2 /* SVPullToRefresh.h */,
+				CDCA04F01B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.h */,
+				CDCA04F11B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.m */,
+				CDCA04F21B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.h */,
+				CDCA04F31B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -804,9 +892,12 @@
 				6F8387461B1D862A002D2ED3 /* RC_PopUpADView.xib in Resources */,
 				6F8387441B1D862A002D2ED3 /* RC_MoreTableViewCell.xib in Resources */,
 				6F55A4B81B1D7567006DA537 /* LaunchScreen.xib in Resources */,
+				CDCA04E31B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib in Resources */,
 				6F55A4B51B1D7567006DA537 /* Images.xcassets in Resources */,
 				6F83880C1B1D9D6C002D2ED3 /* a@2x.png in Resources */,
 				6F8387421B1D862A002D2ED3 /* RC_moreAPPsLibBundle.bundle in Resources */,
+				CDCA04ED1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib in Resources */,
+				CDCA04E81B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,10 +922,13 @@
 				6F555CF91B1DAA2D0045A155 /* MB_MainViewController.m in Sources */,
 				6F8387291B1D8544002D2ED3 /* UIImage+processing.m in Sources */,
 				6F83872F1B1D85DC002D2ED3 /* CMethods.m in Sources */,
+				CDCA05331B1EBAA3003CCDB2 /* MB_InstragramViewController.m in Sources */,
 				6F555D071B1DB89E0045A155 /* MB_FilterViewController.m in Sources */,
 				6F83878A1B1D86E6002D2ED3 /* AFURLConnectionOperation.m in Sources */,
 				6F555CEF1B1DA5A00045A155 /* MBProgressHUD.m in Sources */,
 				6F8387891B1D86E6002D2ED3 /* AFSecurityPolicy.m in Sources */,
+				CDCA052D1B1EB993003CCDB2 /* MB_UserSummaryViewController.m in Sources */,
+				CDCA04EC1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m in Sources */,
 				6F8387CA1B1D8715002D2ED3 /* MKAnnotationView+WebCache.m in Sources */,
 				6F555D0A1B1DB8B10045A155 /* MB_SearchViewController.m in Sources */,
 				6F8387A31B1D86F9002D2ED3 /* UIButton+AFNetworking.m in Sources */,
@@ -845,10 +939,12 @@
 				6F83872B1B1D8544002D2ED3 /* UIImage+SubImage.m in Sources */,
 				6F8387871B1D86E6002D2ED3 /* AFHTTPSessionManager.m in Sources */,
 				6F555CF61B1DA9420045A155 /* MB_Utils.m in Sources */,
+				CDA567A31B1EE1BE006FB5C3 /* MB_AddressBookPeople.m in Sources */,
 				6F8387701B1D8684002D2ED3 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				6F8388071B1D9C3C002D2ED3 /* MB_UserViewController.m in Sources */,
 				6F8387D51B1D8715002D2ED3 /* UIImage+MultiFormat.m in Sources */,
 				6F8387D71B1D8715002D2ED3 /* UIImageView+HighlightedWebCache.m in Sources */,
+				CDCA05391B1EBAEB003CCDB2 /* MB_ FavoritesViewController.m in Sources */,
 				6F8387251B1D8544002D2ED3 /* UIButton+helper.m in Sources */,
 				6F83872C1B1D8544002D2ED3 /* UIImage+Utility.m in Sources */,
 				6F8387D41B1D8715002D2ED3 /* UIImage+GIF.m in Sources */,
@@ -863,11 +959,14 @@
 				6F8388041B1D9C18002D2ED3 /* MB_RankingViewController.m in Sources */,
 				6F55A4AA1B1D7567006DA537 /* main.m in Sources */,
 				6F8387D01B1D8715002D2ED3 /* SDWebImageDownloaderOperation.m in Sources */,
+				CDCA05301B1EBA7F003CCDB2 /* MB_SampleReelsViewController.m in Sources */,
 				6F8387861B1D86E6002D2ED3 /* AFHTTPRequestOperationManager.m in Sources */,
 				6F8387A71B1D86F9002D2ED3 /* UIWebView+AFNetworking.m in Sources */,
+				CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */,
 				6F8387241B1D8544002D2ED3 /* NSString+Helper.m in Sources */,
 				6F8387851B1D86E6002D2ED3 /* AFHTTPRequestOperation.m in Sources */,
 				6F555CF21B1DA74C0045A155 /* MB_LoginViewController.m in Sources */,
+				CDCA04E21B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m in Sources */,
 				6F8387A61B1D86F9002D2ED3 /* UIRefreshControl+AFNetworking.m in Sources */,
 				6F83878D1B1D86E6002D2ED3 /* AFURLSessionManager.m in Sources */,
 				6F8387451B1D862A002D2ED3 /* RC_PopUpADView.m in Sources */,
@@ -875,7 +974,10 @@
 				6F83878C1B1D86E6002D2ED3 /* AFURLResponseSerialization.m in Sources */,
 				6F555D031B1DB1980045A155 /* MB_UserCollectViewCell.m in Sources */,
 				6F8387D81B1D8715002D2ED3 /* UIImageView+WebCache.m in Sources */,
+				CDCA053C1B1EBC1E003CCDB2 /* MB_SettingViewController.m in Sources */,
 				6F83878B1B1D86E6002D2ED3 /* AFURLRequestSerialization.m in Sources */,
+				CDCA05361B1EBABA003CCDB2 /* MB_MessageViewController.m in Sources */,
+				CDCA04F41B1EB14F003CCDB2 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				6F8387D91B1D8715002D2ED3 /* UIView+WebCacheOperation.m in Sources */,
 				6F83873F1B1D862A002D2ED3 /* RC_AppInfo.m in Sources */,
 				6F8387D21B1D8715002D2ED3 /* SDWebImagePrefetcher.m in Sources */,
@@ -883,13 +985,15 @@
 				6F8387CB1B1D8715002D2ED3 /* NSData+ImageContentType.m in Sources */,
 				6F8387411B1D862A002D2ED3 /* RC_moreAPPsLib.m in Sources */,
 				6F83872A1B1D8544002D2ED3 /* UIImage+Rotate.m in Sources */,
+				CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */,
 				6F8387261B1D8544002D2ED3 /* UIDevice+DeviceInfo.m in Sources */,
+				CDCA04F51B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				6F555CFF1B1DAF960045A155 /* MB_BaseViewController.m in Sources */,
 				6F8387A41B1D86F9002D2ED3 /* UIImageView+AFNetworking.m in Sources */,
 				6F8387D31B1D8715002D2ED3 /* UIButton+WebCache.m in Sources */,
 				6F8387CF1B1D8715002D2ED3 /* SDWebImageDownloader.m in Sources */,
 				6F8387431B1D862A002D2ED3 /* RC_MoreTableViewCell.m in Sources */,
-				6F83880A1B1D9C7B002D2ED3 /* MB_MessageViewController.m in Sources */,
+				6F83880A1B1D9C7B002D2ED3 /* MB_NoticeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

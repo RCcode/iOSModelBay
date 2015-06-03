@@ -1,5 +1,5 @@
 //
-//  MB_MessageViewController.h
+//  MB_InviteViewController.h
 //  IOSModelBay
 //
 //  Created by lisongrc on 15/6/3.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_MessageViewController : UIViewController
+@interface MB_InviteViewController : UIViewController
 
 @end
