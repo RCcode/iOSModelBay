@@ -19,5 +19,6 @@
 #import "MB_Utils.h"
 #import "CMethods.h"
 #import "SVPullToRefresh.h"
+#import "MobClick.h"
 
 #endif

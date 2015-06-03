@@ -31,7 +31,7 @@
     web.delegate = self;
     [self.view addSubview:web];
     
-    NSString *loginUrl = [NSString stringWithFormat:@"https://api.instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=code&scope=likes+relationships",kClientId,kRedirectUri];
+    NSString *loginUrl = [NSString stringWithFormat:@"https://api.instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=code&scope=likes+relationships",kClientID,kRedirectUri];
     NSURL *url = [NSURL URLWithString:loginUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [web loadRequest:request];

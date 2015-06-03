@@ -11,7 +11,7 @@
 #import "MB_SampleReelsViewController.h"
 #import "MB_InstragramViewController.h"
 #import "MB_MessageViewController.h"
-#import "MB_ FavoritesViewController.h"
+#import "MB_FavoritesViewController.h"
 #import "MB_SettingViewController.h"
 
 @interface MB_UserViewController ()
