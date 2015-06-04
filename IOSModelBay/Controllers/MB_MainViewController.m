@@ -8,6 +8,7 @@
 
 #import "MB_MainViewController.h"
 #import "MB_TabBarViewController.h"
+#import "MB_LoginViewController.h"
 
 
 @interface MB_MainViewController ()
@@ -30,11 +31,22 @@
     [self.view addSubview:self.skipBtn];
 }
 
+
 #pragma mark - private methods
 
 - (void)loginBtnOnClick:(UIButton *)btn{
-    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-    [self presentViewController:tabVC animated:YES completion:nil];
+    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
+        NSLog(@"ssss%@",codeStr);
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
+            NSLog(@"%@",response);
+        } failure:^(NSError *err) {
+            
+        }];
+    }];
+        
+    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:loginNC animated:YES completion:nil];
 }
 
 - (void)skipBtnOnClick:(UIButton *)btn{

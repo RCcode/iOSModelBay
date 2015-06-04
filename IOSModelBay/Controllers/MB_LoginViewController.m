@@ -14,6 +14,14 @@
 
 @implementation MB_LoginViewController
 
+- (instancetype)initWithSuccessBlock:(LoginSuccessBlock)success {
+    self = [super init];
+    if (self) {
+        _loginSuccessBlock = success;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,7 +41,7 @@
     
     NSString *loginUrl = [NSString stringWithFormat:@"https://api.instagram.com/oauth/authorize/?client_id=%@&redirect_uri=%@&response_type=code&scope=likes+relationships",kClientID,kRedirectUri];
     NSURL *url = [NSURL URLWithString:loginUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
     [web loadRequest:request];
 }
 
@@ -52,7 +60,7 @@
         NSLog(@"absoluteString == %@",request.URL.absoluteString);
         NSLog(@"code = %@",codeStr);
         [self dismissViewControllerAnimated:YES completion:^{
-            self.loginSuccessBlock(codeStr);
+            _loginSuccessBlock(codeStr);
         }];
         return NO;
     }

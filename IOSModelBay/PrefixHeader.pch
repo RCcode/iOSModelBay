@@ -20,5 +20,6 @@
 #import "CMethods.h"
 #import "SVPullToRefresh.h"
 #import "MobClick.h"
+#import "AFHttpTool.h"
 
 #endif

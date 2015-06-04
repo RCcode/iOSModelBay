@@ -14,4 +14,6 @@ typedef void(^LoginSuccessBlock)(NSString *codeStr);
 
 @property (nonatomic, copy) LoginSuccessBlock loginSuccessBlock;
 
+- (instancetype)initWithSuccessBlock:(LoginSuccessBlock)success;
+
 @end

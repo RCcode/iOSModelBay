@@ -112,6 +112,7 @@
 		CDCA05361B1EBABA003CCDB2 /* MB_MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */; };
 		CDCA05391B1EBAEB003CCDB2 /* MB_FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05381B1EBAEB003CCDB2 /* MB_FavoritesViewController.m */; };
 		CDCA053C1B1EBC1E003CCDB2 /* MB_SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */; };
+		CDDE7F621B20569400BEBAA9 /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDE7F611B20569400BEBAA9 /* AFHttpTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +350,8 @@
 		CDCA05381B1EBAEB003CCDB2 /* MB_FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_FavoritesViewController.m; sourceTree = "<group>"; };
 		CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SettingViewController.h; sourceTree = "<group>"; };
 		CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SettingViewController.m; sourceTree = "<group>"; };
+		CDDE7F601B20569400BEBAA9 /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
+		CDDE7F611B20569400BEBAA9 /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +520,8 @@
 				6F8388011B1D99C7002D2ED3 /* MB_Define.h */,
 				6F555CF41B1DA9420045A155 /* MB_Utils.h */,
 				6F555CF51B1DA9420045A155 /* MB_Utils.m */,
+				CDDE7F601B20569400BEBAA9 /* AFHttpTool.h */,
+				CDDE7F611B20569400BEBAA9 /* AFHttpTool.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -957,6 +962,7 @@
 				6F8387701B1D8684002D2ED3 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				6F8388071B1D9C3C002D2ED3 /* MB_UserViewController.m in Sources */,
 				6F8387D51B1D8715002D2ED3 /* UIImage+MultiFormat.m in Sources */,
+				CDDE7F621B20569400BEBAA9 /* AFHttpTool.m in Sources */,
 				6F8387D71B1D8715002D2ED3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				CDCA05391B1EBAEB003CCDB2 /* MB_FavoritesViewController.m in Sources */,
 				6F8387251B1D8544002D2ED3 /* UIButton+helper.m in Sources */,
