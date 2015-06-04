@@ -95,6 +95,8 @@ static AFHttpTool *httpTool = nil;
         NSDictionary *userParams = @{@"access_token":resultDic[@"access_token"]};
         
         [_manager GET:userurl parameters:userParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
+            
             //服务器登录
             [self loginWithParameters:userParams success:^(id response) {
                 NSLog(@"login  %@",response);
