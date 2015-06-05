@@ -9,6 +9,7 @@
 #import "MB_MainViewController.h"
 #import "MB_TabBarViewController.h"
 #import "MB_LoginViewController.h"
+#import "MB_User.h"
 
 
 @interface MB_MainViewController ()
@@ -40,6 +41,8 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
             NSLog(@"%@",response);
+            MB_User *user = [[MB_User alloc] init];
+            [user setValuesForKeysWithDictionary:response];
         } failure:^(NSError *err) {
             
         }];

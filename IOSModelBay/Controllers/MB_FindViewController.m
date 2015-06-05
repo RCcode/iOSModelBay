@@ -15,6 +15,7 @@ static NSString * const ReuseIdentifier = @"item";
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
+@property (nonatomic, strong) UILabel *footerLabel;
 
 @end
 
@@ -29,6 +30,8 @@ static NSString * const ReuseIdentifier = @"item";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(filterBarBtnOnCLick:)];
     
     [self.view addSubview:self.collectView];
+    [self addFooterRefresh];
+    [self findUserList];
 }
 
 
@@ -59,6 +62,33 @@ static NSString * const ReuseIdentifier = @"item";
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     [self.navigationController pushViewController:filterVC animated:YES];
 }
+
+- (void)addFooterRefresh {
+    __weak MB_FindViewController *weakSelf = self;
+    _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
+    _footerLabel.textAlignment = NSTextAlignmentCenter;
+    _footerLabel.backgroundColor = [UIColor whiteColor];
+    
+    [_collectView addInfiniteScrollingWithActionHandler:^{
+        NSLog(@"footer");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.collectView.infiniteScrollingView stopAnimating];
+            weakSelf.footerLabel.text = @"没有更多了";
+        });
+    }];
+    [self.collectView.infiniteScrollingView setCustomView:_footerLabel forState:SVPullToRefreshStateStopped];
+}
+
+- (void)findUserList {
+    NSDictionary *params = @{@"minId":@(0),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
+        NSLog(@"list %@",response);
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
 
 #pragma mark - getters & setters
 

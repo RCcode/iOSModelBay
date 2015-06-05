@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_FavoritesViewController : UIViewController
+@interface MB_LikesViewController : UIViewController
 
 @end

@@ -1,18 +1,18 @@
 //
-//  MB_ FavoritesViewController.m
+//  MB_SampleReelsViewController.m
 //  IOSModelBay
 //
 //  Created by lisongrc on 15/6/3.
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_FavoritesViewController.h"
+#import "MB_AblumViewController.h"
 
-@interface MB_FavoritesViewController ()
+@interface MB_AblumViewController ()
 
 @end
 
-@implementation MB_FavoritesViewController
+@implementation MB_AblumViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_SampleReelsViewController : UIViewController
+@interface MB_AblumViewController : UIViewController
 
 @end

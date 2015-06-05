@@ -8,10 +8,10 @@
 
 #import "MB_UserViewController.h"
 #import "MB_UserSummaryViewController.h"
-#import "MB_SampleReelsViewController.h"
+#import "MB_AblumViewController.h"
 #import "MB_InstragramViewController.h"
 #import "MB_MessageViewController.h"
-#import "MB_FavoritesViewController.h"
+#import "MB_LikesViewController.h"
 #import "MB_SettingViewController.h"
 
 @interface MB_UserViewController ()

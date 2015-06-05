@@ -8,7 +8,27 @@
 
 #import "AFHttpTool.h"
 
-#define baseUrl @""
+#define kBaseUrl             @"http://192.168.0.86:8082/ModelBay/"
+
+#define kLoginUrl            @"user/login.do"
+#define kRegistUrl           @"user/register.do"
+#define kGetNoticeUrl        @"user/getUserMessage.do"
+#define kFindUserUrl         @"media/findUser.do"
+#define kGetUserDetailUrl    @"user/getUserDetail.do"
+#define kUpdateUserDetailUrl @"user/updateUserDetail.do"
+#define kUpdateUserPicUrl    @"user/updatUPic.do"
+#define kUpdateBackgroudUrl  @"user/updateBackgroud.do"
+#define kGetAblumUrl         @"ablum/getAblum.do"
+#define kGetAblumLikesUrl    @"ablum/getAblumLikes.do"
+#define kLikeAblumUrl        @"ablum/likeAblum.do"
+#define kGetAblumCommentsUrl @"ablum/getAblumComments.do"
+#define kCommentAblumUrl     @"ablum/commentAblum.do"
+#define kAddAblumUrl         @"ablum/addAblum.do"
+#define kUploadPicUrl        @"ablum/uploadPic.do"
+#define kGetMessagesUrl      @"user/getComments.do"
+#define kAddMessageUrl       @"user/addComment.do"
+#define kReplyMessageUrl     @"user/replyComment.do"
+#define kGetLikesUrl         @"user/getLikes.do"
 
 //#define ContentType @"text/html"
 //#define ContentType @"text/plain"
@@ -35,7 +55,8 @@ static AFHttpTool *httpTool = nil;
                   success:(void (^)(id response))success
                   failure:(void (^)(NSError* err))failure
 {
-    url = [NSString stringWithFormat:@"%@%@",baseUrl,url];
+    url = [NSString stringWithFormat:@"%@%@",kBaseUrl,url];
+    NSLog(@"url = %@",url);
 //#ifdef ContentType
 //    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
 //#endif
@@ -76,10 +97,10 @@ static AFHttpTool *httpTool = nil;
     }
 }
 
+//instragram登录
 - (void)loginWithCodeString:(NSString *)codeStr
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure {
-    
     //获取token
     NSDictionary *params = @{@"client_id":kClientID,
                              @"client_secret":kClientSecret,
@@ -88,25 +109,34 @@ static AFHttpTool *httpTool = nil;
                              @"code":codeStr};
     NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
     [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *resultDic = (NSDictionary*)responseObject;
-        NSLog(@"%@",resultDic);
-        //获取用户信息
-        NSString *userurl= [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/",resultDic[@"user"][@"id"]];
-        NSDictionary *userParams = @{@"access_token":resultDic[@"access_token"]};
+        NSLog(@"--%@",responseObject);
         
-        [_manager GET:userurl parameters:userParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"%@",responseObject);
+        //服务器登录
+        NSDictionary *loginParams = @{@"uid":responseObject[@"user"][@"id"],
+                                      @"tplat":@(0),
+                                      @"plat":@(2),
+                                      @"ikey":@"a",
+                                      @"akey":@"a",
+                                      @"fullName":responseObject[@"user"][@"full_name"],
+                                      @"token":responseObject[@"access_token"]};
+        NSLog(@"%@",loginParams);
+        [self loginWithParameters:loginParams success:^(id response) {
+            NSLog(@"login--%@",response);
             
-            //服务器登录
-            [self loginWithParameters:userParams success:^(id response) {
-                NSLog(@"login  %@",response);
-                success(response);
-            } failure:^(NSError *err) {
-                failure(err);
-            }];
+            //记录用户信息
+            [userDefaults setObject:responseObject[@"user"][@"id"] forKey:kUid];
+            [userDefaults setObject:responseObject[@"user"][@"username"] forKey:kUsername];
+            [userDefaults setObject:responseObject[@"user"][@"full_name"] forKey:kFullname];
+            [userDefaults setObject:responseObject[@"user"][@"profile_picture"] forKey:kPic];
+            [userDefaults setObject:responseObject[@"access_token"] forKey:kAccessToken];
+            [userDefaults setBool:YES forKey:kIsLogin];
+            [userDefaults synchronize];
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            failure(error);
+            success(response);
+            
+        } failure:^(NSError *err) {
+            NSLog(@"%#",err);
+            failure(err);
         }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -114,16 +144,233 @@ static AFHttpTool *httpTool = nil;
     }];
 }
 
-//login
+//登录
 - (void)loginWithParameters:params
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure
 {
     [self requestWihtMethod:RequestTypePost
-                              url:@"email_login"
-                           params:params
-                          success:success
-                          failure:failure];
+                        url:kLoginUrl
+                     params:params
+                    success:success
+                    failure:failure];
 }
+
+//注册
+- (void)registWithParameters:params
+                     success:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kRegistUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取用户动态
+- (void)getNoticeWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetNoticeUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取推荐人员搜索 & 按条件搜索用户
+- (void)findUserWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kFindUserUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取用户详细信息
+- (void)getUerDetailWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetUserDetailUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//修改用户详细信息
+- (void)updateUserDetailWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kUpdateUserDetailUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//修改用户头像
+- (void)updateUserPicWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kUpdateUserPicUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//修改用户背景
+- (void)updateBackgroundWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kUpdateBackgroudUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取用户作品集
+- (void)getAblumWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetAblumUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取作品集赞列表
+- (void)getAblumLikesWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetAblumLikesUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//赞作品集
+- (void)likeAblumWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kLikeAblumUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取作品集评论列表
+- (void)getAblumCommentsWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetAblumCommentsUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//评论作品集
+- (void)commentAblumWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kCommentAblumUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//发布作品集
+- (void)addAblumWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kAddAblumUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//上传图片
+- (void)uploadPicWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kUploadPicUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取用户留言列表
+- (void)getMessagesWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetMessagesUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//添加用户留言
+- (void)addMessageWithParameters:params
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kAddMessageUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//回复留言
+- (void)replyMessageWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kReplyMessageUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取收藏列表
+- (void)GetLikesWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetLikesUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
 
 @end

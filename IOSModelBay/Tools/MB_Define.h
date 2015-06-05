@@ -43,6 +43,15 @@
 #define FEEDBACK_EMAIL @"rcplatform.help@gmail.com"
 #define FOLLOW_US_URL  @"http://www.instagram.com/nocrop_rc"
 
+#define kIsLogin @"isLogin"
+#define kUid @"uid"
+#define kUsername @"username"
+#define kFullname @"fullname"
+#define kPic @"pic"
+#define kAccessToken @"accessToken"
+
+#define userDefaults [NSUserDefaults standardUserDefaults]
+
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)

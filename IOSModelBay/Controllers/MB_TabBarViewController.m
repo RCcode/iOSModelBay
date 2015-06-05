@@ -24,19 +24,19 @@
     
     MB_FindViewController *findVC       = [[MB_FindViewController alloc] init];
     findVC.tabBarItem.image             = [UIImage imageNamed:@"a"];
-    MB_BaseViewController *findNC      = [[MB_BaseViewController alloc] initWithRootViewController:findVC];
+    MB_BaseViewController *findNC       = [[MB_BaseViewController alloc] initWithRootViewController:findVC];
     
     MB_RankingViewController *rankingVC = [[MB_RankingViewController alloc] init];
     rankingVC.tabBarItem.image          = [UIImage imageNamed:@"a"];
-    MB_BaseViewController *rankingNC   = [[MB_BaseViewController alloc] initWithRootViewController:rankingVC];
+    MB_BaseViewController *rankingNC    = [[MB_BaseViewController alloc] initWithRootViewController:rankingVC];
     
-    MB_NoticeViewController *messageVC = [[MB_NoticeViewController alloc] init];
+    MB_NoticeViewController *messageVC  = [[MB_NoticeViewController alloc] init];
     messageVC.tabBarItem.image          = [UIImage imageNamed:@"a"];
-    MB_BaseViewController *messageNC   = [[MB_BaseViewController alloc] initWithRootViewController:messageVC];
+    MB_BaseViewController *messageNC    = [[MB_BaseViewController alloc] initWithRootViewController:messageVC];
     
     MB_UserViewController *userVC       = [[MB_UserViewController alloc] init];
     userVC.tabBarItem.image             = [UIImage imageNamed:@"a"];
-    MB_BaseViewController *userNC      = [[MB_BaseViewController alloc] initWithRootViewController:userVC];
+    MB_BaseViewController *userNC       = [[MB_BaseViewController alloc] initWithRootViewController:userVC];
     
     self.viewControllers          = @[findNC, rankingNC, messageNC, userNC];
 }

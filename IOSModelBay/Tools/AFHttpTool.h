@@ -30,14 +30,101 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 - (void)loginWithCodeString:(NSString *)codeStr
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure;
+
 //登录
 - (void)loginWithParameters:params
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure;
 
+//注册
+- (void)registWithParameters:params
+                     success:(void (^)(id response))success
+                     failure:(void (^)(NSError* err))failure;
 
+//获取用户动态
+- (void)getNoticeWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
 
+//获取推荐人员搜索 & 按条件搜索用户
+- (void)findUserWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure;
 
+//获取用户详细信息
+- (void)getUerDetailWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure;
+
+//修改用户详细信息
+- (void)updateUserDetailWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure;
+
+//修改用户头像
+- (void)updateUserPicWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure;
+
+//修改用户背景
+- (void)updateBackgroundWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure;
+
+//获取用户作品集
+- (void)getAblumWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure;
+
+//获取作品集赞列表
+- (void)getAblumLikesWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure;
+
+//赞作品集
+- (void)likeAblumWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
+
+//获取作品集评论列表
+- (void)getAblumCommentsWithParameters:params
+                               success:(void (^)(id response))success
+                               failure:(void (^)(NSError* err))failure;
+
+//评论作品集
+- (void)commentAblumWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure;
+
+//发布作品集
+- (void)addAblumWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure;
+
+//上传图片
+- (void)uploadPicWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
+
+//获取用户留言列表
+- (void)getMessagesWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure;
+
+//添加用户留言
+- (void)addMessageWithParameters:params
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError* err))failure;
+
+//回复留言
+- (void)replyMessageWithParameters:params
+                           success:(void (^)(id response))success
+                           failure:(void (^)(NSError* err))failure;
+
+//获取收藏列表
+- (void)GetLikesWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure;
 
 
 @end
