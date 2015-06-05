@@ -97,6 +97,10 @@
 		CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDA567A81B1EF61A006FB5C3 /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */; };
+		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
+		CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */; };
+		CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB971B21B3E300119C18 /* MB_Notice.m */; };
+		CDC9AB9D1B21B3E300119C18 /* MB_User.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB991B21B3E300119C18 /* MB_User.m */; };
 		CDCA04E21B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */; };
 		CDCA04E31B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */; };
 		CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */; };
@@ -321,6 +325,14 @@
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDA567A61B1EF61A006FB5C3 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
+		CDC9AB921B21B3E300119C18 /* MB_Ablum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Ablum.h; sourceTree = "<group>"; };
+		CDC9AB931B21B3E300119C18 /* MB_Ablum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Ablum.m; sourceTree = "<group>"; };
+		CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddressBookPeople.h; sourceTree = "<group>"; };
+		CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AddressBookPeople.m; sourceTree = "<group>"; };
+		CDC9AB961B21B3E300119C18 /* MB_Notice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Notice.h; sourceTree = "<group>"; };
+		CDC9AB971B21B3E300119C18 /* MB_Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Notice.m; sourceTree = "<group>"; };
+		CDC9AB981B21B3E300119C18 /* MB_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_User.h; sourceTree = "<group>"; };
+		CDC9AB991B21B3E300119C18 /* MB_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_User.m; sourceTree = "<group>"; };
 		CDCA04DF1B1EAB7F003CCDB2 /* MB_MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageTableViewCell.h; sourceTree = "<group>"; };
 		CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageTableViewCell.m; sourceTree = "<group>"; };
 		CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -804,6 +816,14 @@
 		CDC9AB461B216BE200119C18 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CDC9AB921B21B3E300119C18 /* MB_Ablum.h */,
+				CDC9AB931B21B3E300119C18 /* MB_Ablum.m */,
+				CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */,
+				CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */,
+				CDC9AB961B21B3E300119C18 /* MB_Notice.h */,
+				CDC9AB971B21B3E300119C18 /* MB_Notice.m */,
+				CDC9AB981B21B3E300119C18 /* MB_User.h */,
+				CDC9AB991B21B3E300119C18 /* MB_User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -933,6 +953,7 @@
 				6F8387D11B1D8715002D2ED3 /* SDWebImageManager.m in Sources */,
 				6F8387401B1D862A002D2ED3 /* RC_GetPath.m in Sources */,
 				6F8387281B1D8544002D2ED3 /* UIImage+ImageEffects.m in Sources */,
+				CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */,
 				6F555CF91B1DAA2D0045A155 /* MB_MainViewController.m in Sources */,
 				6F8387291B1D8544002D2ED3 /* UIImage+processing.m in Sources */,
 				6F83872F1B1D85DC002D2ED3 /* CMethods.m in Sources */,
@@ -958,6 +979,7 @@
 				6F8387D51B1D8715002D2ED3 /* UIImage+MultiFormat.m in Sources */,
 				CDDE7F621B20569400BEBAA9 /* AFHttpTool.m in Sources */,
 				6F8387D71B1D8715002D2ED3 /* UIImageView+HighlightedWebCache.m in Sources */,
+				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
 				CDCA05391B1EBAEB003CCDB2 /* MB_LikesViewController.m in Sources */,
 				6F8387251B1D8544002D2ED3 /* UIButton+helper.m in Sources */,
 				6F83872C1B1D8544002D2ED3 /* UIImage+Utility.m in Sources */,
@@ -975,6 +997,7 @@
 				6F8387D01B1D8715002D2ED3 /* SDWebImageDownloaderOperation.m in Sources */,
 				CDCA05301B1EBA7F003CCDB2 /* MB_AblumViewController.m in Sources */,
 				6F8387861B1D86E6002D2ED3 /* AFHTTPRequestOperationManager.m in Sources */,
+				CDC9AB9D1B21B3E300119C18 /* MB_User.m in Sources */,
 				6F8387A71B1D86F9002D2ED3 /* UIWebView+AFNetworking.m in Sources */,
 				CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */,
 				6F8387241B1D8544002D2ED3 /* NSString+Helper.m in Sources */,
@@ -997,6 +1020,7 @@
 				6F8387D21B1D8715002D2ED3 /* SDWebImagePrefetcher.m in Sources */,
 				6F8387271B1D8544002D2ED3 /* UIImage+ColorAtPixel.m in Sources */,
 				6F8387CB1B1D8715002D2ED3 /* NSData+ImageContentType.m in Sources */,
+				CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */,
 				6F8387411B1D862A002D2ED3 /* RC_moreAPPsLib.m in Sources */,
 				6F83872A1B1D8544002D2ED3 /* UIImage+Rotate.m in Sources */,
 				CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */,
