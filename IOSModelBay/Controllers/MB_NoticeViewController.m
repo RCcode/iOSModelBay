@@ -14,7 +14,6 @@ static NSString * const identifier = @"cell";
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *listArray;
 
 @end
 
@@ -36,7 +35,7 @@ static NSString * const identifier = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.listArray.count;
+//    return self.dataArray.count;
     return 10;
 }
 
@@ -57,7 +56,7 @@ static NSString * const identifier = @"cell";
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight -64 - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
@@ -70,26 +69,10 @@ static NSString * const identifier = @"cell";
     return _tableView;
 }
 
-- (NSMutableArray *)listArray {
-    if (_listArray == nil) {
-        _listArray = [[NSMutableArray alloc] initWithCapacity:0];
-    }
-    return _listArray;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

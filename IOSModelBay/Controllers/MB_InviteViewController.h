@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_InviteViewController : UIViewController
+@interface MB_InviteViewController : MB_BaseViewController
 
 @end

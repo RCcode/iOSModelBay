@@ -14,7 +14,6 @@ static NSString * const identifier = @"cell";
 @interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *listTableView;
-@property (nonatomic, strong) NSMutableArray *resultArray;
 
 @end
 
@@ -36,7 +35,7 @@ static NSString * const identifier = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resultArray.count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,13 +59,6 @@ static NSString * const identifier = @"cell";
         [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:identifier];
     }
     return _listTableView;
-}
-
-- (NSMutableArray *)resultArray {
-    if (_resultArray == nil) {
-        _resultArray = [[NSMutableArray alloc] initWithCapacity:0];
-    }
-    return _resultArray;
 }
 
 - (void)didReceiveMemoryWarning {

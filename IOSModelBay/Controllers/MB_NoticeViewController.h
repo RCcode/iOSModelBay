@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_NoticeViewController : UIViewController
+@interface MB_NoticeViewController : MB_BaseViewController
 
 @end

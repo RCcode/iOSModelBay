@@ -15,7 +15,6 @@ static NSString * const identifier = @"cell";
 @interface MB_InviteViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *listTableView;
-@property (nonatomic, strong) NSMutableArray *listArray;
 
 @end
 
@@ -40,7 +39,7 @@ static NSString * const identifier = @"cell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listArray.count;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,7 +51,7 @@ static NSString * const identifier = @"cell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
-    MB_AddressBookPeople *people = self.listArray[indexPath.row];
+    MB_AddressBookPeople *people = self.dataArray[indexPath.row];
     cell.textLabel.text = people.name;
     cell.detailTextLabel.text = people.email;
     
@@ -121,7 +120,7 @@ static NSString * const identifier = @"cell";
             NSLog(@"没有邮箱");
         }else{
             MB_AddressBookPeople *people = [[MB_AddressBookPeople alloc] initWithName:fullName email:CFBridgingRelease(ABMultiValueCopyValueAtIndex(emails, 0))];
-            [self.listArray addObject:people];
+            [self.dataArray addObject:people];
         }
         CFRelease(emails);
         NSLog(@"=============================================");
@@ -138,7 +137,7 @@ static NSString * const identifier = @"cell";
 
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
         _listTableView.allowsSelection = NO;
@@ -146,26 +145,9 @@ static NSString * const identifier = @"cell";
     return _listTableView;
 }
 
-- (NSMutableArray *)listArray {
-    if (_listArray == nil) {
-        _listArray = [[NSMutableArray alloc] initWithCapacity:0];
-    }
-    return _listArray;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

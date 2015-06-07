@@ -7,15 +7,14 @@
 //
 
 #import "MB_FindViewController.h"
-#import "MB_UserCollectViewCell.h"
 #import "MB_FilterViewController.h"
+#import "MB_UserCollectViewCell.h"
 
 static NSString * const ReuseIdentifier = @"item";
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
-@property (nonatomic, strong) UILabel *footerLabel;
 
 @end
 
@@ -25,14 +24,12 @@ static NSString * const ReuseIdentifier = @"item";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor redColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(filterBarBtnOnCLick:)];
     
     [self.view addSubview:self.collectView];
-    [self addHeaderRefresh];
-    [self addFooterRefresh];
+    [self addPullRefresh];
     [self findUserList];
 }
 
@@ -57,35 +54,29 @@ static NSString * const ReuseIdentifier = @"item";
     return cell;
 }
 
+
 #pragma mark - private methods
 
 - (void)filterBarBtnOnCLick:(UIBarButtonItem *)barBtn {
-    //筛选
+    //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     [self.navigationController pushViewController:filterVC animated:YES];
 }
 
-- (void)addHeaderRefresh {
+//添加上下拉刷新
+- (void)addPullRefresh
+{
     __weak MB_FindViewController *weakSelf = self;
-    [self.collectView addPullToRefreshWithActionHandler:^{
+    
+    [self addHeaderRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"header");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"Header action");
             [weakSelf.collectView.pullToRefreshView stopAnimating];
         });
     }];
-    self.collectView.pullToRefreshView.arrowColor = [UIColor clearColor];
-    self.collectView.pullToRefreshView.textColor = [UIColor clearColor];
-    //    _tableView.pullToRefreshView.titleLabel.textColor = [UIColor redColor];
-    //    _tableView.pullToRefreshView.subtitleLabel.textColor = [UIColor clearColor];
-    //    [_tableView.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateLoading];
-    //    [_tableView.pullToRefreshView setSubtitle:@"" forState:SVPullToRefreshStateLoading];
-}
-
-- (void)addFooterRefresh {
-    __weak MB_FindViewController *weakSelf = self;
     
-    [self.collectView addInfiniteScrollingWithActionHandler:^{
+    [self addFooterRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"footer");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"foot action");
@@ -93,10 +84,9 @@ static NSString * const ReuseIdentifier = @"item";
             weakSelf.footerLabel.text = @"没有更多了";
         });
     }];
-    [self.collectView.infiniteScrollingView setCustomView:_footerLabel
-                                                 forState:SVPullToRefreshStateStopped];
 }
 
+//获取发现用户列表
 - (void)findUserList {
     NSDictionary *params = @{@"minId":@(0),
                              @"count":@(10)};
@@ -111,42 +101,22 @@ static NSString * const ReuseIdentifier = @"item";
 #pragma mark - getters & setters
 
 - (UICollectionView *)collectView {
+    
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49)
-                                          collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
-    
     return _collectView;
 }
 
-- (UILabel *)footerLabel {
-    if (_footerLabel == nil) {
-        _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
-        _footerLabel.textAlignment = NSTextAlignmentCenter;
-        _footerLabel.backgroundColor = [UIColor whiteColor];
-    }
-    
-    return _footerLabel;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
