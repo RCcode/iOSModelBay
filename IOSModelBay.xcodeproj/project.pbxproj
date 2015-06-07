@@ -12,7 +12,7 @@
 		6F555CF61B1DA9420045A155 /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555CF51B1DA9420045A155 /* MB_Utils.m */; };
 		6F555CF91B1DAA2D0045A155 /* MB_MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555CF81B1DAA2D0045A155 /* MB_MainViewController.m */; };
 		6F555CFC1B1DAF0E0045A155 /* MB_TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555CFB1B1DAF0E0045A155 /* MB_TabBarViewController.m */; };
-		6F555CFF1B1DAF960045A155 /* MB_BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555CFE1B1DAF960045A155 /* MB_BaseViewController.m */; };
+		6F555CFF1B1DAF960045A155 /* MB_BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555CFE1B1DAF960045A155 /* MB_BaseNavigationViewController.m */; };
 		6F555D031B1DB1980045A155 /* MB_UserCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555D011B1DB1980045A155 /* MB_UserCollectViewCell.m */; };
 		6F555D041B1DB1980045A155 /* MB_UserCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F555D021B1DB1980045A155 /* MB_UserCollectViewCell.xib */; };
 		6F555D071B1DB89E0045A155 /* MB_FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */; };
@@ -139,8 +139,8 @@
 		6F555CF81B1DAA2D0045A155 /* MB_MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MainViewController.m; sourceTree = "<group>"; };
 		6F555CFA1B1DAF0E0045A155 /* MB_TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_TabBarViewController.h; sourceTree = "<group>"; };
 		6F555CFB1B1DAF0E0045A155 /* MB_TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_TabBarViewController.m; sourceTree = "<group>"; };
-		6F555CFD1B1DAF960045A155 /* MB_BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_BaseViewController.h; sourceTree = "<group>"; };
-		6F555CFE1B1DAF960045A155 /* MB_BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_BaseViewController.m; sourceTree = "<group>"; };
+		6F555CFD1B1DAF960045A155 /* MB_BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_BaseNavigationViewController.h; sourceTree = "<group>"; };
+		6F555CFE1B1DAF960045A155 /* MB_BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_BaseNavigationViewController.m; sourceTree = "<group>"; };
 		6F555D001B1DB1980045A155 /* MB_UserCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserCollectViewCell.h; sourceTree = "<group>"; };
 		6F555D011B1DB1980045A155 /* MB_UserCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserCollectViewCell.m; sourceTree = "<group>"; };
 		6F555D021B1DB1980045A155 /* MB_UserCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_UserCollectViewCell.xib; sourceTree = "<group>"; };
@@ -766,8 +766,8 @@
 		6F8387FA1B1D921E002D2ED3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6F555CFD1B1DAF960045A155 /* MB_BaseViewController.h */,
-				6F555CFE1B1DAF960045A155 /* MB_BaseViewController.m */,
+				6F555CFD1B1DAF960045A155 /* MB_BaseNavigationViewController.h */,
+				6F555CFE1B1DAF960045A155 /* MB_BaseNavigationViewController.m */,
 				6F555CF71B1DAA2D0045A155 /* MB_MainViewController.h */,
 				6F555CF81B1DAA2D0045A155 /* MB_MainViewController.m */,
 				6F555CF01B1DA74C0045A155 /* MB_LoginViewController.h */,
@@ -1026,7 +1026,7 @@
 				CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */,
 				6F8387261B1D8544002D2ED3 /* UIDevice+DeviceInfo.m in Sources */,
 				CDCA04F51B1EB14F003CCDB2 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				6F555CFF1B1DAF960045A155 /* MB_BaseViewController.m in Sources */,
+				6F555CFF1B1DAF960045A155 /* MB_BaseNavigationViewController.m in Sources */,
 				6F8387A41B1D86F9002D2ED3 /* UIImageView+AFNetworking.m in Sources */,
 				6F8387D31B1D8715002D2ED3 /* UIButton+WebCache.m in Sources */,
 				6F8387CF1B1D8715002D2ED3 /* SDWebImageDownloader.m in Sources */,

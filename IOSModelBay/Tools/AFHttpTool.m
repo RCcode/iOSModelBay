@@ -135,7 +135,7 @@ static AFHttpTool *httpTool = nil;
             success(response);
             
         } failure:^(NSError *err) {
-            NSLog(@"%#",err);
+            NSLog(@"%@",err);
             failure(err);
         }];
         

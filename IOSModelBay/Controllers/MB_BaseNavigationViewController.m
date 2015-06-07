@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_BaseViewController.h"
+#import "MB_BaseNavigationViewController.h"
 
-@interface MB_BaseViewController ()
+@interface MB_BaseNavigationViewController ()
 
 @end
 
-@implementation MB_BaseViewController
+@implementation MB_BaseNavigationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

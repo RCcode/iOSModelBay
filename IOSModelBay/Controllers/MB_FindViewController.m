@@ -25,11 +25,13 @@ static NSString * const ReuseIdentifier = @"item";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor redColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(filterBarBtnOnCLick:)];
     
     [self.view addSubview:self.collectView];
+    [self addHeaderRefresh];
     [self addFooterRefresh];
     [self findUserList];
 }
@@ -63,20 +65,36 @@ static NSString * const ReuseIdentifier = @"item";
     [self.navigationController pushViewController:filterVC animated:YES];
 }
 
+- (void)addHeaderRefresh {
+    __weak MB_FindViewController *weakSelf = self;
+    [self.collectView addPullToRefreshWithActionHandler:^{
+        NSLog(@"header");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"Header action");
+            [weakSelf.collectView.pullToRefreshView stopAnimating];
+        });
+    }];
+    self.collectView.pullToRefreshView.arrowColor = [UIColor clearColor];
+    self.collectView.pullToRefreshView.textColor = [UIColor clearColor];
+    //    _tableView.pullToRefreshView.titleLabel.textColor = [UIColor redColor];
+    //    _tableView.pullToRefreshView.subtitleLabel.textColor = [UIColor clearColor];
+    //    [_tableView.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateLoading];
+    //    [_tableView.pullToRefreshView setSubtitle:@"" forState:SVPullToRefreshStateLoading];
+}
+
 - (void)addFooterRefresh {
     __weak MB_FindViewController *weakSelf = self;
-    _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
-    _footerLabel.textAlignment = NSTextAlignmentCenter;
-    _footerLabel.backgroundColor = [UIColor whiteColor];
     
-    [_collectView addInfiniteScrollingWithActionHandler:^{
+    [self.collectView addInfiniteScrollingWithActionHandler:^{
         NSLog(@"footer");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"foot action");
             [weakSelf.collectView.infiniteScrollingView stopAnimating];
             weakSelf.footerLabel.text = @"没有更多了";
         });
     }];
-    [self.collectView.infiniteScrollingView setCustomView:_footerLabel forState:SVPullToRefreshStateStopped];
+    [self.collectView.infiniteScrollingView setCustomView:_footerLabel
+                                                 forState:SVPullToRefreshStateStopped];
 }
 
 - (void)findUserList {
@@ -95,7 +113,7 @@ static NSString * const ReuseIdentifier = @"item";
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight)
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49)
                                           collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
@@ -104,6 +122,16 @@ static NSString * const ReuseIdentifier = @"item";
     }
     
     return _collectView;
+}
+
+- (UILabel *)footerLabel {
+    if (_footerLabel == nil) {
+        _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
+        _footerLabel.textAlignment = NSTextAlignmentCenter;
+        _footerLabel.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _footerLabel;
 }
 
 - (void)didReceiveMemoryWarning {
