@@ -10,4 +10,6 @@
 
 @interface MB_MessageViewController : UIViewController
 
+@property (nonatomic, assign) CGRect containerViewRect;
+
 @end

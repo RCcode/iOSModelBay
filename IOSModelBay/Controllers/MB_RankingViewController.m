@@ -21,16 +21,15 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 
 #pragma mark - private methods
 
 #pragma mark - getters & setters
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

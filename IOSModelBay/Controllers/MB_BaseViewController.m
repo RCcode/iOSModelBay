@@ -29,7 +29,7 @@
               WithActionHandler:(void (^)(void))actionHandler {
     
     [scrollview addPullToRefreshWithActionHandler:actionHandler];
-    [scrollview.pullToRefreshView setArrowColor:self.view.backgroundColor];
+    [scrollview.pullToRefreshView setArrowColor:scrollview.backgroundColor];
     [scrollview.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateAll];
     [scrollview.pullToRefreshView setCustomView:self.activityIndicatorView
                                        forState:SVPullToRefreshStateTriggered];
@@ -39,6 +39,7 @@
               WithActionHandler:(void (^)(void))actionHandler {
     
     [scrollview addInfiniteScrollingWithActionHandler:actionHandler];
+    self.footerLabel.backgroundColor = scrollview.backgroundColor;
     [scrollview.infiniteScrollingView setCustomView:self.footerLabel
                                            forState:SVPullToRefreshStateStopped];
 }
@@ -57,7 +58,6 @@
     if (_footerLabel == nil) {
         _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
         _footerLabel.textAlignment = NSTextAlignmentCenter;
-        _footerLabel.backgroundColor = self.view.backgroundColor;
     }
     return _footerLabel;
 }

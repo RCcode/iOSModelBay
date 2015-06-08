@@ -10,4 +10,6 @@
 
 @interface MB_LikesViewController : UIViewController
 
+@property (nonatomic, assign) CGRect containerViewRect;
+
 @end

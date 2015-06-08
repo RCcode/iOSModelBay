@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_InstragramViewController : UIViewController
+@interface MB_InstragramViewController : MB_BaseViewController
+
+@property (nonatomic, assign) CGRect containerViewRect;
 
 @end

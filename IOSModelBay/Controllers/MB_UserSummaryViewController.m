@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor =[UIColor redColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 400, 100, 50)];
+    label.center = CGPointMake(self.containerViewRect.size.width/2, self.containerViewRect.size.height/2);
+    label.text = @"ssas";
+    [self.view addSubview:label];
 }
 
 

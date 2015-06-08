@@ -10,4 +10,6 @@
 
 @interface MB_UserSummaryViewController : UIViewController
 
+@property (nonatomic, assign) CGRect containerViewRect;
+
 @end

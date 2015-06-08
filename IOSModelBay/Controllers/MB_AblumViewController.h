@@ -10,4 +10,6 @@
 
 @interface MB_AblumViewController : UIViewController
 
+@property (nonatomic, assign) CGRect containerViewRect;
+
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_UserViewController : UIViewController
+@interface MB_UserViewController : MB_BaseViewController
 
 @end

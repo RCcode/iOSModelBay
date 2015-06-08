@@ -12,11 +12,12 @@
 #import "MB_User.h"
 
 
-@interface MB_MainViewController ()
+@interface MB_MainViewController ()<UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIImageView * backImageView;
 @property (nonatomic, strong) UIButton    * loginBtn;
 @property (nonatomic, strong) UIButton    * skipBtn;
+@property (nonatomic, strong) NSString    *codeStr;
 
 @end
 
@@ -32,24 +33,39 @@
     [self.view addSubview:self.skipBtn];
 }
 
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        //重试
+        [self loginWitnCodeStr:_codeStr];
+    }
+}
 
 #pragma mark - private methods
 
 - (void)loginBtnOnClick:(UIButton *)btn{
     MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
         NSLog(@"ssss%@",codeStr);
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
-            NSLog(@"%@",response);
-            MB_User *user = [[MB_User alloc] init];
-            [user setValuesForKeysWithDictionary:response];
-        } failure:^(NSError *err) {
-            
-        }];
+        [self loginWitnCodeStr:codeStr];
     }];
         
     UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:loginNC animated:YES completion:nil];
+}
+
+- (void)loginWitnCodeStr:(NSString *)codeStr {
+    [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
+        NSLog(@"%@",response);
+        MB_User *user = [[MB_User alloc] init];
+        [user setValuesForKeysWithDictionary:response];
+    } failure:^(NSError *err) {
+        [self showLoginFailedAlertView];
+    }];
+}
+
+- (void)showLoginFailedAlertView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login failed,retry?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+    [alert show];
 }
 
 - (void)skipBtnOnClick:(UIButton *)btn{
@@ -62,7 +78,7 @@
 
 - (UIImageView *)backImageView{
     if (_backImageView == nil) {
-        _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight)];
+        _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kViewHeight)];
         _backImageView.image = [UIImage imageNamed:@"a"];
     }
     return _backImageView;
@@ -98,15 +114,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
