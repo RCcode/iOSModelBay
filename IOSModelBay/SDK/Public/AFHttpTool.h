@@ -36,6 +36,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure;
 
+//用户名校验
+- (void)checkNameWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
+
 //注册
 - (void)registWithParameters:params
                      success:(void (^)(id response))success

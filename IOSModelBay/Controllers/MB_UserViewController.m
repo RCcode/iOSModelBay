@@ -14,12 +14,16 @@
 #import "MB_LikesViewController.h"
 #import "MB_SettingViewController.h"
 #import "MB_InviteViewController.h"
+#import "MB_SearchViewController.h"
+#import "MB_UserInfoView.h"
 
-@interface MB_UserViewController ()
+@interface MB_UserViewController ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) UISegmentedControl *segmentControl;
-@property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIView *currentView;
+@property (nonatomic, strong) MB_UserInfoView *userInfoView;
+@property (nonatomic, strong) UIView *menuView;
+@property (nonatomic, strong) UIScrollView *containerView;
+
+@property (nonatomic, strong) NSMutableArray *menuBtns;
 
 @end
 
@@ -33,11 +37,12 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"邀请" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
-    [self.view addSubview:self.segmentControl];
+    [self.view addSubview:self.userInfoView];
+    [self.view addSubview:self.menuView];
     [self.view addSubview:self.containerView];
     [self addChildViewControllers];
     
-    [self segmentControlOnClick:self.segmentControl];
+    [self menuBtnOnClick:self.menuBtns[0]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,9 +50,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSLog(@"sss");
+    NSInteger page = scrollView.contentOffset.x/scrollView.frame.size.width;
+    for (UIButton *btn in self.menuBtns) {
+        btn.selected = NO;
+    }
+    
+    ((UIButton *)self.menuBtns[page]).selected = YES;
+}
+
 #pragma mark - private methods
 - (void)test {
-    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
+//    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
+//    [self.navigationController pushViewController:inviteVC animated:YES];
+    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
@@ -69,32 +87,68 @@
     [self addChildViewController:instragramVC];
     [self addChildViewController:messageVC];
     [self addChildViewController:likesVC];
+    
+    for (int i = 0; i < 5; i++) {
+        UIViewController *vc = self.childViewControllers[i];
+        vc.view.frame = CGRectMake(kWindowWidth * i, 0, kWindowWidth, CGRectGetHeight(self.containerView.frame));
+        [self.containerView addSubview:vc.view];
+    }
+    self.containerView.contentSize = CGSizeMake(kWindowWidth * 5, CGRectGetHeight(self.containerView.frame));
 }
 
-- (void)segmentControlOnClick:(UISegmentedControl *)segmentControl {
-    UIViewController *vc = self.childViewControllers[segmentControl.selectedSegmentIndex];
-    [_currentView removeFromSuperview];
-    [self.containerView addSubview:vc.view];
-    _currentView = vc.view;
+- (void)menuBtnOnClick:(UIButton *)btn {
+    
+    for (UIButton *btn in self.menuBtns) {
+        btn.selected = NO;
+    }
+    btn.selected = YES;
+    
+    self.containerView.contentOffset = CGPointMake(CGRectGetWidth(self.containerView.frame) * btn.tag, 0);
 }
 
 #pragma mark - getters & setters
-- (UISegmentedControl *)segmentControl {
-    if (_segmentControl == nil) {
-        _segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"a", @"b", @"c", @"d", @"e"]];
-        _segmentControl.frame = CGRectMake(0, 300, windowWidth(), 50);
-        self.segmentControl.selectedSegmentIndex = 0;
-        [_segmentControl addTarget:self action:@selector(segmentControlOnClick:) forControlEvents:UIControlEventValueChanged];
+
+- (MB_UserInfoView *)userInfoView {
+    if (_userInfoView == nil) {
+        _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
+        _userInfoView.frame = CGRectMake(0, 64, kWindowWidth, 250);
     }
-    return _segmentControl;
+    return _userInfoView;
+}
+
+- (UIView *)menuView {
+    if (_menuView == nil) {
+        _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.userInfoView.frame), kWindowWidth, 50)];
+        CGFloat btnWidth = kWindowWidth / 5;
+        for (int i = 0; i < 5; i++) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(btnWidth * i, 0, btnWidth, CGRectGetHeight(_menuView.frame));
+            button.tag = i;
+            [button setImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
+            [button addTarget:self action:@selector(menuBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [self.menuBtns addObject:button];
+            [_menuView addSubview:button];
+        }
+    }
+    return _menuView;
 }
 
 - (UIView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.segmentControl.frame), windowWidth(), kViewHeight - CGRectGetMaxY(self.segmentControl.frame) + 64)];
+        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.menuView.frame), windowWidth(), kWindowHeight - 49 - CGRectGetMaxY(self.menuView.frame))];
         _containerView.backgroundColor = [UIColor blueColor];
+        _containerView.pagingEnabled = YES;
+        _containerView.delegate = self;
     }
     return _containerView;
+}
+
+- (NSArray *)menuBtns {
+    if (_menuBtns == nil) {
+        _menuBtns = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _menuBtns;
 }
 
 @end

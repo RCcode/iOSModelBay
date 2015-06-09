@@ -10,7 +10,7 @@
 #import "MB_AddressBookPeople.h"
 #import <AddressBook/AddressBook.h>
 
-static NSString * const identifier = @"cell";
+//static NSString * const identifier = @"cell";
 
 @interface MB_InviteViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -46,9 +46,9 @@ static NSString * const identifier = @"cell";
     return 60;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ReuseIdentifier];
     }
     
     MB_AddressBookPeople *people = self.dataArray[indexPath.row];

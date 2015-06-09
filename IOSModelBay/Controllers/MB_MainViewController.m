@@ -46,6 +46,7 @@
 - (void)loginBtnOnClick:(UIButton *)btn{
     MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
         NSLog(@"ssss%@",codeStr);
+        _codeStr = codeStr;
         [self loginWitnCodeStr:codeStr];
     }];
         
@@ -78,7 +79,7 @@
 
 - (UIImageView *)backImageView{
     if (_backImageView == nil) {
-        _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kViewHeight)];
+        _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight)];
         _backImageView.image = [UIImage imageNamed:@"a"];
     }
     return _backImageView;

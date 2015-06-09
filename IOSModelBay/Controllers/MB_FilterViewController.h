@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_FilterViewController : UIViewController
+@interface MB_FilterViewController : MB_BaseViewController
 
 @end

@@ -8,7 +8,7 @@
 
 #import "MB_SettingViewController.h"
 
-static NSString * const identifier = @"cell";
+//static NSString * const identifier = @"cell";
 
 @interface MB_SettingViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -40,9 +40,9 @@ static NSString * const identifier = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
     }
     cell.textLabel.text = _titleArray[indexPath.row];
     return cell;

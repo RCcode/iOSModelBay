@@ -16,22 +16,23 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-A7-3ua">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="101"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lL9-Pf-Gsg">
-                        <rect key="frame" x="38" y="125" width="72" height="25"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omb-W1-quc">
-                        <rect key="frame" x="37" y="76" width="76" height="21"/>
+                        <rect key="frame" x="37" y="99" width="76" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYj-TJ-fKl">
+                        <rect key="frame" x="0.0" y="120" width="150" height="30"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="IconImageView" destination="HQw-A7-3ua" id="Wz9-eH-KWP"/>
-                <outlet property="professionImageView" destination="lL9-Pf-Gsg" id="UHj-5N-paa"/>
+                <outlet property="careerView" destination="eYj-TJ-fKl" id="9ee-PY-on8"/>
                 <outlet property="usernameLabel" destination="omb-W1-quc" id="ygS-zp-saF"/>
             </connections>
             <point key="canvasLocation" x="716" y="443"/>

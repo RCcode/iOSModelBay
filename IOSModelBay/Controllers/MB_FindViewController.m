@@ -10,8 +10,6 @@
 #import "MB_FilterViewController.h"
 #import "MB_UserCollectViewCell.h"
 
-static NSString * const ReuseIdentifier = @"item";
-
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
@@ -108,7 +106,7 @@ static NSString * const ReuseIdentifier = @"item";
     
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kViewHeight) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;

@@ -9,7 +9,7 @@
 #import "MB_NoticeViewController.h"
 #import "MB_UserTableViewCell.h"
 
-static NSString * const identifier = @"cell";
+//static NSString * const identifier = @"cell";
 
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -49,7 +49,7 @@ static NSString * const identifier = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
     cell.usernameLabel.text = @"songge";
     return cell;
 }
@@ -61,7 +61,7 @@ static NSString * const identifier = @"cell";
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kViewHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
@@ -69,7 +69,7 @@ static NSString * const identifier = @"cell";
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];
         
-        [_tableView registerNib:[UINib nibWithNibName:@"MB_UserTableViewCell" bundle:nil] forCellReuseIdentifier:identifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_UserTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
 }

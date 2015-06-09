@@ -12,6 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *IconImageView;//头像
 @property (weak, nonatomic) IBOutlet UILabel     *usernameLabel;//名字
-@property (weak, nonatomic) IBOutlet UIImageView *professionImageView;//职业图标
+@property (weak, nonatomic) IBOutlet UIView *careerView;
 
 @end

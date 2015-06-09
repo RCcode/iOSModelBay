@@ -9,8 +9,6 @@
 #import "MB_InstragramViewController.h"
 #import "MB_UserCollectViewCell.h"
 
-static NSString * const ReuseIdentifier = @"item";
-
 @interface MB_InstragramViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;

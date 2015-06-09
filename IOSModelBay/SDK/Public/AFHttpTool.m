@@ -11,6 +11,7 @@
 #define kBaseUrl             @"http://192.168.0.86:8082/ModelBay/"
 
 #define kLoginUrl            @"user/login.do"
+#define kCheckNameUrl        @"user/checkName.do"
 #define kRegistUrl           @"user/register.do"
 #define kGetNoticeUrl        @"user/getUserMessage.do"
 #define kFindUserUrl         @"media/findUser.do"
@@ -148,6 +149,18 @@ static AFHttpTool *httpTool = nil;
 - (void)loginWithParameters:params
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kLoginUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//用户名校验
+- (void)checkNameWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure
 {
     [self requestWihtMethod:RequestTypePost
                         url:kLoginUrl

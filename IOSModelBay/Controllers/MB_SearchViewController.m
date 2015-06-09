@@ -9,10 +9,11 @@
 #import "MB_SearchViewController.h"
 #import "MB_UserTableViewCell.h"
 
-static NSString * const identifier = @"cell";
+@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
-@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic, strong) UIView *searchView;
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UIView *tableHeaderView;
 @property (nonatomic, strong) UITableView *listTableView;
 
 @end
@@ -24,9 +25,26 @@ static NSString * const identifier = @"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view addSubview:self.searchView];
     [self.view addSubview:self.listTableView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 
@@ -39,41 +57,69 @@ static NSString * const identifier = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    MB_UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
     cell.usernameLabel.text = @"songge";
     return cell;
 }
 
+#pragma mark - UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+  //搜索用户
+    
+}
 
 #pragma mark - private methods
+
+- (void)cancelBtnOnClick:(UIButton *)btn {
+    if ([self.searchBar.text isEqualToString:@""]) {
+        //返回上一界面
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        //清除内容
+        self.searchBar.text = @"";
+    }
+}
 
 
 #pragma mark - getters & setters
 
+- (UIView *)searchView {
+    if (_searchView == nil) {
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
+        
+        UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
+        searchBar.placeholder = @"sas";
+        [searchBar becomeFirstResponder];
+        [_searchView addSubview:searchBar];
+        self.searchBar = searchBar;
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(searchBar.frame), 0, 50, 50)];
+        [button setImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(cancelBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_searchView addSubview:button];
+    }
+    return _searchView;
+}
+
+- (UIView *)tableHeaderView {
+    if (_tableHeaderView == nil) {
+        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
+        _tableHeaderView.backgroundColor = [UIColor redColor];
+    }
+    return _tableHeaderView;
+}
+
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
+        _listTableView.tableFooterView = [[UIView alloc] init];
         
-        [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:identifier];
+        [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _listTableView;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

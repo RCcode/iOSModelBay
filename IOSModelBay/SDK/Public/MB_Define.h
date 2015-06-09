@@ -11,9 +11,7 @@
 
 #define kWindowWidth  [UIScreen mainScreen].bounds.size.width
 #define kWindowHeight [UIScreen mainScreen].bounds.size.height
-//去掉上下(都按Hidden为NO处理的)遮挡部分后的高度
-#define kViewHeight kWindowHeight - (self.navigationController?64:0) - (self.tabBarController?49:0)
-#define kSelfViewHeight self.view.frame.size.height
+
 #define kContainerHeight 268
 
 #pragma mark - life cycle
