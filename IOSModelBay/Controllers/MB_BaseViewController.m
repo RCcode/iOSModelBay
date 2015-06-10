@@ -8,7 +8,7 @@
 
 #import "MB_BaseViewController.h"
 
-@interface MB_BaseViewController ()
+@interface MB_BaseViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
@@ -22,11 +22,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+//    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
-#pragma mark - private methods
+#pragma mark - UIScrollViewDelegate
+static CGFloat startOffsetY;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startOffsetY = scrollView.contentOffset.y;
+}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (![self.parentViewController isKindOfClass:[UINavigationController class]]) {
+        return;//防止ChildViewController滑动隐藏导航栏
+    }
+    
+//    NSLog(@"%f%f%f",scrollView.contentOffset.y,scrollView.contentSize.height,kWindowHeight);
+    //这个判断为了消除刷新的影响
+    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
+        if (scrollView.contentOffset.y < startOffsetY-20) {
+            startOffsetY = scrollView.contentOffset.y;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+        }
+        if (scrollView.contentOffset.y > startOffsetY+20) {
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            startOffsetY = scrollView.contentOffset.y;
+        }
+    }
+}
+
+
+#pragma mark - Private Methods
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
               WithActionHandler:(void (^)(void))actionHandler {
     
@@ -44,6 +70,10 @@
     self.footerLabel.backgroundColor = scrollview.backgroundColor;
     [scrollview.infiniteScrollingView setCustomView:self.footerLabel
                                            forState:SVPullToRefreshStateStopped];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
+//    view.backgroundColor = [UIColor redColor];
+//    [scrollview.infiniteScrollingView setCustomView:view
+//                                           forState:SVPullToRefreshStateTriggered];
 }
 
 - (void)endRefreshingForView:(UIScrollView *)scrollView {

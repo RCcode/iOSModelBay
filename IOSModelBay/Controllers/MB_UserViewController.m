@@ -90,9 +90,9 @@
     [self addChildViewController:likesVC];
     
     for (int i = 0; i < 5; i++) {
-        UIViewController *vc = self.childViewControllers[i];
-        vc.view.frame = CGRectMake(kWindowWidth * i, 0, kWindowWidth, CGRectGetHeight(self.containerView.frame));
-        [self.containerView addSubview:vc.view];
+//        UIViewController *vc = self.childViewControllers[i];
+        instragramVC.view.frame = CGRectMake(kWindowWidth * i, 0, kWindowWidth, CGRectGetHeight(self.containerView.frame));
+        [self.containerView addSubview:instragramVC.view];
     }
     self.containerView.contentSize = CGSizeMake(kWindowWidth * 5, CGRectGetHeight(self.containerView.frame));
 }

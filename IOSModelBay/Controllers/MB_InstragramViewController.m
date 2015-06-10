@@ -26,10 +26,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"songsong  %@",self.navigationController);
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestInstragramMediasListWithMaxId:nil];
 }
 
