@@ -79,6 +79,7 @@
     summaryVC.containerViewRect    = self.containerView.frame;
     ablumVC.containerViewRect      = self.containerView.frame;
     instragramVC.containerViewRect = self.containerView.frame;
+    instragramVC.uid = @"122345";
     messageVC.containerViewRect    = self.containerView.frame;
     likesVC.containerViewRect      = self.containerView.frame;
     

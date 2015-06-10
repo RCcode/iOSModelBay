@@ -28,6 +28,8 @@
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserList];
 }
 
@@ -44,10 +46,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 40;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(100, 100);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -72,18 +70,18 @@
     
     [self addHeaderRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"header");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog(@"Header action");
-            [weakSelf.collectView.pullToRefreshView stopAnimating];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf endRefreshingForView:weakSelf.collectView];
         });
     }];
     
     [self addFooterRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"footer");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog(@"foot action");
-            [weakSelf.collectView.infiniteScrollingView stopAnimating];
-            weakSelf.footerLabel.text = @"没有更多了";
+            
+            [weakSelf endRefreshingForView:weakSelf.collectView];
+            [weakSelf showNoMoreMessage];
         });
     }];
 }
@@ -92,10 +90,12 @@
 - (void)findUserList {
     NSDictionary *params = @{@"minId":@(0),
                              @"count":@(10)};
+    
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"list %@",response);
+        [self endRefreshingForView:self.collectView];
     } failure:^(NSError *err) {
-        
+        [self endRefreshingForView:self.collectView];
     }];
 }
 
@@ -106,6 +106,11 @@
     
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//        CGFloat space = 2.5;
+        CGFloat itemWidth = (kWindowWidth - 2.5) / 2;
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 2.5;
+        layout.itemSize = CGSizeMake(itemWidth, itemWidth);
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;

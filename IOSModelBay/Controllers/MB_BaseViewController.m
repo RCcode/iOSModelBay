@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
+@property (nonatomic, strong) UILabel *footerLabel;
+
 @end
 
 @implementation MB_BaseViewController
@@ -44,6 +46,16 @@
                                            forState:SVPullToRefreshStateStopped];
 }
 
+- (void)endRefreshingForView:(UIScrollView *)scrollView {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [scrollView.pullToRefreshView stopAnimating];
+    [scrollView.infiniteScrollingView stopAnimating];
+}
+
+//没有更多数据时调用
+- (void)showNoMoreMessage {
+    self.footerLabel.text = @"没有更多了";
+}
 
 #pragma mark - getters & setters
 - (NSMutableArray *)dataArray {

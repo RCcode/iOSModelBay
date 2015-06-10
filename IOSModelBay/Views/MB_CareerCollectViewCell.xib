@@ -13,24 +13,39 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZK-pV-Ujo">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZK-pV-Ujo">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-kk-GY1">
-                        <rect key="frame" x="54" y="109" width="43" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b.png" translatesAutoresizingMaskIntoConstraints="NO" id="KBf-jy-NCa">
+                        <rect key="frame" x="55" y="55" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="3eT-R3-esL"/>
+                            <constraint firstAttribute="width" constant="40" id="gWf-h4-9Lg"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-kk-GY1">
+                        <rect key="frame" x="51" y="115" width="48" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBf-jy-NCa">
-                        <rect key="frame" x="51" y="34" width="48" height="49"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="KBf-jy-NCa" secondAttribute="centerX" id="0Cn-IO-JUi"/>
+                <constraint firstItem="UZK-pV-Ujo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7JW-el-gwo"/>
+                <constraint firstAttribute="bottom" secondItem="UZK-pV-Ujo" secondAttribute="bottom" id="9KP-NA-b0m"/>
+                <constraint firstItem="UZK-pV-Ujo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GOa-vM-yAm"/>
+                <constraint firstAttribute="trailing" secondItem="UZK-pV-Ujo" secondAttribute="trailing" id="exS-83-EVV"/>
+                <constraint firstItem="BLF-kk-GY1" firstAttribute="top" secondItem="KBf-jy-NCa" secondAttribute="bottom" constant="20" id="fF8-gT-U0i"/>
+                <constraint firstAttribute="centerX" secondItem="BLF-kk-GY1" secondAttribute="centerX" id="hUQ-tM-nO3"/>
+                <constraint firstAttribute="centerY" secondItem="KBf-jy-NCa" secondAttribute="centerY" id="qFw-7q-KIt"/>
+            </constraints>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="a.png" width="30" height="30"/>
+        <image name="b.png" width="20" height="20"/>
     </resources>
 </document>

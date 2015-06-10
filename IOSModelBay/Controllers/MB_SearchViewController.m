@@ -13,7 +13,10 @@
 
 @property (nonatomic, strong) UIView *searchView;
 @property (nonatomic, strong) UISearchBar *searchBar;
+
 @property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic, strong) UILabel *inviteLabel;
+
 @property (nonatomic, strong) UITableView *listTableView;
 
 @end
@@ -66,6 +69,15 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
   //搜索用户
     
+    if ([searchBar.text isEqualToString:@""]) {
+        return;
+    }
+    
+    [searchBar resignFirstResponder];
+    self.listTableView.tableHeaderView = self.tableHeaderView;
+    self.inviteLabel.text = [NSString stringWithFormat:@"invite %@",searchBar.text];
+    [self.dataArray addObject:@"sss"];
+    [self.listTableView reloadData];
 }
 
 #pragma mark - private methods
@@ -89,6 +101,7 @@
         
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
         searchBar.placeholder = @"sas";
+        searchBar.delegate = self;
         [searchBar becomeFirstResponder];
         [_searchView addSubview:searchBar];
         self.searchBar = searchBar;
@@ -105,7 +118,16 @@
 - (UIView *)tableHeaderView {
     if (_tableHeaderView == nil) {
         _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
-        _tableHeaderView.backgroundColor = [UIColor redColor];
+        _tableHeaderView.backgroundColor = [UIColor grayColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
+        [_tableHeaderView addSubview:label];
+        self.inviteLabel = label;
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(CGRectGetMaxX(label.frame), 0, 50, 50);
+        [button setBackgroundColor:[UIColor redColor]];
+        [button setTitle:@"invite" forState:UIControlStateNormal];
+        [_tableHeaderView addSubview:button];
     }
     return _tableHeaderView;
 }
@@ -115,6 +137,7 @@
         _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
+        _listTableView.rowHeight = 80;
         _listTableView.tableFooterView = [[UIView alloc] init];
         
         [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:ReuseIdentifier];

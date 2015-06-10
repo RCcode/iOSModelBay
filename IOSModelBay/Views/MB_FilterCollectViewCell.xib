@@ -13,11 +13,11 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZPb-fa-8HJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZPb-fa-8HJ">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-Hu-bLl">
-                        <rect key="frame" x="54" y="14" width="48" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-Hu-bLl">
+                        <rect key="frame" x="51" y="14" width="48" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -25,6 +25,14 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstItem="ZPb-fa-8HJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0Z6-SQ-C79"/>
+                <constraint firstItem="ZPb-fa-8HJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4Ys-Ed-fk9"/>
+                <constraint firstAttribute="trailing" secondItem="ZPb-fa-8HJ" secondAttribute="trailing" id="LEd-Xy-tAf"/>
+                <constraint firstAttribute="bottom" secondItem="ZPb-fa-8HJ" secondAttribute="bottom" id="X9m-hq-D0M"/>
+                <constraint firstAttribute="centerY" secondItem="Q43-Hu-bLl" secondAttribute="centerY" id="Y0A-mU-6J3"/>
+                <constraint firstAttribute="centerX" secondItem="Q43-Hu-bLl" secondAttribute="centerX" id="qSX-hI-Orc"/>
+            </constraints>
         </collectionViewCell>
     </objects>
     <resources>

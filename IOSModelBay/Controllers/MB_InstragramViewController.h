@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) CGRect containerViewRect;
 
+@property (nonatomic, strong) NSString *uid;
+
 @end
