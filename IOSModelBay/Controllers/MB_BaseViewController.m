@@ -57,6 +57,7 @@ static CGFloat startOffsetY;
               WithActionHandler:(void (^)(void))actionHandler {
     
     [scrollview addPullToRefreshWithActionHandler:actionHandler];
+    scrollview.pullToRefreshView.originalTopInset = [self.parentViewController isKindOfClass:[UINavigationController class]]?64:0;
     [scrollview.pullToRefreshView setArrowColor:scrollview.backgroundColor];
     [scrollview.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateAll];
     [scrollview.pullToRefreshView setCustomView:self.activityIndicatorView
