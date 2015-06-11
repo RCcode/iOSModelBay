@@ -10,7 +10,18 @@
 
 @implementation MB_Utils
 
-+ (void)showPromptWithText:(NSString *)text{
+static MB_Utils *util = nil;
++ (instancetype)shareUtil {
+    if (util == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            util = [[MB_Utils alloc] init];
+        });
+    }
+    return util;
+}
+
++ (void)showPromptWithText:(NSString *)text {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.detailsLabelText = text;
     hud.detailsLabelFont = [UIFont systemFontOfSize:17.0];

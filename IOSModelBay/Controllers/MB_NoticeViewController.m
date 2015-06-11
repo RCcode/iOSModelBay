@@ -25,6 +25,7 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+    [self addPullRefresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +42,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return self.dataArray.count;
-    return 10;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,8 +55,34 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 
 #pragma mark - private methods
+//添加上下拉刷新
+- (void)addPullRefresh
+{
+    __weak MB_NoticeViewController *weakSelf = self;
+    
+    [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"header");
+        [weakSelf endFooterRefreshingForView:weakSelf.tableView];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf endRefreshingForView:weakSelf.tableView];
+        });
+    }];
+    
+    [self addFooterRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"footer");
+        [weakSelf endHeaderRefreshingForView:weakSelf.tableView];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf endRefreshingForView:weakSelf.tableView];
+            [weakSelf showNoMoreMessageForview:weakSelf.tableView];
+        });
+    }];
+}
 
 #pragma mark - getters & setters
 

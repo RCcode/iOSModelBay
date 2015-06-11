@@ -8,13 +8,14 @@
 
 #import "AFHttpTool.h"
 
-#define kBaseUrl             @"http://192.168.0.86:8082/ModelBay/"
+//#define kBaseUrl             @"http://192.168.0.86:8082/ModelBay/"
+#define kBaseUrl             @"http://192.168.0.89:8082/ModelBayWeb/"
 
 #define kLoginUrl            @"user/login.do"
 #define kCheckNameUrl        @"user/checkName.do"
 #define kRegistUrl           @"user/register.do"
 #define kGetNoticeUrl        @"user/getUserMessage.do"
-#define kFindUserUrl         @"media/findUser.do"
+#define kFindUserUrl         @"user/findUser.do"
 #define kGetUserDetailUrl    @"user/getUserDetail.do"
 #define kUpdateUserDetailUrl @"user/updateUserDetail.do"
 #define kUpdateUserPicUrl    @"user/updatUPic.do"
@@ -44,6 +45,12 @@ static AFHttpTool *httpTool = nil;
         dispatch_once(&onceToken, ^{
             httpTool = [[AFHttpTool alloc] init];
             httpTool.manager = [AFHTTPRequestOperationManager manager];
+            
+            httpTool.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            httpTool.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+            [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         });
     }
     return httpTool;
@@ -69,10 +76,12 @@ static AFHttpTool *httpTool = nil;
             [_manager GET:url parameters:params
              success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
                  if (success) {
+                     NSLog(@"sdsdsdsd%@",responseObj);
                      success(responseObj);
                  }
              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                  if (failure) {
+                     NSLog(@"error == %@",error);
                      failure(error);
                  }
              }];
@@ -88,6 +97,7 @@ static AFHttpTool *httpTool = nil;
                   }
               } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
                   if (failure) {
+                      NSLog(@"error == %@",error);
                       failure(error);
                   }
               }];
@@ -98,38 +108,92 @@ static AFHttpTool *httpTool = nil;
     }
 }
 
+////instragram登录
+//- (void)loginWithCodeString:(NSString *)codeStr
+//                    success:(void (^)(id response))success
+//                    failure:(void (^)(NSError* err))failure {
+//    //获取token
+//    NSDictionary *params = @{@"client_id":kClientID,
+//                             @"client_secret":kClientSecret,
+//                             @"grant_type":@"authorization_code",
+//                             @"redirect_uri":kRedirectUri,
+//                             @"code":codeStr};
+//    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
+//    [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"--%@",responseObject);
+//        
+//        //服务器登录
+//        NSDictionary *loginParams = @{@"uid":responseObject[@"user"][@"id"],
+//                                      @"tplat":@(0),
+//                                      @"plat":@(2),
+//                                      @"ikey":@"a",
+//                                      @"akey":@"a",
+//                                      @"fullName":responseObject[@"user"][@"full_name"],
+//                                      @"token":responseObject[@"access_token"]};
+//        NSLog(@"%@",loginParams);
+//        [self loginWithParameters:loginParams success:^(id response) {
+//            NSLog(@"login--%@",response);
+//            
+//            //记录用户信息
+//            [userDefaults setObject:responseObject[@"user"][@"id"] forKey:kUid];
+//            [userDefaults setObject:responseObject[@"user"][@"username"] forKey:kUsername];
+//            [userDefaults setObject:responseObject[@"user"][@"full_name"] forKey:kFullname];
+//            [userDefaults setObject:responseObject[@"user"][@"profile_picture"] forKey:kPic];
+//            [userDefaults setObject:responseObject[@"access_token"] forKey:kAccessToken];
+//            [userDefaults setBool:YES forKey:kIsLogin];
+//            [userDefaults synchronize];
+//            
+//            success(response);
+//            
+//        } failure:^(NSError *err) {
+//            NSLog(@"%@",err);
+//            failure(err);
+//        }];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failure(error);
+//    }];
+//}
+
 //instragram登录
 - (void)loginWithCodeString:(NSString *)codeStr
                     success:(void (^)(id response))success
                     failure:(void (^)(NSError* err))failure {
-    //获取token
-    NSDictionary *params = @{@"client_id":kClientID,
-                             @"client_secret":kClientSecret,
-                             @"grant_type":@"authorization_code",
-                             @"redirect_uri":kRedirectUri,
-                             @"code":codeStr};
-    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
-    [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"--%@",responseObject);
-        
+//    //获取token
+//    NSDictionary *params = @{@"client_id":kClientID,
+//                             @"client_secret":kClientSecret,
+//                             @"grant_type":@"authorization_code",
+//                             @"redirect_uri":kRedirectUri,
+//                             @"code":codeStr};
+//    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
+//    [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"--%@",responseObject);
+    
+    NSString *uid = @"123";
+    NSString *username = @"lisong";
+    NSString *fullName = @"songge";
+    NSString *imageUrl = @"http://img1.imgtn.bdimg.com/it/u=1887538964,2552017407&fm=21&gp=0.jpg";
+    
+    
         //服务器登录
-        NSDictionary *loginParams = @{@"uid":responseObject[@"user"][@"id"],
+        NSDictionary *loginParams = @{@"uid":uid,
                                       @"tplat":@(0),
                                       @"plat":@(2),
                                       @"ikey":@"a",
                                       @"akey":@"a",
-                                      @"fullName":responseObject[@"user"][@"full_name"],
-                                      @"token":responseObject[@"access_token"]};
+                                      @"userName":username,
+                                      @"fullName":fullName,
+                                      @"token":@"abcde"};
         NSLog(@"%@",loginParams);
         [self loginWithParameters:loginParams success:^(id response) {
             NSLog(@"login--%@",response);
             
             //记录用户信息
-            [userDefaults setObject:responseObject[@"user"][@"id"] forKey:kUid];
-            [userDefaults setObject:responseObject[@"user"][@"username"] forKey:kUsername];
-            [userDefaults setObject:responseObject[@"user"][@"full_name"] forKey:kFullname];
-            [userDefaults setObject:responseObject[@"user"][@"profile_picture"] forKey:kPic];
-            [userDefaults setObject:responseObject[@"access_token"] forKey:kAccessToken];
+            [userDefaults setObject:uid forKey:kUid];
+            [userDefaults setObject:username forKey:kUsername];
+            [userDefaults setObject:fullName forKey:kFullname];
+            [userDefaults setObject:imageUrl forKey:kPic];
+            [userDefaults setObject:@"abcde" forKey:kAccessToken];
             [userDefaults setBool:YES forKey:kIsLogin];
             [userDefaults synchronize];
             
@@ -140,10 +204,11 @@ static AFHttpTool *httpTool = nil;
             failure(err);
         }];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
-    }];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failure(error);
+//    }];
 }
+
 
 //登录
 - (void)loginWithParameters:params
@@ -163,7 +228,7 @@ static AFHttpTool *httpTool = nil;
                         failure:(void (^)(NSError* err))failure
 {
     [self requestWihtMethod:RequestTypePost
-                        url:kLoginUrl
+                        url:kCheckNameUrl
                      params:params
                     success:success
                     failure:failure];

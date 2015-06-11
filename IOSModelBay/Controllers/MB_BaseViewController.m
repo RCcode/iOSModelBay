@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 //    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -37,14 +36,13 @@ static CGFloat startOffsetY;
         return;//防止ChildViewController滑动隐藏导航栏
     }
     
-//    NSLog(@"%f%f%f",scrollView.contentOffset.y,scrollView.contentSize.height,kWindowHeight);
     //这个判断为了消除刷新的影响
     if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
-        if (scrollView.contentOffset.y < startOffsetY-20) {
-            startOffsetY = scrollView.contentOffset.y;
+        if (scrollView.contentOffset.y < startOffsetY - 60) {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
+            startOffsetY = scrollView.contentOffset.y;
         }
-        if (scrollView.contentOffset.y > startOffsetY+20) {
+        if (scrollView.contentOffset.y > startOffsetY + 60) {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             startOffsetY = scrollView.contentOffset.y;
         }
@@ -71,20 +69,29 @@ static CGFloat startOffsetY;
     self.footerLabel.backgroundColor = scrollview.backgroundColor;
     [scrollview.infiniteScrollingView setCustomView:self.footerLabel
                                            forState:SVPullToRefreshStateStopped];
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
-//    view.backgroundColor = [UIColor redColor];
-//    [scrollview.infiniteScrollingView setCustomView:view
-//                                           forState:SVPullToRefreshStateTriggered];
 }
 
+//结束头部刷新动画
+- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView {
+    [scrollView.pullToRefreshView stopAnimating];
+}
+
+//结束尾部刷新动画
+- (void)endFooterRefreshingForView:(UIScrollView *)scrollView {
+    self.footerLabel.text = @"";
+    [scrollView.infiniteScrollingView stopAnimating];
+}
+
+//结束头部和尾部刷新动画
 - (void)endRefreshingForView:(UIScrollView *)scrollView {
+    self.footerLabel.text = @"";
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [scrollView.pullToRefreshView stopAnimating];
     [scrollView.infiniteScrollingView stopAnimating];
 }
 
 //没有更多数据时调用
-- (void)showNoMoreMessage {
+- (void)showNoMoreMessageForview:(UIScrollView *)scrollView {
     self.footerLabel.text = @"没有更多了";
 }
 

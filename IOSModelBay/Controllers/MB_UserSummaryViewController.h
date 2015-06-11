@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_UserSummaryViewController : UIViewController
+@interface MB_UserSummaryViewController : MB_BaseViewController
 
 @property (nonatomic, assign) CGRect containerViewRect;
 

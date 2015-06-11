@@ -76,7 +76,7 @@
         if (weakSelf.noMore) {
             //没有更多了
             [weakSelf endRefreshingForView:weakSelf.collectView];
-            [weakSelf showNoMoreMessage];
+            [weakSelf showNoMoreMessageForview:weakSelf.collectView];
             return;
         }
         

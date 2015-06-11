@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SexType){
+    SexTypeMale,
+    SexTypeFemale,
+};
+
 @interface MB_SelectCareerViewController : UIViewController
+
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, assign) SexType sexType;
 
 @end

@@ -22,10 +22,13 @@ static NSString * const ReuseIdentifier = @"cell";
 - (void)addFooterRefreshForView:(UIScrollView *)scrollview
               WithActionHandler:(void (^)(void))actionHandler;
 
-//结束刷新动画
+//结束头部刷新动画
+- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView;
+//结束尾部刷新动画
+- (void)endFooterRefreshingForView:(UIScrollView *)scrollView;
+//结束头部和尾部刷新动画
 - (void)endRefreshingForView:(UIScrollView *)scrollView;
 
 //没有更多数据时调用
-- (void)showNoMoreMessage;
-
+- (void)showNoMoreMessageForview:(UIScrollView *)scrollView;
 @end

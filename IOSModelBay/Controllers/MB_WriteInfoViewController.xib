@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MB_WriteInfoViewController">
             <connections>
+                <outlet property="femaleBtn" destination="XGz-98-MXj" id="SKv-Na-8YN"/>
+                <outlet property="maleBtn" destination="sDL-ZM-yAR" id="sei-H0-qey"/>
+                <outlet property="usernameTF" destination="HPJ-5t-LkX" id="8Ci-iH-K4j"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,16 +36,24 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
-                    <rect key="frame" x="33" y="217" width="60" height="22"/>
-                    <state key="normal" title="Male" image="b.png">
+                    <rect key="frame" x="33" y="217" width="80" height="22"/>
+                    <state key="normal" title="Male" image="a.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="b.png"/>
+                    <connections>
+                        <action selector="maleBtnOnClick:" destination="-1" eventType="touchUpInside" id="ds1-YK-WS3"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-98-MXj">
-                    <rect key="frame" x="208" y="217" width="79" height="22"/>
-                    <state key="normal" title="Female" image="b.png">
+                    <rect key="frame" x="208" y="217" width="92" height="22"/>
+                    <state key="normal" title="Female" image="a.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="b.png"/>
+                    <connections>
+                        <action selector="femaleBtnOnClick:" destination="-1" eventType="touchUpInside" id="fu9-nd-C58"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -64,6 +75,7 @@
         </view>
     </objects>
     <resources>
+        <image name="a.png" width="30" height="30"/>
         <image name="b.png" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -29,7 +29,7 @@
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
     
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserList];
 }
 
@@ -81,7 +81,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [weakSelf endRefreshingForView:weakSelf.collectView];
-            [weakSelf showNoMoreMessage];
+            [weakSelf showNoMoreMessageForview:weakSelf.collectView];
         });
     }];
 }

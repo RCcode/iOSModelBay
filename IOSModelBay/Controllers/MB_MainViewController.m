@@ -9,6 +9,7 @@
 #import "MB_MainViewController.h"
 #import "MB_TabBarViewController.h"
 #import "MB_LoginViewController.h"
+#import "MB_SelectRoleViewController.h"
 #import "MB_User.h"
 
 
@@ -44,21 +45,31 @@
 #pragma mark - private methods
 
 - (void)loginBtnOnClick:(UIButton *)btn{
-    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
-        NSLog(@"ssss%@",codeStr);
-        _codeStr = codeStr;
-        [self loginWitnCodeStr:codeStr];
-    }];
-        
-    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    [self presentViewController:loginNC animated:YES completion:nil];
+//    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
+//        NSLog(@"ssss%@",codeStr);
+//        _codeStr = codeStr;
+//        [self loginWitnCodeStr:codeStr];
+//    }];
+//        
+//    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//    [self presentViewController:loginNC animated:YES completion:nil];
+    
+    [self loginWitnCodeStr:@"123"];
 }
 
 - (void)loginWitnCodeStr:(NSString *)codeStr {
     [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
         NSLog(@"%@",response);
-        MB_User *user = [[MB_User alloc] init];
-        [user setValuesForKeysWithDictionary:response];
+//        MB_User *user = [[MB_User alloc] init];
+//        [user setValuesForKeysWithDictionary:response];
+        
+        if ([response[@"stat"] integerValue] == 10100) {
+            //未注册
+            MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
+            MB_BaseNavigationViewController *na = [[MB_BaseNavigationViewController alloc] initWithRootViewController:selectRoleVC];
+            [self presentViewController:na animated:YES completion:nil];
+        }
+        
     } failure:^(NSError *err) {
         [self showLoginFailedAlertView];
     }];

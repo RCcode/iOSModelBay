@@ -7,8 +7,13 @@
 //
 
 #import "MB_WriteInfoViewController.h"
+#import "MB_SelectCareerViewController.h"
 
 @interface MB_WriteInfoViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameTF;
+@property (weak, nonatomic) IBOutlet UIButton *maleBtn;
+@property (weak, nonatomic) IBOutlet UIButton *femaleBtn;
 
 @end
 
@@ -16,7 +21,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    self.navigationItem.rightBarButtonItem = barButton;
+    
+    _maleBtn.selected = YES;
+    
+    if (_roleType == RoleTypeAudience) {
+        _maleBtn.hidden = YES;
+        _femaleBtn.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +38,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//点击男性
+- (IBAction)maleBtnOnClick:(UIButton *)sender {
+    _maleBtn.selected = YES;
+    _femaleBtn.selected = NO;
 }
-*/
+
+//点击女性
+- (IBAction)femaleBtnOnClick:(UIButton *)sender {
+    _maleBtn.selected = NO;
+    _femaleBtn.selected = YES;
+}
+
+- (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
+    if (_usernameTF.text == nil || [_usernameTF.text isEqualToString:@""]) {
+        //请输入用户名
+        NSLog(@"请输入用户名");
+    }else{
+        //验证用户名
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kUid],
+                                 @"name":_usernameTF.text};
+        [[AFHttpTool shareTool] checkNameWithParameters:params success:^(id response) {
+            NSLog(@"check username %@",response);
+            if ([response[@"stat"] integerValue] == 10201) {
+                //用户名已经存在
+            }else{
+                MB_SelectCareerViewController *careerVC = [[MB_SelectCareerViewController alloc] init];
+                careerVC.username = _usernameTF.text;
+                if (_maleBtn.selected) {
+                    careerVC.sexType = SexTypeMale;
+                }else{
+                    careerVC.sexType = SexTypeFemale;
+                }
+                [self.navigationController pushViewController:careerVC animated:YES];
+            }
+        } failure:^(NSError *err) {
+            
+        }];
+    }
+}
 
 @end

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, RoleType){
+    RoleTypeProfessional,
+    RoleTypeAudience
+};
+
 @interface MB_WriteInfoViewController : UIViewController
+
+@property (nonatomic, assign) RoleType roleType;
 
 @end

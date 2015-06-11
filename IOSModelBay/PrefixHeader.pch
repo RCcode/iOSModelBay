@@ -22,5 +22,6 @@
 #import "MobClick.h"
 #import "AFHttpTool.h"
 #import "MB_BaseViewController.h"
+#import "MB_BaseNavigationViewController.h"
 
 #endif
