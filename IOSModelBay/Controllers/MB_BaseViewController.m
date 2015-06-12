@@ -25,6 +25,11 @@
 //    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 #pragma mark - UIScrollViewDelegate
 static CGFloat startOffsetY;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -32,17 +37,20 @@ static CGFloat startOffsetY;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    NSLog(@"%f  %f  %f %f ",scrollView.contentSize.height,scrollView.contentOffset.y, startOffsetY,kWindowHeight);
     if (![self.parentViewController isKindOfClass:[UINavigationController class]]) {
         return;//防止ChildViewController滑动隐藏导航栏
     }
     
     //这个判断为了消除刷新的影响
-    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
-        if (scrollView.contentOffset.y < startOffsetY - 60) {
+//    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
+    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)) {
+        if (scrollView.contentOffset.y < startOffsetY - 40) {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
             startOffsetY = scrollView.contentOffset.y;
         }
-        if (scrollView.contentOffset.y > startOffsetY + 60) {
+        if (scrollView.contentOffset.y > startOffsetY + 40) {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             startOffsetY = scrollView.contentOffset.y;
         }
@@ -94,6 +102,26 @@ static CGFloat startOffsetY;
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView {
     self.footerLabel.text = @"没有更多了";
 }
+
+- (NSInteger)statFromResponse:(id)response {
+    NSInteger stat = [response[@"stat"] integerValue];
+    NSString *errorMsg = nil;
+    if (stat == 10001) {
+        errorMsg = @"参数异常";
+    }
+    if (stat == 10002) {
+        errorMsg = @"服务器异常";
+    }
+    if (stat == 10003) {
+        errorMsg = @"操作失败";
+    }
+    if (stat == 10004) {
+        errorMsg = @"无记录";
+    }
+    [MB_Utils showAlertViewWithMessage:errorMsg];
+    return stat;
+}
+
 
 #pragma mark - getters & setters
 - (NSMutableArray *)dataArray {

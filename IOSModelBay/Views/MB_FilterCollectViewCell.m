@@ -14,4 +14,14 @@
     // Initialization code
 }
 
+
+-(void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    if (selected) {
+        self.nameLabel.textColor = [UIColor redColor];
+    }else{
+        self.nameLabel.textColor = [UIColor blackColor];
+    }
+}
+
 @end

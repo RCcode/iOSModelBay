@@ -22,8 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
-    self.navigationItem.rightBarButtonItem = barButton;
+    if (_roleType == RoleTypeProfessional) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    }else{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    }
     
     _maleBtn.selected = YES;
     
@@ -56,21 +59,26 @@
         NSLog(@"请输入用户名");
     }else{
         //验证用户名
-        NSDictionary *params = @{@"id":[userDefaults objectForKey:kUid],
+        NSDictionary *params = @{@"uid":[userDefaults objectForKey:kUid],
                                  @"name":_usernameTF.text};
         [[AFHttpTool shareTool] checkNameWithParameters:params success:^(id response) {
             NSLog(@"check username %@",response);
             if ([response[@"stat"] integerValue] == 10201) {
                 //用户名已经存在
             }else{
-                MB_SelectCareerViewController *careerVC = [[MB_SelectCareerViewController alloc] init];
-                careerVC.username = _usernameTF.text;
-                if (_maleBtn.selected) {
-                    careerVC.sexType = SexTypeMale;
+                if (_roleType == RoleTypeProfessional) {
+                    MB_SelectCareerViewController *careerVC = [[MB_SelectCareerViewController alloc] init];
+                    careerVC.username = _usernameTF.text;
+                    if (_maleBtn.selected) {
+                        careerVC.sexType = SexTypeMale;
+                    }else{
+                        careerVC.sexType = SexTypeFemale;
+                    }
+                    [self.navigationController pushViewController:careerVC animated:YES];
                 }else{
-                    careerVC.sexType = SexTypeFemale;
+                    //注册
+                    
                 }
-                [self.navigationController pushViewController:careerVC animated:YES];
             }
         } failure:^(NSError *err) {
             

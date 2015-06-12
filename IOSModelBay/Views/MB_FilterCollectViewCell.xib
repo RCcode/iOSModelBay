@@ -33,6 +33,10 @@
                 <constraint firstAttribute="centerY" secondItem="Q43-Hu-bLl" secondAttribute="centerY" id="Y0A-mU-6J3"/>
                 <constraint firstAttribute="centerX" secondItem="Q43-Hu-bLl" secondAttribute="centerX" id="qSX-hI-Orc"/>
             </constraints>
+            <connections>
+                <outlet property="backImageView" destination="ZPb-fa-8HJ" id="dA1-ge-vPU"/>
+                <outlet property="nameLabel" destination="Q43-Hu-bLl" id="wGI-6w-Pq4"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

@@ -31,4 +31,8 @@ static NSString * const ReuseIdentifier = @"cell";
 
 //没有更多数据时调用
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView;
+
+
+- (NSInteger)statFromResponse:(id)response;
+
 @end

@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, RoleType){
-    RoleTypeProfessional,
-    RoleTypeAudience
+    RoleTypeProfessional,//专业用户
+    RoleTypeAudience//观众
 };
 
 @interface MB_WriteInfoViewController : UIViewController

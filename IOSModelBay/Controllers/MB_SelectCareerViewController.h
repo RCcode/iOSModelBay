@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SexType){
+    SexTypeFemale = 0,
     SexTypeMale,
-    SexTypeFemale,
 };
 
-@interface MB_SelectCareerViewController : UIViewController
+@interface MB_SelectCareerViewController : MB_BaseViewController
 
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, assign) SexType sexType;

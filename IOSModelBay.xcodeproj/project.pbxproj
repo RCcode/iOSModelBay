@@ -106,6 +106,7 @@
 		CD30D0381B26CECE0053BE08 /* MB_UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD30D0371B26CECE0053BE08 /* MB_UserInfoView.xib */; };
 		CD803B591B295F660011D629 /* MB_SummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD803B571B295F660011D629 /* MB_SummaryTableViewCell.m */; };
 		CD803B5A1B295F660011D629 /* MB_SummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */; };
+		CD81A6311B2AE40600B880E3 /* MB_InviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD81A6301B2AE40600B880E3 /* MB_InviteView.m */; };
 		CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDA567A81B1EF61A006FB5C3 /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */; };
@@ -351,6 +352,8 @@
 		CD803B561B295F660011D629 /* MB_SummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SummaryTableViewCell.h; sourceTree = "<group>"; };
 		CD803B571B295F660011D629 /* MB_SummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SummaryTableViewCell.m; sourceTree = "<group>"; };
 		CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_SummaryTableViewCell.xib; sourceTree = "<group>"; };
+		CD81A62F1B2AE40600B880E3 /* MB_InviteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InviteView.h; sourceTree = "<group>"; };
+		CD81A6301B2AE40600B880E3 /* MB_InviteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InviteView.m; sourceTree = "<group>"; };
 		CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InviteViewController.h; sourceTree = "<group>"; };
 		CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InviteViewController.m; sourceTree = "<group>"; };
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -579,6 +582,8 @@
 				CD803B561B295F660011D629 /* MB_SummaryTableViewCell.h */,
 				CD803B571B295F660011D629 /* MB_SummaryTableViewCell.m */,
 				CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */,
+				CD81A62F1B2AE40600B880E3 /* MB_InviteView.h */,
+				CD81A6301B2AE40600B880E3 /* MB_InviteView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -824,6 +829,8 @@
 				6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */,
 				6F555D081B1DB8B10045A155 /* MB_SearchViewController.h */,
 				6F555D091B1DB8B10045A155 /* MB_SearchViewController.m */,
+				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
+				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
 				CDCA052B1B1EB993003CCDB2 /* MB_UserSummaryViewController.h */,
 				CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */,
 				CDCA052E1B1EBA7F003CCDB2 /* MB_AblumViewController.h */,
@@ -836,8 +843,6 @@
 				CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */,
 				CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */,
 				CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */,
-				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
-				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1096,6 +1101,7 @@
 				6F8387D91B1D8715002D2ED3 /* UIView+WebCacheOperation.m in Sources */,
 				6F83873F1B1D862A002D2ED3 /* RC_AppInfo.m in Sources */,
 				6F8387D21B1D8715002D2ED3 /* SDWebImagePrefetcher.m in Sources */,
+				CD81A6311B2AE40600B880E3 /* MB_InviteView.m in Sources */,
 				6F8387271B1D8544002D2ED3 /* UIImage+ColorAtPixel.m in Sources */,
 				CDE285521B268313007FA77D /* AFHttpTool.m in Sources */,
 				CD21EAFF1B26A0D800513061 /* MB_WriteInfoViewController.m in Sources */,

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^CompleteHandler)(void);
+
 @interface MB_FilterViewController : MB_BaseViewController
+
+@property (nonatomic, copy) CompleteHandler CompleteHandler;
 
 @end

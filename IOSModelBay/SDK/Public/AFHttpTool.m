@@ -108,7 +108,7 @@ static AFHttpTool *httpTool = nil;
     }
 }
 
-////instragram登录
+//instragram登录
 //- (void)loginWithCodeString:(NSString *)codeStr
 //                    success:(void (^)(id response))success
 //                    failure:(void (^)(NSError* err))failure {
@@ -118,8 +118,9 @@ static AFHttpTool *httpTool = nil;
 //                             @"grant_type":@"authorization_code",
 //                             @"redirect_uri":kRedirectUri,
 //                             @"code":codeStr};
-//    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
-//    [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=relationships";
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"--%@",responseObject);
 //        
 //        //服务器登录
@@ -173,7 +174,6 @@ static AFHttpTool *httpTool = nil;
     NSString *username = @"lisong";
     NSString *fullName = @"songge";
     NSString *imageUrl = @"http://img1.imgtn.bdimg.com/it/u=1887538964,2552017407&fm=21&gp=0.jpg";
-    
     
         //服务器登录
         NSDictionary *loginParams = @{@"uid":uid,

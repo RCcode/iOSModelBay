@@ -45,6 +45,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
     if (cell == nil) {
@@ -68,9 +69,14 @@
         cell.accessoryView.tag = indexPath.row;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"dddd");
+}
 
 #pragma mark - private methods
 
@@ -137,10 +143,10 @@
 
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
+        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
-        _listTableView.allowsSelection = NO;
+//        _listTableView.allowsSelection = NO;
     }
     return _listTableView;
 }

@@ -65,6 +65,8 @@ NSString *LocalizedString(NSString *translation_key, id none);
 
 NSString *doDevicePlatform();
 
+void enumerateFonts();
+
 CGSize sizeWithContentAndFont(NSString *content,CGSize size,float fontSize);
 
 //void refreshAppInfoArray(NSMutableArray *array);
@@ -72,7 +74,7 @@ CGSize sizeWithContentAndFont(NSString *content,CGSize size,float fontSize);
 //根据内容和字体获得标签大小
 CGRect getTextLabelRectWithContentAndFont(NSString *content,UIFont *font);
 
-NSString* getHeaderData();
+//NSString* getHeaderData();
 
 
 @end

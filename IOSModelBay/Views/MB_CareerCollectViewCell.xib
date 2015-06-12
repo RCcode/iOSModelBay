@@ -16,32 +16,37 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="UZK-pV-Ujo">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b.png" translatesAutoresizingMaskIntoConstraints="NO" id="KBf-jy-NCa">
-                        <rect key="frame" x="55" y="55" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="3eT-R3-esL"/>
-                            <constraint firstAttribute="width" constant="40" id="gWf-h4-9Lg"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-kk-GY1">
                         <rect key="frame" x="51" y="115" width="48" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3I-i7-hhR">
+                        <rect key="frame" x="65" y="64" width="20" height="22"/>
+                        <state key="normal" image="b.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="a.png"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="KBf-jy-NCa" secondAttribute="centerX" id="0Cn-IO-JUi"/>
+                <constraint firstAttribute="centerY" secondItem="i3I-i7-hhR" secondAttribute="centerY" id="4Ya-wO-BFG"/>
                 <constraint firstItem="UZK-pV-Ujo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7JW-el-gwo"/>
                 <constraint firstAttribute="bottom" secondItem="UZK-pV-Ujo" secondAttribute="bottom" id="9KP-NA-b0m"/>
                 <constraint firstItem="UZK-pV-Ujo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GOa-vM-yAm"/>
+                <constraint firstAttribute="bottom" secondItem="BLF-kk-GY1" secondAttribute="bottom" constant="14" id="LaW-Ey-VgV"/>
                 <constraint firstAttribute="trailing" secondItem="UZK-pV-Ujo" secondAttribute="trailing" id="exS-83-EVV"/>
-                <constraint firstItem="BLF-kk-GY1" firstAttribute="top" secondItem="KBf-jy-NCa" secondAttribute="bottom" constant="20" id="fF8-gT-U0i"/>
                 <constraint firstAttribute="centerX" secondItem="BLF-kk-GY1" secondAttribute="centerX" id="hUQ-tM-nO3"/>
-                <constraint firstAttribute="centerY" secondItem="KBf-jy-NCa" secondAttribute="centerY" id="qFw-7q-KIt"/>
+                <constraint firstAttribute="centerX" secondItem="i3I-i7-hhR" secondAttribute="centerX" id="opq-Lu-GLU"/>
             </constraints>
+            <connections>
+                <outlet property="backImageView" destination="UZK-pV-Ujo" id="0iq-dh-t7Y"/>
+                <outlet property="careerLabel" destination="BLF-kk-GY1" id="hyz-o8-nmZ"/>
+                <outlet property="selectButton" destination="i3I-i7-hhR" id="0F7-Hf-sk6"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

@@ -9,6 +9,7 @@
 #import "MB_FindViewController.h"
 #import "MB_FilterViewController.h"
 #import "MB_UserCollectViewCell.h"
+#import "MB_UserViewController.h"
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -24,7 +25,9 @@
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor redColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(filterBarBtnOnCLick:)];
+    self.title = @"MODELBAY";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(rightBarBtnOnCLick:)];
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
@@ -54,12 +57,26 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+
 
 #pragma mark - private methods
 
-- (void)filterBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+    //跳转到筛选界面
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
+    filterVC.CompleteHandler = ^(){
+        [self findUserList];
+    };
     [self.navigationController pushViewController:filterVC animated:YES];
 }
 
@@ -79,7 +96,6 @@
     [self addFooterRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"footer");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
             [weakSelf endRefreshingForView:weakSelf.collectView];
             [weakSelf showNoMoreMessageForview:weakSelf.collectView];
         });
@@ -88,12 +104,30 @@
 
 //获取发现用户列表
 - (void)findUserList {
-    NSDictionary *params = @{@"minId":@(0),
-                             @"count":@(10)};
+    NSMutableDictionary *params = [@{@"id":@"",
+                                     @"token":@"",
+                                     @"fid":@"",
+                                     @"fname":@"",
+                                     @"fgender":@(-1),
+                                     @"fcareerId":[MB_Utils shareUtil].careerId?:@"",
+                                     @"minId":@(0),
+                                     @"count":@(10)} mutableCopy];
+    if ([userDefaults boolForKey:kIsLogin]) {
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fid"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fname"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fgender"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fcareerId"];
+//        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+    }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"list %@",response);
         [self endRefreshingForView:self.collectView];
+        if ([self statFromResponse:response] == 10000) {
+            [self.collectView reloadData];
+        }
     } failure:^(NSError *err) {
         [self endRefreshingForView:self.collectView];
     }];
@@ -107,7 +141,7 @@
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         CGFloat itemWidth = (kWindowWidth - 2.5) / 2;
-        layout.minimumInteritemSpacing = 0;
+        layout.minimumInteritemSpacing = 2.5;
         layout.minimumLineSpacing = 2.5;
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];

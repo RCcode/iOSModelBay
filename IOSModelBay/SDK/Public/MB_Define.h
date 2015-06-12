@@ -51,6 +51,12 @@
 #define kPic @"pic"
 #define kAccessToken @"accessToken"
 
+//模特平台
+#define kID   @"id"
+#define kName @"name"
+#define kCareer @"career"
+#define kGender @"gender"
+
 #define userDefaults [NSUserDefaults standardUserDefaults]
 
 

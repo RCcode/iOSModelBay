@@ -63,14 +63,22 @@
 //        MB_User *user = [[MB_User alloc] init];
 //        [user setValuesForKeysWithDictionary:response];
         
-        if ([response[@"stat"] integerValue] == 10100) {
+        if ([self statFromResponse:response] == 10100) {
             //未注册
             MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
             MB_BaseNavigationViewController *na = [[MB_BaseNavigationViewController alloc] initWithRootViewController:selectRoleVC];
             [self presentViewController:na animated:YES completion:nil];
+        }else if ([self statFromResponse:response] == 10000){
+            [userDefaults setObject:response[@"name"] forKey:kName];
+//            [userDefaults setObject:response[@"userName"] forKey:kUsername];
+//            [userDefaults setObject:response[@"fullName"] forKey:kFullname];
+            [userDefaults synchronize];
+            
+            MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+            [self presentViewController:tabVC animated:YES completion:nil];
         }
-        
     } failure:^(NSError *err) {
+        NSLog(@"sasasa%@",err);
         [self showLoginFailedAlertView];
     }];
 }

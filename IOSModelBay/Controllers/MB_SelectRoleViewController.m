@@ -29,12 +29,15 @@
 - (IBAction)professionalBtnOnClick:(UIButton *)sender{
     //专业用户
     MB_WriteInfoViewController *writeVC = [[MB_WriteInfoViewController alloc] init];
+    writeVC.roleType = RoleTypeProfessional;
     [self.navigationController pushViewController:writeVC animated:YES];
 }
 
 - (IBAction)audinceBtnOnClick:(UIButton *)sender {
     //观众
-    
+    MB_WriteInfoViewController *writeVC = [[MB_WriteInfoViewController alloc] init];
+    writeVC.roleType = RoleTypeAudience;
+    [self.navigationController pushViewController:writeVC animated:YES];
 }
 
 

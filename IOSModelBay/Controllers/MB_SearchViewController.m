@@ -8,8 +8,10 @@
 
 #import "MB_SearchViewController.h"
 #import "MB_UserTableViewCell.h"
+#import "MB_InviteView.h"
+#import "MB_InviteViewController.h"
 
-@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, InviteViewDelegate>
 
 @property (nonatomic, strong) UIView *searchView;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -18,6 +20,7 @@
 @property (nonatomic, strong) UILabel *inviteLabel;
 
 @property (nonatomic, strong) UITableView *listTableView;
+@property (nonatomic, strong) MB_InviteView *inviteView;
 
 @end
 
@@ -34,13 +37,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     [self.navigationController setNavigationBarHidden:NO];
 }
 
@@ -49,12 +50,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - UITableViewDelegate UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -65,10 +62,9 @@
     return cell;
 }
 
+
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-  //搜索用户
-    
     if ([searchBar.text isEqualToString:@""]) {
         return;
     }
@@ -76,12 +72,41 @@
     [searchBar resignFirstResponder];
     self.listTableView.tableHeaderView = self.tableHeaderView;
     self.inviteLabel.text = [NSString stringWithFormat:@"invite %@",searchBar.text];
-    [self.dataArray addObject:@"sss"];
-    [self.listTableView reloadData];
+    
+    //搜索用户
+    NSMutableDictionary *params = [@{@"id":@"",
+                                     @"token":@"",
+                                     @"fid":@"",
+                                     @"fname":searchBar.text,
+                                     @"fgender":@(-1),
+                                     @"fcareerId":@"",
+                                     @"minId":@(0),
+                                     @"count":@(10)} mutableCopy];
+    if ([userDefaults boolForKey:kIsLogin]) {
+        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
+        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"fid"];
+        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+    }
+    
+    [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
+        NSLog(@"search list%@",response);
+        
+    } failure:^(NSError *err) {
+        
+    }];
 }
 
-#pragma mark - private methods
 
+#pragma mark - InviteViewDelegate
+-(void)inviteRightViewOnClick:(UIButton *)button {
+    [self.inviteView removeFromSuperview];
+    MB_InviteViewController *inviteVC = [[MB_InviteViewController alloc] init];
+    [self.navigationController pushViewController:inviteVC animated:YES];
+}
+
+
+#pragma mark - private methods
 - (void)cancelBtnOnClick:(UIButton *)btn {
     if ([self.searchBar.text isEqualToString:@""]) {
         //返回上一界面
@@ -92,15 +117,21 @@
     }
 }
 
+- (void)inviteButtonOnClick:(UIButton *)button {
+    [[UIApplication sharedApplication].keyWindow addSubview:self.inviteView];
+}
+
 
 #pragma mark - getters & setters
-
 - (UIView *)searchView {
     if (_searchView == nil) {
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
         
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
         searchBar.placeholder = @"sas";
+        if (![[MB_Utils shareUtil].name isEqualToString:@""]) {
+            searchBar.text = [MB_Utils shareUtil].name;
+        }
         searchBar.delegate = self;
         [searchBar becomeFirstResponder];
         [_searchView addSubview:searchBar];
@@ -127,6 +158,7 @@
         button.frame = CGRectMake(CGRectGetMaxX(label.frame), 0, 50, 50);
         [button setBackgroundColor:[UIColor redColor]];
         [button setTitle:@"invite" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_tableHeaderView addSubview:button];
     }
     return _tableHeaderView;
@@ -143,6 +175,14 @@
         [_listTableView registerNib:[UINib nibWithNibName:NSStringFromClass([MB_UserTableViewCell class]) bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _listTableView;
+}
+
+- (MB_InviteView *)inviteView {
+    if (_inviteView == nil) {
+        _inviteView = [[MB_InviteView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) delegate:self];
+
+    }
+    return _inviteView;
 }
 
 @end
