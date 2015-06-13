@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_RankingViewController : UIViewController
+@interface MB_RankingViewController : MB_BaseViewController
 
 @end

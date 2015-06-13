@@ -110,12 +110,16 @@
 		CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDA567A81B1EF61A006FB5C3 /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */; };
+		CDA623951B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA623941B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.m */; };
+		CDA623991B2BE2D500A3A41F /* MB_MsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA623971B2BE2D500A3A41F /* MB_MsgTableViewCell.m */; };
+		CDA6239A1B2BE2D500A3A41F /* MB_MsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA623981B2BE2D500A3A41F /* MB_MsgTableViewCell.xib */; };
+		CDA6239D1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */; };
+		CDA623A11B2C0E0F00A3A41F /* MB_RankingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */; };
+		CDA623A21B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
 		CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */; };
 		CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB971B21B3E300119C18 /* MB_Notice.m */; };
 		CDC9AB9D1B21B3E300119C18 /* MB_User.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB991B21B3E300119C18 /* MB_User.m */; };
-		CDCA04E21B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */; };
-		CDCA04E31B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */; };
 		CDCA04E71B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */; };
 		CDCA04E81B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */; };
 		CDCA04EC1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA04EA1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.m */; };
@@ -359,6 +363,16 @@
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDA567A61B1EF61A006FB5C3 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
+		CDA623931B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		CDA623941B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		CDA623961B2BE2D500A3A41F /* MB_MsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MsgTableViewCell.h; sourceTree = "<group>"; };
+		CDA623971B2BE2D500A3A41F /* MB_MsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MsgTableViewCell.m; sourceTree = "<group>"; };
+		CDA623981B2BE2D500A3A41F /* MB_MsgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MsgTableViewCell.xib; sourceTree = "<group>"; };
+		CDA6239B1B2BF7DF00A3A41F /* MB_ScanAblumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_ScanAblumViewController.h; sourceTree = "<group>"; };
+		CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_ScanAblumViewController.m; sourceTree = "<group>"; };
+		CDA6239E1B2C0E0F00A3A41F /* MB_RankingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_RankingTableViewCell.h; sourceTree = "<group>"; };
+		CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_RankingTableViewCell.m; sourceTree = "<group>"; };
+		CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_RankingTableViewCell.xib; sourceTree = "<group>"; };
 		CDC9AB921B21B3E300119C18 /* MB_Ablum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Ablum.h; sourceTree = "<group>"; };
 		CDC9AB931B21B3E300119C18 /* MB_Ablum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Ablum.m; sourceTree = "<group>"; };
 		CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddressBookPeople.h; sourceTree = "<group>"; };
@@ -367,9 +381,6 @@
 		CDC9AB971B21B3E300119C18 /* MB_Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Notice.m; sourceTree = "<group>"; };
 		CDC9AB981B21B3E300119C18 /* MB_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_User.h; sourceTree = "<group>"; };
 		CDC9AB991B21B3E300119C18 /* MB_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_User.m; sourceTree = "<group>"; };
-		CDCA04DF1B1EAB7F003CCDB2 /* MB_MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageTableViewCell.h; sourceTree = "<group>"; };
-		CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageTableViewCell.m; sourceTree = "<group>"; };
-		CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MessageTableViewCell.xib; sourceTree = "<group>"; };
 		CDCA04E41B1EADD5003CCDB2 /* MB_AlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AlbumTableViewCell.h; sourceTree = "<group>"; };
 		CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AlbumTableViewCell.m; sourceTree = "<group>"; };
 		CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_AlbumTableViewCell.xib; sourceTree = "<group>"; };
@@ -538,6 +549,7 @@
 		6F83870F1B1D84D8002D2ED3 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				CDA623921B2BDEC700A3A41F /* FDTemplateLayoutCell */,
 				CDA567A51B1EF61A006FB5C3 /* flurryAnalytics */,
 				CDCA04EE1B1EB14F003CCDB2 /* SVPullToRefresh */,
 				6F555CEC1B1DA58F0045A155 /* MBProgressHUD */,
@@ -567,9 +579,6 @@
 				6F555D0B1B1DBCCB0045A155 /* MB_UserTableViewCell.h */,
 				6F555D0C1B1DBCCB0045A155 /* MB_UserTableViewCell.m */,
 				6F555D0D1B1DBCCB0045A155 /* MB_UserTableViewCell.xib */,
-				CDCA04DF1B1EAB7F003CCDB2 /* MB_MessageTableViewCell.h */,
-				CDCA04E01B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m */,
-				CDCA04E11B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib */,
 				CDCA04E41B1EADD5003CCDB2 /* MB_AlbumTableViewCell.h */,
 				CDCA04E51B1EADD5003CCDB2 /* MB_AlbumTableViewCell.m */,
 				CDCA04E61B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib */,
@@ -584,6 +593,12 @@
 				CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */,
 				CD81A62F1B2AE40600B880E3 /* MB_InviteView.h */,
 				CD81A6301B2AE40600B880E3 /* MB_InviteView.m */,
+				CDA623961B2BE2D500A3A41F /* MB_MsgTableViewCell.h */,
+				CDA623971B2BE2D500A3A41F /* MB_MsgTableViewCell.m */,
+				CDA623981B2BE2D500A3A41F /* MB_MsgTableViewCell.xib */,
+				CDA6239E1B2C0E0F00A3A41F /* MB_RankingTableViewCell.h */,
+				CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */,
+				CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -843,6 +858,8 @@
 				CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */,
 				CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */,
 				CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */,
+				CDA6239B1B2BF7DF00A3A41F /* MB_ScanAblumViewController.h */,
+				CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -869,6 +886,15 @@
 				CDA567A71B1EF61A006FB5C3 /* libFlurry_6.3.0.a */,
 			);
 			path = flurryAnalytics;
+			sourceTree = "<group>";
+		};
+		CDA623921B2BDEC700A3A41F /* FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				CDA623931B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.h */,
+				CDA623941B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.m */,
+			);
+			path = FDTemplateLayoutCell;
 			sourceTree = "<group>";
 		};
 		CDC9AB461B216BE200119C18 /* Models */ = {
@@ -999,13 +1025,13 @@
 				6F555D0F1B1DBCCB0045A155 /* MB_UserTableViewCell.xib in Resources */,
 				CD30D0381B26CECE0053BE08 /* MB_UserInfoView.xib in Resources */,
 				CD21EB401B26BADB00513061 /* MB_FilterCollectViewCell.xib in Resources */,
+				CDA6239A1B2BE2D500A3A41F /* MB_MsgTableViewCell.xib in Resources */,
 				6F555D041B1DB1980045A155 /* MB_UserCollectViewCell.xib in Resources */,
 				6F8387461B1D862A002D2ED3 /* RC_PopUpADView.xib in Resources */,
 				6F8387441B1D862A002D2ED3 /* RC_MoreTableViewCell.xib in Resources */,
 				CD21EB001B26A0D800513061 /* MB_WriteInfoViewController.xib in Resources */,
 				CD803B5A1B295F660011D629 /* MB_SummaryTableViewCell.xib in Resources */,
 				6F55A4B81B1D7567006DA537 /* LaunchScreen.xib in Resources */,
-				CDCA04E31B1EAB7F003CCDB2 /* MB_MessageTableViewCell.xib in Resources */,
 				CD21EAFB1B269F2A00513061 /* MB_SelectRoleViewController.xib in Resources */,
 				6F55A4B51B1D7567006DA537 /* Images.xcassets in Resources */,
 				CD21EB091B26A3E400513061 /* MB_CareerCollectViewCell.xib in Resources */,
@@ -1014,6 +1040,7 @@
 				CDCA04ED1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib in Resources */,
 				CD21EB421B26C11A00513061 /* b.png in Resources */,
 				CDCA04E81B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib in Resources */,
+				CDA623A21B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1084,7 @@
 				6F8387871B1D86E6002D2ED3 /* AFHTTPSessionManager.m in Sources */,
 				6F8387701B1D8684002D2ED3 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				6F8388071B1D9C3C002D2ED3 /* MB_UserViewController.m in Sources */,
+				CDA6239D1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m in Sources */,
 				6F8387D51B1D8715002D2ED3 /* UIImage+MultiFormat.m in Sources */,
 				6F8387D71B1D8715002D2ED3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
@@ -1071,10 +1099,12 @@
 				6F8387A21B1D86F9002D2ED3 /* UIAlertView+AFNetworking.m in Sources */,
 				6F555CFC1B1DAF0E0045A155 /* MB_TabBarViewController.m in Sources */,
 				6F555D0E1B1DBCCB0045A155 /* MB_UserTableViewCell.m in Sources */,
+				CDA623991B2BE2D500A3A41F /* MB_MsgTableViewCell.m in Sources */,
 				6F55A4AD1B1D7567006DA537 /* AppDelegate.m in Sources */,
 				6F8387E01B1D892A002D2ED3 /* Reachability.m in Sources */,
 				6F8388041B1D9C18002D2ED3 /* MB_RankingViewController.m in Sources */,
 				6F55A4AA1B1D7567006DA537 /* main.m in Sources */,
+				CDA623A11B2C0E0F00A3A41F /* MB_RankingTableViewCell.m in Sources */,
 				6F8387D01B1D8715002D2ED3 /* SDWebImageDownloaderOperation.m in Sources */,
 				CD21EAFA1B269F2A00513061 /* MB_SelectRoleViewController.m in Sources */,
 				CDCA05301B1EBA7F003CCDB2 /* MB_AblumViewController.m in Sources */,
@@ -1085,7 +1115,6 @@
 				6F8387241B1D8544002D2ED3 /* NSString+Helper.m in Sources */,
 				6F8387851B1D86E6002D2ED3 /* AFHTTPRequestOperation.m in Sources */,
 				6F555CF21B1DA74C0045A155 /* MB_LoginViewController.m in Sources */,
-				CDCA04E21B1EAB7F003CCDB2 /* MB_MessageTableViewCell.m in Sources */,
 				6F8387A61B1D86F9002D2ED3 /* UIRefreshControl+AFNetworking.m in Sources */,
 				6F83878D1B1D86E6002D2ED3 /* AFURLSessionManager.m in Sources */,
 				6F8387451B1D862A002D2ED3 /* RC_PopUpADView.m in Sources */,
@@ -1103,6 +1132,7 @@
 				6F8387D21B1D8715002D2ED3 /* SDWebImagePrefetcher.m in Sources */,
 				CD81A6311B2AE40600B880E3 /* MB_InviteView.m in Sources */,
 				6F8387271B1D8544002D2ED3 /* UIImage+ColorAtPixel.m in Sources */,
+				CDA623951B2BDEC700A3A41F /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				CDE285521B268313007FA77D /* AFHttpTool.m in Sources */,
 				CD21EAFF1B26A0D800513061 /* MB_WriteInfoViewController.m in Sources */,
 				99E2A97E1B243BA300957A6E /* MB_BaseViewController.m in Sources */,

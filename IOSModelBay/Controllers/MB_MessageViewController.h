@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_MessageViewController : UIViewController
+@interface MB_MessageViewController : MB_BaseViewController
 
 @property (nonatomic, assign) CGRect containerViewRect;
 

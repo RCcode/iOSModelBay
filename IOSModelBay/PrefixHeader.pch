@@ -9,8 +9,6 @@
 #ifndef IOSModelBay_PrefixHeader_pch
 #define IOSModelBay_PrefixHeader_pch
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "MobClick.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"

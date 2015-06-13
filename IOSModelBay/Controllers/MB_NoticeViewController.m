@@ -9,11 +9,11 @@
 #import "MB_NoticeViewController.h"
 #import "MB_UserTableViewCell.h"
 
-//static NSString * const identifier = @"cell";
-
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *noticeArray;
+@property (nonatomic, strong) NSMutableArray *Array;
 
 @end
 

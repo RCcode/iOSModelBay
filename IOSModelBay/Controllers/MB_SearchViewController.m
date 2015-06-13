@@ -125,7 +125,7 @@
 #pragma mark - getters & setters
 - (UIView *)searchView {
     if (_searchView == nil) {
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, kWindowWidth, 50)];
         
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
         searchBar.placeholder = @"sas";

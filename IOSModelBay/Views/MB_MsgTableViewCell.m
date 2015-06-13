@@ -1,17 +1,19 @@
 //
-//  MB_MessageTableViewCell.m
+//  MB_MsgTableViewCell.m
 //  IOSModelBay
 //
-//  Created by lisongrc on 15/6/3.
+//  Created by lisongrc on 15/6/13.
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_MessageTableViewCell.h"
+#import "MB_MsgTableViewCell.h"
 
-@implementation MB_MessageTableViewCell
+@implementation MB_MsgTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

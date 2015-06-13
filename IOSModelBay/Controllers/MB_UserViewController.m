@@ -17,6 +17,8 @@
 #import "MB_SearchViewController.h"
 #import "MB_UserInfoView.h"
 
+#import "MB_ScanAblumViewController.h"
+
 @interface MB_UserViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
@@ -35,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"邀请" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     [self.view addSubview:self.userInfoView];
     [self.view addSubview:self.menuView];
@@ -65,7 +67,10 @@
 - (void)test {
 //    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
+//    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
+//    [self.navigationController pushViewController:inviteVC animated:YES];
+    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 

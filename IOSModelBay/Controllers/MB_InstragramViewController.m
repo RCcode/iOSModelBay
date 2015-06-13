@@ -24,9 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    NSLog(@"songsong  %@",self.navigationController);
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
     
@@ -40,11 +38,6 @@
 }
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 40;
 }
@@ -55,14 +48,12 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-//    cell.usernameLabel.text = @"songge";
     cell.backgroundColor = [UIColor greenColor];
     return cell;
 }
 
 
 #pragma mark - private methods
-
 //添加上下拉刷新
 - (void)addPullRefresh
 {
@@ -124,9 +115,7 @@
 }
 
 #pragma mark - getters & setters
-
 - (UICollectionView *)collectView {
-    
     if (_collectView == nil) {
         NSLog(@"-----%f",self.view.frame.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -134,7 +123,6 @@
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
-//        [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
         [_collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;

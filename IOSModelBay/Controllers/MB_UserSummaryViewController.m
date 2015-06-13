@@ -35,12 +35,15 @@
 #pragma mark - UITableViewDelegate UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 20;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    return self.dataArray.count;
-    return 2;
+    if (section == 0) {
+        return 1;
+    }else{
+        return 10;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,7 +70,6 @@
         cell.subLabel.text = @"saasasnzcnczxcxzcxc";
     }
     
-//    cell.subLabel.font =     [UIFont systemFontOfSize:17.0 weight:UIFontDescriptorTraitBold];
     return cell;
 }
 

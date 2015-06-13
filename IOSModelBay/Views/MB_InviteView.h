@@ -22,6 +22,6 @@
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, weak) id<InviteViewDelegate> delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<InviteViewDelegate>)delegate;
 
 @end

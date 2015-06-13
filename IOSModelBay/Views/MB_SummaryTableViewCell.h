@@ -10,6 +10,8 @@
 
 @interface MB_SummaryTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) CAShapeLayer *mylayer;
+
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 
 

@@ -12,6 +12,25 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
+//    _mylayer = [CAShapeLayer layer];
+//    CGRect rect = self.contentView.bounds;
+//    rect.size.height += 10;
+//    _mylayer.path = [UIBezierPath bezierPathWithRect:rect].CGPath;
+//    _mylayer.frame = CGRectMake(0, 0, kWindowWidth, rect.size.height);
+//    _mylayer.lineWidth = 2;
+//    _mylayer.lineDashPhase = 5;
+//    _mylayer.lineDashPattern = @[@(5)];
+//    _mylayer.strokeColor = [UIColor redColor].CGColor;
+//    _mylayer.fillColor = [UIColor clearColor].CGColor;
+//    
+//    self.contentView.clipsToBounds = YES;
+//    [self.contentView.layer addSublayer:_mylayer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
