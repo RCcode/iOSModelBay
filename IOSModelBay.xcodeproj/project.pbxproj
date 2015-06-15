@@ -132,6 +132,10 @@
 		CDCA05361B1EBABA003CCDB2 /* MB_MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */; };
 		CDCA05391B1EBAEB003CCDB2 /* MB_LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */; };
 		CDCA053C1B1EBC1E003CCDB2 /* MB_SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */; };
+		CDCB90901B2E736E000A4CAE /* MB_ReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCB908E1B2E736E000A4CAE /* MB_ReplyTableViewCell.m */; };
+		CDCB90911B2E736E000A4CAE /* MB_ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCB908F1B2E736E000A4CAE /* MB_ReplyTableViewCell.xib */; };
+		CDCB90951B2E7C0D000A4CAE /* MB_LikeCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDCB90931B2E7C0D000A4CAE /* MB_LikeCollectViewCell.m */; };
+		CDCB90961B2E7C0D000A4CAE /* MB_LikeCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDCB90941B2E7C0D000A4CAE /* MB_LikeCollectViewCell.xib */; };
 		CDE285521B268313007FA77D /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2854C1B268313007FA77D /* AFHttpTool.m */; };
 		CDE285531B268313007FA77D /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2854E1B268313007FA77D /* CMethods.m */; };
 		CDE285541B268313007FA77D /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE285511B268313007FA77D /* MB_Utils.m */; };
@@ -404,6 +408,12 @@
 		CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikesViewController.m; sourceTree = "<group>"; };
 		CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SettingViewController.h; sourceTree = "<group>"; };
 		CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SettingViewController.m; sourceTree = "<group>"; };
+		CDCB908D1B2E736E000A4CAE /* MB_ReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_ReplyTableViewCell.h; sourceTree = "<group>"; };
+		CDCB908E1B2E736E000A4CAE /* MB_ReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_ReplyTableViewCell.m; sourceTree = "<group>"; };
+		CDCB908F1B2E736E000A4CAE /* MB_ReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_ReplyTableViewCell.xib; sourceTree = "<group>"; };
+		CDCB90921B2E7C0D000A4CAE /* MB_LikeCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikeCollectViewCell.h; sourceTree = "<group>"; };
+		CDCB90931B2E7C0D000A4CAE /* MB_LikeCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikeCollectViewCell.m; sourceTree = "<group>"; };
+		CDCB90941B2E7C0D000A4CAE /* MB_LikeCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_LikeCollectViewCell.xib; sourceTree = "<group>"; };
 		CDE2854B1B268313007FA77D /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
 		CDE2854C1B268313007FA77D /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
 		CDE2854D1B268313007FA77D /* CMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMethods.h; sourceTree = "<group>"; };
@@ -596,9 +606,15 @@
 				CDA623961B2BE2D500A3A41F /* MB_MsgTableViewCell.h */,
 				CDA623971B2BE2D500A3A41F /* MB_MsgTableViewCell.m */,
 				CDA623981B2BE2D500A3A41F /* MB_MsgTableViewCell.xib */,
+				CDCB908D1B2E736E000A4CAE /* MB_ReplyTableViewCell.h */,
+				CDCB908E1B2E736E000A4CAE /* MB_ReplyTableViewCell.m */,
+				CDCB908F1B2E736E000A4CAE /* MB_ReplyTableViewCell.xib */,
 				CDA6239E1B2C0E0F00A3A41F /* MB_RankingTableViewCell.h */,
 				CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */,
 				CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */,
+				CDCB90921B2E7C0D000A4CAE /* MB_LikeCollectViewCell.h */,
+				CDCB90931B2E7C0D000A4CAE /* MB_LikeCollectViewCell.m */,
+				CDCB90941B2E7C0D000A4CAE /* MB_LikeCollectViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1026,6 +1042,8 @@
 				CD30D0381B26CECE0053BE08 /* MB_UserInfoView.xib in Resources */,
 				CD21EB401B26BADB00513061 /* MB_FilterCollectViewCell.xib in Resources */,
 				CDA6239A1B2BE2D500A3A41F /* MB_MsgTableViewCell.xib in Resources */,
+				CDCB90961B2E7C0D000A4CAE /* MB_LikeCollectViewCell.xib in Resources */,
+				CDCB90911B2E736E000A4CAE /* MB_ReplyTableViewCell.xib in Resources */,
 				6F555D041B1DB1980045A155 /* MB_UserCollectViewCell.xib in Resources */,
 				6F8387461B1D862A002D2ED3 /* RC_PopUpADView.xib in Resources */,
 				6F8387441B1D862A002D2ED3 /* RC_MoreTableViewCell.xib in Resources */,
@@ -1105,6 +1123,7 @@
 				6F8388041B1D9C18002D2ED3 /* MB_RankingViewController.m in Sources */,
 				6F55A4AA1B1D7567006DA537 /* main.m in Sources */,
 				CDA623A11B2C0E0F00A3A41F /* MB_RankingTableViewCell.m in Sources */,
+				CDCB90901B2E736E000A4CAE /* MB_ReplyTableViewCell.m in Sources */,
 				6F8387D01B1D8715002D2ED3 /* SDWebImageDownloaderOperation.m in Sources */,
 				CD21EAFA1B269F2A00513061 /* MB_SelectRoleViewController.m in Sources */,
 				CDCA05301B1EBA7F003CCDB2 /* MB_AblumViewController.m in Sources */,
@@ -1115,6 +1134,7 @@
 				6F8387241B1D8544002D2ED3 /* NSString+Helper.m in Sources */,
 				6F8387851B1D86E6002D2ED3 /* AFHTTPRequestOperation.m in Sources */,
 				6F555CF21B1DA74C0045A155 /* MB_LoginViewController.m in Sources */,
+				CDCB90951B2E7C0D000A4CAE /* MB_LikeCollectViewCell.m in Sources */,
 				6F8387A61B1D86F9002D2ED3 /* UIRefreshControl+AFNetworking.m in Sources */,
 				6F83878D1B1D86E6002D2ED3 /* AFURLSessionManager.m in Sources */,
 				6F8387451B1D862A002D2ED3 /* RC_PopUpADView.m in Sources */,

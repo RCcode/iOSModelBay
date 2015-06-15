@@ -10,4 +10,6 @@
 
 @interface MB_UserViewController : MB_BaseViewController
 
+//@property (nonatomic, strong) UITableView *tableView;
+
 @end

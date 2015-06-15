@@ -45,13 +45,16 @@ static CGFloat startOffsetY;
     
     //这个判断为了消除刷新的影响
 //    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
-    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)) {
+//    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)- 30) {
+    if (scrollView.contentOffset.y >0 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)) {
         if (scrollView.contentOffset.y < startOffsetY - 40) {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
             startOffsetY = scrollView.contentOffset.y;
         }
         if (scrollView.contentOffset.y > startOffsetY + 40) {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
             startOffsetY = scrollView.contentOffset.y;
         }
     }
@@ -64,6 +67,7 @@ static CGFloat startOffsetY;
     
     [scrollview addPullToRefreshWithActionHandler:actionHandler];
     scrollview.pullToRefreshView.originalTopInset = [self.parentViewController isKindOfClass:[UINavigationController class]]?64:0;
+//    scrollview.pullToRefreshView.originalTopInset = self.automaticallyAdjustsScrollViewInsets?64:0;
     [scrollview.pullToRefreshView setArrowColor:scrollview.backgroundColor];
     [scrollview.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateAll];
     [scrollview.pullToRefreshView setCustomView:self.activityIndicatorView

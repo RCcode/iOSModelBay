@@ -10,6 +10,10 @@
 #import "SVPullToRefresh.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "MB_MsgTableViewCell.h"
+#import "MB_ReplyTableViewCell.h"
+
+static NSString * const ReuseIdentifierMsg = @"msg";
+static NSString * const ReuseIdentifierReply = @"reply";
 
 @interface MB_MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -24,8 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.view addSubview:self.tableView];
-//    [self addPullRefresh];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:self.tableView];
+    [self addPullRefresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,9 +40,13 @@
 
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 9;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //    return self.dataArray.count;
-    return 9;
+    return 1;
 }
 
 - (void)configureCell:(MB_MsgTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -47,15 +56,24 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [tableView fd_heightForCellWithIdentifier:ReuseIdentifier cacheByIndexPath:indexPath configuration:^(MB_MsgTableViewCell *cell) {
-        [self configureCell:cell atIndexPath:indexPath];
-    }];
+//    return [tableView fd_heightForCellWithIdentifier:ReuseIdentifier cacheByIndexPath:indexPath configuration:^(MB_MsgTableViewCell *cell) {
+//        [self configureCell:cell atIndexPath:indexPath];
+//    }];
+    
+    return 168;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MB_MsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
+//    [self configureCell:cell atIndexPath:indexPath];
+    if (indexPath.section %2 == 0) {
+        MB_MsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierMsg forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor redColor];
+        return cell;
+    }else {
+        MB_ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierReply forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor yellowColor];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,16 +109,20 @@
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
-        UIView *view =[[UIView alloc] init];
-        [_tableView setTableFooterView:view];
-        [_tableView setTableHeaderView:view];
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 10)];
+//        _tableView.tableHeaderView = view;
+//        _tableView.tableFooterView = view;
+        _tableView.sectionHeaderHeight = 10;
+        _tableView.sectionFooterHeight = 0;
         
-        [_tableView registerNib:[UINib nibWithNibName:@"MB_MsgTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_MsgTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierMsg];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_ReplyTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierReply];
     }
+    
     return _tableView;
 }
 

@@ -59,6 +59,7 @@
 
 #define userDefaults [NSUserDefaults standardUserDefaults]
 
+#define kCanScrollNotification @"canScrollNotification"
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)

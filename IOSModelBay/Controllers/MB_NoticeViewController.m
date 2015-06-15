@@ -9,9 +9,13 @@
 #import "MB_NoticeViewController.h"
 #import "MB_UserTableViewCell.h"
 
+static CGFloat const menuBtnWidth = 150;
+
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIButton       *noticeBtn;
+@property (nonatomic, strong) UIButton       *messageBtn;
+@property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *noticeArray;
 @property (nonatomic, strong) NSMutableArray *Array;
 
@@ -24,8 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor cyanColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:self.noticeBtn];
+    [self.view addSubview:self.messageBtn];
     [self.view addSubview:self.tableView];
     [self addPullRefresh];
+    
+    [self requestNoticeListwithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +64,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
 
 #pragma mark - private methods
 //添加上下拉刷新
@@ -79,11 +92,55 @@
     }];
 }
 
+- (void)requestNoticeListwithMinId:(NSInteger)minId {
+    NSDictionary *params = @{@"id":@"",
+                             @"token":@"",
+                             @"mId":@(minId),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] getMessagesWithParameters:params success:^(id response) {
+        NSLog(@"notice = %@",response);
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
+- (void)noticeBtnOnClick:(UIButton *)button {
+    self.messageBtn.selected = NO;
+    button.selected = YES;
+}
+
+- (void)messageBtnOnClick:(UIButton *)button {
+    self.noticeBtn.selected = NO;
+    button.selected = YES;
+}
 
 #pragma mark - getters & setters
+- (UIButton *)noticeBtn {
+    if (_noticeBtn == nil) {
+        _noticeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _noticeBtn.frame = CGRectMake((kWindowWidth - (menuBtnWidth * 2)) / 2, 70, menuBtnWidth, 40);
+        [_noticeBtn setBackgroundImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
+        [_noticeBtn setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
+        [_noticeBtn addTarget:self action:@selector(noticeBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _noticeBtn.selected = YES;
+    }
+    return _noticeBtn;
+}
+
+- (UIButton *)messageBtn {
+    if (_messageBtn == nil) {
+        _messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _messageBtn.frame = CGRectMake(CGRectGetMaxX(self.noticeBtn.frame), 70, menuBtnWidth, 40);
+        [_messageBtn setBackgroundImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
+        [_messageBtn setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
+        [_messageBtn addTarget:self action:@selector(messageBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _messageBtn;
+}
+
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.noticeBtn.frame), kWindowWidth, kWindowHeight - CGRectGetMaxY(self.noticeBtn.frame) - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         

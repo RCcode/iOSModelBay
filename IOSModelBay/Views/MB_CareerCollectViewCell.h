@@ -11,9 +11,7 @@
 @interface MB_CareerCollectViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
-
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *careerLabel;
 
 @end

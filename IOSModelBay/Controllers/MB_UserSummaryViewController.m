@@ -8,6 +8,7 @@
 
 #import "MB_UserSummaryViewController.h"
 #import "MB_SummaryTableViewCell.h"
+#import "MB_UserViewController.h"
 #import <CoreText/CoreText.h>
 
 @interface MB_UserSummaryViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -24,6 +25,7 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canScrollNotification:) name:kCanScrollNotification object:nil];
 }
 
 
@@ -77,8 +79,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+////    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+//    NSLog(@"dddddddddd%F",scrollView.contentOffset.y);
+//    if (scrollView.contentOffset.y <= 0) {
+//        NSLog(@"NNONONO");
+//        scrollView.scrollEnabled = NO;
+//    }
+//}
 
 #pragma mark - private methods
+- (void)canScrollNotification:(NSNotification *)noti {
+    NSLog(@"YES");
+    self.tableView.scrollEnabled = YES;
+}
 
 #pragma mark - getters & setters
 
@@ -87,6 +101,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+//        _tableView.scrollEnabled = NO;
         
         UIView *view =[[UIView alloc] init];
         [_tableView setTableFooterView:view];

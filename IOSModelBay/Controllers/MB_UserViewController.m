@@ -19,8 +19,9 @@
 
 #import "MB_ScanAblumViewController.h"
 
-@interface MB_UserViewController ()<UIScrollViewDelegate>
+@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, strong) UIScrollView *containerView;
@@ -39,9 +40,8 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
-    [self.view addSubview:self.userInfoView];
-    [self.view addSubview:self.menuView];
-    [self.view addSubview:self.containerView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:self.tableView];
     [self addChildViewControllers];
     
     [self menuBtnOnClick:self.menuBtns[0]];
@@ -52,9 +52,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDelegate, UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kWindowHeight - CGRectGetHeight(self.menuView.frame);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return self.menuView.frame.size.height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return self.menuView;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
+    cell.backgroundColor = [UIColor redColor];
+    [cell.contentView addSubview:self.containerView];
+    return cell;
+}
+
+
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [super scrollViewDidScroll:scrollView];
+    NSLog(@"%f %f %f",scrollView.contentOffset.y,scrollView.contentSize.height,scrollView.bounds.size.height);
+
+    
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height + 49) {
+        NSLog(@"%f %f %f",scrollView.contentOffset.y,scrollView.contentSize.height,scrollView.bounds.size.height);
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCanScrollNotification object:[NSNumber numberWithBool:YES]];
+    }
+//    if (scrollView.contentOffset.y <= - (64 + CGRectGetHeight(self.userInfoView.frame))) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kCanScrollNotification object:[NSNumber numberWithBool:NO]];
+//    }
+}
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"sss");
     NSInteger page = scrollView.contentOffset.x/scrollView.frame.size.width;
     for (UIButton *btn in self.menuBtns) {
         btn.selected = NO;
@@ -62,6 +101,7 @@
     
     ((UIButton *)self.menuBtns[page]).selected = YES;
 }
+
 
 #pragma mark - private methods
 - (void)test {
@@ -113,6 +153,17 @@
 }
 
 #pragma mark - getters & setters
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor redColor];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableHeaderView = self.userInfoView;
+        _tableView.bounces = NO;
+    }
+    return _tableView;
+}
 
 - (MB_UserInfoView *)userInfoView {
     if (_userInfoView == nil) {
@@ -124,7 +175,8 @@
 
 - (UIView *)menuView {
     if (_menuView == nil) {
-        _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.userInfoView.frame), kWindowWidth, 50)];
+        _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
+        _menuView.backgroundColor = [UIColor grayColor];
         CGFloat btnWidth = kWindowWidth / 5;
         for (int i = 0; i < 5; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -142,7 +194,7 @@
 
 - (UIView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.menuView.frame), windowWidth(), kWindowHeight - 49 - CGRectGetMaxY(self.menuView.frame))];
+        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame))];
         _containerView.backgroundColor = [UIColor blueColor];
         _containerView.pagingEnabled = YES;
         _containerView.delegate = self;
