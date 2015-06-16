@@ -42,7 +42,7 @@
 //    self.scrollCoordinator.bottomView = self.tabBarController.tabBar;
     
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self findUserList];
+    [self findUserList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,7 +153,7 @@
         layout.minimumInteritemSpacing = 2.5;
         layout.minimumLineSpacing = 2.5;
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) collectionViewLayout:layout];
         _collectView.bounces = YES;
         _collectView.alwaysBounceVertical = YES;
         _collectView.scrollEnabled = YES;

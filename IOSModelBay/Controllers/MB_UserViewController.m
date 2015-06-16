@@ -21,7 +21,6 @@
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-//@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, strong) UIScrollView *containerView;
@@ -34,29 +33,25 @@
 @implementation MB_UserViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
-    
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.view addSubview:self.tableView];
-    [self addChildViewControllers];
     
     self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
     self.scrollCoordinator.scrollView = self.tableView;
     self.scrollCoordinator.topView = self.navigationController.navigationBar;
     self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
     
+    [self.view addSubview:self.tableView];
+    [self addChildViewControllers];
     [self menuBtnOnClick:self.menuBtns[0]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -94,26 +89,28 @@ static CGFloat startY = 0;
             //向上拉
             if (scrollView.contentOffset.y != 250) {
                 NSLog(@"dddddd");
+//                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
             }
         }else{
             //向下拉
             if (scrollView.contentOffset.y != -64) {
                 NSLog(@"aaaaaa");
+//                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
     }
     
     if (self.scrollCoordinator.topView.frame.origin.y == -24) {
-        _tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     }else{
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     }
 }
 
-//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-//    
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+//    scrollView.userInteractionEnabled = YES;
 //}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -176,6 +173,7 @@ static CGFloat startY = 0;
     
     self.containerView.contentOffset = CGPointMake(CGRectGetWidth(self.containerView.frame) * btn.tag, 0);
 }
+
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {

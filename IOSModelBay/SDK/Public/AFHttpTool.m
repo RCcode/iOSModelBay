@@ -47,7 +47,7 @@ static AFHttpTool *httpTool = nil;
             httpTool.manager = [AFHTTPRequestOperationManager manager];
             
             httpTool.manager.requestSerializer = [AFJSONRequestSerializer serializer];
-            httpTool.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            httpTool.manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
 
             [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

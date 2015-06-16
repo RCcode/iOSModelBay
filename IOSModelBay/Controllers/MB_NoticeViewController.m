@@ -42,8 +42,8 @@ static CGFloat const menuBtnWidth = 150;
     self.scrollCoordinator.scrollView = self.tableView;
     self.scrollCoordinator.topView = self.navigationController.navigationBar;
     self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
-//    self.scrollCoordinator.bottomView = self.tabBarController.tabBar;
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
 //    [self requestNoticeListwithMinId:0];
 }
 
@@ -73,16 +73,37 @@ static CGFloat const menuBtnWidth = 150;
 }
 
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"%@",NSStringFromCGRect(self.scrollCoordinator.topView.frame));
-    CGRect rect = self.scrollCoordinator.topView.frame;
-    if (rect.origin.y >= -24 && rect.origin.y <= 20) {
-        self.tableHeaderView.frame = CGRectMake(0, rect.origin.y + 44, kWindowWidth, 60);
-        CGRect rect1 = self.tableView.frame;
-        rect1.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
-        self.tableView.frame = rect1;
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat topViewContentOffsetY = self.scrollCoordinator.topView.frame.origin.y;
+    
+    if (topViewContentOffsetY >= -24 && topViewContentOffsetY <= 20) {
+//        if (scrollView.pullToRefreshView.state == SVPullToRefreshStateLoading) {
+//            CGRect headerRect = self.tableHeaderView.frame;
+//            headerRect.origin.y = topViewContentOffsetY + 44;
+//            headerRect.size.height = 60;
+//            self.tableHeaderView.frame = headerRect;
+//
+//            if (scrollView.contentOffset.y >= 0) {
+//                CGRect tableRect = self.tableView.frame;
+//                tableRect.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
+//                self.tableView.frame = tableRect;
+//            }
+//        }else{
+            CGRect headerRect = self.tableHeaderView.frame;
+            headerRect.origin.y = topViewContentOffsetY + 44;
+            headerRect.size.height = 60;
+            self.tableHeaderView.frame = headerRect;
+            
+            CGRect tableRect = self.tableView.frame;
+            tableRect.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
+            self.tableView.frame = tableRect;
+//        }
+    }else{
+        
     }
 }
+
 
 #pragma mark - private methods
 //添加上下拉刷新
@@ -131,6 +152,18 @@ static CGFloat const menuBtnWidth = 150;
 }
 
 #pragma mark - getters & setters
+
+- (UIView *)tableHeaderView {
+    if (_tableHeaderView == nil) {
+        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 60)];
+        _tableHeaderView.backgroundColor = self.view.backgroundColor;
+        [_tableHeaderView addSubview:self.messageBtn];
+        [_tableHeaderView addSubview:self.noticeBtn];
+        return _tableHeaderView;
+    }
+    return _tableHeaderView;
+}
+
 - (UIButton *)noticeBtn {
     if (_noticeBtn == nil) {
         _noticeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -152,17 +185,6 @@ static CGFloat const menuBtnWidth = 150;
         [_messageBtn addTarget:self action:@selector(messageBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _messageBtn;
-}
-
-- (UIView *)tableHeaderView {
-    if (_tableHeaderView == nil) {
-        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 60)];
-        _tableHeaderView.backgroundColor = self.view.backgroundColor;
-        [_tableHeaderView addSubview:self.messageBtn];
-        [_tableHeaderView addSubview:self.noticeBtn];
-        return _tableHeaderView;
-    }
-    return _tableHeaderView;
 }
 
 - (UITableView *)tableView {
