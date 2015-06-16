@@ -9,7 +9,6 @@
 #import "MB_UserSummaryViewController.h"
 #import "MB_SummaryTableViewCell.h"
 #import "MB_UserViewController.h"
-#import <CoreText/CoreText.h>
 
 @interface MB_UserSummaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -20,22 +19,20 @@
 @implementation MB_UserSummaryViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canScrollNotification:) name:kCanScrollNotification object:nil];
+    self.automaticallyAdjustsScrollViewInsets = YES;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableViewDelegate UITableViewDataSource
 
+#pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
@@ -67,7 +64,6 @@
     cell.mainLabel.text = @"介绍";
     cell.subLabel.text = @"拿到手都快考试的难度是女生的女生不得vsbdvsdvsdvsdvdsvsdvsdsfssjkjskasajsjdasdjkdsjfsdfjjdhfjsfdhs按时间等哈说不定你爸说的那是";
     
-    
     if (indexPath.row == 2) {
         cell.subLabel.text = @"saasasnzcnczxcxzcxc";
     }
@@ -79,29 +75,38 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-////    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-//    NSLog(@"dddddddddd%F",scrollView.contentOffset.y);
-//    if (scrollView.contentOffset.y <= 0) {
-//        NSLog(@"NNONONO");
-//        scrollView.scrollEnabled = NO;
-//    }
-//}
 
-#pragma mark - private methods
-- (void)canScrollNotification:(NSNotification *)noti {
-    NSLog(@"YES");
-    self.tableView.scrollEnabled = YES;
+#pragma mark - UIScrollViewDelegate
+static CGFloat startY = 0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startY = scrollView.contentOffset.y;
 }
 
-#pragma mark - getters & setters
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    UITableView *taleView = userVC.tableView;
+    if (scrollView.dragging) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (taleView.contentOffset.y == -64) {
+                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (taleView.contentOffset.y == 250) {
+                [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
+    }
+}
 
+
+#pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-//        _tableView.scrollEnabled = NO;
         
         UIView *view =[[UIView alloc] init];
         [_tableView setTableFooterView:view];

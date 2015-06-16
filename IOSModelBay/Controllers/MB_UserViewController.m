@@ -16,17 +16,18 @@
 #import "MB_InviteViewController.h"
 #import "MB_SearchViewController.h"
 #import "MB_UserInfoView.h"
-
+#import "JDFPeekabooCoordinator.h"
 #import "MB_ScanAblumViewController.h"
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, strong) UIScrollView *containerView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
+@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 
 @end
 
@@ -40,9 +41,14 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.tableView];
     [self addChildViewControllers];
+    
+    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+    self.scrollCoordinator.scrollView = self.tableView;
+    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
     
     [self menuBtnOnClick:self.menuBtns[0]];
 }
@@ -76,30 +82,49 @@
     return cell;
 }
 
-
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [super scrollViewDidScroll:scrollView];
-    NSLog(@"%f %f %f",scrollView.contentOffset.y,scrollView.contentSize.height,scrollView.bounds.size.height);
-
-    
-    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height + 49) {
-        NSLog(@"%f %f %f",scrollView.contentOffset.y,scrollView.contentSize.height,scrollView.bounds.size.height);
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:kCanScrollNotification object:[NSNumber numberWithBool:YES]];
-    }
-//    if (scrollView.contentOffset.y <= - (64 + CGRectGetHeight(self.userInfoView.frame))) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kCanScrollNotification object:[NSNumber numberWithBool:NO]];
-//    }
+static CGFloat startY = 0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startY = scrollView.contentOffset.y;
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSInteger page = scrollView.contentOffset.x/scrollView.frame.size.width;
-    for (UIButton *btn in self.menuBtns) {
-        btn.selected = NO;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView && scrollView.dragging) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (scrollView.contentOffset.y != 250) {
+                NSLog(@"dddddd");
+                [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (scrollView.contentOffset.y != -64) {
+                NSLog(@"aaaaaa");
+                [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
     }
     
-    ((UIButton *)self.menuBtns[page]).selected = YES;
+    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+        _tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    }else{
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }
+}
+
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+//    
+//}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView != self.tableView) {
+        NSInteger page = scrollView.contentOffset.x/scrollView.frame.size.width;
+        for (UIButton *btn in self.menuBtns) {
+            btn.selected = NO;
+        }
+        
+        ((UIButton *)self.menuBtns[page]).selected = YES;
+    }
 }
 
 
@@ -155,7 +180,7 @@
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -194,7 +219,7 @@
 
 - (UIView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame))];
+        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49)];
         _containerView.backgroundColor = [UIColor blueColor];
         _containerView.pagingEnabled = YES;
         _containerView.delegate = self;

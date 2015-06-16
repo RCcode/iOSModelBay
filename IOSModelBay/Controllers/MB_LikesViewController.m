@@ -8,6 +8,7 @@
 
 #import "MB_LikesViewController.h"
 #import "MB_LikeCollectViewCell.h"
+#import "MB_UserViewController.h"
 
 @interface MB_LikesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -45,6 +46,31 @@
 }
 
 
+#pragma mark - UIScrollViewDelegate
+static CGFloat startY = 0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    UITableView *taleView = userVC.tableView;
+    if (scrollView.dragging) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (taleView.contentOffset.y == -64) {
+                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (taleView.contentOffset.y == 250) {
+                [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
+    }
+}
+
+
 #pragma mark - private methods
 //添加上下拉刷新
 - (void)addPullRefresh
@@ -58,6 +84,7 @@
         
     }];
 }
+
 
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {

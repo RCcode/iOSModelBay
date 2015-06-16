@@ -8,6 +8,7 @@
 
 #import "MB_NoticeViewController.h"
 #import "MB_UserTableViewCell.h"
+#import "JDFPeekabooCoordinator.h"
 
 static CGFloat const menuBtnWidth = 150;
 
@@ -18,6 +19,9 @@ static CGFloat const menuBtnWidth = 150;
 @property (nonatomic, strong) UITableView    *tableView;
 @property (nonatomic, strong) NSMutableArray *noticeArray;
 @property (nonatomic, strong) NSMutableArray *Array;
+@property (nonatomic, strong) UIView         *tableHeaderView;
+
+@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 
 @end
 
@@ -30,24 +34,28 @@ static CGFloat const menuBtnWidth = 150;
     
     self.view.backgroundColor = [UIColor cyanColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.view addSubview:self.noticeBtn];
-    [self.view addSubview:self.messageBtn];
+    [self.view addSubview:self.tableHeaderView];
     [self.view addSubview:self.tableView];
     [self addPullRefresh];
     
-    [self requestNoticeListwithMinId:0];
+    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+    self.scrollCoordinator.scrollView = self.tableView;
+    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+//    self.scrollCoordinator.bottomView = self.tabBarController.tabBar;
+
+//    [self requestNoticeListwithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return self.dataArray.count;
-    return 9;
+    return 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,8 +72,16 @@ static CGFloat const menuBtnWidth = 150;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+    NSLog(@"%@",NSStringFromCGRect(self.scrollCoordinator.topView.frame));
+    CGRect rect = self.scrollCoordinator.topView.frame;
+    if (rect.origin.y >= -24 && rect.origin.y <= 20) {
+        self.tableHeaderView.frame = CGRectMake(0, rect.origin.y + 44, kWindowWidth, 60);
+        CGRect rect1 = self.tableView.frame;
+        rect1.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
+        self.tableView.frame = rect1;
+    }
 }
 
 #pragma mark - private methods
@@ -118,7 +134,7 @@ static CGFloat const menuBtnWidth = 150;
 - (UIButton *)noticeBtn {
     if (_noticeBtn == nil) {
         _noticeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _noticeBtn.frame = CGRectMake((kWindowWidth - (menuBtnWidth * 2)) / 2, 70, menuBtnWidth, 40);
+        _noticeBtn.frame = CGRectMake((kWindowWidth - (menuBtnWidth * 2)) / 2, 5, menuBtnWidth, 40);
         [_noticeBtn setBackgroundImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
         [_noticeBtn setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
         [_noticeBtn addTarget:self action:@selector(noticeBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -130,7 +146,7 @@ static CGFloat const menuBtnWidth = 150;
 - (UIButton *)messageBtn {
     if (_messageBtn == nil) {
         _messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _messageBtn.frame = CGRectMake(CGRectGetMaxX(self.noticeBtn.frame), 70, menuBtnWidth, 40);
+        _messageBtn.frame = CGRectMake(CGRectGetMaxX(self.noticeBtn.frame), 5, menuBtnWidth, 40);
         [_messageBtn setBackgroundImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
         [_messageBtn setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
         [_messageBtn addTarget:self action:@selector(messageBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -138,13 +154,24 @@ static CGFloat const menuBtnWidth = 150;
     return _messageBtn;
 }
 
+- (UIView *)tableHeaderView {
+    if (_tableHeaderView == nil) {
+        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 60)];
+        _tableHeaderView.backgroundColor = self.view.backgroundColor;
+        [_tableHeaderView addSubview:self.messageBtn];
+        [_tableHeaderView addSubview:self.noticeBtn];
+        return _tableHeaderView;
+    }
+    return _tableHeaderView;
+}
+
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.noticeBtn.frame), kWindowWidth, kWindowHeight - CGRectGetMaxY(self.noticeBtn.frame) - 49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableHeaderView.frame), kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
-        UIView *view =[[UIView alloc] init];
+        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];
         

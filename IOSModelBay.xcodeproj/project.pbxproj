@@ -104,6 +104,7 @@
 		CD21EB421B26C11A00513061 /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = CD21EB411B26C11A00513061 /* b.png */; };
 		CD30D0361B26CEBC0053BE08 /* MB_UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD30D0351B26CEBC0053BE08 /* MB_UserInfoView.m */; };
 		CD30D0381B26CECE0053BE08 /* MB_UserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD30D0371B26CECE0053BE08 /* MB_UserInfoView.xib */; };
+		CD59F88F1B2EC1450051FA5B /* JDFPeekabooCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = CD59F88E1B2EC1450051FA5B /* JDFPeekabooCoordinator.m */; };
 		CD803B591B295F660011D629 /* MB_SummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD803B571B295F660011D629 /* MB_SummaryTableViewCell.m */; };
 		CD803B5A1B295F660011D629 /* MB_SummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */; };
 		CD81A6311B2AE40600B880E3 /* MB_InviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD81A6301B2AE40600B880E3 /* MB_InviteView.m */; };
@@ -357,6 +358,8 @@
 		CD30D0341B26CEBC0053BE08 /* MB_UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserInfoView.h; sourceTree = "<group>"; };
 		CD30D0351B26CEBC0053BE08 /* MB_UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserInfoView.m; sourceTree = "<group>"; };
 		CD30D0371B26CECE0053BE08 /* MB_UserInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_UserInfoView.xib; sourceTree = "<group>"; };
+		CD59F88D1B2EC1450051FA5B /* JDFPeekabooCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFPeekabooCoordinator.h; sourceTree = "<group>"; };
+		CD59F88E1B2EC1450051FA5B /* JDFPeekabooCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFPeekabooCoordinator.m; sourceTree = "<group>"; };
 		CD803B561B295F660011D629 /* MB_SummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SummaryTableViewCell.h; sourceTree = "<group>"; };
 		CD803B571B295F660011D629 /* MB_SummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SummaryTableViewCell.m; sourceTree = "<group>"; };
 		CD803B581B295F660011D629 /* MB_SummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_SummaryTableViewCell.xib; sourceTree = "<group>"; };
@@ -488,6 +491,8 @@
 			children = (
 				6F55A4AB1B1D7567006DA537 /* AppDelegate.h */,
 				6F55A4AC1B1D7567006DA537 /* AppDelegate.m */,
+				CD59F88D1B2EC1450051FA5B /* JDFPeekabooCoordinator.h */,
+				CD59F88E1B2EC1450051FA5B /* JDFPeekabooCoordinator.m */,
 				6F83880B1B1D9D6C002D2ED3 /* a@2x.png */,
 				6F83870C1B1D84D8002D2ED3 /* Categories */,
 				6F83870F1B1D84D8002D2ED3 /* SDK */,
@@ -1079,6 +1084,7 @@
 				6F8387CE1B1D8715002D2ED3 /* SDWebImageDecoder.m in Sources */,
 				6F8387D11B1D8715002D2ED3 /* SDWebImageManager.m in Sources */,
 				6F8387401B1D862A002D2ED3 /* RC_GetPath.m in Sources */,
+				CD59F88F1B2EC1450051FA5B /* JDFPeekabooCoordinator.m in Sources */,
 				6F8387281B1D8544002D2ED3 /* UIImage+ImageEffects.m in Sources */,
 				CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */,
 				6F555CF91B1DAA2D0045A155 /* MB_MainViewController.m in Sources */,

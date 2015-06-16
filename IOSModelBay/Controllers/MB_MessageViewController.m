@@ -11,6 +11,7 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "MB_MsgTableViewCell.h"
 #import "MB_ReplyTableViewCell.h"
+#import "MB_UserViewController.h"
 
 static NSString * const ReuseIdentifierMsg = @"msg";
 static NSString * const ReuseIdentifierReply = @"reply";
@@ -80,6 +81,29 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - UIScrollViewDelegate
+static CGFloat startY = 0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    UITableView *taleView = userVC.tableView;
+    if (scrollView.dragging) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (taleView.contentOffset.y == -64) {
+                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (taleView.contentOffset.y == 250) {
+                [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
+    }
+}
 
 #pragma mark - private methods
 //添加上下拉刷新

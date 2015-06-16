@@ -20,7 +20,10 @@
 @implementation MB_TabBarViewController
 
 -(void)viewDidAppear:(BOOL)animated {
-    self.tabBar.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];
+    
+//    [self.tabBar setBackgroundImage:[UIImage new]];
+//    self.tabBar.shadowImage = [UIImage new];
+//    self.tabBar.translucent = YES;
 }
 
 - (void)viewDidLoad {
@@ -42,7 +45,7 @@
     userVC.tabBarItem.image             = [UIImage imageNamed:@"a"];
     MB_BaseNavigationViewController *userNC       = [[MB_BaseNavigationViewController alloc] initWithRootViewController:userVC];
     
-    self.viewControllers          = @[findNC, rankingNC, messageNC, userNC];
+    self.viewControllers = @[findNC, rankingNC, messageNC, userNC];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
 
 #import "MB_InstragramViewController.h"
 #import "MB_UserCollectViewCell.h"
+#import "MB_UserViewController.h"
 
 @interface MB_InstragramViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -21,7 +22,6 @@
 @implementation MB_InstragramViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -29,13 +29,14 @@
     [self addPullRefresh];
     
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self requestInstragramMediasListWithMaxId:nil];
+//    [self requestInstragramMediasListWithMaxId:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -50,6 +51,31 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor greenColor];
     return cell;
+}
+
+
+#pragma mark - UIScrollViewDelegate
+static CGFloat startY = 0;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    UITableView *taleView = userVC.tableView;
+    if (scrollView.dragging) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (taleView.contentOffset.y == -64) {
+                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (taleView.contentOffset.y == 250) {
+                [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
+    }
 }
 
 
@@ -114,12 +140,13 @@
     }];
 }
 
+
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
         NSLog(@"-----%f",self.view.frame.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, self.containerViewRect.size.height) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;

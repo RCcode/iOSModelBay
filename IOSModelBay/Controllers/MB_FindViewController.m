@@ -10,10 +10,13 @@
 #import "MB_FilterViewController.h"
 #import "MB_UserCollectViewCell.h"
 #import "MB_UserViewController.h"
+#import "JDFPeekabooCoordinator.h"
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
+@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
+
 
 @end
 
@@ -32,8 +35,14 @@
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self findUserList];
+    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+    self.scrollCoordinator.scrollView = self.collectView;
+    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+//    self.scrollCoordinator.bottomView = self.tabBarController.tabBar;
+    
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [self findUserList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +57,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 40;
+    return 20;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,6 +154,9 @@
         layout.minimumLineSpacing = 2.5;
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
+        _collectView.bounces = YES;
+        _collectView.alwaysBounceVertical = YES;
+        _collectView.scrollEnabled = YES;
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
