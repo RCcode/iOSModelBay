@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    [self requestUserDetail];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,29 +34,21 @@
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    }else{
-        return 10;
+    }else if (section == 1){
+        return 5;
+    }else {
+        return 3;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UILabel *label = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-    if (label == nil) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
-    }
-    label.text = [NSString stringWithFormat:@"hello%ld",(long)section+1];
-    return label;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -67,7 +59,6 @@
     if (indexPath.row == 2) {
         cell.subLabel.text = @"saasasnzcnczxcxzcxc";
     }
-    
     return cell;
 }
 
@@ -101,14 +92,30 @@ static CGFloat startY = 0;
 }
 
 
+#pragma mark - privtate methods
+- (void)requestUserDetail {
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
+                             @"fid":@(6)};
+    [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
+        NSLog(@"detail %@",response);
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
+
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor grayColor];
+        _tableView.sectionHeaderHeight = 10;
+        _tableView.sectionFooterHeight = 0;
         
-        UIView *view =[[UIView alloc] init];
+        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];
         

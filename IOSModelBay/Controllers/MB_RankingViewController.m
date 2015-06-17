@@ -23,6 +23,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+    [self addPullRefresh];
+    [self requestRankingList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,9 +48,34 @@
 }
 
 #pragma mark - private methods
+//添加上下拉刷新
+- (void)addPullRefresh
+{
+    __weak MB_RankingViewController *weakSelf = self;
+    
+    [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"header");
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf endRefreshingForView:weakSelf.tableView];
+        });
+    }];
+    
+    [self addFooterRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"footer");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf endRefreshingForView:weakSelf.tableView];
+            [weakSelf showNoMoreMessageForview:weakSelf.tableView];
+        });
+    }];
+}
+
+- (void)requestRankingList {
+//    [[AFHttpTool shareTool] ]
+}
+
 
 #pragma mark - getters & setters
-
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];

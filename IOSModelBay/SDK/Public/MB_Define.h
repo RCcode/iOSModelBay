@@ -56,6 +56,7 @@
 #define kName @"name"
 #define kCareer @"career"
 #define kGender @"gender"
+#define kUtype @"utype"
 
 #define userDefaults [NSUserDefaults standardUserDefaults]
 

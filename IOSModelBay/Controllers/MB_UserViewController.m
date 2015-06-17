@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UIScrollView *containerView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
-@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
+//@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 
 @end
 
@@ -36,12 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor greenColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
-    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-    self.scrollCoordinator.scrollView = self.tableView;
-    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+//    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+//    self.scrollCoordinator.scrollView = self.tableView;
+//    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+//    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
     
     [self.view addSubview:self.tableView];
     [self addChildViewControllers];
@@ -84,29 +85,53 @@ static CGFloat startY = 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.tableView && scrollView.dragging) {
+//    if (scrollView == self.tableView && scrollView.dragging) {
+//        if (scrollView.contentOffset.y - startY > 0) {
+//            //向上拉
+//            if (scrollView.contentOffset.y != 250) {
+//                NSLog(@"dddddd");
+////                scrollView.userInteractionEnabled = NO;
+//                [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
+//            }
+//        }else{
+//            //向下拉
+//            if (scrollView.contentOffset.y != -64) {
+//                NSLog(@"aaaaaa");
+////                scrollView.userInteractionEnabled = NO;
+//                [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
+//            }
+//        }
+//    }
+//    
+    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    }else{
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (scrollView.contentOffset.y != 250) {
                 NSLog(@"dddddd");
-//                scrollView.userInteractionEnabled = NO;
+                //                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
             }
         }else{
             //向下拉
             if (scrollView.contentOffset.y != -64) {
                 NSLog(@"aaaaaa");
-//                scrollView.userInteractionEnabled = NO;
+                //                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
-    }
     
-    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
-        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-    }else{
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }
+//    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+//        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+//    }else{
+//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+//    }
 }
 
 //- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
@@ -191,7 +216,15 @@ static CGFloat startY = 0;
 - (MB_UserInfoView *)userInfoView {
     if (_userInfoView == nil) {
         _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
-        _userInfoView.frame = CGRectMake(0, 64, kWindowWidth, 250);
+        _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, 250);
+        [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
+        [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
+        _userInfoView.nameLabel.text = _user.fname;
+        NSMutableArray *careerArr = [NSMutableArray arrayWithCapacity:0];
+        for (NSString *career in [_user.fcareerId componentsSeparatedByString:@"|"]) {
+            [careerArr addObject:[[MB_Utils shareUtil].careerDic objectForKey:career]?:@""];
+        }
+        _userInfoView.careerLabel.text = [careerArr componentsJoinedByString:@"  |  "];
     }
     return _userInfoView;
 }
@@ -217,7 +250,11 @@ static CGFloat startY = 0;
 
 - (UIView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49)];
+        if (self.hidesBottomBarWhenPushed) {
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame))];
+        }else{
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49)];
+        }
         _containerView.backgroundColor = [UIColor blueColor];
         _containerView.pagingEnabled = YES;
         _containerView.delegate = self;

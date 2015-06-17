@@ -19,6 +19,13 @@ static MB_Utils *util = nil;
             util.name = @"";
             util.gender = -1;
             util.careerId = @"";
+            util.careerDic = @{@"0":@"aaa",
+                               @"1":@"bbb",
+                               @"2":@"ccc",
+                               @"3":@"ddd",
+                               @"4":@"eee",
+                               @"5":@"fff",
+                               @"6":@"ggg",};
         });
     }
     return util;

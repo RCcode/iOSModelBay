@@ -11,17 +11,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b.png" translatesAutoresizingMaskIntoConstraints="NO" id="BcB-64-HJg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-Lz-vR7">
                     <rect key="frame" x="121" y="17" width="79" height="70"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRf-1J-0Zg">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRf-1J-0Zg">
                     <rect key="frame" x="139" y="104" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ju-Ry-0tj">
-                    <rect key="frame" x="139" y="141" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ju-Ry-0tj">
+                    <rect key="frame" x="19" y="141" width="274" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -44,7 +47,21 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.98144756848265868" green="1" blue="0.24735261430375044" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="BcB-64-HJg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4P2-8f-1pV"/>
+                <constraint firstItem="BcB-64-HJg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8w0-No-UjG"/>
+                <constraint firstAttribute="trailing" secondItem="BcB-64-HJg" secondAttribute="trailing" id="noP-UP-UyI"/>
+                <constraint firstAttribute="bottom" secondItem="BcB-64-HJg" secondAttribute="bottom" id="tYg-bS-Uj6"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backImageView" destination="BcB-64-HJg" id="thd-OA-B5f"/>
+                <outlet property="careerLabel" destination="8Ju-Ry-0tj" id="OM1-s1-f6e"/>
+                <outlet property="inviteButton" destination="2cr-fY-XbY" id="9WD-W6-WgQ"/>
+                <outlet property="likeButton" destination="kTh-XV-FcM" id="Zj5-bp-6Gd"/>
+                <outlet property="nameLabel" destination="fRf-1J-0Zg" id="IBv-nP-slc"/>
+                <outlet property="userImageView" destination="WoQ-Lz-vR7" id="dHt-BR-peO"/>
+            </connections>
             <point key="canvasLocation" x="57" y="444"/>
         </view>
     </objects>

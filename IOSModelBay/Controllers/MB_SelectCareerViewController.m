@@ -25,17 +25,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(rightBarButtonItemOnClick:)];
     
     [self.view addSubview:self.collectView];
-    
-    self.dataArray = [@[@"a", @"b", @"c", @"d", @"e", @"f", @"g"] mutableCopy];
+    self.dataArray = [[[MB_Utils shareUtil].careerDic allKeys] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -44,32 +41,30 @@
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.selectButton.selected = [self.selectedArray containsObject:[NSNumber numberWithInteger:indexPath.row]];
-    cell.careerLabel.text = self.dataArray[indexPath.row];
+    cell.selectButton.selected = [self.selectedArray containsObject:self.dataArray[indexPath.row]];
+    cell.careerLabel.text = [[MB_Utils shareUtil].careerDic objectForKey:self.dataArray[indexPath.row]];
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    MB_CareerCollectViewCell *cell = (MB_CareerCollectViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [self selectButtonOnClick:cell.selectButton];
-}
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+//    
+//    MB_CareerCollectViewCell *cell = (MB_CareerCollectViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    [self selectButtonOnClick:cell.selectButton];
+//}
 
 
 #pragma mark - private methods
-
 - (void)selectButtonOnClick:(UIButton *)button {
-    
     if (button.selected) {
         button.selected = NO;
-        [self.selectedArray removeObject:[NSNumber numberWithInteger:button.tag]];
+        [self.selectedArray removeObject:self.dataArray[button.tag]];
     }else{
         if (self.selectedArray.count >= 3) {
             [MB_Utils showAlertViewWithMessage:@"最多三个最少一个"];
             return;
         }else{
-            [self.selectedArray addObject:[NSNumber numberWithInteger:button.tag]];
+            [self.selectedArray addObject:self.dataArray[button.tag]];
         }
     }
     [self.collectView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:button.tag inSection:0]]];

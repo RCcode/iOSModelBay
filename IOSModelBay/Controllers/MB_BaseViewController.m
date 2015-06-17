@@ -11,7 +11,6 @@
 @interface MB_BaseViewController ()
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
-
 @property (nonatomic, strong) UILabel *footerLabel;
 
 @end
@@ -22,19 +21,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//    [self.scrollCoordinator disable];
 }
 
-#pragma mark - UIScrollViewDelegate
-static CGFloat startOffsetY;
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    startOffsetY = scrollView.contentOffset.y;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    [self.scrollCoordinator fullyHideViews];
+//    [self.scrollCoordinator fullyExpandViews];
+
+//    [self.scrollCoordinator enable];
+//    [self.scrollCoordinator setBarsNeedDisplay];
 }
+
+//#pragma mark - UIScrollViewDelegate
+//static CGFloat startOffsetY;
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//    startOffsetY = scrollView.contentOffset.y;
+//}
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    
@@ -110,6 +118,13 @@ static CGFloat startOffsetY;
     self.footerLabel.text = @"没有更多了";
 }
 
+- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView {
+    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+    self.scrollCoordinator.scrollView = scrollView;
+    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+}
+
 - (NSInteger)statFromResponse:(id)response {
     NSInteger stat = [response[@"stat"] integerValue];
     NSString *errorMsg = nil;
@@ -124,6 +139,9 @@ static CGFloat startOffsetY;
     }
     if (stat == 10004) {
         errorMsg = @"无记录";
+    }
+    if (stat == 10501) {
+        errorMsg = @"无此用户";
     }
     [MB_Utils showAlertViewWithMessage:errorMsg];
     return stat;

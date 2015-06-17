@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MB_MainViewController.h"
+#import "MB_TabBarViewController.h"
 #import "Flurry.h"
 #import "RC_moreAPPsLib.h"
 
@@ -16,7 +17,6 @@
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -30,8 +30,13 @@
     [self cancelNotification];
     [self registNotification];
     
-    MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
-    self.window.rootViewController = mainVC;
+    if ([userDefaults boolForKey:kIsLogin] == YES) {
+        MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+        self.window.rootViewController = tabVC;
+    }else{
+        MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
+        self.window.rootViewController = mainVC;
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -83,8 +88,6 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     NSLog(@"Fail to Register For Remote Notificaions With Error :error = %@",error.description);
 }
-
-
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"userInfo = %@",userInfo);

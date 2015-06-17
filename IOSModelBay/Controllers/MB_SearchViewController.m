@@ -74,20 +74,14 @@
     self.inviteLabel.text = [NSString stringWithFormat:@"invite %@",searchBar.text];
     
     //搜索用户
-    NSMutableDictionary *params = [@{@"id":@"",
-                                     @"token":@"",
-                                     @"fid":@"",
-                                     @"fname":searchBar.text,
-                                     @"fgender":@(-1),
-                                     @"fcareerId":@"",
+    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].gender),
+                                     @"fcareerId":[MB_Utils shareUtil].careerId?:@"",
                                      @"minId":@(0),
                                      @"count":@(10)} mutableCopy];
-    if ([userDefaults boolForKey:kIsLogin]) {
-        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
-        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
-        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"fid"];
-        //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
-    }
+    //    if ([userDefaults boolForKey:kIsLogin]) {
+    //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+    //        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
+    //    }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"search list%@",response);

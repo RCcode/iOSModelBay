@@ -46,8 +46,8 @@
                 <constraint firstItem="HQw-A7-3ua" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z52-i0-Xls"/>
             </constraints>
             <connections>
-                <outlet property="IconImageView" destination="HQw-A7-3ua" id="Wz9-eH-KWP"/>
                 <outlet property="careerView" destination="eYj-TJ-fKl" id="9ee-PY-on8"/>
+                <outlet property="iconImageView" destination="HQw-A7-3ua" id="Tpq-d9-gLj"/>
                 <outlet property="usernameLabel" destination="omb-W1-quc" id="ygS-zp-saF"/>
             </connections>
             <point key="canvasLocation" x="716" y="443"/>

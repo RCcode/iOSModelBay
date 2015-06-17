@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JDFPeekabooCoordinator.h"
 
 static NSString * const ReuseIdentifier = @"cell";
 
 @interface MB_BaseViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 
 //添加下拉刷新
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
@@ -32,7 +34,8 @@ static NSString * const ReuseIdentifier = @"cell";
 //没有更多数据时调用
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView;
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+//加入上滑隐藏导航栏
+- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView;
 
 - (NSInteger)statFromResponse:(id)response;
 

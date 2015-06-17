@@ -198,7 +198,7 @@ static CGFloat const JDFPeekabooCoordinatorNavigationBarHorizontalHeightDifferen
         scrollView.contentInset = contentInset;
         return;
     } else {
-        //self.scrollView.contentInset = self.scrollView.contentInset;//这是原来的
+//        self.scrollView.contentInset = self.scrollView.contentInset;//这是原来的
         UIEdgeInsets insets = self.scrollView.contentInset;
         insets.bottom = 60;
         self.scrollView.contentInset = insets;

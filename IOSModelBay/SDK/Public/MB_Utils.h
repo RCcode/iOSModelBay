@@ -17,6 +17,8 @@
 @property (nonatomic, assign) NSInteger gender;
 @property (nonatomic, strong) NSString  *careerId;
 
+@property (nonatomic, strong) NSDictionary *careerDic;
+
 + (void)showPromptWithText:(NSString *)text;
 
 + (void)showAlertViewWithMessage:(NSString *)string;

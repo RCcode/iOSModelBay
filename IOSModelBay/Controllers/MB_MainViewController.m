@@ -45,40 +45,57 @@
 #pragma mark - private methods
 
 - (void)loginBtnOnClick:(UIButton *)btn{
-//    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
-//        NSLog(@"ssss%@",codeStr);
-//        _codeStr = codeStr;
-//        [self loginWitnCodeStr:codeStr];
-//    }];
-//        
-//    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//    [self presentViewController:loginNC animated:YES completion:nil];
+    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
+        NSLog(@"ssss%@",codeStr);
+        _codeStr = codeStr;
+        [self loginWitnCodeStr:codeStr];
+    }];
+        
+    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:loginNC animated:YES completion:nil];
     
-    [self loginWitnCodeStr:@"123"];
+//    [self loginWitnCodeStr:@"123"];
 }
 
 - (void)loginWitnCodeStr:(NSString *)codeStr {
     [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
         NSLog(@"%@",response);
-//        MB_User *user = [[MB_User alloc] init];
-//        [user setValuesForKeysWithDictionary:response];
-        
         if ([self statFromResponse:response] == 10100) {
             //未注册
             MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
             MB_BaseNavigationViewController *na = [[MB_BaseNavigationViewController alloc] initWithRootViewController:selectRoleVC];
             [self presentViewController:na animated:YES completion:nil];
         }else if ([self statFromResponse:response] == 10000){
+            //记录用户信息
+//            {
+//            backPic = "<null>";
+//            careerId = "<null>";
+//            follow = 0;
+//            followed = 0;
+//            fullName = "<null>";
+//            gender = 0;
+//            id = 0;
+//            mess = "<null>";
+//            name = "<null>";
+//            pic = "<null>";
+//            stat = 10100;
+//            userName = "<null>";
+//            utype = 0;
+//        }
+
+            [userDefaults setObject:response[@"id"] forKey:kID];
+            [userDefaults setObject:response[@"gender"] forKey:kGender];
             [userDefaults setObject:response[@"name"] forKey:kName];
-//            [userDefaults setObject:response[@"userName"] forKey:kUsername];
-//            [userDefaults setObject:response[@"fullName"] forKey:kFullname];
+            [userDefaults setObject:response[@"careerId"] forKey:kCareer];
+            [userDefaults setObject:response[@"utype"] forKey:kUtype];
+            [userDefaults setBool:YES forKey:kIsLogin];
             [userDefaults synchronize];
             
             MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
             [self presentViewController:tabVC animated:YES completion:nil];
         }
     } failure:^(NSError *err) {
-        NSLog(@"sasasa%@",err);
+        NSLog(@"%@",err);
         [self showLoginFailedAlertView];
     }];
 }

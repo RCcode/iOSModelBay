@@ -11,12 +11,12 @@
 #import "MB_UserCollectViewCell.h"
 #import "MB_UserViewController.h"
 #import "JDFPeekabooCoordinator.h"
+#import "MB_User.h"
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
-@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
-
+@property (nonatomic, assign) NSInteger minId;//分页用的
 
 @end
 
@@ -26,28 +26,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor redColor];
     
-    self.title = @"MODELBAY";
+//    self.title = @"MODELBAY";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(rightBarBtnOnCLick:)];
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     
-    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-    self.scrollCoordinator.scrollView = self.collectView;
-    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
-//    self.scrollCoordinator.bottomView = self.tabBarController.tabBar;
-    
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self findUserList];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self findUserListWithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
@@ -57,24 +51,26 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 20;
+    return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_UserCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.usernameLabel.text = @"songge";
+    MB_User *user = self.dataArray[indexPath.row];
+    cell.user = user;
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+//    userVC.hidesBottomBarWhenPushed = YES;
+    userVC.user = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:userVC animated:YES];
 }
 
 
 #pragma mark - private methods
-
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     //跳转到筛选界面
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -84,7 +80,7 @@
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.CompleteHandler = ^(){
-        [self findUserList];
+        [self findUserListWithMinId:0];
     };
     [self.navigationController pushViewController:filterVC animated:YES];
 }
@@ -96,45 +92,46 @@
     
     [self addHeaderRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"header");
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.collectView];
-        });
+        [weakSelf findUserListWithMinId:0];
     }];
     
     [self addFooterRefreshForView:self.collectView WithActionHandler:^{
         NSLog(@"footer");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.collectView];
-            [weakSelf showNoMoreMessageForview:weakSelf.collectView];
-        });
+        [weakSelf findUserListWithMinId:weakSelf.minId];
     }];
 }
 
 //获取发现用户列表
-- (void)findUserList {
-    NSMutableDictionary *params = [@{@"id":@"",
-                                     @"token":@"",
-                                     @"fid":@"",
-                                     @"fname":@"",
-                                     @"fgender":@(-1),
+- (void)findUserListWithMinId:(NSInteger)minId {
+    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].gender),
                                      @"fcareerId":[MB_Utils shareUtil].careerId?:@"",
-                                     @"minId":@(0),
+                                     @"minId":@(minId),
                                      @"count":@(10)} mutableCopy];
-    if ([userDefaults boolForKey:kIsLogin]) {
+//    if ([userDefaults boolForKey:kIsLogin]) {
 //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
 //        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fid"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fname"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fgender"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"fcareerId"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
-    }
+//    }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"list %@",response);
         [self endRefreshingForView:self.collectView];
         if ([self statFromResponse:response] == 10000) {
+            NSArray *userList = response[@"list"];
+            if (userList == nil || [userList isKindOfClass:[NSNull class]] || userList.count <= 0) {
+                [self showNoMoreMessageForview:self.collectView];
+                return;
+            }
+            
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+            }
+            
+            self.minId = [response[@"minId"] integerValue];
+            for (NSDictionary *dic in response[@"list"]) {
+                MB_User *user = [[MB_User alloc] init];
+                [user setValuesForKeysWithDictionary:dic];
+                [self.dataArray addObject:user];
+            }
             [self.collectView reloadData];
         }
     } failure:^(NSError *err) {
@@ -144,19 +141,16 @@
 
 
 #pragma mark - getters & setters
-
 - (UICollectionView *)collectView {
-    
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         CGFloat itemWidth = (kWindowWidth - 2.5) / 2;
         layout.minimumInteritemSpacing = 2.5;
         layout.minimumLineSpacing = 2.5;
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
         _collectView.bounces = YES;
         _collectView.alwaysBounceVertical = YES;
-        _collectView.scrollEnabled = YES;
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
