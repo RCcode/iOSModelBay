@@ -171,7 +171,7 @@ static CGFloat startY = 0;
     summaryVC.containerViewRect    = self.containerView.frame;
     ablumVC.containerViewRect      = self.containerView.frame;
     instragramVC.containerViewRect = self.containerView.frame;
-    instragramVC.uid = @"122345";
+    instragramVC.uid = [userDefaults objectForKey:kUid];
     messageVC.containerViewRect    = self.containerView.frame;
     likesVC.containerViewRect      = self.containerView.frame;
     

@@ -117,6 +117,7 @@
 		CDA6239D1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */; };
 		CDA623A11B2C0E0F00A3A41F /* MB_RankingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */; };
 		CDA623A21B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */; };
+		CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76B781B32662200C391E5 /* MB_InstragramModel.m */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
 		CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */; };
 		CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB971B21B3E300119C18 /* MB_Notice.m */; };
@@ -380,6 +381,8 @@
 		CDA6239E1B2C0E0F00A3A41F /* MB_RankingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_RankingTableViewCell.h; sourceTree = "<group>"; };
 		CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_RankingTableViewCell.m; sourceTree = "<group>"; };
 		CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_RankingTableViewCell.xib; sourceTree = "<group>"; };
+		CDC76B771B32662200C391E5 /* MB_InstragramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramModel.h; sourceTree = "<group>"; };
+		CDC76B781B32662200C391E5 /* MB_InstragramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramModel.m; sourceTree = "<group>"; };
 		CDC9AB921B21B3E300119C18 /* MB_Ablum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Ablum.h; sourceTree = "<group>"; };
 		CDC9AB931B21B3E300119C18 /* MB_Ablum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Ablum.m; sourceTree = "<group>"; };
 		CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddressBookPeople.h; sourceTree = "<group>"; };
@@ -842,6 +845,7 @@
 		6F8387FA1B1D921E002D2ED3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDC76B7C1B329B6900C391E5 /* Profile */,
 				CD21EB011B26A24900513061 /* Regist */,
 				6F555CFD1B1DAF960045A155 /* MB_BaseNavigationViewController.h */,
 				6F555CFE1B1DAF960045A155 /* MB_BaseNavigationViewController.m */,
@@ -859,24 +863,12 @@
 				6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */,
 				6F8388081B1D9C7B002D2ED3 /* MB_NoticeViewController.h */,
 				6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */,
-				6F8388051B1D9C3C002D2ED3 /* MB_UserViewController.h */,
-				6F8388061B1D9C3C002D2ED3 /* MB_UserViewController.m */,
 				6F555D051B1DB89E0045A155 /* MB_FilterViewController.h */,
 				6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */,
 				6F555D081B1DB8B10045A155 /* MB_SearchViewController.h */,
 				6F555D091B1DB8B10045A155 /* MB_SearchViewController.m */,
 				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
 				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
-				CDCA052B1B1EB993003CCDB2 /* MB_UserSummaryViewController.h */,
-				CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */,
-				CDCA052E1B1EBA7F003CCDB2 /* MB_AblumViewController.h */,
-				CDCA052F1B1EBA7F003CCDB2 /* MB_AblumViewController.m */,
-				CDCA05311B1EBAA3003CCDB2 /* MB_InstragramViewController.h */,
-				CDCA05321B1EBAA3003CCDB2 /* MB_InstragramViewController.m */,
-				CDCA05341B1EBABA003CCDB2 /* MB_MessageViewController.h */,
-				CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */,
-				CDCA05371B1EBAEB003CCDB2 /* MB_LikesViewController.h */,
-				CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */,
 				CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */,
 				CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */,
 				CDA6239B1B2BF7DF00A3A41F /* MB_ScanAblumViewController.h */,
@@ -918,6 +910,25 @@
 			path = FDTemplateLayoutCell;
 			sourceTree = "<group>";
 		};
+		CDC76B7C1B329B6900C391E5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6F8388051B1D9C3C002D2ED3 /* MB_UserViewController.h */,
+				6F8388061B1D9C3C002D2ED3 /* MB_UserViewController.m */,
+				CDCA052B1B1EB993003CCDB2 /* MB_UserSummaryViewController.h */,
+				CDCA052C1B1EB993003CCDB2 /* MB_UserSummaryViewController.m */,
+				CDCA052E1B1EBA7F003CCDB2 /* MB_AblumViewController.h */,
+				CDCA052F1B1EBA7F003CCDB2 /* MB_AblumViewController.m */,
+				CDCA05311B1EBAA3003CCDB2 /* MB_InstragramViewController.h */,
+				CDCA05321B1EBAA3003CCDB2 /* MB_InstragramViewController.m */,
+				CDCA05341B1EBABA003CCDB2 /* MB_MessageViewController.h */,
+				CDCA05351B1EBABA003CCDB2 /* MB_MessageViewController.m */,
+				CDCA05371B1EBAEB003CCDB2 /* MB_LikesViewController.h */,
+				CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		CDC9AB461B216BE200119C18 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +940,8 @@
 				CDC9AB971B21B3E300119C18 /* MB_Notice.m */,
 				CDC9AB981B21B3E300119C18 /* MB_User.h */,
 				CDC9AB991B21B3E300119C18 /* MB_User.m */,
+				CDC76B771B32662200C391E5 /* MB_InstragramModel.h */,
+				CDC76B781B32662200C391E5 /* MB_InstragramModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1114,6 +1127,7 @@
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
 				CDCA05391B1EBAEB003CCDB2 /* MB_LikesViewController.m in Sources */,
 				CDE285531B268313007FA77D /* CMethods.m in Sources */,
+				CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */,
 				6F8387251B1D8544002D2ED3 /* UIButton+helper.m in Sources */,
 				6F83872C1B1D8544002D2ED3 /* UIImage+Utility.m in Sources */,
 				6F8387D41B1D8715002D2ED3 /* UIImage+GIF.m in Sources */,

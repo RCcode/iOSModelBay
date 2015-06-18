@@ -28,7 +28,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -53,11 +52,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.mainLabel.text = @"介绍";
-    cell.subLabel.text = @"拿到手都快考试的难度是女生的女生不得vsbdvsdvsdvsdvdsvsdvsdsfssjkjskasajsjdasdjkdsjfsdfjjdhfjsfdhs按时间等哈说不定你爸说的那是";
-    
-    if (indexPath.row == 2) {
-        cell.subLabel.text = @"saasasnzcnczxcxzcxc";
+    if (indexPath.section == 0) {
+        cell.mainLabelWidth.constant = 0;
+        cell.mainLabel.text = @"";
+        cell.subLabel.text = @"穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
+    }else {
+        cell.mainLabelWidth.constant = 100;
+        cell.mainLabel.text = @"介绍";
+        cell.subLabel.text = @"拿到手都快考试的难度是女生的女生不得vsbdvsdvsdvsdvdsvsdvsdsfssjkjskasajsjdasdjkdsjfsdfjjdhfjsfdhs按时间等哈说不定你爸说的那是";
     }
     return cell;
 }

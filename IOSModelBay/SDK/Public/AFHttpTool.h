@@ -108,6 +108,7 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 
 //上传图片
 - (void)uploadPicWithParameters:params
+                         images:(NSArray *)images
                         success:(void (^)(id response))success
                         failure:(void (^)(NSError* err))failure;
 

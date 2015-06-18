@@ -7,13 +7,13 @@
 //
 
 #import "MB_InstragramViewController.h"
-#import "MB_UserCollectViewCell.h"
 #import "MB_UserViewController.h"
+#import "MB_InstragramModel.h"
+#import "MB_CareerCollectViewCell.h"
 
 @interface MB_InstragramViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
-
 @property (nonatomic, strong) NSString *maxId;
 @property (nonatomic, assign) BOOL noMore;
 
@@ -29,18 +29,17 @@
     [self addPullRefresh];
     
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self requestInstragramMediasListWithMaxId:nil];
+    [self requestInstragramMediasListWithMaxId:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 40;
+    return self.dataArray.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -48,8 +47,11 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor greenColor];
+    MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    MB_InstragramModel *model = self.dataArray[indexPath.row];
+    [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
+    cell.careerLabel.hidden = YES;
+    cell.selectButton.hidden = YES;
     return cell;
 }
 
@@ -102,42 +104,53 @@ static CGFloat startY = 0;
 }
 
 - (void)requestInstragramMediasListWithMaxId:(NSString *)maxId {
-    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",_uid];
+//    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
+//    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
+//                                     @"count": @(24)} mutableCopy];
+//    if (maxId) {
+//        [params setValue:maxId forKey:@"max_id"];
+//    }
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        NSLog(@"instragram %@",responseObject);
+//        [self endRefreshingForView:self.collectView];
+//        
+//        NSArray *dataArr = responseObject[@"data"];
+//        if ([responseObject[@"pagination"] allKeys].count == 0) {
+//            //下一页没有了
+//            self.noMore = YES;
+//        }else{
+//            //记录请求下一页需要的maxId
+//            self.maxId = responseObject[@"pagination"][@"next_max_id"];
+//        }
+//        
+//        //下拉刷新则清空数组
+//        if (maxId == nil) {
+//            [self.dataArray removeAllObjects];
+//        }
+//        
+//        for (NSDictionary *dic in dataArr) {
+//            //model
+//            MB_InstragramModel *model = [[MB_InstragramModel alloc] init];
+//            [model setValuesForKeysWithDictionary:dic];
+//            [self.dataArray addObject:model];
+//        }
+//        [self.collectView reloadData];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [self endRefreshingForView:self.collectView];
+//    }];
     
-    NSMutableDictionary *params = [@{@"count": @(24),
-                                     } mutableCopy];
-    if ([userDefaults objectForKey:kAccessToken]) {
-        [params setValue:[userDefaults objectForKey:kAccessToken] forKey:@"access_token"];
-    }
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"instragram %@",responseObject);
-        [self endRefreshingForView:self.collectView];
+    NSDictionary *params = @{@"id":@"6",
+                             @"ablId":@"1",
+                             @"sort":@"1"};
+    [[AFHttpTool shareTool] uploadPicWithParameters:params images:nil success:^(id response) {
+        NSLog(@"%@",response);
+    } failure:^(NSError *err) {
         
-        NSArray *dataArr = responseObject[@"data"];
-        if ([responseObject[@"pagination"] allKeys].count == 0) {
-            //下一页没有了
-            self.noMore = YES;
-        }else{
-            //记录请求下一页需要的maxId
-            self.maxId = responseObject[@"pagination"][@"next_max_id"];
-        }
-        
-        //下拉刷新则清空数组
-        if (maxId == nil) {
-            [self.dataArray removeAllObjects];
-        }
-        
-        for (NSDictionary *dic in dataArr) {
-            //model
-        }
-        [self.collectView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self endRefreshingForView:self.collectView];
     }];
 }
 
@@ -149,9 +162,10 @@ static CGFloat startY = 0;
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
+        _collectView.alwaysBounceVertical = YES;
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
-        [_collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ReuseIdentifier];
+        [_collectView registerNib:[UINib nibWithNibName:@"MB_CareerCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
 }

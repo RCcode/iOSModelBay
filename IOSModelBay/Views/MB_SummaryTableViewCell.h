@@ -10,11 +10,12 @@
 
 @interface MB_SummaryTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) CAShapeLayer *mylayer;
+//@property (nonatomic, strong) CAShapeLayer *mylayer;
 
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 
-
 @property (weak, nonatomic) IBOutlet UILabel *subLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainLabelWidth;
+
 
 @end

@@ -45,12 +45,8 @@ static AFHttpTool *httpTool = nil;
         dispatch_once(&onceToken, ^{
             httpTool = [[AFHttpTool alloc] init];
             httpTool.manager = [AFHTTPRequestOperationManager manager];
-            
             httpTool.manager.requestSerializer = [AFJSONRequestSerializer serializer];
             httpTool.manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-
-            [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            [httpTool.manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         });
     }
     return httpTool;
@@ -71,38 +67,38 @@ static AFHttpTool *httpTool = nil;
 //    _manager.requestSerializer.HTTPShouldHandleCookies = YES;
     switch (methodType) {
         case RequestTypeGet:
-        {
-            //GET请求
-            [_manager GET:url parameters:params
-             success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
-                 if (success) {
-                     NSLog(@"sdsdsdsd%@",responseObj);
-                     success(responseObj);
-                 }
-             } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
-                 if (failure) {
-                     NSLog(@"error == %@",error);
-                     failure(error);
-                 }
-             }];
-        }
-            break;
+            {
+                //GET请求
+                [_manager GET:url parameters:params
+                 success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
+                     if (success) {
+                         NSLog(@"sdsdsdsd%@",responseObj);
+                         success(responseObj);
+                     }
+                 } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+                     if (failure) {
+                         NSLog(@"error == %@",error);
+                         failure(error);
+                     }
+                 }];
+                break;
+            }
         case RequestTypePost:
-        {
-            //POST请求
-            [_manager POST:url parameters:params
-              success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
-                  if (success) {
-                      success(responseObj);
-                  }
-              } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
-                  if (failure) {
-                      NSLog(@"error == %@",error);
-                      failure(error);
-                  }
-              }];
-        }
-            break;
+            {
+                //POST请求
+                [_manager POST:url parameters:params
+                  success:^(AFHTTPRequestOperation* operation, NSDictionary* responseObj) {
+                      if (success) {
+                          success(responseObj);
+                      }
+                  } failure:^(AFHTTPRequestOperation* operation, NSError* error) {
+                      if (failure) {
+                          NSLog(@"error == %@",error);
+                          failure(error);
+                      }
+                  }];
+                break;
+            }
         default:
             break;
     }
@@ -387,14 +383,28 @@ static AFHttpTool *httpTool = nil;
 
 //上传图片
 - (void)uploadPicWithParameters:params
+                         images:(NSArray *)images
                         success:(void (^)(id response))success
                         failure:(void (^)(NSError* err))failure
 {
-    [self requestWihtMethod:RequestTypePost
-                        url:kUploadPicUrl
-                     params:params
-                    success:success
-                    failure:failure];
+    NSString *url = [NSString stringWithFormat:@"%@%@",kBaseUrl,kUploadPicUrl];
+    AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (int i = 0; i < images.count; i ++) {
+            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.5);
+            [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"anyImage_%d.jpg",i] mimeType:@"image/jpeg"];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+    
+    NSLog(@"%@",operation);
+    __weak AFHTTPRequestOperation *weakOpera = operation;
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        NSLog(@"%@",weakOpera);
+        NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+    }];
 }
 
 //获取用户留言列表
