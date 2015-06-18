@@ -118,6 +118,11 @@
 		CDA623A11B2C0E0F00A3A41F /* MB_RankingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA6239F1B2C0E0F00A3A41F /* MB_RankingTableViewCell.m */; };
 		CDA623A21B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */; };
 		CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76B781B32662200C391E5 /* MB_InstragramModel.m */; };
+		CDC76BB91B32AABF00C391E5 /* MB_SelectPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76BB81B32AABF00C391E5 /* MB_SelectPhotosViewController.m */; };
+		CDC76BC11B32CC1000C391E5 /* MB_AddTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76BBF1B32CC1000C391E5 /* MB_AddTextViewController.m */; };
+		CDC76BC21B32CC1000C391E5 /* MB_AddTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC76BC01B32CC1000C391E5 /* MB_AddTextViewController.xib */; };
+		CDC76BC51B32D72500C391E5 /* MB_SelectTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76BC41B32D72500C391E5 /* MB_SelectTemplateViewController.m */; };
+		CDC76BC91B32E11600C391E5 /* MB_LikersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76BC81B32E11600C391E5 /* MB_LikersViewController.m */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
 		CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */; };
 		CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB971B21B3E300119C18 /* MB_Notice.m */; };
@@ -355,7 +360,7 @@
 		CD21EB3C1B26BADB00513061 /* MB_FilterCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_FilterCollectViewCell.h; sourceTree = "<group>"; };
 		CD21EB3D1B26BADB00513061 /* MB_FilterCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_FilterCollectViewCell.m; sourceTree = "<group>"; };
 		CD21EB3E1B26BADB00513061 /* MB_FilterCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_FilterCollectViewCell.xib; sourceTree = "<group>"; };
-		CD21EB411B26C11A00513061 /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
+		CD21EB411B26C11A00513061 /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = b.png; path = Views/b.png; sourceTree = "<group>"; };
 		CD30D0341B26CEBC0053BE08 /* MB_UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserInfoView.h; sourceTree = "<group>"; };
 		CD30D0351B26CEBC0053BE08 /* MB_UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserInfoView.m; sourceTree = "<group>"; };
 		CD30D0371B26CECE0053BE08 /* MB_UserInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_UserInfoView.xib; sourceTree = "<group>"; };
@@ -383,6 +388,15 @@
 		CDA623A01B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_RankingTableViewCell.xib; sourceTree = "<group>"; };
 		CDC76B771B32662200C391E5 /* MB_InstragramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramModel.h; sourceTree = "<group>"; };
 		CDC76B781B32662200C391E5 /* MB_InstragramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramModel.m; sourceTree = "<group>"; };
+		CDC76BB71B32AABF00C391E5 /* MB_SelectPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SelectPhotosViewController.h; sourceTree = "<group>"; };
+		CDC76BB81B32AABF00C391E5 /* MB_SelectPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SelectPhotosViewController.m; sourceTree = "<group>"; };
+		CDC76BBE1B32CC1000C391E5 /* MB_AddTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddTextViewController.h; sourceTree = "<group>"; };
+		CDC76BBF1B32CC1000C391E5 /* MB_AddTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AddTextViewController.m; sourceTree = "<group>"; };
+		CDC76BC01B32CC1000C391E5 /* MB_AddTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_AddTextViewController.xib; sourceTree = "<group>"; };
+		CDC76BC31B32D72500C391E5 /* MB_SelectTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SelectTemplateViewController.h; sourceTree = "<group>"; };
+		CDC76BC41B32D72500C391E5 /* MB_SelectTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SelectTemplateViewController.m; sourceTree = "<group>"; };
+		CDC76BC71B32E11600C391E5 /* MB_LikersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikersViewController.h; sourceTree = "<group>"; };
+		CDC76BC81B32E11600C391E5 /* MB_LikersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikersViewController.m; sourceTree = "<group>"; };
 		CDC9AB921B21B3E300119C18 /* MB_Ablum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Ablum.h; sourceTree = "<group>"; };
 		CDC9AB931B21B3E300119C18 /* MB_Ablum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Ablum.m; sourceTree = "<group>"; };
 		CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddressBookPeople.h; sourceTree = "<group>"; };
@@ -497,6 +511,7 @@
 				CD59F88D1B2EC1450051FA5B /* JDFPeekabooCoordinator.h */,
 				CD59F88E1B2EC1450051FA5B /* JDFPeekabooCoordinator.m */,
 				6F83880B1B1D9D6C002D2ED3 /* a@2x.png */,
+				CD21EB411B26C11A00513061 /* b.png */,
 				6F83870C1B1D84D8002D2ED3 /* Categories */,
 				6F83870F1B1D84D8002D2ED3 /* SDK */,
 				CDE2854A1B268313007FA77D /* Public */,
@@ -584,7 +599,6 @@
 		6F8387111B1D84D8002D2ED3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CD21EB411B26C11A00513061 /* b.png */,
 				CD21EB051B26A3E400513061 /* MB_CareerCollectViewCell.h */,
 				CD21EB061B26A3E400513061 /* MB_CareerCollectViewCell.m */,
 				CD21EB071B26A3E400513061 /* MB_CareerCollectViewCell.xib */,
@@ -845,8 +859,14 @@
 		6F8387FA1B1D921E002D2ED3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CDC76B7C1B329B6900C391E5 /* Profile */,
 				CD21EB011B26A24900513061 /* Regist */,
+				CDC76B7D1B329C0800C391E5 /* Find */,
+				CDC76B7E1B329CDA00C391E5 /* Ranking */,
+				CDC76B7F1B329CEF00C391E5 /* Notice */,
+				CDC76B7C1B329B6900C391E5 /* Profile */,
+				CDC76BC61B32E0DF00C391E5 /* ScanAblum */,
+				CDC76BBA1B32BF6D00C391E5 /* Make Album */,
+				CDC76BB61B32A9E400C391E5 /* Template */,
 				6F555CFD1B1DAF960045A155 /* MB_BaseNavigationViewController.h */,
 				6F555CFE1B1DAF960045A155 /* MB_BaseNavigationViewController.m */,
 				99E2A97C1B243BA300957A6E /* MB_BaseViewController.h */,
@@ -857,22 +877,8 @@
 				6F555CF11B1DA74C0045A155 /* MB_LoginViewController.m */,
 				6F555CFA1B1DAF0E0045A155 /* MB_TabBarViewController.h */,
 				6F555CFB1B1DAF0E0045A155 /* MB_TabBarViewController.m */,
-				6F8387FB1B1D9239002D2ED3 /* MB_FindViewController.h */,
-				6F8387FC1B1D9239002D2ED3 /* MB_FindViewController.m */,
-				6F8388021B1D9C18002D2ED3 /* MB_RankingViewController.h */,
-				6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */,
-				6F8388081B1D9C7B002D2ED3 /* MB_NoticeViewController.h */,
-				6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */,
-				6F555D051B1DB89E0045A155 /* MB_FilterViewController.h */,
-				6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */,
-				6F555D081B1DB8B10045A155 /* MB_SearchViewController.h */,
-				6F555D091B1DB8B10045A155 /* MB_SearchViewController.m */,
-				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
-				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
 				CDCA053A1B1EBC1E003CCDB2 /* MB_SettingViewController.h */,
 				CDCA053B1B1EBC1E003CCDB2 /* MB_SettingViewController.m */,
-				CDA6239B1B2BF7DF00A3A41F /* MB_ScanAblumViewController.h */,
-				CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -927,6 +933,71 @@
 				CDCA05381B1EBAEB003CCDB2 /* MB_LikesViewController.m */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		CDC76B7D1B329C0800C391E5 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				6F8387FB1B1D9239002D2ED3 /* MB_FindViewController.h */,
+				6F8387FC1B1D9239002D2ED3 /* MB_FindViewController.m */,
+				6F555D051B1DB89E0045A155 /* MB_FilterViewController.h */,
+				6F555D061B1DB89E0045A155 /* MB_FilterViewController.m */,
+				6F555D081B1DB8B10045A155 /* MB_SearchViewController.h */,
+				6F555D091B1DB8B10045A155 /* MB_SearchViewController.m */,
+				CDA5679C1B1ED366006FB5C3 /* MB_InviteViewController.h */,
+				CDA5679D1B1ED366006FB5C3 /* MB_InviteViewController.m */,
+			);
+			name = Find;
+			sourceTree = "<group>";
+		};
+		CDC76B7E1B329CDA00C391E5 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				CDA6239B1B2BF7DF00A3A41F /* MB_ScanAblumViewController.h */,
+				CDA6239C1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m */,
+				6F8388021B1D9C18002D2ED3 /* MB_RankingViewController.h */,
+				6F8388031B1D9C18002D2ED3 /* MB_RankingViewController.m */,
+			);
+			name = Ranking;
+			sourceTree = "<group>";
+		};
+		CDC76B7F1B329CEF00C391E5 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				6F8388081B1D9C7B002D2ED3 /* MB_NoticeViewController.h */,
+				6F8388091B1D9C7B002D2ED3 /* MB_NoticeViewController.m */,
+			);
+			name = Notice;
+			sourceTree = "<group>";
+		};
+		CDC76BB61B32A9E400C391E5 /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				CDC76BC31B32D72500C391E5 /* MB_SelectTemplateViewController.h */,
+				CDC76BC41B32D72500C391E5 /* MB_SelectTemplateViewController.m */,
+			);
+			name = Template;
+			sourceTree = "<group>";
+		};
+		CDC76BBA1B32BF6D00C391E5 /* Make Album */ = {
+			isa = PBXGroup;
+			children = (
+				CDC76BB71B32AABF00C391E5 /* MB_SelectPhotosViewController.h */,
+				CDC76BB81B32AABF00C391E5 /* MB_SelectPhotosViewController.m */,
+				CDC76BBE1B32CC1000C391E5 /* MB_AddTextViewController.h */,
+				CDC76BBF1B32CC1000C391E5 /* MB_AddTextViewController.m */,
+				CDC76BC01B32CC1000C391E5 /* MB_AddTextViewController.xib */,
+			);
+			name = "Make Album";
+			sourceTree = "<group>";
+		};
+		CDC76BC61B32E0DF00C391E5 /* ScanAblum */ = {
+			isa = PBXGroup;
+			children = (
+				CDC76BC71B32E11600C391E5 /* MB_LikersViewController.h */,
+				CDC76BC81B32E11600C391E5 /* MB_LikersViewController.m */,
+			);
+			name = ScanAblum;
 			sourceTree = "<group>";
 		};
 		CDC9AB461B216BE200119C18 /* Models */ = {
@@ -1075,6 +1146,7 @@
 				6F8387421B1D862A002D2ED3 /* RC_moreAPPsLibBundle.bundle in Resources */,
 				CDCA04ED1B1EAF59003CCDB2 /* MB_SignalImageTableViewCell.xib in Resources */,
 				CD21EB421B26C11A00513061 /* b.png in Resources */,
+				CDC76BC21B32CC1000C391E5 /* MB_AddTextViewController.xib in Resources */,
 				CDCA04E81B1EADD5003CCDB2 /* MB_AlbumTableViewCell.xib in Resources */,
 				CDA623A21B2C0E0F00A3A41F /* MB_RankingTableViewCell.xib in Resources */,
 			);
@@ -1122,6 +1194,7 @@
 				6F8387701B1D8684002D2ED3 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				6F8388071B1D9C3C002D2ED3 /* MB_UserViewController.m in Sources */,
 				CDA6239D1B2BF7DF00A3A41F /* MB_ScanAblumViewController.m in Sources */,
+				CDC76BC91B32E11600C391E5 /* MB_LikersViewController.m in Sources */,
 				6F8387D51B1D8715002D2ED3 /* UIImage+MultiFormat.m in Sources */,
 				6F8387D71B1D8715002D2ED3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
@@ -1149,6 +1222,7 @@
 				CDCA05301B1EBA7F003CCDB2 /* MB_AblumViewController.m in Sources */,
 				6F8387861B1D86E6002D2ED3 /* AFHTTPRequestOperationManager.m in Sources */,
 				CDC9AB9D1B21B3E300119C18 /* MB_User.m in Sources */,
+				CDC76BC51B32D72500C391E5 /* MB_SelectTemplateViewController.m in Sources */,
 				6F8387A71B1D86F9002D2ED3 /* UIWebView+AFNetworking.m in Sources */,
 				CDA5679E1B1ED366006FB5C3 /* MB_InviteViewController.m in Sources */,
 				6F8387241B1D8544002D2ED3 /* NSString+Helper.m in Sources */,
@@ -1160,6 +1234,7 @@
 				6F8387451B1D862A002D2ED3 /* RC_PopUpADView.m in Sources */,
 				6F8387881B1D86E6002D2ED3 /* AFNetworkReachabilityManager.m in Sources */,
 				6F83878C1B1D86E6002D2ED3 /* AFURLResponseSerialization.m in Sources */,
+				CDC76BC11B32CC1000C391E5 /* MB_AddTextViewController.m in Sources */,
 				6F555D031B1DB1980045A155 /* MB_UserCollectViewCell.m in Sources */,
 				6F8387D81B1D8715002D2ED3 /* UIImageView+WebCache.m in Sources */,
 				CDCA053C1B1EBC1E003CCDB2 /* MB_SettingViewController.m in Sources */,
@@ -1190,6 +1265,7 @@
 				6F8387D31B1D8715002D2ED3 /* UIButton+WebCache.m in Sources */,
 				CDE285571B268326007FA77D /* UIImageEffects.m in Sources */,
 				6F8387CF1B1D8715002D2ED3 /* SDWebImageDownloader.m in Sources */,
+				CDC76BB91B32AABF00C391E5 /* MB_SelectPhotosViewController.m in Sources */,
 				6F8387431B1D862A002D2ED3 /* RC_MoreTableViewCell.m in Sources */,
 				6F83880A1B1D9C7B002D2ED3 /* MB_NoticeViewController.m in Sources */,
 				CD21EB3F1B26BADB00513061 /* MB_FilterCollectViewCell.m in Sources */,

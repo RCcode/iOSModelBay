@@ -1,32 +1,31 @@
 //
-//  MB_SettingViewController.m
+//  MB_LikersViewController.m
 //  IOSModelBay
 //
-//  Created by lisongrc on 15/6/3.
+//  Created by lisongrc on 15/6/18.
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
-#import "MB_SettingViewController.h"
+#import "MB_LikersViewController.h"
 
-//static NSString * const identifier = @"cell";
+@interface MB_LikersViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@interface MB_SettingViewController ()<UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, strong) UITableView *listTableView;
-@property (nonatomic, strong) NSArray *titleArray;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation MB_SettingViewController
+@implementation MB_LikersViewController
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.listTableView];
+    
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -34,7 +33,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.titleArray.count;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -42,7 +41,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
     }
-    cell.textLabel.text = _titleArray[indexPath.row];
     return cell;
 }
 
@@ -73,26 +71,14 @@
 
 
 #pragma mark - getters & setters
-- (UITableView *)listTableView {
-    if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _listTableView.delegate = self;
-        _listTableView.dataSource = self;
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor redColor];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
-    return _listTableView;
-}
-
-- (NSArray *)titleArray {
-    if (_titleArray == nil) {
-        _titleArray = @[@"a", @"b", @"c", @"d", @"e"];
-    }
-    return _titleArray;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return _tableView;
 }
 
 

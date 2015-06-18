@@ -18,6 +18,8 @@
 #import "MB_UserInfoView.h"
 #import "JDFPeekabooCoordinator.h"
 #import "MB_ScanAblumViewController.h"
+#import "MB_SelectPhotosViewController.h"
+#import "MB_SelectTemplateViewController.h"
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 

@@ -41,6 +41,18 @@
     }
 }
 
+- (void)likesButtonOnCliclk:(UIButton *)button {
+    
+}
+
+- (void)commentsButtonOnCliclk:(UIButton *)button {
+    
+}
+
+- (void)shareButtonOnCliclk:(UIButton *)button {
+    
+}
+
 #pragma mark - getters & setters
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
@@ -94,16 +106,19 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, CGRectGetMaxY(descLabel2.frame), 30, 30);
         [button setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(likesButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
         [_descView addSubview:button];
         
         UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
         button2.frame = CGRectMake(CGRectGetMaxX(button.frame) + 50, CGRectGetMaxY(descLabel2.frame), 30, 30);
         [button2 setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        [button2 addTarget:self action:@selector(likesButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
         [_descView addSubview:button2];
         
         UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
         button3.frame = CGRectMake(kWindowWidth - 30, CGRectGetMaxY(descLabel2.frame), 30, 30);
         [button3 setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        [button3 addTarget:self action:@selector(likesButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
         [_descView addSubview:button3];
         
         _descView.frame = CGRectMake(0, kWindowHeight - CGRectGetMaxY(button.frame), kWindowWidth, CGRectGetMaxY(button.frame));

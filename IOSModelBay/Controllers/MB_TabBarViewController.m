@@ -16,7 +16,6 @@
 @interface MB_TabBarViewController ()
 
 @property (nonatomic, strong) UIView *customTabBar;
-//@property (nonatomic, strong) NSMutableArray *btnArray;
 @property (nonatomic, strong) UIButton *selectedButton;
 
 @end
@@ -24,12 +23,11 @@
 @implementation MB_TabBarViewController
 
 -(void)viewDidAppear:(BOOL)animated {
+    [self.tabBar addSubview:self.customTabBar];
     //使tabbar透明
     [self.tabBar setBackgroundImage:[UIImage new]];
     self.tabBar.shadowImage = [UIImage new];
     self.tabBar.translucent = YES;
-    
-    [self.tabBar addSubview:self.customTabBar];
 }
 
 - (void)viewDidLoad {
