@@ -116,13 +116,13 @@
         UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
         button2.frame = CGRectMake(CGRectGetMaxX(button.frame) + 50, CGRectGetMaxY(descLabel2.frame), 30, 30);
         [button2 setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
-        [button2 addTarget:self action:@selector(likesButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
+        [button2 addTarget:self action:@selector(commentsButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
         [_descView addSubview:button2];
         
         UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
         button3.frame = CGRectMake(kWindowWidth - 30, CGRectGetMaxY(descLabel2.frame), 30, 30);
         [button3 setBackgroundImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
-        [button3 addTarget:self action:@selector(likesButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
+        [button3 addTarget:self action:@selector(shareButtonOnCliclk:) forControlEvents:UIControlEventTouchUpInside];
         [_descView addSubview:button3];
         
         _descView.frame = CGRectMake(0, kWindowHeight - CGRectGetMaxY(button.frame), kWindowWidth, CGRectGetMaxY(button.frame));

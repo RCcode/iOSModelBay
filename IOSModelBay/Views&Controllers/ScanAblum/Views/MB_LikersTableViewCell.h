@@ -1,5 +1,5 @@
 //
-//  MB_CommentsViewController.h
+//  LikersTableViewCell.h
 //  IOSModelBay
 //
 //  Created by lisongrc on 15/6/19.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_CommentsViewController : MB_BaseViewController
+@interface MB_LikersTableViewCell : UITableViewCell
 
 @end

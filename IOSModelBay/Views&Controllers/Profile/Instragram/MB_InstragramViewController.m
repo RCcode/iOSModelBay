@@ -29,7 +29,7 @@
     [self addPullRefresh];
     
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self requestInstragramMediasListWithMaxId:nil];
+//    [self requestInstragramMediasListWithMaxId:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,53 +104,44 @@ static CGFloat startY = 0;
 }
 
 - (void)requestInstragramMediasListWithMaxId:(NSString *)maxId {
-//    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
-//    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
-//                                     @"count": @(24)} mutableCopy];
-//    if (maxId) {
-//        [params setValue:maxId forKey:@"max_id"];
-//    }
-//    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        NSLog(@"instragram %@",responseObject);
-//        [self endRefreshingForView:self.collectView];
-//        
-//        NSArray *dataArr = responseObject[@"data"];
-//        if ([responseObject[@"pagination"] allKeys].count == 0) {
-//            //下一页没有了
-//            self.noMore = YES;
-//        }else{
-//            //记录请求下一页需要的maxId
-//            self.maxId = responseObject[@"pagination"][@"next_max_id"];
-//        }
-//        
-//        //下拉刷新则清空数组
-//        if (maxId == nil) {
-//            [self.dataArray removeAllObjects];
-//        }
-//        
-//        for (NSDictionary *dic in dataArr) {
-//            //model
-//            MB_InstragramModel *model = [[MB_InstragramModel alloc] init];
-//            [model setValuesForKeysWithDictionary:dic];
-//            [self.dataArray addObject:model];
-//        }
-//        [self.collectView reloadData];
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        [self endRefreshingForView:self.collectView];
-//    }];
+    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
+    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
+                                     @"count": @(24)} mutableCopy];
+    if (maxId) {
+        [params setValue:maxId forKey:@"max_id"];
+    }
     
-    NSDictionary *params = @{@"id":@"6",
-                             @"ablId":@"1",
-                             @"sort":@"1"};
-    [[AFHttpTool shareTool] uploadPicWithParameters:params images:nil success:^(id response) {
-        NSLog(@"%@",response);
-    } failure:^(NSError *err) {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"instragram %@",responseObject);
+        [self endRefreshingForView:self.collectView];
         
+        NSArray *dataArr = responseObject[@"data"];
+        if ([responseObject[@"pagination"] allKeys].count == 0) {
+            //下一页没有了
+            self.noMore = YES;
+        }else{
+            //记录请求下一页需要的maxId
+            self.maxId = responseObject[@"pagination"][@"next_max_id"];
+        }
+        
+        //下拉刷新则清空数组
+        if (maxId == nil) {
+            [self.dataArray removeAllObjects];
+        }
+        
+        for (NSDictionary *dic in dataArr) {
+            //model
+            MB_InstragramModel *model = [[MB_InstragramModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            [self.dataArray addObject:model];
+        }
+        [self.collectView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.collectView];
     }];
 }
 

@@ -12,14 +12,14 @@
 #import "MB_InstragramViewController.h"
 #import "MB_MessageViewController.h"
 #import "MB_LikesViewController.h"
-#import "MB_SettingViewController.h"
-#import "MB_InviteViewController.h"
-#import "MB_SearchViewController.h"
 #import "MB_UserInfoView.h"
-#import "JDFPeekabooCoordinator.h"
+
+//#import "MB_SettingViewController.h"
+//#import "MB_InviteViewController.h"
+//#import "MB_SearchViewController.h"
 #import "MB_ScanAblumViewController.h"
-#import "MB_SelectPhotosViewController.h"
-#import "MB_SelectTemplateViewController.h"
+//#import "MB_SelectPhotosViewController.h"
+//#import "MB_SelectTemplateViewController.h"
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -131,8 +131,8 @@ static CGFloat startY = -64;
 //    [self.navigationController pushViewController:inviteVC animated:YES];
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
-    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
+    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+//    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }

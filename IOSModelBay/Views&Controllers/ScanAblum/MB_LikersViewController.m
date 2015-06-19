@@ -7,6 +7,7 @@
 //
 
 #import "MB_LikersViewController.h"
+#import "MB_LikersTableViewCell.h"
 
 @interface MB_LikersViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -19,13 +20,13 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    [self.view addSubview:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -37,35 +38,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
-    }
+    MB_LikersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-            
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
-            break;
-        default:
-            break;
-    }
+    
 }
+
 
 #pragma mark - private methods
 
@@ -77,6 +58,7 @@
         _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_LikersTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
 }

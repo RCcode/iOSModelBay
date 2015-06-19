@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_AblumViewController : UIViewController
+@interface MB_AblumViewController : MB_BaseViewController
 
 @property (nonatomic, assign) CGRect containerViewRect;
 

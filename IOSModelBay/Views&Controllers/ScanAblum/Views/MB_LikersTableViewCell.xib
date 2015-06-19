@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MB_LikersTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Wj-AF-Cpy">
+                        <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="e3K-33-qXS"/>
+                            <constraint firstAttribute="height" constant="44" id="lwh-dJ-cfh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eci-E3-BFf">
+                        <rect key="frame" x="76" y="10" width="76" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSL-xJ-cuR">
+                        <rect key="frame" x="76" y="42" width="86" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70E-94-dX3">
+                        <rect key="frame" x="290" y="24" width="20" height="22"/>
+                        <state key="normal" image="b.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="70E-94-dX3" secondAttribute="trailing" constant="10" id="6Ql-bm-S1w"/>
+                    <constraint firstItem="eci-E3-BFf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="8QF-aZ-oxq"/>
+                    <constraint firstItem="eci-E3-BFf" firstAttribute="leading" secondItem="9Wj-AF-Cpy" secondAttribute="trailing" constant="22" id="As6-EV-ZwH"/>
+                    <constraint firstItem="70E-94-dX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eci-E3-BFf" secondAttribute="trailing" id="Dnv-Au-L98"/>
+                    <constraint firstItem="fSL-xJ-cuR" firstAttribute="top" secondItem="eci-E3-BFf" secondAttribute="bottom" constant="11" id="MLB-gL-GA6"/>
+                    <constraint firstItem="9Wj-AF-Cpy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Nq9-VU-cbR"/>
+                    <constraint firstItem="fSL-xJ-cuR" firstAttribute="leading" secondItem="9Wj-AF-Cpy" secondAttribute="trailing" constant="22" id="bmA-SI-Yer"/>
+                    <constraint firstAttribute="bottom" secondItem="9Wj-AF-Cpy" secondAttribute="bottom" constant="10" id="oqL-03-Fxw"/>
+                    <constraint firstAttribute="centerY" secondItem="70E-94-dX3" secondAttribute="centerY" id="owb-bg-IiC"/>
+                    <constraint firstItem="9Wj-AF-Cpy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rBe-Ah-5iQ"/>
+                    <constraint firstItem="70E-94-dX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fSL-xJ-cuR" secondAttribute="trailing" id="sQv-Ag-Eiq"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="oqL-03-Fxw"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="b.png" width="20" height="20"/>
+    </resources>
+</document>

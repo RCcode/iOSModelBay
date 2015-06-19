@@ -73,6 +73,10 @@
 		CD05758D1B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575571B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m */; };
 		CD05758E1B3416180015BBDA /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575591B3416180015BBDA /* UIScrollView+SVPullToRefresh.m */; };
 		CD05758F1B3416180015BBDA /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD05755B1B3416180015BBDA /* libMobClickLibrary.a */; };
+		CD390F751B34216700254740 /* MB_LikersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD390F731B34216700254740 /* MB_LikersTableViewCell.m */; };
+		CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD390F741B34216700254740 /* MB_LikersTableViewCell.xib */; };
+		CD390F7A1B34218E00254740 /* MB_CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */; };
+		CD390F7B1B34218E00254740 /* MB_CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */; };
 		CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
@@ -311,6 +315,12 @@
 		CD05755B1B3416180015BBDA /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		CD05755C1B3416180015BBDA /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		CD05755D1B3416180015BBDA /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		CD390F721B34216700254740 /* MB_LikersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikersTableViewCell.h; sourceTree = "<group>"; };
+		CD390F731B34216700254740 /* MB_LikersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikersTableViewCell.m; sourceTree = "<group>"; };
+		CD390F741B34216700254740 /* MB_LikersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_LikersTableViewCell.xib; sourceTree = "<group>"; };
+		CD390F771B34218E00254740 /* MB_CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CommentTableViewCell.h; sourceTree = "<group>"; };
+		CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CommentTableViewCell.m; sourceTree = "<group>"; };
+		CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_CommentTableViewCell.xib; sourceTree = "<group>"; };
 		CD79643E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -894,16 +904,16 @@
 				CDD536D21B340CB6008B436C /* MB_BaseNavigationViewController.m */,
 				CDD536D31B340CB6008B436C /* MB_BaseViewController.h */,
 				CDD536D41B340CB6008B436C /* MB_BaseViewController.m */,
-				CDD536D51B340CB6008B436C /* MB_InviteViewController.h */,
-				CDD536D61B340CB6008B436C /* MB_InviteViewController.m */,
-				CDD536D71B340CB6008B436C /* MB_LoginViewController.h */,
-				CDD536D81B340CB6008B436C /* MB_LoginViewController.m */,
 				CDD536D91B340CB6008B436C /* MB_MainViewController.h */,
 				CDD536DA1B340CB6008B436C /* MB_MainViewController.m */,
-				CDD536DB1B340CB6008B436C /* MB_SettingViewController.h */,
-				CDD536DC1B340CB6008B436C /* MB_SettingViewController.m */,
+				CDD536D71B340CB6008B436C /* MB_LoginViewController.h */,
+				CDD536D81B340CB6008B436C /* MB_LoginViewController.m */,
 				CDD536DD1B340CB6008B436C /* MB_TabBarViewController.h */,
 				CDD536DE1B340CB6008B436C /* MB_TabBarViewController.m */,
+				CDD536DB1B340CB6008B436C /* MB_SettingViewController.h */,
+				CDD536DC1B340CB6008B436C /* MB_SettingViewController.m */,
+				CDD536D51B340CB6008B436C /* MB_InviteViewController.h */,
+				CDD536D61B340CB6008B436C /* MB_InviteViewController.m */,
 			);
 			path = "Views&Controllers";
 			sourceTree = "<group>";
@@ -911,10 +921,10 @@
 		CDD536B71B340CB6008B436C /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				CDD536B81B340CB6008B436C /* MB_FilterViewController.h */,
-				CDD536B91B340CB6008B436C /* MB_FilterViewController.m */,
 				CDD536BA1B340CB6008B436C /* MB_FindViewController.h */,
 				CDD536BB1B340CB6008B436C /* MB_FindViewController.m */,
+				CDD536B81B340CB6008B436C /* MB_FilterViewController.h */,
+				CDD536B91B340CB6008B436C /* MB_FilterViewController.m */,
 				CDD536BC1B340CB6008B436C /* MB_SearchViewController.h */,
 				CDD536BD1B340CB6008B436C /* MB_SearchViewController.m */,
 				CDD536BE1B340CB6008B436C /* Views */,
@@ -943,11 +953,11 @@
 		CDD536CA1B340CB6008B436C /* MakeAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				CDD536CE1B340CB6008B436C /* MB_SelectPhotosViewController.h */,
+				CDD536CF1B340CB6008B436C /* MB_SelectPhotosViewController.m */,
 				CDD536CB1B340CB6008B436C /* MB_AddTextViewController.h */,
 				CDD536CC1B340CB6008B436C /* MB_AddTextViewController.m */,
 				CDD536CD1B340CB6008B436C /* MB_AddTextViewController.xib */,
-				CDD536CE1B340CB6008B436C /* MB_SelectPhotosViewController.h */,
-				CDD536CF1B340CB6008B436C /* MB_SelectPhotosViewController.m */,
 				CDD536D01B340CB6008B436C /* Views */,
 			);
 			path = MakeAlbum;
@@ -980,16 +990,16 @@
 		CDD536E31B340CB6008B436C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CDD537081B340CB6008B436C /* Summary */,
 				CDD536E41B340CB6008B436C /* Ablum */,
 				CDD536EE1B340CB6008B436C /* Instragram */,
+				CDD536FE1B340CB6008B436C /* Message */,
 				CDD536F21B340CB6008B436C /* Likes */,
 				CDD536F91B340CB6008B436C /* MB_UserInfoView.h */,
 				CDD536FA1B340CB6008B436C /* MB_UserInfoView.m */,
 				CDD536FB1B340CB6008B436C /* MB_UserInfoView.xib */,
 				CDD536FC1B340CB6008B436C /* MB_UserViewController.h */,
 				CDD536FD1B340CB6008B436C /* MB_UserViewController.m */,
-				CDD536FE1B340CB6008B436C /* Message */,
-				CDD537081B340CB6008B436C /* Summary */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1120,14 +1130,14 @@
 		CDD537161B340CB6008B436C /* Regist */ = {
 			isa = PBXGroup;
 			children = (
-				CDD537171B340CB6008B436C /* MB_SelectCareerViewController.h */,
-				CDD537181B340CB6008B436C /* MB_SelectCareerViewController.m */,
 				CDD537191B340CB6008B436C /* MB_SelectRoleViewController.h */,
 				CDD5371A1B340CB6008B436C /* MB_SelectRoleViewController.m */,
 				CDD5371B1B340CB6008B436C /* MB_SelectRoleViewController.xib */,
 				CDD5371C1B340CB6008B436C /* MB_WriteInfoViewController.h */,
 				CDD5371D1B340CB6008B436C /* MB_WriteInfoViewController.m */,
 				CDD5371E1B340CB6008B436C /* MB_WriteInfoViewController.xib */,
+				CDD537171B340CB6008B436C /* MB_SelectCareerViewController.h */,
+				CDD537181B340CB6008B436C /* MB_SelectCareerViewController.m */,
 				CDD5371F1B340CB6008B436C /* Views */,
 			);
 			path = Regist;
@@ -1146,12 +1156,12 @@
 		CDD537231B340CB6008B436C /* ScanAblum */ = {
 			isa = PBXGroup;
 			children = (
-				CDD537241B340CB6008B436C /* MB_CommentsViewController.h */,
-				CDD537251B340CB6008B436C /* MB_CommentsViewController.m */,
-				CDD537261B340CB6008B436C /* MB_LikersViewController.h */,
-				CDD537271B340CB6008B436C /* MB_LikersViewController.m */,
 				CDD537281B340CB6008B436C /* MB_ScanAblumViewController.h */,
 				CDD537291B340CB6008B436C /* MB_ScanAblumViewController.m */,
+				CDD537261B340CB6008B436C /* MB_LikersViewController.h */,
+				CDD537271B340CB6008B436C /* MB_LikersViewController.m */,
+				CDD537241B340CB6008B436C /* MB_CommentsViewController.h */,
+				CDD537251B340CB6008B436C /* MB_CommentsViewController.m */,
 				CDD5372A1B340CB6008B436C /* Views */,
 			);
 			path = ScanAblum;
@@ -1160,6 +1170,12 @@
 		CDD5372A1B340CB6008B436C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD390F721B34216700254740 /* MB_LikersTableViewCell.h */,
+				CD390F731B34216700254740 /* MB_LikersTableViewCell.m */,
+				CD390F741B34216700254740 /* MB_LikersTableViewCell.xib */,
+				CD390F771B34218E00254740 /* MB_CommentTableViewCell.h */,
+				CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */,
+				CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1266,6 +1282,7 @@
 				6F55A4B31B1D7567006DA537 /* Main.storyboard in Resources */,
 				CDD537611B340CB6008B436C /* MB_CareerCollectViewCell.xib in Resources */,
 				6F55A4B81B1D7567006DA537 /* LaunchScreen.xib in Resources */,
+				CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */,
 				CD05757B1B3416180015BBDA /* RC_PopUpADView.xib in Resources */,
 				6F55A4B51B1D7567006DA537 /* Images.xcassets in Resources */,
 				CDD537671B340D29008B436C /* b.png in Resources */,
@@ -1276,6 +1293,7 @@
 				CDD5374C1B340CB6008B436C /* MB_LikeCollectViewCell.xib in Resources */,
 				CDD5375F1B340CB6008B436C /* MB_WriteInfoViewController.xib in Resources */,
 				CDD537381B340CB6008B436C /* MB_UserTableViewCell.xib in Resources */,
+				CD390F7B1B34218E00254740 /* MB_CommentTableViewCell.xib in Resources */,
 				CDD537481B340CB6008B436C /* MB_SignalImageTableViewCell.xib in Resources */,
 				CDD5374E1B340CB6008B436C /* MB_UserInfoView.xib in Resources */,
 				CDD537521B340CB6008B436C /* MB_MsgTableViewCell.xib in Resources */,
@@ -1330,6 +1348,7 @@
 				CD0575671B3416180015BBDA /* AFURLSessionManager.m in Sources */,
 				CDD5375E1B340CB6008B436C /* MB_WriteInfoViewController.m in Sources */,
 				CD05756A1B3416180015BBDA /* UIAlertView+AFNetworking.m in Sources */,
+				CD390F751B34216700254740 /* MB_LikersTableViewCell.m in Sources */,
 				CDD537651B340CB6008B436C /* MB_SelectTemplateViewController.m in Sources */,
 				CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */,
 				6F55A4AD1B1D7567006DA537 /* AppDelegate.m in Sources */,
@@ -1379,6 +1398,7 @@
 				CD05758C1B3416180015BBDA /* UIView+WebCacheOperation.m in Sources */,
 				CDD537581B340CB6008B436C /* MB_RankingViewController.m in Sources */,
 				CDD537591B340CB6008B436C /* MB_RankingTableViewCell.m in Sources */,
+				CD390F7A1B34218E00254740 /* MB_CommentTableViewCell.m in Sources */,
 				CDD537561B340CB6008B436C /* MB_SummaryTableViewCell.m in Sources */,
 				CDD537621B340CB6008B436C /* MB_CommentsViewController.m in Sources */,
 				CDD537311B340CB6008B436C /* MB_SearchViewController.m in Sources */,
@@ -1546,9 +1566,6 @@
 					"$(PROJECT_DIR)/IOSModelBay/SDK/Umeng",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/adMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/flurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/AdMob",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/FlurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/Umeng",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/AdMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/FlurryAnalytics",
 				);
@@ -1573,9 +1590,6 @@
 					"$(PROJECT_DIR)/IOSModelBay/SDK/Umeng",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/adMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/flurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/AdMob",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/FlurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/Categories/SDK/Umeng",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/AdMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/FlurryAnalytics",
 				);
