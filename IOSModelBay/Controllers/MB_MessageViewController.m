@@ -79,6 +79,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    [self.parentViewController.navigationController pushViewController:userVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

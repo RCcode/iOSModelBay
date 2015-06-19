@@ -21,8 +21,6 @@ static CGFloat const menuBtnWidth = 150;
 @property (nonatomic, strong) NSMutableArray *Array;
 @property (nonatomic, strong) UIView         *tableHeaderView;
 
-//@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
-
 @end
 
 @implementation MB_NoticeViewController
@@ -33,17 +31,12 @@ static CGFloat const menuBtnWidth = 150;
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor cyanColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.view addSubview:self.tableHeaderView];
     [self.view addSubview:self.tableView];
-    [self addPullRefresh];
-    
-    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-    self.scrollCoordinator.scrollView = self.tableView;
-    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+    [self.view addSubview:self.tableHeaderView];
 
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self addPullRefresh];
+    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+    
     [self requestNoticeListwithMinId:0];
 }
 
@@ -76,29 +69,15 @@ static CGFloat const menuBtnWidth = 150;
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat topViewContentOffsetY = self.scrollCoordinator.topView.frame.origin.y;
-    
+    if (topViewContentOffsetY == 0) {
+        return;
+    }
+//    NSLog(@"%f",topViewContentOffsetY);
     if (topViewContentOffsetY >= -24 && topViewContentOffsetY <= 20) {
-//        if (scrollView.pullToRefreshView.state == SVPullToRefreshStateLoading) {
-//            CGRect headerRect = self.tableHeaderView.frame;
-//            headerRect.origin.y = topViewContentOffsetY + 44;
-//            headerRect.size.height = 60;
-//            self.tableHeaderView.frame = headerRect;
-//
-//            if (scrollView.contentOffset.y >= 0) {
-//                CGRect tableRect = self.tableView.frame;
-//                tableRect.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
-//                self.tableView.frame = tableRect;
-//            }
-//        }else{
             CGRect headerRect = self.tableHeaderView.frame;
             headerRect.origin.y = topViewContentOffsetY + 44;
-            headerRect.size.height = 60;
             self.tableHeaderView.frame = headerRect;
-            
-            CGRect tableRect = self.tableView.frame;
-            tableRect.origin.y = CGRectGetMaxY(self.tableHeaderView.frame);
-            self.tableView.frame = tableRect;
-//        }
+//            NSLog(@"www%@",NSStringFromCGRect(self.tableHeaderView.frame));
     }else{
         
     }
@@ -189,10 +168,10 @@ static CGFloat const menuBtnWidth = 150;
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableHeaderView.frame), kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        
+        _tableView.contentInset = UIEdgeInsetsMake(CGRectGetMaxY(self.tableHeaderView.frame), 0, 0, 0);
         UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];

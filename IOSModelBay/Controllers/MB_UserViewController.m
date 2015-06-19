@@ -28,7 +28,6 @@
 @property (nonatomic, strong) UIScrollView *containerView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
-//@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 
 @end
 
@@ -39,14 +38,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor greenColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
-//    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-//    self.scrollCoordinator.scrollView = self.tableView;
-//    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-//    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
-    
     [self.view addSubview:self.tableView];
+    [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addChildViewControllers];
     [self menuBtnOnClick:self.menuBtns[0]];
 }
@@ -81,64 +77,42 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-static CGFloat startY = 0;
+static CGFloat startY = -64;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    startY = scrollView.contentOffset.y;
+    if (scrollView == self.tableView) {
+        startY = scrollView.contentOffset.y;
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView == self.tableView && scrollView.dragging) {
-//        if (scrollView.contentOffset.y - startY > 0) {
-//            //向上拉
-//            if (scrollView.contentOffset.y != 250) {
-//                NSLog(@"dddddd");
-////                scrollView.userInteractionEnabled = NO;
-//                [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
-//            }
-//        }else{
-//            //向下拉
-//            if (scrollView.contentOffset.y != -64) {
-//                NSLog(@"aaaaaa");
-////                scrollView.userInteractionEnabled = NO;
-//                [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
-//            }
-//        }
-//    }
-//    
-    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
-        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-    }else{
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    if (scrollView == self.tableView) {
+        //    NSLog(@"%@  %@",NSStringFromCGRect(scrollView.frame), NSStringFromUIEdgeInsets(scrollView.contentInset));;
+//        NSLog(@"www%@",NSStringFromCGPoint(scrollView.contentOffset));
+        if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+            self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+        }else{
+            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        }
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (scrollView.contentOffset.y != 250) {
                 NSLog(@"dddddd");
-                //                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
             }
         }else{
             //向下拉
             if (scrollView.contentOffset.y != -64) {
                 NSLog(@"aaaaaa");
-                //                scrollView.userInteractionEnabled = NO;
                 [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
-    
-//    if (self.scrollCoordinator.topView.frame.origin.y == -24) {
-//        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-//    }else{
-//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-//    }
+    }
 }
-
-//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-//    scrollView.userInteractionEnabled = YES;
-//}
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView != self.tableView) {
@@ -150,7 +124,6 @@ static CGFloat startY = 0;
         ((UIButton *)self.menuBtns[page]).selected = YES;
     }
 }
-
 
 #pragma mark - private methods
 - (void)test {
@@ -209,8 +182,9 @@ static CGFloat startY = 0;
         _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
-        _tableView.bounces = NO;
+//        _tableView.bounces = NO;
     }
     return _tableView;
 }

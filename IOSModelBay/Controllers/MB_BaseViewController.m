@@ -21,64 +21,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    [self.scrollCoordinator disable];
+    [self.scrollCoordinator disable];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    [self.scrollCoordinator fullyHideViews];
-//    [self.scrollCoordinator fullyExpandViews];
-
-//    [self.scrollCoordinator enable];
-//    [self.scrollCoordinator setBarsNeedDisplay];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.scrollCoordinator enable];
 }
-
-//#pragma mark - UIScrollViewDelegate
-//static CGFloat startOffsetY;
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//    startOffsetY = scrollView.contentOffset.y;
-//}
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    NSLog(@"%f  %f  %f %f ",scrollView.contentSize.height,scrollView.contentOffset.y, startOffsetY,kWindowHeight);
-//    if (![self.parentViewController isKindOfClass:[UINavigationController class]]) {
-//        return;//防止ChildViewController滑动隐藏导航栏
-//    }
-//    
-//    //这个判断为了消除刷新的影响
-////    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - kWindowHeight) {
-////    if (scrollView.contentOffset.y >-64 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)- 30) {
-//    if (scrollView.contentOffset.y >0 && scrollView.contentOffset.y < scrollView.contentSize.height - (kWindowHeight - 64 - 49)) {
-//        if (scrollView.contentOffset.y < startOffsetY - 40) {
-//            [self.navigationController setNavigationBarHidden:NO animated:YES];
-//            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-//            startOffsetY = scrollView.contentOffset.y;
-//        }
-//        if (scrollView.contentOffset.y > startOffsetY + 40) {
-//            [self.navigationController setNavigationBarHidden:YES animated:YES];
-//            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-//            startOffsetY = scrollView.contentOffset.y;
-//        }
-//    }
-//}
-
 
 #pragma mark - Private Methods
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
               WithActionHandler:(void (^)(void))actionHandler {
     
     [scrollview addPullToRefreshWithActionHandler:actionHandler];
-    scrollview.pullToRefreshView.originalTopInset = [self.parentViewController isKindOfClass:[UINavigationController class]]?64:0;
-    if (self.automaticallyAdjustsScrollViewInsets == NO) {
-        scrollview.pullToRefreshView.originalTopInset = 0;
-    }
-//    scrollview.pullToRefreshView.originalTopInset = self.automaticallyAdjustsScrollViewInsets?64:0;
     [scrollview.pullToRefreshView setArrowColor:scrollview.backgroundColor];
     [scrollview.pullToRefreshView setTitle:@"" forState:SVPullToRefreshStateAll];
     [scrollview.pullToRefreshView setCustomView:self.activityIndicatorView

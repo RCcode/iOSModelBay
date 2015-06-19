@@ -198,10 +198,10 @@ static CGFloat const JDFPeekabooCoordinatorNavigationBarHorizontalHeightDifferen
         scrollView.contentInset = contentInset;
         return;
     } else {
-//        self.scrollView.contentInset = self.scrollView.contentInset;//这是原来的
-        UIEdgeInsets insets = self.scrollView.contentInset;
-        insets.bottom = 60;
-        self.scrollView.contentInset = insets;
+        self.scrollView.contentInset = self.scrollView.contentInset;//这是原来的
+//        UIEdgeInsets insets = self.scrollView.contentInset;
+//        insets.bottom = 60;
+//        self.scrollView.contentInset = insets;
     }
     
     CGRect topBarFrame = self.topView.frame;
@@ -223,8 +223,8 @@ static CGFloat const JDFPeekabooCoordinatorNavigationBarHorizontalHeightDifferen
     } else if ((scrollOffset + scrollHeight) >= scrollContentSizeHeight) {
         topBarFrame.origin.y = -topBarHeight + self.topViewMinimisedHeight;
         //改了
-//        bottomBarFrame.origin.y = defaultBottomViewY + topBarHeight;
-        bottomBarFrame.origin.y = kWindowHeight + topBarHeight;
+        bottomBarFrame.origin.y = defaultBottomViewY + topBarHeight;
+//        bottomBarFrame.origin.y = kWindowHeight + topBarHeight;
     } else {
         topBarFrame.origin.y = MIN(self.topViewDefaultY, MAX(-topBarHeight + self.topViewMinimisedHeight, topBarFrame.origin.y - scrollDiff));
         CGFloat toolbarY = MAX(defaultBottomViewY, MIN(self.containingView.frame.size.height, bottomBarFrame.origin.y + scrollDiff));
@@ -240,9 +240,9 @@ static CGFloat const JDFPeekabooCoordinatorNavigationBarHorizontalHeightDifferen
     [self.topView setFrame:topBarFrame];
     [self.bottomView setFrame:bottomBarFrame];
     
-//    CGFloat top = topBarFrame.origin.y + topBarFrame.size.height;
-//    CGFloat bottom = self.scrollView.frame.size.height - bottomBarFrame.origin.y;
-//    self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(top, 0, bottom, 0);
+    CGFloat top = topBarFrame.origin.y + topBarFrame.size.height;
+    CGFloat bottom = self.scrollView.frame.size.height - bottomBarFrame.origin.y;
+    self.scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(top, 0, bottom, 0);
     
     CGFloat topViewPercentageHidden = [self topViewPercentageHidden];
     [self updateTopViewSubviews:(1 - topViewPercentageHidden)];

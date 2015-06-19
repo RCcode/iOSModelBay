@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     
 //    self.title = @"MODELBAY";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
@@ -34,7 +35,7 @@
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
+    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
@@ -64,11 +65,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-//    userVC.hidesBottomBarWhenPushed = YES;
+    userVC.hidesBottomBarWhenPushed = YES;
     userVC.user = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:userVC animated:YES];
 }
-
 
 #pragma mark - private methods
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
@@ -148,12 +148,13 @@
         layout.minimumInteritemSpacing = 2.5;
         layout.minimumLineSpacing = 2.5;
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) collectionViewLayout:layout];
         _collectView.bounces = YES;
         _collectView.alwaysBounceVertical = YES;
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
+        _collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;

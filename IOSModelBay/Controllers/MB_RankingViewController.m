@@ -23,14 +23,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addPullRefresh];
     [self requestRankingList];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
@@ -78,10 +77,10 @@
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.delaysContentTouches = NO;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_RankingTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
