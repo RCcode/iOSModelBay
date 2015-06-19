@@ -31,6 +31,10 @@
 		CD7964531B340EC400977A7F /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964491B340EC400977A7F /* UIImage+Rotate.m */; };
 		CD7964541B340EC400977A7F /* UIImage+SubImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79644B1B340EC400977A7F /* UIImage+SubImage.m */; };
 		CD7964551B340EC400977A7F /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79644D1B340EC400977A7F /* UIImage+Utility.m */; };
+		CD7965F21B34154100977A7F /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EA1B34154100977A7F /* AFHttpTool.m */; };
+		CD7965F31B34154100977A7F /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EC1B34154100977A7F /* CMethods.m */; };
+		CD7965F41B34154100977A7F /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EF1B34154100977A7F /* MB_Utils.m */; };
+		CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965F11B34154100977A7F /* UIImageEffects.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76B781B32662200C391E5 /* MB_InstragramModel.m */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
@@ -123,10 +127,6 @@
 		CDD538F11B340DF8008B436C /* RC_MoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD538991B340DF7008B436C /* RC_MoreTableViewCell.xib */; };
 		CDD538F21B340DF8008B436C /* RC_PopUpADView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD5389B1B340DF7008B436C /* RC_PopUpADView.m */; };
 		CDD538F31B340DF8008B436C /* RC_PopUpADView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD5389C1B340DF7008B436C /* RC_PopUpADView.xib */; };
-		CDD538F41B340DF8008B436C /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD5389F1B340DF7008B436C /* AFHttpTool.m */; };
-		CDD538F51B340DF8008B436C /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538A11B340DF7008B436C /* CMethods.m */; };
-		CDD538F61B340DF8008B436C /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538A41B340DF7008B436C /* MB_Utils.m */; };
-		CDD538F71B340DF8008B436C /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538A61B340DF7008B436C /* UIImageEffects.m */; };
 		CDD538F81B340DF8008B436C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538A91B340DF7008B436C /* Reachability.m */; };
 		CDD538F91B340DF8008B436C /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538AC1B340DF7008B436C /* MKAnnotationView+WebCache.m */; };
 		CDD538FA1B340DF8008B436C /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538AE1B340DF7008B436C /* NSData+ImageContentType.m */; };
@@ -147,10 +147,6 @@
 		CDD539091B340DF8008B436C /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538CF1B340DF8008B436C /* UIScrollView+SVInfiniteScrolling.m */; };
 		CDD5390A1B340DF8008B436C /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD538D11B340DF8008B436C /* UIScrollView+SVPullToRefresh.m */; };
 		CDD5390B1B340DF8008B436C /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD538D31B340DF8008B436C /* libMobClickLibrary.a */; };
-		CDE285521B268313007FA77D /* AFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2854C1B268313007FA77D /* AFHttpTool.m */; };
-		CDE285531B268313007FA77D /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE2854E1B268313007FA77D /* CMethods.m */; };
-		CDE285541B268313007FA77D /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE285511B268313007FA77D /* MB_Utils.m */; };
-		CDE285571B268326007FA77D /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE285561B268326007FA77D /* UIImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +198,15 @@
 		CD79644B1B340EC400977A7F /* UIImage+SubImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SubImage.m"; sourceTree = "<group>"; };
 		CD79644C1B340EC400977A7F /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		CD79644D1B340EC400977A7F /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		CD7965E91B34154100977A7F /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
+		CD7965EA1B34154100977A7F /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
+		CD7965EB1B34154100977A7F /* CMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMethods.h; sourceTree = "<group>"; };
+		CD7965EC1B34154100977A7F /* CMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMethods.m; sourceTree = "<group>"; };
+		CD7965ED1B34154100977A7F /* MB_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Define.h; sourceTree = "<group>"; };
+		CD7965EE1B34154100977A7F /* MB_Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Utils.h; sourceTree = "<group>"; };
+		CD7965EF1B34154100977A7F /* MB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Utils.m; sourceTree = "<group>"; };
+		CD7965F01B34154100977A7F /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		CD7965F11B34154100977A7F /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDC76B771B32662200C391E5 /* MB_InstragramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramModel.h; sourceTree = "<group>"; };
 		CDC76B781B32662200C391E5 /* MB_InstragramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramModel.m; sourceTree = "<group>"; };
@@ -395,15 +400,6 @@
 		CDD5389A1B340DF7008B436C /* RC_PopUpADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_PopUpADView.h; sourceTree = "<group>"; };
 		CDD5389B1B340DF7008B436C /* RC_PopUpADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_PopUpADView.m; sourceTree = "<group>"; };
 		CDD5389C1B340DF7008B436C /* RC_PopUpADView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RC_PopUpADView.xib; sourceTree = "<group>"; };
-		CDD5389E1B340DF7008B436C /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
-		CDD5389F1B340DF7008B436C /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
-		CDD538A01B340DF7008B436C /* CMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMethods.h; sourceTree = "<group>"; };
-		CDD538A11B340DF7008B436C /* CMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMethods.m; sourceTree = "<group>"; };
-		CDD538A21B340DF7008B436C /* MB_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Define.h; sourceTree = "<group>"; };
-		CDD538A31B340DF7008B436C /* MB_Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Utils.h; sourceTree = "<group>"; };
-		CDD538A41B340DF7008B436C /* MB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Utils.m; sourceTree = "<group>"; };
-		CDD538A51B340DF7008B436C /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
-		CDD538A61B340DF7008B436C /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		CDD538A81B340DF7008B436C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CDD538A91B340DF7008B436C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CDD538AB1B340DF7008B436C /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -447,15 +443,6 @@
 		CDD538D31B340DF8008B436C /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		CDD538D41B340DF8008B436C /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		CDD538D51B340DF8008B436C /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		CDE2854B1B268313007FA77D /* AFHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHttpTool.h; sourceTree = "<group>"; };
-		CDE2854C1B268313007FA77D /* AFHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHttpTool.m; sourceTree = "<group>"; };
-		CDE2854D1B268313007FA77D /* CMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMethods.h; sourceTree = "<group>"; };
-		CDE2854E1B268313007FA77D /* CMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMethods.m; sourceTree = "<group>"; };
-		CDE2854F1B268313007FA77D /* MB_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Define.h; sourceTree = "<group>"; };
-		CDE285501B268313007FA77D /* MB_Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Utils.h; sourceTree = "<group>"; };
-		CDE285511B268313007FA77D /* MB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Utils.m; sourceTree = "<group>"; };
-		CDE285551B268326007FA77D /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
-		CDE285561B268326007FA77D /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,7 +503,7 @@
 				CDD537661B340D29008B436C /* b.png */,
 				CD79643D1B340EC400977A7F /* Category */,
 				CDD5383A1B340DF7008B436C /* SDK */,
-				CDE2854A1B268313007FA77D /* Public */,
+				CD7965E81B34154100977A7F /* Public */,
 				CDC9AB461B216BE200119C18 /* Models */,
 				CDD536B61B340CB6008B436C /* Views&Controllers */,
 				6F55A4B11B1D7567006DA537 /* Main.storyboard */,
@@ -593,6 +580,22 @@
 				CD79644D1B340EC400977A7F /* UIImage+Utility.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		CD7965E81B34154100977A7F /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				CD7965E91B34154100977A7F /* AFHttpTool.h */,
+				CD7965EA1B34154100977A7F /* AFHttpTool.m */,
+				CD7965EB1B34154100977A7F /* CMethods.h */,
+				CD7965EC1B34154100977A7F /* CMethods.m */,
+				CD7965ED1B34154100977A7F /* MB_Define.h */,
+				CD7965EE1B34154100977A7F /* MB_Utils.h */,
+				CD7965EF1B34154100977A7F /* MB_Utils.m */,
+				CD7965F01B34154100977A7F /* UIImageEffects.h */,
+				CD7965F11B34154100977A7F /* UIImageEffects.m */,
+			);
+			path = Public;
 			sourceTree = "<group>";
 		};
 		CDC9AB461B216BE200119C18 /* Models */ = {
@@ -924,7 +927,6 @@
 				CDD538881B340DF7008B436C /* JDFPeekabooCoordinator */,
 				CDD5388B1B340DF7008B436C /* MBProgressHUD */,
 				CDD5388E1B340DF7008B436C /* MoreApp */,
-				CDD5389D1B340DF7008B436C /* Public */,
 				CDD538A71B340DF7008B436C /* Reachability */,
 				CDD538AA1B340DF7008B436C /* SDWebImage */,
 				CDD538CC1B340DF8008B436C /* SVPullToRefresh */,
@@ -1108,22 +1110,6 @@
 			path = MoreApp;
 			sourceTree = "<group>";
 		};
-		CDD5389D1B340DF7008B436C /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				CDD5389E1B340DF7008B436C /* AFHttpTool.h */,
-				CDD5389F1B340DF7008B436C /* AFHttpTool.m */,
-				CDD538A01B340DF7008B436C /* CMethods.h */,
-				CDD538A11B340DF7008B436C /* CMethods.m */,
-				CDD538A21B340DF7008B436C /* MB_Define.h */,
-				CDD538A31B340DF7008B436C /* MB_Utils.h */,
-				CDD538A41B340DF7008B436C /* MB_Utils.m */,
-				CDD538A51B340DF7008B436C /* UIImageEffects.h */,
-				CDD538A61B340DF7008B436C /* UIImageEffects.m */,
-			);
-			path = Public;
-			sourceTree = "<group>";
-		};
 		CDD538A71B340DF7008B436C /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,23 +1179,6 @@
 				CDD538D51B340DF8008B436C /* MobClickSocialAnalytics.h */,
 			);
 			path = Umeng;
-			sourceTree = "<group>";
-		};
-		CDE2854A1B268313007FA77D /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				CDE285551B268326007FA77D /* UIImageEffects.h */,
-				CDE285561B268326007FA77D /* UIImageEffects.m */,
-				CDE2854B1B268313007FA77D /* AFHttpTool.h */,
-				CDE2854C1B268313007FA77D /* AFHttpTool.m */,
-				CDE2854D1B268313007FA77D /* CMethods.h */,
-				CDE2854E1B268313007FA77D /* CMethods.m */,
-				CDE2854F1B268313007FA77D /* MB_Define.h */,
-				CDE285501B268313007FA77D /* MB_Utils.h */,
-				CDE285511B268313007FA77D /* MB_Utils.m */,
-			);
-			name = Public;
-			path = SDK/Public;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1337,10 +1306,11 @@
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
 				CDD537421B340CB6008B436C /* MB_TabBarViewController.m in Sources */,
 				CDD538F01B340DF8008B436C /* RC_MoreTableViewCell.m in Sources */,
-				CDE285531B268313007FA77D /* CMethods.m in Sources */,
 				CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */,
 				CDD538E11B340DF8008B436C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				CDD5374F1B340CB6008B436C /* MB_UserViewController.m in Sources */,
+				CD7965F41B34154100977A7F /* MB_Utils.m in Sources */,
+				CD7965F21B34154100977A7F /* AFHttpTool.m in Sources */,
 				CDD538EB1B340DF8008B436C /* MBProgressHUD.m in Sources */,
 				CDD538ED1B340DF8008B436C /* RC_GetPath.m in Sources */,
 				CDD538F21B340DF8008B436C /* RC_PopUpADView.m in Sources */,
@@ -1360,18 +1330,17 @@
 				CDD537321B340CB6008B436C /* MB_FilterCollectViewCell.m in Sources */,
 				CDD539021B340DF8008B436C /* UIButton+WebCache.m in Sources */,
 				CDD538D81B340DF8008B436C /* AFHTTPRequestOperationManager.m in Sources */,
-				CDD538F41B340DF8008B436C /* AFHttpTool.m in Sources */,
 				CDD538DF1B340DF8008B436C /* AFURLSessionManager.m in Sources */,
 				CDD538E21B340DF8008B436C /* UIAlertView+AFNetworking.m in Sources */,
 				CDD538FC1B340DF8008B436C /* SDWebImageCompat.m in Sources */,
 				CDD5375E1B340CB6008B436C /* MB_WriteInfoViewController.m in Sources */,
 				CDD537651B340CB6008B436C /* MB_SelectTemplateViewController.m in Sources */,
+				CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */,
 				6F55A4AD1B1D7567006DA537 /* AppDelegate.m in Sources */,
 				CDD537411B340CB6008B436C /* MB_SettingViewController.m in Sources */,
 				CDD537601B340CB6008B436C /* MB_CareerCollectViewCell.m in Sources */,
 				CDD539031B340DF8008B436C /* UIImage+GIF.m in Sources */,
 				CDD537341B340CB6008B436C /* MB_InviteView.m in Sources */,
-				CDD538F51B340DF8008B436C /* CMethods.m in Sources */,
 				CDD537371B340CB6008B436C /* MB_UserTableViewCell.m in Sources */,
 				CDD539091B340DF8008B436C /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				CDD537391B340CB6008B436C /* MB_AddTextViewController.m in Sources */,
@@ -1392,7 +1361,6 @@
 				CDD537471B340CB6008B436C /* MB_SignalImageTableViewCell.m in Sources */,
 				CDD5372F1B340CB6008B436C /* MB_FilterViewController.m in Sources */,
 				CDD538F91B340DF8008B436C /* MKAnnotationView+WebCache.m in Sources */,
-				CDE285521B268313007FA77D /* AFHttpTool.m in Sources */,
 				CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */,
 				CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */,
 				CDD538E41B340DF8008B436C /* UIImageView+AFNetworking.m in Sources */,
@@ -1405,7 +1373,6 @@
 				CD7964531B340EC400977A7F /* UIImage+Rotate.m in Sources */,
 				CDD5373C1B340CB6008B436C /* MB_BaseNavigationViewController.m in Sources */,
 				CDD538E81B340DF8008B436C /* UITableView+FDTemplateLayoutCell.m in Sources */,
-				CDD538F61B340DF8008B436C /* MB_Utils.m in Sources */,
 				CDD537631B340CB6008B436C /* MB_LikersViewController.m in Sources */,
 				CDD537351B340CB6008B436C /* MB_UserCollectViewCell.m in Sources */,
 				CDD538EC1B340DF8008B436C /* RC_AppInfo.m in Sources */,
@@ -1418,12 +1385,11 @@
 				CDD537621B340CB6008B436C /* MB_CommentsViewController.m in Sources */,
 				CDD537311B340CB6008B436C /* MB_SearchViewController.m in Sources */,
 				CDD538DD1B340DF8008B436C /* AFURLRequestSerialization.m in Sources */,
+				CD7965F31B34154100977A7F /* CMethods.m in Sources */,
 				CD7964521B340EC400977A7F /* UIImage+ColorAtPixel.m in Sources */,
-				CDE285541B268313007FA77D /* MB_Utils.m in Sources */,
 				CDD537401B340CB6008B436C /* MB_MainViewController.m in Sources */,
 				CDD5373F1B340CB6008B436C /* MB_LoginViewController.m in Sources */,
 				CDD5373B1B340CB6008B436C /* MB_SelectPhotosViewController.m in Sources */,
-				CDD538F71B340DF8008B436C /* UIImageEffects.m in Sources */,
 				CDD537301B340CB6008B436C /* MB_FindViewController.m in Sources */,
 				CDD5374A1B340CB6008B436C /* MB_LikesViewController.m in Sources */,
 				CDD538FA1B340DF8008B436C /* NSData+ImageContentType.m in Sources */,
@@ -1437,7 +1403,6 @@
 				CDD538E71B340DF8008B436C /* UIWebView+AFNetworking.m in Sources */,
 				CDD5375C1B340CB6008B436C /* MB_SelectRoleViewController.m in Sources */,
 				CD7964511B340EC400977A7F /* UIDevice+DeviceInfo.m in Sources */,
-				CDE285571B268326007FA77D /* UIImageEffects.m in Sources */,
 				CDD5373E1B340CB6008B436C /* MB_InviteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
