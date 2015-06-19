@@ -13,9 +13,10 @@
 
 @interface MB_SelectPhotosViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) UIButton *menuButton;
+@property (nonatomic, strong) UIButton         *menuButton;
 @property (nonatomic, strong) UICollectionView *collectView;
-@property (nonatomic, strong) ALAssetsLibrary *assertLibrary;
+@property (nonatomic, strong) NSMutableArray   *selectArray;
+@property (nonatomic, strong) ALAssetsLibrary  *assertLibrary;
 
 @end
 
@@ -29,6 +30,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     [self.view addSubview:self.collectView];
+    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     [self getALlPhotosFromAlbum];
 }
 
@@ -58,10 +60,15 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.selectArray addObject:self.dataArray[indexPath.row]];
+    NSLog(@"%@",self.selectArray);
+}
 
 #pragma mark - private methods
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
+    addTextVC.urlArray = self.selectArray;
     [self.navigationController pushViewController:addTextVC animated:YES];
 }
 
@@ -115,16 +122,22 @@
 
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
-        NSLog(@"-----%f",self.view.frame.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.alwaysBounceVertical = YES;
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
+        _collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_collectView registerNib:[UINib nibWithNibName:@"MB_CareerCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
 }
 
+- (NSMutableArray *)selectArray {
+    if (_selectArray == nil) {
+        _selectArray = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _selectArray;
+}
 @end

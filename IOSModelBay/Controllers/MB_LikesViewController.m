@@ -78,13 +78,17 @@ static CGFloat startY = 0;
     __weak MB_LikesViewController *weakSelf = self;
     
     [self addHeaderRefreshForView:self.collectView WithActionHandler:^{
+        [weakSelf requestLikesList];
     }];
     
     [self addFooterRefreshForView:self.collectView WithActionHandler:^{
-        
+        [weakSelf requestLikesList];
     }];
 }
 
+- (void)requestLikesList {
+    
+}
 
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {

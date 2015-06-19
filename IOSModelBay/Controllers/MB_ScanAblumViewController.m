@@ -7,6 +7,8 @@
 //
 
 #import "MB_ScanAblumViewController.h"
+#import "MB_LikersViewController.h"
+#import "MB_CommentsViewController.h"
 
 @interface MB_ScanAblumViewController ()
 
@@ -42,11 +44,13 @@
 }
 
 - (void)likesButtonOnCliclk:(UIButton *)button {
-    
+    MB_LikersViewController *likersVC = [[MB_LikersViewController alloc] init];
+    [self.navigationController pushViewController:likersVC animated:YES];
 }
 
 - (void)commentsButtonOnCliclk:(UIButton *)button {
-    
+    MB_CommentsViewController *commentsVC = [[MB_CommentsViewController alloc] init];
+    [self.navigationController pushViewController:commentsVC animated:YES];
 }
 
 - (void)shareButtonOnCliclk:(UIButton *)button {

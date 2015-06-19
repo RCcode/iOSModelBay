@@ -131,7 +131,8 @@ static CGFloat startY = -64;
 //    [self.navigationController pushViewController:inviteVC animated:YES];
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }

@@ -10,4 +10,6 @@
 
 @interface MB_AddTextViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray * urlArray;
+
 @end
