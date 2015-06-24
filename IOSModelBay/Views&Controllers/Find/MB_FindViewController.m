@@ -79,6 +79,7 @@
 - (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
+    filterVC.type = FilterTypeFind;
     filterVC.CompleteHandler = ^(){
         [self findUserListWithMinId:0];
     };
@@ -103,8 +104,8 @@
 
 //获取发现用户列表
 - (void)findUserListWithMinId:(NSInteger)minId {
-    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].gender),
-                                     @"fcareerId":[MB_Utils shareUtil].careerId?:@"",
+    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].fGender),
+                                     @"fcareerId":[MB_Utils shareUtil].fCareerId,
                                      @"minId":@(minId),
                                      @"count":@(10)} mutableCopy];
 //    if ([userDefaults boolForKey:kIsLogin]) {

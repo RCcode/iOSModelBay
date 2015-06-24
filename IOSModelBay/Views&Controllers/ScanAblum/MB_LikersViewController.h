@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_LikersViewController : UIViewController
+@interface MB_LikersViewController : MB_BaseViewController
 
 @end

@@ -16,9 +16,14 @@ static MB_Utils *util = nil;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             util = [[MB_Utils alloc] init];
-            util.name = @"";
-            util.gender = -1;
-            util.careerId = @"";
+            
+            util.fName = @"";
+            util.fGender = -1;
+            util.fCareerId = @"";
+            
+            util.rGender = -1;
+            util.rCareerId = @"";
+    
             util.careerDic = @{@"0":@"aaa",
                                @"1":@"bbb",
                                @"2":@"ccc",

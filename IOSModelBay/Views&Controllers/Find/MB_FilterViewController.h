@@ -10,8 +10,14 @@
 
 typedef void(^CompleteHandler)(void);
 
+typedef NS_ENUM(NSInteger, FilterType) {
+    FilterTypeFind,
+    FilterTypeRanking
+};
+
 @interface MB_FilterViewController : MB_BaseViewController
 
 @property (nonatomic, copy) CompleteHandler CompleteHandler;
+@property (nonatomic, assign) FilterType type;
 
 @end

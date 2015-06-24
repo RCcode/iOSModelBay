@@ -77,6 +77,15 @@
 		CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD390F741B34216700254740 /* MB_LikersTableViewCell.xib */; };
 		CD390F7A1B34218E00254740 /* MB_CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */; };
 		CD390F7B1B34218E00254740 /* MB_CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */; };
+		CD46C11E1B3A5AAD000E2F0C /* MB_UserDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C11D1B3A5AAD000E2F0C /* MB_UserDetail.m */; };
+		CD46C1211B3A6650000E2F0C /* MB_Liker.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1201B3A6650000E2F0C /* MB_Liker.m */; };
+		CD46C1241B3A665E000E2F0C /* MB_Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1231B3A665E000E2F0C /* MB_Comment.m */; };
+		CD46C1271B3A6A59000E2F0C /* MB_Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1261B3A6A59000E2F0C /* MB_Message.m */; };
+		CD46C12A1B3A7719000E2F0C /* MB_Collect.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1291B3A7719000E2F0C /* MB_Collect.m */; };
+		CD46C12D1B3A86D7000E2F0C /* MB_AddAblumMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C12C1B3A86D7000E2F0C /* MB_AddAblumMenuView.m */; };
+		CD46C12F1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C12E1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib */; };
+		CD46C1331B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1311B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m */; };
+		CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */; };
 		CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
@@ -95,6 +104,10 @@
 		CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */; };
 		CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB971B21B3E300119C18 /* MB_Notice.m */; };
 		CDC9AB9D1B21B3E300119C18 /* MB_User.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB991B21B3E300119C18 /* MB_User.m */; };
+		CDD1174A1B3A4D44002BD897 /* MB_NoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD117481B3A4D44002BD897 /* MB_NoticeTableViewCell.m */; };
+		CDD1174B1B3A4D44002BD897 /* MB_NoticeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD117491B3A4D44002BD897 /* MB_NoticeTableViewCell.xib */; };
+		CDD1174F1B3A5036002BD897 /* MB_MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD1174D1B3A5036002BD897 /* MB_MessageTableViewCell.m */; };
+		CDD117501B3A5036002BD897 /* MB_MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD1174E1B3A5036002BD897 /* MB_MessageTableViewCell.xib */; };
 		CDD5372F1B340CB6008B436C /* MB_FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536B91B340CB6008B436C /* MB_FilterViewController.m */; };
 		CDD537301B340CB6008B436C /* MB_FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536BB1B340CB6008B436C /* MB_FindViewController.m */; };
 		CDD537311B340CB6008B436C /* MB_SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536BD1B340CB6008B436C /* MB_SearchViewController.m */; };
@@ -122,7 +135,7 @@
 		CDD537471B340CB6008B436C /* MB_SignalImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536EC1B340CB6008B436C /* MB_SignalImageTableViewCell.m */; };
 		CDD537481B340CB6008B436C /* MB_SignalImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD536ED1B340CB6008B436C /* MB_SignalImageTableViewCell.xib */; };
 		CDD537491B340CB6008B436C /* MB_InstragramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536F01B340CB6008B436C /* MB_InstragramViewController.m */; };
-		CDD5374A1B340CB6008B436C /* MB_LikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536F41B340CB6008B436C /* MB_LikesViewController.m */; };
+		CDD5374A1B340CB6008B436C /* MB_CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536F41B340CB6008B436C /* MB_CollectViewController.m */; };
 		CDD5374B1B340CB6008B436C /* MB_LikeCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536F71B340CB6008B436C /* MB_LikeCollectViewCell.m */; };
 		CDD5374C1B340CB6008B436C /* MB_LikeCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD536F81B340CB6008B436C /* MB_LikeCollectViewCell.xib */; };
 		CDD5374D1B340CB6008B436C /* MB_UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD536FA1B340CB6008B436C /* MB_UserInfoView.m */; };
@@ -321,6 +334,22 @@
 		CD390F771B34218E00254740 /* MB_CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CommentTableViewCell.h; sourceTree = "<group>"; };
 		CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CommentTableViewCell.m; sourceTree = "<group>"; };
 		CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_CommentTableViewCell.xib; sourceTree = "<group>"; };
+		CD46C11C1B3A5AAD000E2F0C /* MB_UserDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UserDetail.h; sourceTree = "<group>"; };
+		CD46C11D1B3A5AAD000E2F0C /* MB_UserDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UserDetail.m; sourceTree = "<group>"; };
+		CD46C11F1B3A6650000E2F0C /* MB_Liker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Liker.h; sourceTree = "<group>"; };
+		CD46C1201B3A6650000E2F0C /* MB_Liker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Liker.m; sourceTree = "<group>"; };
+		CD46C1221B3A665E000E2F0C /* MB_Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Comment.h; sourceTree = "<group>"; };
+		CD46C1231B3A665E000E2F0C /* MB_Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Comment.m; sourceTree = "<group>"; };
+		CD46C1251B3A6A59000E2F0C /* MB_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Message.h; sourceTree = "<group>"; };
+		CD46C1261B3A6A59000E2F0C /* MB_Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Message.m; sourceTree = "<group>"; };
+		CD46C1281B3A7719000E2F0C /* MB_Collect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_Collect.h; sourceTree = "<group>"; };
+		CD46C1291B3A7719000E2F0C /* MB_Collect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Collect.m; sourceTree = "<group>"; };
+		CD46C12B1B3A86D7000E2F0C /* MB_AddAblumMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddAblumMenuView.h; sourceTree = "<group>"; };
+		CD46C12C1B3A86D7000E2F0C /* MB_AddAblumMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AddAblumMenuView.m; sourceTree = "<group>"; };
+		CD46C12E1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_AddAblumMenuView.xib; sourceTree = "<group>"; };
+		CD46C1301B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_selectPhotosCollectViewCell.h; sourceTree = "<group>"; };
+		CD46C1311B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_selectPhotosCollectViewCell.m; sourceTree = "<group>"; };
+		CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_selectPhotosCollectViewCell.xib; sourceTree = "<group>"; };
 		CD79643E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -357,6 +386,12 @@
 		CDC9AB971B21B3E300119C18 /* MB_Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Notice.m; sourceTree = "<group>"; };
 		CDC9AB981B21B3E300119C18 /* MB_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_User.h; sourceTree = "<group>"; };
 		CDC9AB991B21B3E300119C18 /* MB_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_User.m; sourceTree = "<group>"; };
+		CDD117471B3A4D44002BD897 /* MB_NoticeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_NoticeTableViewCell.h; sourceTree = "<group>"; };
+		CDD117481B3A4D44002BD897 /* MB_NoticeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_NoticeTableViewCell.m; sourceTree = "<group>"; };
+		CDD117491B3A4D44002BD897 /* MB_NoticeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_NoticeTableViewCell.xib; sourceTree = "<group>"; };
+		CDD1174C1B3A5036002BD897 /* MB_MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageTableViewCell.h; sourceTree = "<group>"; };
+		CDD1174D1B3A5036002BD897 /* MB_MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageTableViewCell.m; sourceTree = "<group>"; };
+		CDD1174E1B3A5036002BD897 /* MB_MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MessageTableViewCell.xib; sourceTree = "<group>"; };
 		CDD536B81B340CB6008B436C /* MB_FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_FilterViewController.h; sourceTree = "<group>"; };
 		CDD536B91B340CB6008B436C /* MB_FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_FilterViewController.m; sourceTree = "<group>"; };
 		CDD536BA1B340CB6008B436C /* MB_FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_FindViewController.h; sourceTree = "<group>"; };
@@ -405,8 +440,8 @@
 		CDD536ED1B340CB6008B436C /* MB_SignalImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_SignalImageTableViewCell.xib; sourceTree = "<group>"; };
 		CDD536EF1B340CB6008B436C /* MB_InstragramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramViewController.h; sourceTree = "<group>"; };
 		CDD536F01B340CB6008B436C /* MB_InstragramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramViewController.m; sourceTree = "<group>"; };
-		CDD536F31B340CB6008B436C /* MB_LikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikesViewController.h; sourceTree = "<group>"; };
-		CDD536F41B340CB6008B436C /* MB_LikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikesViewController.m; sourceTree = "<group>"; };
+		CDD536F31B340CB6008B436C /* MB_CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CollectViewController.h; sourceTree = "<group>"; };
+		CDD536F41B340CB6008B436C /* MB_CollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CollectViewController.m; sourceTree = "<group>"; };
 		CDD536F61B340CB6008B436C /* MB_LikeCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikeCollectViewCell.h; sourceTree = "<group>"; };
 		CDD536F71B340CB6008B436C /* MB_LikeCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LikeCollectViewCell.m; sourceTree = "<group>"; };
 		CDD536F81B340CB6008B436C /* MB_LikeCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_LikeCollectViewCell.xib; sourceTree = "<group>"; };
@@ -875,16 +910,26 @@
 		CDC9AB461B216BE200119C18 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CDC9AB921B21B3E300119C18 /* MB_Ablum.h */,
-				CDC9AB931B21B3E300119C18 /* MB_Ablum.m */,
 				CDC9AB941B21B3E300119C18 /* MB_AddressBookPeople.h */,
 				CDC9AB951B21B3E300119C18 /* MB_AddressBookPeople.m */,
-				CDC9AB961B21B3E300119C18 /* MB_Notice.h */,
-				CDC9AB971B21B3E300119C18 /* MB_Notice.m */,
 				CDC9AB981B21B3E300119C18 /* MB_User.h */,
 				CDC9AB991B21B3E300119C18 /* MB_User.m */,
+				CD46C11C1B3A5AAD000E2F0C /* MB_UserDetail.h */,
+				CD46C11D1B3A5AAD000E2F0C /* MB_UserDetail.m */,
+				CDC9AB921B21B3E300119C18 /* MB_Ablum.h */,
+				CDC9AB931B21B3E300119C18 /* MB_Ablum.m */,
+				CD46C11F1B3A6650000E2F0C /* MB_Liker.h */,
+				CD46C1201B3A6650000E2F0C /* MB_Liker.m */,
+				CD46C1221B3A665E000E2F0C /* MB_Comment.h */,
+				CD46C1231B3A665E000E2F0C /* MB_Comment.m */,
+				CDC9AB961B21B3E300119C18 /* MB_Notice.h */,
+				CDC9AB971B21B3E300119C18 /* MB_Notice.m */,
 				CDC76B771B32662200C391E5 /* MB_InstragramModel.h */,
 				CDC76B781B32662200C391E5 /* MB_InstragramModel.m */,
+				CD46C1251B3A6A59000E2F0C /* MB_Message.h */,
+				CD46C1261B3A6A59000E2F0C /* MB_Message.m */,
+				CD46C1281B3A7719000E2F0C /* MB_Collect.h */,
+				CD46C1291B3A7719000E2F0C /* MB_Collect.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -966,6 +1011,9 @@
 		CDD536D01B340CB6008B436C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD46C1301B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.h */,
+				CD46C1311B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m */,
+				CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -983,6 +1031,12 @@
 		CDD536E21B340CB6008B436C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CDD117471B3A4D44002BD897 /* MB_NoticeTableViewCell.h */,
+				CDD117481B3A4D44002BD897 /* MB_NoticeTableViewCell.m */,
+				CDD117491B3A4D44002BD897 /* MB_NoticeTableViewCell.xib */,
+				CDD1174C1B3A5036002BD897 /* MB_MessageTableViewCell.h */,
+				CDD1174D1B3A5036002BD897 /* MB_MessageTableViewCell.m */,
+				CDD1174E1B3A5036002BD897 /* MB_MessageTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1047,8 +1101,8 @@
 		CDD536F21B340CB6008B436C /* Likes */ = {
 			isa = PBXGroup;
 			children = (
-				CDD536F31B340CB6008B436C /* MB_LikesViewController.h */,
-				CDD536F41B340CB6008B436C /* MB_LikesViewController.m */,
+				CDD536F31B340CB6008B436C /* MB_CollectViewController.h */,
+				CDD536F41B340CB6008B436C /* MB_CollectViewController.m */,
 				CDD536F51B340CB6008B436C /* Views */,
 			);
 			path = Likes;
@@ -1060,6 +1114,9 @@
 				CDD536F61B340CB6008B436C /* MB_LikeCollectViewCell.h */,
 				CDD536F71B340CB6008B436C /* MB_LikeCollectViewCell.m */,
 				CDD536F81B340CB6008B436C /* MB_LikeCollectViewCell.xib */,
+				CD46C12B1B3A86D7000E2F0C /* MB_AddAblumMenuView.h */,
+				CD46C12C1B3A86D7000E2F0C /* MB_AddAblumMenuView.m */,
+				CD46C12E1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1277,6 +1334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD46C12F1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib in Resources */,
 				CDD5373A1B340CB6008B436C /* MB_AddTextViewController.xib in Resources */,
 				CDD537331B340CB6008B436C /* MB_FilterCollectViewCell.xib in Resources */,
 				6F55A4B31B1D7567006DA537 /* Main.storyboard in Resources */,
@@ -1289,6 +1347,7 @@
 				CDD537571B340CB6008B436C /* MB_SummaryTableViewCell.xib in Resources */,
 				CDD537541B340CB6008B436C /* MB_ReplyTableViewCell.xib in Resources */,
 				CD0575791B3416180015BBDA /* RC_MoreTableViewCell.xib in Resources */,
+				CDD1174B1B3A4D44002BD897 /* MB_NoticeTableViewCell.xib in Resources */,
 				CDD5375A1B340CB6008B436C /* MB_RankingTableViewCell.xib in Resources */,
 				CDD5374C1B340CB6008B436C /* MB_LikeCollectViewCell.xib in Resources */,
 				CDD5375F1B340CB6008B436C /* MB_WriteInfoViewController.xib in Resources */,
@@ -1299,9 +1358,11 @@
 				CDD537521B340CB6008B436C /* MB_MsgTableViewCell.xib in Resources */,
 				6F83880C1B1D9D6C002D2ED3 /* a@2x.png in Resources */,
 				CD0575771B3416180015BBDA /* RC_moreAPPsLibBundle.bundle in Resources */,
+				CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */,
 				CDD5375D1B340CB6008B436C /* MB_SelectRoleViewController.xib in Resources */,
 				CDD537461B340CB6008B436C /* MB_AlbumTableViewCell.xib in Resources */,
 				CDD537361B340CB6008B436C /* MB_UserCollectViewCell.xib in Resources */,
+				CDD117501B3A5036002BD897 /* MB_MessageTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1320,6 +1381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */,
+				CD46C1271B3A6A59000E2F0C /* MB_Message.m in Sources */,
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
 				CDD537421B340CB6008B436C /* MB_TabBarViewController.m in Sources */,
 				CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */,
@@ -1330,6 +1392,7 @@
 				CD0575691B3416180015BBDA /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				CD7965F21B34154100977A7F /* AFHttpTool.m in Sources */,
 				CD0575731B3416180015BBDA /* MBProgressHUD.m in Sources */,
+				CD46C12D1B3A86D7000E2F0C /* MB_AddAblumMenuView.m in Sources */,
 				CD0575891B3416180015BBDA /* UIImage+WebP.m in Sources */,
 				CD0575751B3416180015BBDA /* RC_GetPath.m in Sources */,
 				CD0575861B3416180015BBDA /* UIButton+WebCache.m in Sources */,
@@ -1351,7 +1414,9 @@
 				CD390F751B34216700254740 /* MB_LikersTableViewCell.m in Sources */,
 				CDD537651B340CB6008B436C /* MB_SelectTemplateViewController.m in Sources */,
 				CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */,
+				CD46C1331B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m in Sources */,
 				6F55A4AD1B1D7567006DA537 /* AppDelegate.m in Sources */,
+				CD46C1211B3A6650000E2F0C /* MB_Liker.m in Sources */,
 				CDD537411B340CB6008B436C /* MB_SettingViewController.m in Sources */,
 				CDD537601B340CB6008B436C /* MB_CareerCollectViewCell.m in Sources */,
 				CDD537341B340CB6008B436C /* MB_InviteView.m in Sources */,
@@ -1360,7 +1425,9 @@
 				CD05758E1B3416180015BBDA /* UIScrollView+SVPullToRefresh.m in Sources */,
 				CDD537371B340CB6008B436C /* MB_UserTableViewCell.m in Sources */,
 				CDD537391B340CB6008B436C /* MB_AddTextViewController.m in Sources */,
+				CD46C1241B3A665E000E2F0C /* MB_Comment.m in Sources */,
 				CDD5374B1B340CB6008B436C /* MB_LikeCollectViewCell.m in Sources */,
+				CD46C11E1B3A5AAD000E2F0C /* MB_UserDetail.m in Sources */,
 				CD05756D1B3416180015BBDA /* UIProgressView+AFNetworking.m in Sources */,
 				CD0575661B3416180015BBDA /* AFURLResponseSerialization.m in Sources */,
 				6F55A4AA1B1D7567006DA537 /* main.m in Sources */,
@@ -1375,10 +1442,12 @@
 				CD0575681B3416180015BBDA /* AFNetworkActivityIndicatorManager.m in Sources */,
 				CD05756B1B3416180015BBDA /* UIButton+AFNetworking.m in Sources */,
 				CD0575761B3416180015BBDA /* RC_moreAPPsLib.m in Sources */,
+				CDD1174F1B3A5036002BD897 /* MB_MessageTableViewCell.m in Sources */,
 				CDD537471B340CB6008B436C /* MB_SignalImageTableViewCell.m in Sources */,
 				CDD5372F1B340CB6008B436C /* MB_FilterViewController.m in Sources */,
 				CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */,
 				CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */,
+				CDD1174A1B3A4D44002BD897 /* MB_NoticeTableViewCell.m in Sources */,
 				CD0575811B3416180015BBDA /* SDWebImageDecoder.m in Sources */,
 				CD7964551B340EC400977A7F /* UIImage+Utility.m in Sources */,
 				CD7964531B340EC400977A7F /* UIImage+Rotate.m in Sources */,
@@ -1388,6 +1457,7 @@
 				CDD5373C1B340CB6008B436C /* MB_BaseNavigationViewController.m in Sources */,
 				CD0575701B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				CDD537631B340CB6008B436C /* MB_LikersViewController.m in Sources */,
+				CD46C12A1B3A7719000E2F0C /* MB_Collect.m in Sources */,
 				CDD537351B340CB6008B436C /* MB_UserCollectViewCell.m in Sources */,
 				CD05757D1B3416180015BBDA /* MKAnnotationView+WebCache.m in Sources */,
 				CDD537491B340CB6008B436C /* MB_InstragramViewController.m in Sources */,
@@ -1411,7 +1481,7 @@
 				CDD5373F1B340CB6008B436C /* MB_LoginViewController.m in Sources */,
 				CDD5373B1B340CB6008B436C /* MB_SelectPhotosViewController.m in Sources */,
 				CDD537301B340CB6008B436C /* MB_FindViewController.m in Sources */,
-				CDD5374A1B340CB6008B436C /* MB_LikesViewController.m in Sources */,
+				CDD5374A1B340CB6008B436C /* MB_CollectViewController.m in Sources */,
 				CDD5373D1B340CB6008B436C /* MB_BaseViewController.m in Sources */,
 				CDD537501B340CB6008B436C /* MB_MessageViewController.m in Sources */,
 				CDD5375B1B340CB6008B436C /* MB_SelectCareerViewController.m in Sources */,

@@ -18,7 +18,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 @interface MB_AblumViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) NSInteger minId;
 
 @end
 
@@ -30,7 +31,7 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     
     [self.view addSubview:self.tableView];
     [self addPullRefresh];
-    [self requestAblumList];
+    [self requestAblumListWithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +41,7 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return self.dataArray.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -50,9 +51,11 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row % 2 == 0) {
         MB_AlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierAblum forIndexPath:indexPath];
+        cell.ablum = self.dataArray[indexPath.row];
         return cell;
     }else {
         MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
+        cell.ablum = self.dataArray[indexPath.row];
         return cell;
     }
 }
@@ -63,6 +66,7 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //    scanVC.ablum = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:scanVC animated:YES];
 }
+
 
 #pragma mark - UIScrollViewDelegate
 static CGFloat startY = 0;
@@ -97,24 +101,35 @@ static CGFloat startY = 0;
     
     [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"header");
-        [weakSelf endFooterRefreshingForView:weakSelf.tableView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-        });
+        [weakSelf requestAblumListWithMinId:0];
     }];
     
     [self addFooterRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"footer");
-        [weakSelf endHeaderRefreshingForView:weakSelf.tableView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-            [weakSelf showNoMoreMessageForview:weakSelf.tableView];
-        });
+        [weakSelf requestAblumListWithMinId:weakSelf.minId];
     }];
 }
 
-- (void)requestAblumList {
-    
+- (void)requestAblumListWithMinId:(NSInteger)minId {
+    NSDictionary *params = @{@"id":@"",
+                             @"token":@"",
+                             @"fid":@(6),
+                             @"minId":@(minId),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] getAblumWithParameters:params success:^(id response) {
+        if ([self statFromResponse:response] == 10000) {
+            self.minId = [response[@"minId"] integerValue];
+            NSArray *array = response[@"list"];
+            for (NSDictionary *dic in array) {
+                MB_Ablum *ablum = [[MB_Ablum alloc] init];
+                [ablum setValuesForKeysWithDictionary:dic];
+                [self.dataArray addObject:ablum];
+            }
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *err) {
+        
+    }];
 }
 
 #pragma mark - getters & setters

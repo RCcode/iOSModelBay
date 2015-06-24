@@ -10,4 +10,9 @@
 
 @interface MB_LikersTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *collectButton;
+
 @end

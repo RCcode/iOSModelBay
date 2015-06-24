@@ -8,6 +8,7 @@
 
 #import "MB_AddTextViewController.h"
 #import "UIImage+Utility.h"
+#import "MB_LikersViewController.h"
 @import AssetsLibrary;
 
 @interface MB_AddTextViewController ()<UITextFieldDelegate>
@@ -61,6 +62,7 @@
     [super didReceiveMemoryWarning];
 }
 
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -69,6 +71,23 @@
 
 
 #pragma mark - private methods
+- (IBAction)modelButtonOnClick:(UIButton *)sender {
+    MB_LikersViewController *likers = [[MB_LikersViewController alloc] init];
+    [self.navigationController pushViewController:likers animated:YES];
+}
+
+- (IBAction)photographerButtonOnClick:(UIButton *)sender {
+    
+}
+
+- (IBAction)hairstylistButtonOnClick:(UIButton *)sender {
+    
+}
+
+- (IBAction)dresserButtonOnClick:(UIButton *)sender {
+    
+}
+
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     NSDictionary *params = @{@"id":@(6),//用户id
                              @"token":@"abcde",//token
@@ -93,7 +112,12 @@
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
-    NSLog(@"%ld",(long)tap.view.tag);
+    if (tap.view.tag == self.urlArray.count) {
+        //添加图片
+        
+    }else{
+        
+    }
 }
 
 #pragma mark - getters & setters

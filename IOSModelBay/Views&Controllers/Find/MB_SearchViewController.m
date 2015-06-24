@@ -74,8 +74,8 @@
     self.inviteLabel.text = [NSString stringWithFormat:@"invite %@",searchBar.text];
     
     //搜索用户
-    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].gender),
-                                     @"fcareerId":[MB_Utils shareUtil].careerId?:@"",
+    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].fGender),
+                                     @"fcareerId":[MB_Utils shareUtil].fCareerId,
                                      @"minId":@(0),
                                      @"count":@(10)} mutableCopy];
     //    if ([userDefaults boolForKey:kIsLogin]) {
@@ -123,8 +123,8 @@
         
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, 50)];
         searchBar.placeholder = @"sas";
-        if (![[MB_Utils shareUtil].name isEqualToString:@""]) {
-            searchBar.text = [MB_Utils shareUtil].name;
+        if (![[MB_Utils shareUtil].fName isEqualToString:@""]) {
+            searchBar.text = [MB_Utils shareUtil].fName;
         }
         searchBar.delegate = self;
         [searchBar becomeFirstResponder];

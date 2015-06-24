@@ -16,6 +16,7 @@
 #define kRegistUrl           @"user/register.do"
 #define kGetNoticeUrl        @"user/getUserMessage.do"
 #define kFindUserUrl         @"user/findUser.do"
+#define kGetRankUrl          @"user/getRankList.do"
 #define kGetUserDetailUrl    @"user/getUserDetail.do"
 #define kUpdateUserDetailUrl @"user/updateUserDetail.do"
 #define kUpdateUserPicUrl    @"user/updatUPic.do"
@@ -256,6 +257,18 @@ static AFHttpTool *httpTool = nil;
 {
     [self requestWihtMethod:RequestTypePost
                         url:kFindUserUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取排行榜用户
+- (void)getRankListWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kGetRankUrl
                      params:params
                     success:success
                     failure:failure];

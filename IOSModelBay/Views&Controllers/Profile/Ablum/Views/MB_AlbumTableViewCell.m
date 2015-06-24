@@ -20,4 +20,9 @@
     // Configure the view for the selected state
 }
 
+- (void)setAblum:(MB_Ablum *)ablum {
+    _ablum = ablum;
+    
+}
+
 @end

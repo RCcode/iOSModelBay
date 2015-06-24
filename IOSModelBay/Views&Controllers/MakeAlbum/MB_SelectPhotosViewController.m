@@ -7,15 +7,15 @@
 //
 
 #import "MB_SelectPhotosViewController.h"
-#import "MB_CareerCollectViewCell.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MB_AddTextViewController.h"
+#import "MB_selectPhotosCollectViewCell.h"
 
 @interface MB_SelectPhotosViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIButton         *menuButton;
 @property (nonatomic, strong) UICollectionView *collectView;
-@property (nonatomic, strong) NSMutableArray   *selectArray;
+
 @property (nonatomic, strong) ALAssetsLibrary  *assertLibrary;
 
 @end
@@ -49,26 +49,25 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    MB_selectPhotosCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     NSURL *url = self.dataArray[indexPath.row];
     [_assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
         cell.backImageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     } failureBlock:^(NSError *error) {
         
     }];
-    cell.careerLabel.hidden = YES;
+    cell.selected = [collectionView.indexPathsForSelectedItems containsObject:indexPath];
     return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.selectArray addObject:self.dataArray[indexPath.row]];
-    NSLog(@"%@",self.selectArray);
 }
 
 #pragma mark - private methods
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
-    addTextVC.urlArray = self.selectArray;
+    NSMutableArray *selectedArray = [NSMutableArray arrayWithCapacity:0];
+    for (NSIndexPath *indexPath in self.collectView.indexPathsForSelectedItems) {
+        [selectedArray addObject:self.dataArray[indexPath.row]];
+    }
+    addTextVC.urlArray = selectedArray;
     [self.navigationController pushViewController:addTextVC animated:YES];
 }
 
@@ -126,18 +125,13 @@
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.alwaysBounceVertical = YES;
+        _collectView.allowsMultipleSelection = YES;
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
         _collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        [_collectView registerNib:[UINib nibWithNibName:@"MB_CareerCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
+        [_collectView registerNib:[UINib nibWithNibName:@"MB_selectPhotosCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
 }
 
-- (NSMutableArray *)selectArray {
-    if (_selectArray == nil) {
-        _selectArray = [NSMutableArray arrayWithCapacity:0];
-    }
-    return _selectArray;
-}
 @end

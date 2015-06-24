@@ -28,53 +28,67 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
-    [self.view addSubview:self.searchView];
+    if (self.type == FilterTypeFind) {
+        [self.view addSubview:self.searchView];
+    }
+    
     [self.view addSubview:self.sexView];
     [self.view addSubview:self.collectView];
     
-//    [self sexBtnOnClick:self.sexBtnArray[0]];
-//    if ([MB_Utils shareUtil].gender == 0) {
-//        [self sexBtnOnClick:self.sexBtnArray[1]];
-//    }
-//    if ([MB_Utils shareUtil].gender == 0) {
-//        [self sexBtnOnClick:self.sexBtnArray[2]];
-//    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 40;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_FilterCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    
-    if ([[MB_Utils shareUtil].careerId isEqualToString:@""] && indexPath.row == 0) {
-        //默认选中All
-        cell.selected = YES;
-    }else if ([[MB_Utils shareUtil].careerId integerValue] == indexPath.row) {
-        //上次选中的
-        cell.selected = YES;
-    }else{
-        cell.selected = NO;
+    if (self.type == FilterTypeFind) {
+        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""] && indexPath.row == 0) {
+            //默认选中All
+            cell.selected = YES;
+        }else if ([[MB_Utils shareUtil].fCareerId integerValue] == indexPath.row) {
+            //上次选中的
+            cell.selected = YES;
+        }else{
+            cell.selected = NO;
+        }
+    }else {
+        if ([[MB_Utils shareUtil].rCareerId isEqualToString:@""] && indexPath.row == 0) {
+            //默认选中All
+            cell.selected = YES;
+        }else if ([[MB_Utils shareUtil].rCareerId integerValue] == indexPath.row) {
+            //上次选中的
+            cell.selected = YES;
+        }else{
+            cell.selected = NO;
+        }
     }
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [MB_Utils shareUtil].careerId = @"";
+    if (self.type == FilterTypeFind) {
+        if (indexPath.row == 0) {
+            [MB_Utils shareUtil].fCareerId = @"";
+        }else {
+            [MB_Utils shareUtil].fCareerId = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        }
     }else {
-        [MB_Utils shareUtil].careerId = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        if (indexPath.row == 0) {
+            [MB_Utils shareUtil].rCareerId = @"";
+        }else {
+            [MB_Utils shareUtil].rCareerId = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        }
     }
+    
     [collectionView reloadData];
 }
 
@@ -92,7 +106,11 @@
     }
     
     btn.selected = YES;
-    [MB_Utils shareUtil].gender = btn.tag - 1;
+    if (self.type == FilterTypeFind) {
+        [MB_Utils shareUtil].fGender = btn.tag - 1;
+    }else {
+        [MB_Utils shareUtil].rGender = btn.tag - 1;
+    }
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
@@ -122,7 +140,11 @@
 
 - (UIView *)sexView {
     if (_sexView == nil) {
-        _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, 50)];
+        if (self.type == FilterTypeFind) {
+            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, 50)];
+        }else {
+            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 50)];
+        }
         _sexView.backgroundColor = [UIColor yellowColor];
         
         UIImage *image = [UIImage imageNamed:@"b"];
@@ -141,9 +163,14 @@
             [button addTarget:self action:@selector(sexBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
             [_sexView addSubview:button];
             
-            //默认选中第一个
-            if ([MB_Utils shareUtil].gender == (i - 1)) {
-                button.selected = YES;
+            if (self.type == FilterTypeFind) {
+                if ([MB_Utils shareUtil].fGender == (i - 1)) {
+                    button.selected = YES;
+                }
+            }else {
+                if ([MB_Utils shareUtil].rGender == (i - 1)) {
+                    button.selected = YES;
+                }
             }
         }
     }

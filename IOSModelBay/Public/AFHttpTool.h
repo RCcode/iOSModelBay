@@ -56,6 +56,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                        success:(void (^)(id response))success
                        failure:(void (^)(NSError* err))failure;
 
+//获取排行榜用户
+- (void)getRankListWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure;
+
 //获取用户详细信息
 - (void)getUerDetailWithParameters:params
                            success:(void (^)(id response))success

@@ -11,7 +11,7 @@
 #import "MB_AblumViewController.h"
 #import "MB_InstragramViewController.h"
 #import "MB_MessageViewController.h"
-#import "MB_LikesViewController.h"
+#import "MB_CollectViewController.h"
 #import "MB_UserInfoView.h"
 
 //#import "MB_SettingViewController.h"
@@ -142,20 +142,20 @@ static CGFloat startY = -64;
     MB_AblumViewController *ablumVC           = [[MB_AblumViewController alloc] init];
     MB_InstragramViewController *instragramVC = [[MB_InstragramViewController alloc] init];
     MB_MessageViewController *messageVC       = [[MB_MessageViewController alloc] init];
-    MB_LikesViewController *likesVC           = [[MB_LikesViewController alloc] init];
+    MB_CollectViewController *collectVC           = [[MB_CollectViewController alloc] init];
     
     summaryVC.containerViewRect    = self.containerView.frame;
     ablumVC.containerViewRect      = self.containerView.frame;
     instragramVC.containerViewRect = self.containerView.frame;
     instragramVC.uid = [userDefaults objectForKey:kUid];
     messageVC.containerViewRect    = self.containerView.frame;
-    likesVC.containerViewRect      = self.containerView.frame;
+    collectVC.containerViewRect      = self.containerView.frame;
     
     [self addChildViewController:summaryVC];
     [self addChildViewController:ablumVC];
     [self addChildViewController:instragramVC];
     [self addChildViewController:messageVC];
-    [self addChildViewController:likesVC];
+    [self addChildViewController:collectVC];
     
     for (int i = 0; i < 5; i++) {
         UIViewController *vc = self.childViewControllers[i];

@@ -59,6 +59,12 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="collectButton" destination="70E-94-dX3" id="gfS-b6-hQg"/>
+                <outlet property="fullNameLabel" destination="fSL-xJ-cuR" id="Xz4-h1-y5P"/>
+                <outlet property="userImageView" destination="9Wj-AF-Cpy" id="kei-IN-LtF"/>
+                <outlet property="usernameLabel" destination="eci-E3-BFf" id="ap1-Uk-hWA"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

@@ -37,6 +37,12 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="commentLabel" destination="1qn-Kn-aZr" id="yHb-MG-V16"/>
+                <outlet property="timeLabel" destination="91o-Hp-SF3" id="t6I-un-rbl"/>
+                <outlet property="userImageView" destination="Uaw-32-RXz" id="W7r-xK-4za"/>
+                <outlet property="usernameLabel" destination="Sb1-Xt-pUK" id="8mk-WB-DOj"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_LikesViewController : MB_BaseViewController
+@interface MB_CollectViewController : MB_BaseViewController
 
 @property (nonatomic, assign) CGRect containerViewRect;
 

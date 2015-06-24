@@ -8,6 +8,7 @@
 
 #import "MB_CommentsViewController.h"
 #import "MB_CommentTableViewCell.h"
+#import "MB_Comment.h"
 
 static CGFloat const commentViewHeight = 50;
 
@@ -18,6 +19,8 @@ static CGFloat const commentViewHeight = 50;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIButton *sendButton;
 
+@property (nonatomic, assign) NSInteger minId;
+
 @end
 
 @implementation MB_CommentsViewController
@@ -27,6 +30,7 @@ static CGFloat const commentViewHeight = 50;
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
+    [self requestCommentsListWithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,11 +74,54 @@ static CGFloat const commentViewHeight = 50;
     }
 }
 
+
 #pragma mark - private methods
+//添加上下拉刷新
+- (void)addPullRefresh
+{
+    __weak MB_CommentsViewController *weakSelf = self;
+    
+    [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"header");
+        [weakSelf requestCommentsListWithMinId:0];
+    }];
+    
+    [self addFooterRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"footer");
+        [weakSelf requestCommentsListWithMinId:weakSelf.minId];
+    }];
+}
+
+//获取评论列表
+- (void)requestCommentsListWithMinId:(NSInteger)minId {
+    NSDictionary *params = @{@"id":@"",
+                             @"token":@"",
+                             @"ablId":@"",//作品集id
+                             @"minId":@(minId),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] getAblumCommentsWithParameters:params success:^(id response) {
+        NSLog(@"comments %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            self.minId = [response[@"minId"] integerValue];
+            NSArray *array = response[@"list"];
+            for (NSDictionary *dic in array) {
+                MB_Comment *comment = [[MB_Comment alloc] init];
+                [comment setValuesForKeysWithDictionary:dic];
+                [self.dataArray addObject:comment];
+            }
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
 - (void)sendButtonOnClick:(UIButton *)button {
     [self.textView resignFirstResponder];
     NSLog(@"%@",self.textView.text);
 }
+
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {
@@ -92,7 +139,6 @@ static CGFloat const commentViewHeight = 50;
 - (UIView *)commentView {
     if (_commentView == nil) {
         _commentView = [[UIView alloc] initWithFrame:CGRectMake(0, kWindowHeight - commentViewHeight, kWindowWidth, commentViewHeight)];
-//        _commentView.backgroundColor = [UIColor greenColor];
         [_commentView addSubview:self.textView];
         [_commentView addSubview:self.sendButton];
     }

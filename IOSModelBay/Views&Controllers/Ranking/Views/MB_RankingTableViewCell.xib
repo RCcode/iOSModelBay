@@ -97,6 +97,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ablumScrollView" destination="HfZ-SQ-YfI" id="Kko-gX-FRQ"/>
+                <outlet property="backImageView" destination="qQR-KI-WVX" id="GNd-8L-ODH"/>
+                <outlet property="collectButton" destination="JgO-BY-xao" id="dl6-03-BFI"/>
+                <outlet property="descLabel" destination="aZM-cw-ajf" id="fwu-Gx-Ixi"/>
+                <outlet property="rankImageView" destination="dff-fq-LBw" id="ISX-1H-XX8"/>
+                <outlet property="userImageView" destination="WKP-KX-PdQ" id="dqQ-Xb-XBh"/>
+                <outlet property="usernameLabel" destination="LDu-Xq-gCz" id="RsC-uo-vsu"/>
             </connections>
             <point key="canvasLocation" x="349" y="319"/>
         </tableViewCell>

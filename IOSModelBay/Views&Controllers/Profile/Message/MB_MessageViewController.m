@@ -7,11 +7,11 @@
 //
 
 #import "MB_MessageViewController.h"
-#import "SVPullToRefresh.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "MB_MsgTableViewCell.h"
 #import "MB_ReplyTableViewCell.h"
 #import "MB_UserViewController.h"
+#import "MB_Message.h"
 
 static NSString * const ReuseIdentifierMsg = @"msg";
 static NSString * const ReuseIdentifierReply = @"reply";
@@ -19,6 +19,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
 @interface MB_MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger minId;
 
 @end
 
@@ -29,14 +31,13 @@ static NSString * const ReuseIdentifierReply = @"reply";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.tableView];
     [self addPullRefresh];
+    [self requestMessageListWithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -46,8 +47,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    return self.dataArray.count;
-    return 1;
+    return self.dataArray.count;
 }
 
 - (void)configureCell:(MB_MsgTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -69,16 +69,19 @@ static NSString * const ReuseIdentifierReply = @"reply";
     if (indexPath.section %2 == 0) {
         MB_MsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierMsg forIndexPath:indexPath];
         cell.backgroundColor = [UIColor redColor];
+        cell.message = self.dataArray[indexPath.row];
         return cell;
     }else {
         MB_ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierReply forIndexPath:indexPath];
         cell.backgroundColor = [UIColor yellowColor];
+        cell.message = self.dataArray[indexPath.row];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
     [self.parentViewController.navigationController pushViewController:userVC animated:YES];
 }
@@ -107,6 +110,7 @@ static CGFloat startY = 0;
     }
 }
 
+
 #pragma mark - private methods
 //添加上下拉刷新
 - (void)addPullRefresh
@@ -115,22 +119,51 @@ static CGFloat startY = 0;
     
     [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"header");
-        [weakSelf endFooterRefreshingForView:weakSelf.tableView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-        });
+        [weakSelf requestMessageListWithMinId:0];
     }];
     
     [self addFooterRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"footer");
-        [weakSelf endHeaderRefreshingForView:weakSelf.tableView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-            [weakSelf showNoMoreMessageForview:weakSelf.tableView];
-        });
+        [weakSelf requestMessageListWithMinId:weakSelf.minId];
     }];
 }
 
+//获取留言列表
+- (void)requestMessageListWithMinId:(NSInteger)minId {
+    NSDictionary *params = @{@"id":@"",
+                             @"token":@"",
+                             @"minId":@(minId),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] getMessagesWithParameters:params success:^(id response) {
+        NSLog(@"messages: %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            self.minId = [response[@"minId"] integerValue];
+            NSArray *array = response[@"list"];
+            for (NSDictionary *dic in array) {
+                MB_Message *message = [[MB_Message alloc] init];
+                [message setValuesForKeysWithDictionary:dic];
+                [self. dataArray addObject:message];
+            }
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
+//回复留言
+- (void)replyMessage:(UIButton *)button {
+    NSDictionary *params = @{@"id":@"",//用户id
+                             @"ucid":@(6),//评论id
+                             @"fid":@(6),//评论用户id
+                             @"reply":@(10)//评论
+                             };
+    [[AFHttpTool shareTool] replyMessageWithParameters:params success:^(id response) {
+        NSLog(@"reply %@",response);
+    } failure:^(NSError *err) {
+        
+    }];
+}
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {
@@ -151,6 +184,5 @@ static CGFloat startY = 0;
     
     return _tableView;
 }
-
 
 @end

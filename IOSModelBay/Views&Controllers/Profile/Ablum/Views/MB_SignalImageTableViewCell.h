@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MB_Ablum.h"
 
 @interface MB_SignalImageTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) MB_Ablum *ablum;
 
 @end

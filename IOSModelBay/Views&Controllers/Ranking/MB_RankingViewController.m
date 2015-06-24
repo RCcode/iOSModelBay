@@ -8,10 +8,13 @@
 
 #import "MB_RankingViewController.h"
 #import "MB_RankingTableViewCell.h"
+#import "MB_FilterViewController.h"
+#import "MB_User.h"
 
 @interface MB_RankingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) NSInteger minId;
 
 @end
 
@@ -22,10 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(rightBarBtnOnCLick:)];
+    
     [self.view addSubview:self.tableView];
     [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addPullRefresh];
-    [self requestRankingList];
+    
+    [self requestRankingListWithMinId:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +40,7 @@
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,10 +49,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_RankingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    cell.user = self.dataArray[indexPath.row];
     return cell;
 }
 
 #pragma mark - private methods
+- (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+    //跳转到筛选界面
+    MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
+    filterVC.type = FilterTypeRanking;
+    filterVC.CompleteHandler = ^(){
+        [self requestRankingListWithMinId:0];
+    };
+    [self.navigationController pushViewController:filterVC animated:YES];
+}
+
 //添加上下拉刷新
 - (void)addPullRefresh
 {
@@ -54,23 +71,38 @@
     
     [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"header");
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-        });
+        [weakSelf requestRankingListWithMinId:0];
     }];
     
     [self addFooterRefreshForView:self.tableView WithActionHandler:^{
         NSLog(@"footer");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshingForView:weakSelf.tableView];
-            [weakSelf showNoMoreMessageForview:weakSelf.tableView];
-        });
+        [weakSelf requestRankingListWithMinId:weakSelf.minId];
     }];
 }
 
-- (void)requestRankingList {
-//    [[AFHttpTool shareTool] ]
+//获取排行列表
+- (void)requestRankingListWithMinId:(NSInteger)minId {
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
+                             @"fgender":@([MB_Utils shareUtil].rGender),
+                             @"fcareerId":[MB_Utils shareUtil].rCareerId,
+                             @"minId":@(minId),
+                             @"count":@(10)};
+    [[AFHttpTool shareTool] getRankListWithParameters:params success:^(id response) {
+        NSLog(@"rank %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            self.minId = [response[@"minId"] integerValue];
+            NSArray *array = response[@"list"];
+            for (NSDictionary *dic in array) {
+                MB_User *user = [[MB_User alloc] init];
+                [user setValuesForKeysWithDictionary:dic];
+                [self.dataArray addObject:user];
+            }
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *err) {
+        
+    }];
 }
 
 
