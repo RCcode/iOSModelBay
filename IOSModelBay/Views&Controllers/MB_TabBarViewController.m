@@ -16,6 +16,7 @@
 @interface MB_TabBarViewController ()
 
 @property (nonatomic, strong) UIView *customTabBar;
+@property (nonatomic, strong) UIView *indicateView;
 @property (nonatomic, strong) UIButton *selectedButton;
 
 @end
@@ -23,6 +24,8 @@
 @implementation MB_TabBarViewController
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [self.tabBar addSubview:self.customTabBar];
     //使tabbar透明
     [self.tabBar setBackgroundImage:[UIImage new]];
@@ -59,9 +62,17 @@
 //        return;
 //    }
     self.selectedButton.selected = NO;
+    
     button.selected = YES;
     self.selectedButton = button;
     self.selectedIndex = button.tag;
+    
+    //修改指示条的位置
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect rect = self.indicateView.frame;
+        rect.origin.x = button.tag * rect.size.width;
+        self.indicateView.frame = rect;
+    }];
 }
 
 - (UIView *)customTabBar {
@@ -69,7 +80,7 @@
         _customTabBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 49)];
         _customTabBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.95];
         CGFloat btnWidth = kWindowWidth / 4;
-        CGFloat btnHeight = 49;
+        CGFloat btnHeight = 49 - 3;
         for (int i = 0; i < 4; i ++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = i;
@@ -81,10 +92,20 @@
             if (i == 0) {
                 button.selected = YES;
                 self.selectedButton = button;
+                //添加指示条
+                [_customTabBar addSubview:self.indicateView];
             }
         }
     }
     return _customTabBar;
+}
+
+- (UIView *)indicateView {
+    if (_indicateView == nil) {
+        _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, 49 - 3, kWindowWidth / 4, 3)];
+        _indicateView.backgroundColor = [UIColor redColor];
+    }
+    return _indicateView;
 }
 
 @end

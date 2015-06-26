@@ -114,7 +114,7 @@ static CGFloat startY = 0;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor grayColor];
-        _tableView.sectionHeaderHeight = 10;
+        _tableView.sectionHeaderHeight = 0;
         _tableView.sectionFooterHeight = 0;
         
         UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];

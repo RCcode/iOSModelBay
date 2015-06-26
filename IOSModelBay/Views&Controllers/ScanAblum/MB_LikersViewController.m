@@ -22,6 +22,7 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view addSubview:self.tableView];
     [self requestLikesListWithMinId:0];
 }

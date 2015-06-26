@@ -28,6 +28,7 @@ static CGFloat const commentViewHeight = 50;
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
     [self requestCommentsListWithMinId:0];
@@ -61,6 +62,7 @@ static CGFloat const commentViewHeight = 50;
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     NSLog(@"%s",__FUNCTION__);
 }
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     NSLog(@"%s",__FUNCTION__);
 }
@@ -149,6 +151,7 @@ static CGFloat const commentViewHeight = 50;
     if (_textView == nil) {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, commentViewHeight) textContainer:nil];
         _textView.backgroundColor = [UIColor whiteColor];
+        _textView.text = @"ssss";
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.delegate = self;
     }
