@@ -27,7 +27,6 @@
 @implementation MB_CollectViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -70,11 +69,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, 230) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == 250) {
+            if (taleView.contentOffset.y == 230) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }

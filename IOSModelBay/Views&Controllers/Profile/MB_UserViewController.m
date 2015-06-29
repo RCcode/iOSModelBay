@@ -145,6 +145,8 @@ static CGFloat startY = -64;
     MB_CollectViewController *collectVC           = [[MB_CollectViewController alloc] init];
     
     summaryVC.containerViewRect    = self.containerView.frame;
+    summaryVC.user = self.user;
+    summaryVC.comeFromType = self.comeFromType;
     ablumVC.containerViewRect      = self.containerView.frame;
     instragramVC.containerViewRect = self.containerView.frame;
     instragramVC.uid = [userDefaults objectForKey:kUid];

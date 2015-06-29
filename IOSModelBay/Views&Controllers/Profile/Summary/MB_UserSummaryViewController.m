@@ -8,11 +8,13 @@
 
 #import "MB_UserSummaryViewController.h"
 #import "MB_SummaryTableViewCell.h"
-#import "MB_UserViewController.h"
+#import "MB_UserDetail.h"
 
 @interface MB_UserSummaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSDictionary *detailDic;
+@property (nonatomic, strong) MB_UserDetail *detail;
 
 @end
 
@@ -24,6 +26,17 @@
     
     [self.view addSubview:self.tableView];
     [self requestUserDetail];
+    
+    if (self.comeFromType == ComeFromTypeUser) {
+        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+        if ([self.user.fcareerId containsString:@"1"]) {
+            self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+        }else {
+            self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"专注领域",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+        }
+    }else if (self.comeFromType == ComeFromTypeSelf) {
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,16 +46,14 @@
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    }else if (section == 1){
-        return 5;
     }else {
-        return 3;
+        return self.dataArray.count - 1;
     }
 }
 
@@ -52,14 +63,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    
     if (indexPath.section == 0) {
         cell.mainLabelWidth.constant = 0;
         cell.mainLabel.text = @"";
         cell.subLabel.text = @"穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
     }else {
         cell.mainLabelWidth.constant = 100;
-        cell.mainLabel.text = @"介绍";
-        cell.subLabel.text = @"拿到手都快考试的难度是女生的女生不得vsbdvsdvsdvsdvdsvsdvsdsfssjkjskasajsjdasdjkdsjfsdfjjdhfjsfdhs按时间等哈说不定你爸说的那是";
+        cell.mainLabel.text = self.dataArray[indexPath.row + 1];
+//        cell.subLabel.text = [self.detailDic objectForKey:self.dataArray[indexPath.row + 1]];
     }
     return cell;
 }
@@ -101,6 +113,10 @@ static CGFloat startY = 0;
                              @"fid":@(6)};
     [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
         NSLog(@"detail %@",response);
+        self.detail = [[MB_UserDetail alloc] init];
+        self.detailDic = response;
+//        [self.detail setValuesForKeysWithDictionary:response];
+        [self.tableView reloadData];
     } failure:^(NSError *err) {
         
     }];

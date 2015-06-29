@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
     
 //    self.title = @"MODELBAY";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
@@ -66,6 +65,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
     userVC.hidesBottomBarWhenPushed = YES;
+    userVC.comeFromType = ComeFromTypeUser;
     userVC.user = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:userVC animated:YES];
 }

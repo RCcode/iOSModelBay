@@ -98,6 +98,7 @@
 		CD7965F31B34154100977A7F /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EC1B34154100977A7F /* CMethods.m */; };
 		CD7965F41B34154100977A7F /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EF1B34154100977A7F /* MB_Utils.m */; };
 		CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965F11B34154100977A7F /* UIImageEffects.m */; };
+		CD7B11271B41012B006C22A4 /* RKNotificationHub.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B11261B41012B006C22A4 /* RKNotificationHub.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76B781B32662200C391E5 /* MB_InstragramModel.m */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
@@ -375,6 +376,8 @@
 		CD7965EF1B34154100977A7F /* MB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Utils.m; sourceTree = "<group>"; };
 		CD7965F01B34154100977A7F /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		CD7965F11B34154100977A7F /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
+		CD7B11251B41012B006C22A4 /* RKNotificationHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKNotificationHub.h; sourceTree = "<group>"; };
+		CD7B11261B41012B006C22A4 /* RKNotificationHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKNotificationHub.m; sourceTree = "<group>"; };
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDC76B771B32662200C391E5 /* MB_InstragramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramModel.h; sourceTree = "<group>"; };
 		CDC76B781B32662200C391E5 /* MB_InstragramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramModel.m; sourceTree = "<group>"; };
@@ -618,6 +621,7 @@
 				CD0575321B3416180015BBDA /* SDWebImage */,
 				CD0575541B3416180015BBDA /* SVPullToRefresh */,
 				CD05755A1B3416180015BBDA /* Umeng */,
+				CD7B11241B41011D006C22A4 /* RKNotificationHub */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -905,6 +909,15 @@
 				CD7965F11B34154100977A7F /* UIImageEffects.m */,
 			);
 			path = Public;
+			sourceTree = "<group>";
+		};
+		CD7B11241B41011D006C22A4 /* RKNotificationHub */ = {
+			isa = PBXGroup;
+			children = (
+				CD7B11251B41012B006C22A4 /* RKNotificationHub.h */,
+				CD7B11261B41012B006C22A4 /* RKNotificationHub.m */,
+			);
+			path = RKNotificationHub;
 			sourceTree = "<group>";
 		};
 		CDC9AB461B216BE200119C18 /* Models */ = {
@@ -1446,6 +1459,7 @@
 				CDD537471B340CB6008B436C /* MB_SignalImageTableViewCell.m in Sources */,
 				CDD5372F1B340CB6008B436C /* MB_FilterViewController.m in Sources */,
 				CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */,
+				CD7B11271B41012B006C22A4 /* RKNotificationHub.m in Sources */,
 				CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */,
 				CDD1174A1B3A4D44002BD897 /* MB_NoticeTableViewCell.m in Sources */,
 				CD0575811B3416180015BBDA /* SDWebImageDecoder.m in Sources */,

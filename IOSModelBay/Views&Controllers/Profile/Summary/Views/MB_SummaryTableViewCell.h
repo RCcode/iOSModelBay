@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface MB_SummaryTableViewCell : UITableViewCell
 
 //@property (nonatomic, strong) CAShapeLayer *mylayer;

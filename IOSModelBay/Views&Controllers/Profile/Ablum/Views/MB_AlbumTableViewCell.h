@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MB_Ablum.h"
+#import "RKNotificationHub.h"
 
 @interface MB_AlbumTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) MB_Ablum *ablum;
+
+@property (nonatomic, strong) RKNotificationHub *hub;
 
 @end

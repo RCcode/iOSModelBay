@@ -15,6 +15,9 @@
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
+    if (value == nil || [value isKindOfClass:[NSNull class]]) {
+        return;
+    }
     [super setValue:value forUndefinedKey:key];
 }
 
