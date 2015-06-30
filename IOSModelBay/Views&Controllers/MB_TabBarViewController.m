@@ -23,10 +23,11 @@
 
 @implementation MB_TabBarViewController
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self.tabBar addSubview:self.customTabBar];
+    
     //使tabbar透明
     [self.tabBar setBackgroundImage:[UIImage new]];
     self.tabBar.shadowImage = [UIImage new];
@@ -78,17 +79,21 @@
 - (UIView *)customTabBar {
     if (_customTabBar == nil) {
         _customTabBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 49)];
-        _customTabBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.95];
+        _customTabBar.backgroundColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.95];
+        
+        NSArray *images = @[@"ic_discover",@"ic_ranking",@"ic_notice",@"ic_personal"];
+        NSArray *images_h = @[@"ic_discover_h",@"ic_ranking_h",@"ic_notice_h",@"ic_personal_h"];
         CGFloat btnWidth = kWindowWidth / 4;
         CGFloat btnHeight = 49 - 3;
         for (int i = 0; i < 4; i ++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = i;
             [button setFrame:CGRectMake(btnWidth * i, 0, btnWidth, btnHeight)];
-            [button setImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
+            [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:images_h[i]] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(tabBarButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
             [_customTabBar addSubview:button];
+            
             if (i == 0) {
                 button.selected = YES;
                 self.selectedButton = button;
@@ -103,7 +108,7 @@
 - (UIView *)indicateView {
     if (_indicateView == nil) {
         _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, 49 - 3, kWindowWidth / 4, 3)];
-        _indicateView.backgroundColor = [UIColor redColor];
+        _indicateView.backgroundColor = colorWithHexString(@"#ff4f42");
     }
     return _indicateView;
 }

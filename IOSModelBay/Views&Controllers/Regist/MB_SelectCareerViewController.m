@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemOnClick:)];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(rightBarButtonItemOnClick:)];
     
     [self.view addSubview:self.collectView];
@@ -39,6 +41,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"in%ld",indexPath.row + 1]];
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectButton.selected = [self.selectedArray containsObject:self.dataArray[indexPath.row]];
@@ -68,6 +71,10 @@
         }
     }
     [self.collectView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:button.tag inSection:0]]];
+}
+
+- (void)leftBarButtonItemOnClick:(UIBarButtonItem *)barButton {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightBarButtonItemOnClick:(UIBarButtonItem *)barButton {
@@ -114,7 +121,7 @@
         layout.itemSize = CGSizeMake(itemWidth, itemWidth);
         layout.minimumInteritemSpacing = 2.5;
         layout.minimumLineSpacing = 2.5;
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor redColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;

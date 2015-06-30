@@ -20,6 +20,7 @@
 #import "MB_ScanAblumViewController.h"
 //#import "MB_SelectPhotosViewController.h"
 //#import "MB_SelectTemplateViewController.h"
+#import "MB_SelectRoleViewController.h"
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -39,7 +40,7 @@
     
     self.view.backgroundColor = [UIColor greenColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     [self.view addSubview:self.tableView];
     [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
@@ -131,7 +132,7 @@ static CGFloat startY = -64;
 //    [self.navigationController pushViewController:inviteVC animated:YES];
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
@@ -212,13 +213,16 @@ static CGFloat startY = -64;
     if (_menuView == nil) {
         _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
         _menuView.backgroundColor = [UIColor grayColor];
+        
+        NSArray *images = @[@"ic_instagram",@"ic_information",@"ic_set",@"ic_message",@"ic_collection"];
+        NSArray *images_h  = @[@"ic_instagram_h",@"ic_information_h",@"ic_set_h",@"ic_message_h",@"ic_collection_h"];
         CGFloat btnWidth = kWindowWidth / 5;
         for (int i = 0; i < 5; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(btnWidth * i, 0, btnWidth, CGRectGetHeight(_menuView.frame));
             button.tag = i;
-            [button setImage:[UIImage imageNamed:@"a"] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:@"b"] forState:UIControlStateSelected];
+            [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:images_h[i]] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(menuBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.menuBtns addObject:button];
             [_menuView addSubview:button];

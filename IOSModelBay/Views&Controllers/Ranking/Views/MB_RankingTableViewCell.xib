@@ -37,20 +37,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgO-BY-xao">
-                        <rect key="frame" x="133" y="154" width="55" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgO-BY-xao">
+                        <rect key="frame" x="123" y="154" width="75" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="g21-iP-qfL"/>
                             <constraint firstAttribute="height" constant="30" id="mnd-CN-sDp"/>
                         </constraints>
-                        <state key="normal" title="+collect">
+                        <state key="normal" title="collect" image="ic_add">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="selected" image="ic_confirm">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="g21-iP-qfL"/>
+                            </mask>
+                        </variation>
                     </button>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfZ-SQ-YfI">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HfZ-SQ-YfI">
                         <rect key="frame" x="0.0" y="189" width="320" height="110"/>
                     </scrollView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dff-fq-LBw">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="num1" translatesAutoresizingMaskIntoConstraints="NO" id="dff-fq-LBw">
                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="7tb-z3-veJ"/>
@@ -109,5 +119,8 @@
     </objects>
     <resources>
         <image name="a.png" width="30" height="30"/>
+        <image name="ic_add" width="22" height="22"/>
+        <image name="ic_confirm" width="24" height="24"/>
+        <image name="num1" width="36" height="36"/>
     </resources>
 </document>

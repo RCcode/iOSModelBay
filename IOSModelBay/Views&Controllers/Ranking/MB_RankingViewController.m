@@ -24,8 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(rightBarBtnOnCLick:)];
+    
+    self.navigationItem.title = @"RANKING";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
     [self.view addSubview:self.tableView];
     [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
@@ -49,7 +50,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_RankingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.user = self.dataArray[indexPath.row];
+    MB_User *user = self.dataArray[indexPath.row];
+    cell.user = user;
+    
+    //前三名显示排名标志
+    if (indexPath.row < 3) {
+        cell.rankImageView.hidden = NO;
+        NSString *imageName = [NSString stringWithFormat:@"num%ld",(long)indexPath.row + 1];
+        cell.rankImageView.image = [UIImage imageNamed:imageName];
+    }else {
+        cell.rankImageView.hidden = YES;
+    }
+    
+    cell.collectButton.tag = indexPath.row;
+    if (indexPath.row %2 == 0) {
+        cell.collectButton.selected = YES;
+        cell.collectButton.backgroundColor = [UIColor redColor];
+    }else {
+        cell.collectButton.selected = NO;
+        cell.collectButton.backgroundColor = [UIColor whiteColor];
+    }
+    [cell.collectButton addTarget:self action:@selector(collectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -103,6 +124,12 @@
     } failure:^(NSError *err) {
         
     }];
+}
+
+//点击收藏按钮
+- (void)collectButtonOnClick:(UIButton *)button {
+    button.selected = YES;
+    button.backgroundColor = [UIColor redColor];
 }
 
 

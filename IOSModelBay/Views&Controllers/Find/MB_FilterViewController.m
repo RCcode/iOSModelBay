@@ -44,11 +44,12 @@
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 40;
+    return 14;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_FilterCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",indexPath.row + 1]];
     if (self.type == FilterTypeFind) {
         if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""] && indexPath.row == 0) {
             //默认选中All
@@ -147,15 +148,15 @@
         }
         _sexView.backgroundColor = [UIColor yellowColor];
         
-        UIImage *image = [UIImage imageNamed:@"b"];
+        UIImage *image = [UIImage imageNamed:@"ic_cz"];
         CGFloat btnWidth = kWindowWidth/3;
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor = [UIColor grayColor];
             button.frame = CGRectMake(btnWidth * i, 0, btnWidth, 50);
-            button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+            button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
             button.tag = i;
-            [button setTitle:@"songge" forState:UIControlStateNormal];
+            [button setTitle:@"lojsongge" forState:UIControlStateNormal];
             [button setImage:image forState:UIControlStateNormal];
             [button setImage:image forState:UIControlStateSelected];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

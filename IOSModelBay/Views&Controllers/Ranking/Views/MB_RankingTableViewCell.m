@@ -12,7 +12,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
-
+    _collectButton.layer.borderColor = [UIColor blackColor].CGColor;
+    _collectButton.layer.borderWidth = 1;
+    
+    _ablumScrollView.pagingEnabled = NO;
 }
 
 - (void)setUser:(MB_User *)user {
@@ -20,12 +23,12 @@
     
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
     [_backImageView sd_setImageWithURL:[NSURL URLWithString:user.fbackPic] placeholderImage:nil];
-    _rankImageView.image = [UIImage imageNamed:@"a"];
+//    _rankImageView.image = [UIImage imageNamed:@"a"];
     _usernameLabel.text = user.fname;
     _descLabel.text = @"";
     
-    CGRect rect = self.ablumScrollView.frame;
-    for (UIView *subView in self.ablumScrollView.subviews) {
+    CGRect rect = _ablumScrollView.frame;
+    for (UIView *subView in _ablumScrollView.subviews) {
         [subView removeFromSuperview];
     }
     CGFloat imageWidth = kWindowWidth / 3;
@@ -33,10 +36,9 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (imageWidth+2.5), 0, imageWidth, rect.size.height)];
         imageView.image = [UIImage imageNamed:@"a"];
         imageView.userInteractionEnabled = YES;
-        [self.ablumScrollView addSubview:imageView];
+        [_ablumScrollView addSubview:imageView];
     }
-    self.ablumScrollView.pagingEnabled = NO;
-    self.ablumScrollView.contentSize = CGSizeMake(5 * imageWidth +10, rect.size.height);
+    _ablumScrollView.contentSize = CGSizeMake(5 * imageWidth +10, rect.size.height);
 }
 
 

@@ -76,20 +76,11 @@
     _assertLibrary = [[ALAssetsLibrary alloc] init];
     [_assertLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if (group) {
-            NSLog(@"%@",group);
-//            NSLog(@"Name == %@",[group valueForProperty:ALAssetsGroupPropertyName]);
-//            NSLog(@"Type == %@",[group valueForProperty:ALAssetsGroupPropertyType]);
-//            NSLog(@"URL == %@",[group valueForProperty:ALAssetsGroupPropertyURL]);
-//            NSLog(@"PersistentID == %@",[group valueForProperty:ALAssetsGroupPropertyPersistentID]);
-//            CGImageRef imageRef = [group posterImage];
-//            NSInteger number = [group numberOfAssets];
-            
             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 if (result) {
                     NSLog(@"result  %@",result);
                     NSURL *urlstr=[result valueForProperty:ALAssetPropertyAssetURL];//图片的url
-//                    NSString *urlstr=[NSString stringWithFormat:@"%@",result.defaultRepresentation.url];
                     [self.dataArray addObject:urlstr];
                 }
             }];

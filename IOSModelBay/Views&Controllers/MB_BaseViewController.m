@@ -82,6 +82,7 @@
     self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
     self.scrollCoordinator.scrollView = scrollView;
     self.scrollCoordinator.topView = self.navigationController.navigationBar;
+//    self.scrollCoordinator.topViewItems = @[self.navigationController.navigationBar,self.navigationItem]
     self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
 }
 

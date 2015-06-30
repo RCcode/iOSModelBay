@@ -11,20 +11,39 @@
 
 @interface MB_SelectRoleViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *labelPro;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPro;
+@property (weak, nonatomic) IBOutlet UILabel *labelAud;
+@property (weak, nonatomic) IBOutlet UILabel *subLabelAud;
+@property (weak, nonatomic) IBOutlet UIButton *buttonAud;
+
+
 @end
 
 @implementation MB_SelectRoleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+
+    _buttonPro.layer.borderWidth = 1.5;
+    _buttonPro.layer.borderColor = [UIColor whiteColor].CGColor;
+    _buttonAud.layer.borderWidth = 1.5;
+    _buttonAud.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    _labelPro.text = @"i am a \nprofessional";
+    _labelAud.text = @"i am a \naudience";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+    //跳转到筛选界面
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)professionalBtnOnClick:(UIButton *)sender{
     //专业用户

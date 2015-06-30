@@ -26,11 +26,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
     
-//    self.title = @"MODELBAY";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(rightBarBtnOnCLick:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
+    label.text = @"MODELBAY";
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:15];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = label;
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
@@ -145,17 +150,21 @@
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        CGFloat itemWidth = (kWindowWidth - 2.5) / 2;
-        layout.minimumInteritemSpacing = 2.5;
-        layout.minimumLineSpacing = 2.5;
-        layout.itemSize = CGSizeMake(itemWidth, itemWidth);
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) collectionViewLayout:layout];
+        CGFloat space = 4;
+        CGFloat itemWidth = (kWindowWidth - 3 * space) / 2;
+        CGFloat itemHeight = itemWidth + 34;
+        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
+        layout.minimumInteritemSpacing = space;
+        layout.minimumLineSpacing = space;
+        layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+        
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
         _collectView.bounces = YES;
         _collectView.alwaysBounceVertical = YES;
-        _collectView.backgroundColor = [UIColor redColor];
+        _collectView.backgroundColor = colorWithHexString(@"#eeeeee");
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
-        _collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _collectView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
         [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
