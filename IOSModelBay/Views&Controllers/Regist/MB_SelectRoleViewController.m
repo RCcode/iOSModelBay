@@ -41,7 +41,6 @@
 }
 
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
-    //跳转到筛选界面
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

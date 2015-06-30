@@ -22,38 +22,42 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM0-AH-06t">
-                    <rect key="frame" x="125" y="84" width="71" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="129" y="84" width="63" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPJ-5t-LkX">
-                    <rect key="frame" x="60" y="125" width="200" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sdsd" borderStyle="roundedRect" placeholder="dsdsd" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPJ-5t-LkX">
+                    <rect key="frame" x="41" y="145" width="238" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="Mze-Km-y40"/>
+                        <constraint firstAttribute="height" constant="44" id="aaJ-pT-VBN"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
-                    <rect key="frame" x="33" y="217" width="59" height="22"/>
-                    <state key="normal" title="Male" image="ic_cz">
+                    <rect key="frame" x="33" y="231" width="53" height="19"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Male" image="ic_wz">
+                        <color key="titleColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="b.png">
-                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" image="ic_cz">
+                        <color key="titleColor" red="1" green="0.30980392156862746" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="maleBtnOnClick:" destination="-1" eventType="touchUpInside" id="ds1-YK-WS3"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-98-MXj">
-                    <rect key="frame" x="209" y="217" width="78" height="22"/>
-                    <state key="normal" title="Female" image="ic_cz">
+                    <rect key="frame" x="218" y="231" width="69" height="19"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Female" image="ic_wz">
+                        <color key="titleColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="b.png">
-                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="selected" image="ic_cz">
+                        <color key="titleColor" red="1" green="0.30980392156862746" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="femaleBtnOnClick:" destination="-1" eventType="touchUpInside" id="fu9-nd-C58"/>
@@ -62,16 +66,18 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="HPJ-5t-LkX" secondAttribute="trailing" constant="41" id="Ba3-R5-24n"/>
                 <constraint firstItem="PM0-AH-06t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="GC7-nN-pjm"/>
                 <constraint firstItem="4rA-AG-fMS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XGG-tD-ZB9"/>
                 <constraint firstAttribute="trailing" secondItem="XGz-98-MXj" secondAttribute="trailing" constant="33" id="XlL-Ts-yj9"/>
                 <constraint firstItem="sDL-ZM-yAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="33" id="hse-NP-hKr"/>
-                <constraint firstItem="XGz-98-MXj" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="62" id="lJA-3a-2jW"/>
+                <constraint firstItem="HPJ-5t-LkX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="41" id="jIi-kr-5F8"/>
+                <constraint firstItem="XGz-98-MXj" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="42" id="lJA-3a-2jW"/>
                 <constraint firstItem="4rA-AG-fMS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lkl-Kl-eKG"/>
                 <constraint firstAttribute="centerX" secondItem="PM0-AH-06t" secondAttribute="centerX" id="nMc-h3-L40"/>
-                <constraint firstItem="HPJ-5t-LkX" firstAttribute="top" secondItem="PM0-AH-06t" secondAttribute="bottom" constant="20" id="oJ8-lY-S83"/>
+                <constraint firstItem="HPJ-5t-LkX" firstAttribute="top" secondItem="PM0-AH-06t" secondAttribute="bottom" constant="43" id="oJ8-lY-S83"/>
                 <constraint firstAttribute="trailing" secondItem="4rA-AG-fMS" secondAttribute="trailing" id="pMS-Vl-nnB"/>
-                <constraint firstItem="sDL-ZM-yAR" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="62" id="qZ8-wR-anq"/>
+                <constraint firstItem="sDL-ZM-yAR" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="42" id="qZ8-wR-anq"/>
                 <constraint firstAttribute="centerX" secondItem="HPJ-5t-LkX" secondAttribute="centerX" id="rcu-vB-6ud"/>
                 <constraint firstAttribute="bottom" secondItem="4rA-AG-fMS" secondAttribute="bottom" id="zLI-rt-LC3"/>
             </constraints>
@@ -79,8 +85,8 @@
         </view>
     </objects>
     <resources>
-        <image name="b.png" width="20" height="20"/>
         <image name="ic_cz" width="19" height="19"/>
+        <image name="ic_wz" width="19" height="19"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

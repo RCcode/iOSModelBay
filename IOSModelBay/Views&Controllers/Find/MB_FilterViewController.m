@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     if (self.type == FilterTypeFind) {
@@ -114,6 +116,10 @@
     }
 }
 
+- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     [self.navigationController popViewControllerAnimated:YES];
     self.CompleteHandler();
@@ -123,7 +129,7 @@
 #pragma mark - getters & setters
 - (UIView *)searchView {
     if (_searchView == nil) {
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 50)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 49)];
         _searchView.backgroundColor = [UIColor redColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [_searchView addGestureRecognizer:tap];
@@ -142,25 +148,25 @@
 - (UIView *)sexView {
     if (_sexView == nil) {
         if (self.type == FilterTypeFind) {
-            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, 50)];
+            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, 61)];
         }else {
-            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 50)];
+            _sexView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 61)];
         }
-        _sexView.backgroundColor = [UIColor yellowColor];
+        _sexView.backgroundColor = [UIColor whiteColor];
         
         UIImage *image = [UIImage imageNamed:@"ic_cz"];
         CGFloat btnWidth = kWindowWidth/3;
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.backgroundColor = [UIColor grayColor];
-            button.frame = CGRectMake(btnWidth * i, 0, btnWidth, 50);
-            button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
+            button.frame = CGRectMake(btnWidth * i, 0, btnWidth, 61);
             button.tag = i;
+            button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
+            [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [button setTitle:@"lojsongge" forState:UIControlStateNormal];
             [button setImage:image forState:UIControlStateNormal];
             [button setImage:image forState:UIControlStateSelected];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            [button setTitleColor:colorWithHexString(@"#8e8e8e") forState:UIControlStateNormal];
+            [button setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
             [button addTarget:self action:@selector(sexBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
             [_sexView addSubview:button];
             
@@ -182,12 +188,15 @@
     
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        
-        layout.itemSize = CGSizeMake((kWindowWidth - 2.5) / 2, 50);
-        layout.minimumLineSpacing = 2.5;
-        layout.minimumInteritemSpacing = 2.5;
+        CGFloat space = 2;
+        CGFloat itemWidth = (kWindowWidth - 3 * space) / 2;
+        CGFloat itemHeight = itemWidth * 128 / 314;
+        layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+        layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+        layout.minimumLineSpacing = space;
+        layout.minimumInteritemSpacing = space;
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sexView.frame), kWindowWidth, kWindowHeight - 49 - CGRectGetMaxY(self.sexView.frame)) collectionViewLayout:layout];
-        _collectView.backgroundColor = [UIColor redColor];
+        _collectView.backgroundColor = [UIColor whiteColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_FilterCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
