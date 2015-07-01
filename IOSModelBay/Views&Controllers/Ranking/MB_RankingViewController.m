@@ -32,6 +32,10 @@
     [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addPullRefresh];
     
+    //重置筛选条件
+    [MB_Utils shareUtil].rGender = -1;
+    [MB_Utils shareUtil].rCareerId = @"";
+    
     [self requestRankingListWithMinId:0];
 }
 

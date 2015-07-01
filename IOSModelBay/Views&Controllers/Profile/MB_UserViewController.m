@@ -21,6 +21,7 @@
 //#import "MB_SelectPhotosViewController.h"
 //#import "MB_SelectTemplateViewController.h"
 #import "MB_SelectRoleViewController.h"
+#import "MB_SelectCareerViewController.h"
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -132,10 +133,13 @@ static CGFloat startY = -64;
 //    [self.navigationController pushViewController:inviteVC animated:YES];
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
+//    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
-    inviteVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:inviteVC animated:YES];
+//    inviteVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:inviteVC animated:YES];
+    MB_SelectCareerViewController *inviteVC = [[MB_SelectCareerViewController alloc] init];
+        inviteVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
 - (void)addChildViewControllers {

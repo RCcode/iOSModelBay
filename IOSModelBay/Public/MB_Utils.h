@@ -24,6 +24,20 @@
 //所有职业
 @property (nonatomic, strong) NSDictionary *careerDic;
 
+@property (nonatomic, strong) NSArray *eyeColor;//眼睛颜色
+@property (nonatomic, strong) NSArray *skincolor;//肤色
+@property (nonatomic, strong) NSArray *haircolor;//发色
+@property (nonatomic, strong) NSArray *shoesize;//鞋号
+@property (nonatomic, strong) NSArray *dress;//衣服号
+@property (nonatomic, strong) NSArray *height;//身高
+@property (nonatomic, strong) NSArray *weight;//体重
+@property (nonatomic, strong) NSArray *chest;//胸围
+@property (nonatomic, strong) NSArray *waist;//腰围
+@property (nonatomic, strong) NSArray *hips;//臀围
+//@property (nonatomic, strong) NSArray *careerDic;//专注领域-模特
+//@property (nonatomic, strong) NSArray *careerDic;//专注领域-摄影师
+@property (nonatomic, strong) NSArray *experience;//经验
+
 + (void)showPromptWithText:(NSString *)text;
 
 + (void)showAlertViewWithMessage:(NSString *)string;

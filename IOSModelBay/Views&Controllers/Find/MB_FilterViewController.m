@@ -37,6 +37,14 @@
     [self.view addSubview:self.sexView];
     [self.view addSubview:self.collectView];
     
+    //所有职业ID
+    NSArray *array = [[MB_Utils shareUtil].careerDic allKeys];
+    //按照ID升序排序
+    self.dataArray = [[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *a = obj1;
+        NSString *b = obj2;
+        return [a compare:b options:NSNumericSearch];
+    }] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,33 +54,63 @@
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 14;
+    return self.dataArray.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_FilterCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    
     cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",indexPath.row + 1]];
-    if (self.type == FilterTypeFind) {
-        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""] && indexPath.row == 0) {
-            //默认选中All
-            cell.selected = YES;
-        }else if ([[MB_Utils shareUtil].fCareerId integerValue] == indexPath.row) {
-            //上次选中的
+    
+    if (indexPath.row == 0) {
+        cell.nameLabel.text = @"All";
+        //是否选中All
+        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""]) {
             cell.selected = YES;
         }else{
             cell.selected = NO;
         }
     }else {
-        if ([[MB_Utils shareUtil].rCareerId isEqualToString:@""] && indexPath.row == 0) {
-            //默认选中All
-            cell.selected = YES;
-        }else if ([[MB_Utils shareUtil].rCareerId integerValue] == indexPath.row) {
-            //上次选中的
-            cell.selected = YES;
-        }else{
-            cell.selected = NO;
+        NSString *carerrId = self.dataArray[indexPath.row - 1];
+        cell.nameLabel.text = [[MB_Utils shareUtil].careerDic objectForKey:carerrId];
+
+        //发现的筛选还是排名的筛选
+        if (self.type == FilterTypeFind) {
+            if ([[MB_Utils shareUtil].fCareerId isEqualToString:carerrId]) {
+                cell.selected = YES;
+            }else{
+                cell.selected = NO;
+            }
+        }else {
+            if ([[MB_Utils shareUtil].rCareerId isEqualToString:carerrId]) {
+                cell.selected = YES;
+            }else{
+                cell.selected = NO;
+            }
         }
     }
+    
+//    if (self.type == FilterTypeFind) {
+//        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""] && indexPath.row == 0) {
+//            //默认选中All
+//            cell.selected = YES;
+//        }else if ([[MB_Utils shareUtil].fCareerId integerValue] == indexPath.row) {
+//            //上次选中的
+//            cell.selected = YES;
+//        }else{
+//            cell.selected = NO;
+//        }
+//    }else {
+//        if ([[MB_Utils shareUtil].rCareerId isEqualToString:@""] && indexPath.row == 0) {
+//            //默认选中All
+//            cell.selected = YES;
+//        }else if ([[MB_Utils shareUtil].rCareerId integerValue] == indexPath.row) {
+//            //上次选中的
+//            cell.selected = YES;
+//        }else{
+//            cell.selected = NO;
+//        }
+//    }
     
     return cell;
 }
@@ -82,13 +120,13 @@
         if (indexPath.row == 0) {
             [MB_Utils shareUtil].fCareerId = @"";
         }else {
-            [MB_Utils shareUtil].fCareerId = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+            [MB_Utils shareUtil].fCareerId = self.dataArray[indexPath.row - 1];
         }
     }else {
         if (indexPath.row == 0) {
             [MB_Utils shareUtil].rCareerId = @"";
         }else {
-            [MB_Utils shareUtil].rCareerId = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+            [MB_Utils shareUtil].rCareerId = self.dataArray[indexPath.row - 1];
         }
     }
     
@@ -130,16 +168,18 @@
 - (UIView *)searchView {
     if (_searchView == nil) {
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 49)];
-        _searchView.backgroundColor = [UIColor redColor];
+        _searchView.backgroundColor = colorWithHexString(@"#444444");
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [_searchView addGestureRecognizer:tap];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 30, 30)];
-        imageView.image = [UIImage imageNamed:@"a"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, (CGRectGetHeight(self.searchView.frame) - 24) / 2, 24, 24)];
+        imageView.image = [UIImage imageNamed:@"ic_seach"];
         [_searchView addSubview:imageView];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 100, 50)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(self.searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(self.searchView.frame))];
+        label.font = [UIFont systemFontOfSize:15];
         label.text = @"songge";
+        label.textColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.5];
         [_searchView addSubview:label];
     }
     return _searchView;
@@ -154,7 +194,7 @@
         }
         _sexView.backgroundColor = [UIColor whiteColor];
         
-        UIImage *image = [UIImage imageNamed:@"ic_cz"];
+        NSArray *titleArray = @[@"All",@"Male",@"Female"];
         CGFloat btnWidth = kWindowWidth/3;
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -162,9 +202,9 @@
             button.tag = i;
             button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
             [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
-            [button setTitle:@"lojsongge" forState:UIControlStateNormal];
-            [button setImage:image forState:UIControlStateNormal];
-            [button setImage:image forState:UIControlStateSelected];
+            [button setTitle:titleArray[i] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"ic_wz"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
             [button setTitleColor:colorWithHexString(@"#8e8e8e") forState:UIControlStateNormal];
             [button setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
             [button addTarget:self action:@selector(sexBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -23,11 +23,13 @@
     
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
     [_backImageView sd_setImageWithURL:[NSURL URLWithString:user.fbackPic] placeholderImage:nil];
-//    _rankImageView.image = [UIImage imageNamed:@"a"];
     _usernameLabel.text = user.fname;
     _descLabel.text = @"";
     
+    [self layoutIfNeeded];
+    
     CGRect rect = _ablumScrollView.frame;
+    NSLog(@"rect = %@",NSStringFromCGRect(rect));
     for (UIView *subView in _ablumScrollView.subviews) {
         [subView removeFromSuperview];
     }

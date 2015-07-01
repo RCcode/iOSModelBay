@@ -19,6 +19,7 @@
 
 @implementation MB_SelectCareerViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -27,12 +28,21 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(rightBarButtonItemOnClick:)];
     
     [self.view addSubview:self.collectView];
-    self.dataArray = [[[MB_Utils shareUtil].careerDic allKeys] mutableCopy];
+    
+    //所有职业ID
+    NSArray *array = [[MB_Utils shareUtil].careerDic allKeys];
+    //按照ID升序排序
+    self.dataArray = [[array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *a = obj1;
+        NSString *b = obj2;
+        return [a compare:b options:NSNumericSearch];
+    }] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -48,13 +58,6 @@
     cell.careerLabel.text = [[MB_Utils shareUtil].careerDic objectForKey:self.dataArray[indexPath.row]];
     return cell;
 }
-
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-//    
-//    MB_CareerCollectViewCell *cell = (MB_CareerCollectViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    [self selectButtonOnClick:cell.selectButton];
-//}
 
 
 #pragma mark - private methods
@@ -97,24 +100,19 @@
                                  @"pic":[userDefaults objectForKey:kPic]};
         [[AFHttpTool shareTool] registWithParameters:params success:^(id response) {
             NSLog(@"regist %@",response);
-            if ([response[@"stat"] integerValue] == 10201) {
-                //用户名已存在
-                
-            }else{
-                
+            if ([response[@"stat"] integerValue] == 10000) {
+                MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+                [self presentViewController:tabVC animated:YES completion:nil];
             }
-            MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-            [self presentViewController:tabVC animated:YES completion:nil];
         } failure:^(NSError *err) {
             
         }];
     }
 }
 
-#pragma mark - getters & setters
 
+#pragma mark - getters & setters
 - (UICollectionView *)collectView {
-    
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         CGFloat itemWidth = (kWindowWidth - 2.5) / 2;

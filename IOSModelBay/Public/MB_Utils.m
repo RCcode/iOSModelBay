@@ -24,14 +24,32 @@ static MB_Utils *util = nil;
             util.rGender = -1;
             util.rCareerId = @"";
     
-            util.careerDic = @{@"0":@"aaa",
-                               @"1":@"bbb",
+            util.careerDic = @{@"1":@"bbb",
                                @"2":@"ccc",
                                @"3":@"ddd",
                                @"4":@"eee",
                                @"5":@"fff",
-                               @"6":@"ggg",};
+                               @"6":@"ggg",
+                               @"7":@"ggg",
+                               @"8":@"ggg",
+                               @"9":@"ggg",
+                               @"10":@"ggg",
+                               @"11":@"ggg",
+                               @"12":@"ggg",
+                               @"13":@"ggg"};
         });
+        
+        util.eyeColor = @[@"Black", @"Blue", @"Brown", @"Green", @"Hazel", @"Other"];
+        util.skincolor = @[@"Black", @"White", @"Olive", @"Tanned", @"Other"];
+        util.haircolor = @[@"Black", @"Blonde", @"Brown", @"Grey", @"Red", @"Other"];
+        util.shoesize = @[@"2", @"2.5", @"3", @"3.5", @"4", @"4.5", @"5", @"5.5", @"6", @"6.5", @"7", @"7.5", @"8", @"8.5", @"9", @"9.5", @"10", @"10.5", @"11", @"11.5", @"12", @"12.5", @"13", @"13.5", @"14", @"14.5"];
+        
+        
+        
+        
+        
+        
+        
     }
     return util;
 }

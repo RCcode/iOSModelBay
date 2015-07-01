@@ -41,6 +41,10 @@
     [self addPullRefresh];
     [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     
+    //重置筛选条件
+    [MB_Utils shareUtil].fGender = -1;
+    [MB_Utils shareUtil].fCareerId = @"";
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
 }
