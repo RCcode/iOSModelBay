@@ -39,17 +39,14 @@
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(100, 100);
+//    return self.dataArray.count;
+    return 100;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    MB_InstragramModel *model = self.dataArray[indexPath.row];
-    [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
+//    MB_InstragramModel *model = self.dataArray[indexPath.row];
+//    [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
     cell.careerLabel.hidden = YES;
     cell.selectButton.hidden = YES;
     return cell;
@@ -149,10 +146,14 @@ static CGFloat startY = 0;
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
-        NSLog(@"-----%f",self.view.frame.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        CGFloat space = 1;
+        CGFloat itemWidth = (kWindowWidth - space * 2) / 3;
+        layout.itemSize = CGSizeMake(itemWidth, itemWidth);
+        layout.minimumLineSpacing = 1;
+        layout.minimumInteritemSpacing = 1;
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) collectionViewLayout:layout];
-        _collectView.backgroundColor = [UIColor redColor];
+        _collectView.backgroundColor = colorWithHexString(@"#ffffff");
         _collectView.alwaysBounceVertical = YES;
         _collectView.delegate        = self;
         _collectView.dataSource      = self;

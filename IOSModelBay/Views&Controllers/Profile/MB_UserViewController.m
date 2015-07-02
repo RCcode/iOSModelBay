@@ -40,7 +40,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor greenColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.title = @"VINCENT";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     [self.view addSubview:self.tableView];
@@ -137,7 +137,7 @@ static CGFloat startY = -64;
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
 //    inviteVC.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_SelectCareerViewController *inviteVC = [[MB_SelectCareerViewController alloc] init];
+    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
         inviteVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:inviteVC animated:YES];
 }
@@ -158,9 +158,9 @@ static CGFloat startY = -64;
     messageVC.containerViewRect    = self.containerView.frame;
     collectVC.containerViewRect      = self.containerView.frame;
     
+    [self addChildViewController:instragramVC];
     [self addChildViewController:summaryVC];
     [self addChildViewController:ablumVC];
-    [self addChildViewController:instragramVC];
     [self addChildViewController:messageVC];
     [self addChildViewController:collectVC];
     
@@ -200,7 +200,7 @@ static CGFloat startY = -64;
 - (MB_UserInfoView *)userInfoView {
     if (_userInfoView == nil) {
         _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
-        _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, 250);
+        _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, 186);
         [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
         [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
         _userInfoView.nameLabel.text = _user.fname;
@@ -215,8 +215,8 @@ static CGFloat startY = -64;
 
 - (UIView *)menuView {
     if (_menuView == nil) {
-        _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
-        _menuView.backgroundColor = [UIColor grayColor];
+        _menuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
+        _menuView.backgroundColor = colorWithHexString(@"#222222");
         
         NSArray *images = @[@"ic_instagram",@"ic_information",@"ic_set",@"ic_message",@"ic_collection"];
         NSArray *images_h  = @[@"ic_instagram_h",@"ic_information_h",@"ic_set_h",@"ic_message_h",@"ic_collection_h"];

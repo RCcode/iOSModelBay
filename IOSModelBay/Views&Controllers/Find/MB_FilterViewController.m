@@ -172,11 +172,11 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [_searchView addGestureRecognizer:tap];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, (CGRectGetHeight(self.searchView.frame) - 24) / 2, 24, 24)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, (CGRectGetHeight(_searchView.frame) - 24) / 2, 24, 24)];
         imageView.image = [UIImage imageNamed:@"ic_seach"];
         [_searchView addSubview:imageView];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(self.searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(self.searchView.frame))];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(_searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(_searchView.frame))];
         label.font = [UIFont systemFontOfSize:15];
         label.text = @"songge";
         label.textColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.5];

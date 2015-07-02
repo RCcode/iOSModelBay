@@ -11,8 +11,7 @@
 @implementation MB_SummaryTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    
+    // Initialization code    
 }
 
 -(void)layoutSubviews {

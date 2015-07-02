@@ -11,11 +11,12 @@
 @protocol InviteViewDelegate <NSObject>
 
 @optional
+- (void)textFieldReturnClick:(UITextField *)textField;
 - (void)inviteRightViewOnClick:(UIButton *)button;
 
 @end
 
-@interface MB_InviteView : UIView
+@interface MB_InviteView : UIView<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UITextField *textField;

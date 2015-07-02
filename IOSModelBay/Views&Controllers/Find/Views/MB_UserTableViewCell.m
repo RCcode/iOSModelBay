@@ -12,12 +12,22 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setUser:(MB_User *)user {
+    _user = user;
+    
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
+    _usernameLabel.text = user.fname;
+    _fullnameLabel.text = user.ffullName;
 }
 
 @end

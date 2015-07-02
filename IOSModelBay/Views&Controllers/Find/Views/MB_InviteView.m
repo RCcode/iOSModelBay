@@ -16,21 +16,25 @@
     if (self) {
         _delegate = delegate;
         _backView = [[UIView alloc] initWithFrame:frame];
-        _backView.backgroundColor = [UIColor colorWithHue:0 saturation:0 brightness:0 alpha:0.5];
+        _backView.backgroundColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.6];
         [self addSubview:_backView];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [_backView addGestureRecognizer:tap];
         
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 100, kWindowWidth, 100)];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 69, kWindowWidth, 64)];
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.backgroundColor = [UIColor whiteColor];
         _textField.rightViewMode = UITextFieldViewModeAlways;
+        _textField.returnKeyType = UIReturnKeyDone;
+        _textField.delegate = self;
+        _textField.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         [self addSubview:_textField];
         
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_rightButton setFrame:CGRectMake(0, 0, 30, 30)];
-        [_rightButton setImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        _rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 13);
+        [_rightButton setFrame:CGRectMake(0, 0, 37, 40)];
+        [_rightButton setImage:[UIImage imageNamed:@"user"] forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(rightButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         _textField.rightView =  _rightButton;
@@ -48,12 +52,12 @@
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([_delegate respondsToSelector:@selector(textFieldReturnClick:)]) {
+        [_delegate textFieldReturnClick:textField];
+    }
+    return YES;
 }
-*/
 
 @end

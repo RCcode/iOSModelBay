@@ -10,12 +10,21 @@
 
 @implementation MB_UserInfoView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib {
+    
+    for (NSString *fa in [UIFont familyNames]) {
+        for (NSString *name in [UIFont fontNamesForFamilyName:fa]) {
+            NSLog(@"%@",name);
+        }
+    }
+    
+    _inviteButton.layer.borderWidth = 1;
+    _inviteButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+    
+    _likeButton.layer.borderWidth = 1;
+    _likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+    
+//    _inviteButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
 }
-*/
 
 @end

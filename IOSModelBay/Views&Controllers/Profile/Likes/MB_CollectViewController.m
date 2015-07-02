@@ -117,15 +117,17 @@ static CGFloat startY = 0;
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
-        NSLog(@"-----%f",self.view.frame.size.height);
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        CGFloat itemWidth = (kWindowWidth - 5) / 3;
-        layout.itemSize = CGSizeMake(itemWidth, itemWidth);
-        layout.minimumLineSpacing = 2.5;
-        layout.minimumInteritemSpacing = 2.5;
+        CGFloat space = 7.0 / 2.0;
+        CGFloat itemWidth = (kWindowWidth - space * 4) / 3;
+        CGFloat itemHeight = itemWidth + 27;
+        layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+        layout.minimumLineSpacing = space;
+        layout.minimumInteritemSpacing = space;
+        layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
         
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, self.containerViewRect.size.height) collectionViewLayout:layout];
-        _collectView.backgroundColor = [UIColor whiteColor];
+        _collectView.backgroundColor = colorWithHexString(@"#eeeeee");
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_LikeCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
