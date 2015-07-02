@@ -15,6 +15,7 @@
 #import "MB_AddAblumMenuView.h"
 #import "MB_SelectPhotosViewController.h"
 #import "MB_SelectTemplateViewController.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 static NSString * const ReuseIdentifierAblum = @"ablum";
 static NSString * const ReuseIdentifierTemplate = @"template";
@@ -48,23 +49,57 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+//    return self.dataArray.count;
+    return 20;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 200;
+//    if (indexPath.row %2 == 0) {
+        NSLog(@"111111%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }]);
+        
+        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+//    }else {
+//        NSLog(@"22222%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
+//            [self configureCell2:cell atIndexPath:indexPath];
+//        }]);
+//        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
+//            [self configureCell2:cell atIndexPath:indexPath];
+//        }];
+//        return 0;
+//    }
+}
+
+- (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
+    cell.label2.text = @"";
+    cell.con2.constant = 0;
+    cell.label3.text = @"";
+    cell.con3.constant = 0;
+}
+
+- (void)configureCell2:(MB_SignalImageTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+//    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
+//    cell.label2.text = _text;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row % 2 == 0) {
+//    if (indexPath.row % 2 == 0) {
         MB_AlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierAblum forIndexPath:indexPath];
-        cell.ablum = self.dataArray[indexPath.row];
+//        cell.ablum = self.dataArray[indexPath.row];
+        [self configureCell:cell atIndexPath:indexPath];
         return cell;
-    }else {
-        MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
-        cell.ablum = self.dataArray[indexPath.row];
-        return cell;
-    }
+//    }else {
+//        MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
+////        cell.ablum = self.dataArray[indexPath.row];
+//        [self configureCell2:cell atIndexPath:indexPath];
+//        return cell;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,11 +123,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == 250) {
+            if (taleView.contentOffset.y == topViewHeight - 20) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -117,6 +152,7 @@ static CGFloat startY = 0;
     }];
 }
 
+//请求影集列表
 - (void)requestAblumListWithMinId:(NSInteger)minId {
     NSDictionary *params = @{@"id":@"",
                              @"token":@"",
@@ -179,6 +215,7 @@ static CGFloat startY = 0;
 
 
 #pragma mark - getters & setters
+//上部的制作相册按钮
 - (UIView *)addView {
     if (_addView == nil) {
         _addView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
@@ -199,12 +236,16 @@ static CGFloat startY = 0;
         _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+//        _tableView.estimatedRowHeight = 390;
+//        _tableView.rowHeight = UITableViewAutomaticDimension;
+        
         [_tableView registerNib:[UINib nibWithNibName:@"MB_AlbumTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierAblum];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
     }
     return _tableView;
 }
 
+//制作相册和模板的选项菜单
 - (UIView *)menuView {
     if (_menuView == nil) {
         _menuView = [[[NSBundle mainBundle] loadNibNamed:@"MB_AddAblumMenuView" owner:nil options:nil] firstObject];

@@ -99,11 +99,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == 250) {
+            if (taleView.contentOffset.y == topViewHeight - 20) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }

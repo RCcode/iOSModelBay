@@ -29,6 +29,8 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = colorWithHexString(@"#eeeeee");
+
     [self.view addSubview:self.tableView];
     [self requestUserDetail];
     
@@ -58,7 +60,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     if (section == 0) {
         return 1;
     }else if (section == 1){
-        return self.dataArray.count - 2;
+        return self.dataArray.count;
     }else {
         return 1;
     }
@@ -116,11 +118,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, 250) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == 250) {
+            if (taleView.contentOffset.y == topViewHeight - 20) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -155,7 +157,7 @@ static CGFloat startY = 0;
         _tableView.sectionHeaderHeight = 10.5;
         _tableView.sectionFooterHeight = 0;
         
-        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10.5)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10.5)];
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];
         

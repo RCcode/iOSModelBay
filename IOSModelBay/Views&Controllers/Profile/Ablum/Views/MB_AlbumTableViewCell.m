@@ -13,14 +13,14 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    _hub = [[RKNotificationHub alloc] initWithView:self.contentView];
-    [_hub moveCircleByX:20 Y:20]; // moves the circle five pixels left and 5 down
-    [_hub increment];
-    //    [hub hideCount]; // uncomment for a blank badge
-    [_hub pop];//缩放
-    //    [hub blink];//闪烁
-    //    [hub bump];//跳跃
-    [_hub scaleCircleSizeBy:1.0];//缩放大小
+//    _hub = [[RKNotificationHub alloc] initWithView:self.contentView];
+//    [_hub moveCircleByX:20 Y:20]; // moves the circle five pixels left and 5 down
+//    [_hub increment];
+//    //    [hub hideCount]; // uncomment for a blank badge
+//    [_hub pop];//缩放
+//    //    [hub blink];//闪烁
+//    //    [hub bump];//跳跃
+//    [_hub scaleCircleSizeBy:1.0];//缩放大小
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

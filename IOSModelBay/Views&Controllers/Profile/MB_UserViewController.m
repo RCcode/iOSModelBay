@@ -187,7 +187,7 @@ static CGFloat startY = -64;
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor redColor];
+//        _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -200,7 +200,7 @@ static CGFloat startY = -64;
 - (MB_UserInfoView *)userInfoView {
     if (_userInfoView == nil) {
         _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
-        _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, 186);
+        _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, topViewHeight);
         [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
         [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
         _userInfoView.nameLabel.text = _user.fname;
@@ -238,9 +238,9 @@ static CGFloat startY = -64;
 - (UIView *)containerView {
     if (_containerView == nil) {
         if (self.hidesBottomBarWhenPushed) {
-            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame))];
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 20)];
         }else{
-            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49)];
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49 - 20)];
         }
         _containerView.backgroundColor = [UIColor blueColor];
         _containerView.pagingEnabled = YES;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MB_User.h"
 
+#define topViewHeight 186
+
 typedef  NS_ENUM(NSInteger, ComeFromType) {
     ComeFromTypeUser,
     ComeFromTypeSelf

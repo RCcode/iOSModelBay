@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "MB_Ablum.h"
-#import "RKNotificationHub.h"
+//#import "RKNotificationHub.h"
 
 @interface MB_AlbumTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con1;
+
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con4;
+
 @property (nonatomic, strong) MB_Ablum *ablum;
 
-@property (nonatomic, strong) RKNotificationHub *hub;
+//@property (nonatomic, strong) RKNotificationHub *hub;
 
 @end
