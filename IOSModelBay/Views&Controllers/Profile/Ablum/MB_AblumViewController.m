@@ -25,6 +25,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 @property (nonatomic, strong) UIView *addView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) NSInteger minId;
+
+@property (nonatomic, strong) UIView *coverView;
 @property (nonatomic, strong) MB_AddAblumMenuView *menuView;
 
 
@@ -36,8 +38,10 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.addView];
     [self.view addSubview:self.tableView];
+    
     [self addPullRefresh];
     [self requestAblumListWithMinId:0];
 }
@@ -48,20 +52,23 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 10;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return self.dataArray.count;
-    return 20;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if (indexPath.row %2 == 0) {
-        NSLog(@"111111%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
-            [self configureCell:cell atIndexPath:indexPath];
-        }]);
-        
-        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
-            [self configureCell:cell atIndexPath:indexPath];
-        }];
+//        NSLog(@"111111%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+//            [self configureCell:cell atIndexPath:indexPath];
+//        }]);
+//        
+//        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+//            [self configureCell:cell atIndexPath:indexPath];
+//        }];
 //    }else {
 //        NSLog(@"22222%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
 //            [self configureCell2:cell atIndexPath:indexPath];
@@ -71,10 +78,12 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //        }];
 //        return 0;
 //    }
+    return 300;
 }
 
 - (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    cell.ablum = [[MB_Ablum alloc] init];
     cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
     cell.label2.text = @"";
     cell.con2.constant = 0;
@@ -177,39 +186,52 @@ static CGFloat startY = 0;
 
 //添加作品集
 - (void)addButtonOnClick:(UIButton *)button{
+    //使菜单出现
+    self.menuView.isShowing = YES;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.coverView];
     [[UIApplication sharedApplication].keyWindow addSubview:self.menuView];
-    if (self.menuView.isShowing) {
-        self.menuView.isShowing = NO;
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect rect = self.menuView.frame;
-            self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
-        }];
-    }else {
-        self.menuView.isShowing = YES;
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect rect = self.menuView.frame;
-            self.menuView.frame = CGRectMake(0, kWindowHeight - rect.size.height, kWindowWidth, rect.size.height);
-        }];
-    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.coverView.hidden = 0;
+        CGRect rect = self.menuView.frame;
+        self.menuView.frame = CGRectMake(0, kWindowHeight - rect.size.height, kWindowWidth, rect.size.height);
+    }];
+}
+
+- (void)handleCoverViewTap:(UITapGestureRecognizer *)tap {
+    //使菜单消失
+    self.menuView.isShowing = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.coverView.hidden = 1;
+        CGRect rect = self.menuView.frame;
+        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
+    } completion:^(BOOL finished) {
+        [self.coverView removeFromSuperview];
+        [self.menuView removeFromSuperview];
+    }];
 }
 
 //添加相册
 - (void)albumButtonOnClick:(UIButton *)button {
     [UIView animateWithDuration:0.5 animations:^{
+        self.coverView.hidden = YES;
         CGRect rect = self.menuView.frame;
         self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
     }];
     MB_SelectPhotosViewController *vc = [[MB_SelectPhotosViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //添加模板
 - (void)templateButtonOnClick:(UIButton *)button {
     [UIView animateWithDuration:0.5 animations:^{
+        self.coverView.hidden = YES;
         CGRect rect = self.menuView.frame;
         self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
     }];
     MB_SelectTemplateViewController *vc = [[MB_SelectTemplateViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -218,11 +240,12 @@ static CGFloat startY = 0;
 //上部的制作相册按钮
 - (UIView *)addView {
     if (_addView == nil) {
-        _addView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
-        _addView.backgroundColor = [UIColor grayColor];
+        _addView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 64)];
+        _addView.backgroundColor = colorWithHexString(@"#eeeeee");
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = _addView.bounds;
+        button.frame = CGRectMake(21.0 / 2, 21.0 / 2, kWindowWidth - 21, 43);
+        button.backgroundColor = [UIColor whiteColor];
         [button setImage:[UIImage imageNamed:@"ic_add"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(addButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_addView addSubview:button];
@@ -232,12 +255,16 @@ static CGFloat startY = 0;
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(self.addView.frame)) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor redColor];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(self.addView.frame)) style:UITableViewStyleGrouped];
+        _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.delegate = self;
         _tableView.dataSource = self;
-//        _tableView.estimatedRowHeight = 390;
-//        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.sectionHeaderHeight = 0.5;
+        _tableView.sectionFooterHeight = 10.5;
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.5)];
+        [_tableView setTableFooterView:view];
+        [_tableView setTableHeaderView:view];
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_AlbumTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierAblum];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
@@ -245,13 +272,23 @@ static CGFloat startY = 0;
     return _tableView;
 }
 
+//黑色半透明背景
+-(UIView *)coverView {
+    if (_coverView == nil) {
+        _coverView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _coverView.backgroundColor = [colorWithHexString(@"#000000") colorWithAlphaComponent:0.3];
+        _coverView.hidden = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCoverViewTap:)];
+        [_coverView addGestureRecognizer:tap];
+    }
+    return _coverView;
+}
+
 //制作相册和模板的选项菜单
 - (UIView *)menuView {
     if (_menuView == nil) {
         _menuView = [[[NSBundle mainBundle] loadNibNamed:@"MB_AddAblumMenuView" owner:nil options:nil] firstObject];
-        _menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, 150);
-        _menuView.backgroundColor = [UIColor grayColor];
-        _menuView.isShowing = YES;
+        _menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, 139);
         [_menuView.albumButton addTarget:self action:@selector(albumButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_menuView.templateButton addTarget:self action:@selector(templateButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

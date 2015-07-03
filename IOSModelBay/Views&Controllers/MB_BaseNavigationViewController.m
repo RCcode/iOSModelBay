@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     self.navigationBar.translucent = YES;
-    self.navigationBar.barTintColor = colorWithHexString(@"#222222");
+    self.navigationBar.barTintColor = colorWithHexString(@"#111111");
     self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.barStyle = UIBarStyleBlack;
 }

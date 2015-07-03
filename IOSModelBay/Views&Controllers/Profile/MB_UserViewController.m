@@ -102,9 +102,9 @@ static CGFloat startY = -64;
     if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
-            if (scrollView.contentOffset.y != 250) {
+            if (scrollView.contentOffset.y != topViewHeight - 20) {
                 NSLog(@"dddddd");
-                [scrollView setContentOffset:CGPointMake(0, 250) animated:YES];
+                [scrollView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
             }
         }else{
             //向下拉
@@ -130,16 +130,16 @@ static CGFloat startY = -64;
 #pragma mark - private methods
 - (void)test {
 //    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
-//    [self.navigationController pushViewController:inviteVC animated:YES];
+    
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
-//    [self.navigationController pushViewController:inviteVC animated:YES];
-//    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
+    
+    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
+    
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
-//    inviteVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:inviteVC animated:YES];
-    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
-        inviteVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:inviteVC animated:YES];
+    
+//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    inviteVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
 - (void)addChildViewControllers {

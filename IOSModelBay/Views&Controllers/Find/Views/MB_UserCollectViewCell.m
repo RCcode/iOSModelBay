@@ -11,7 +11,7 @@
 @implementation MB_UserCollectViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 -(void)setUser:(MB_User *)user {
@@ -35,9 +35,7 @@
         CGFloat topSpace = _careerView.frame.size.height - width - 6;//与父视图的上间隔
         for (int i = 0; i < count; i ++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(leadingSpace + i *(width + space), topSpace, width, width)];
-            imageView.image = [UIImage imageNamed:@"b"];
-            imageView.layer.cornerRadius = width / 2;
-            imageView.layer.masksToBounds = YES;
+            imageView.image = [UIImage imageNamed:[[MB_Utils shareUtil].careerDic objectForKey:careers[i]]];
             [_careerView addSubview:imageView];
         }
     }

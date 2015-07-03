@@ -24,19 +24,19 @@ static MB_Utils *util = nil;
             util.rGender = -1;
             util.rCareerId = @"";
     
-            util.careerDic = @{@"1":@"bbb",
-                               @"2":@"ccc",
-                               @"3":@"ddd",
-                               @"4":@"eee",
-                               @"5":@"fff",
-                               @"6":@"ggg",
-                               @"7":@"ggg",
-                               @"8":@"ggg",
-                               @"9":@"ggg",
-                               @"10":@"ggg",
-                               @"11":@"ggg",
-                               @"12":@"ggg",
-                               @"13":@"ggg"};
+            util.careerDic = @{@"1":@"ic_actor",
+                               @"2":@"ic_brokers",
+                               @"3":@"ic_dancer",
+                               @"4":@"ic_dietitian",
+                               @"5":@"ic_fashion",
+                               @"6":@"ic_fitness-coach",
+                               @"7":@"ic_hairstyle",
+                               @"8":@"ic_makeup",
+                               @"9":@"ic_model",
+                               @"10":@"ic_newface",
+                               @"11":@"ic_photographer",
+                               @"12":@"ic_singer",
+                               @"13":@"ic_stylist"};
         });
         
         util.eyeColor = @[@"Black", @"Blue", @"Brown", @"Green", @"Hazel", @"Other"];

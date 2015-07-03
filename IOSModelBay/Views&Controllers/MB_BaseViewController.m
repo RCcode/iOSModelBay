@@ -142,4 +142,15 @@
     [super didReceiveMemoryWarning];
 }
 
+- (UILabel *)titleLabel {
+    if (_titleLabel == nil) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
+        _titleLabel.text = @"MODELBAY";
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLabel;
+}
+
 @end

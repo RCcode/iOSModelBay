@@ -86,6 +86,8 @@
 		CD46C12F1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C12E1B3A86E9000E2F0C /* MB_AddAblumMenuView.xib */; };
 		CD46C1331B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46C1311B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m */; };
 		CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */; };
+		CD48D3D61B469CAF0023ADAA /* MB_IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */; };
+		CD48D3D91B46A3240023ADAA /* MB_EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */; };
 		CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
@@ -99,6 +101,8 @@
 		CD7965F41B34154100977A7F /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EF1B34154100977A7F /* MB_Utils.m */; };
 		CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965F11B34154100977A7F /* UIImageEffects.m */; };
 		CD7B11271B41012B006C22A4 /* RKNotificationHub.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B11261B41012B006C22A4 /* RKNotificationHub.m */; };
+		CD9CF24D1B465C3700FF4588 /* MB_AblumDescView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CF24C1B465C3700FF4588 /* MB_AblumDescView.m */; };
+		CD9CF2511B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */; };
 		CD9D8E911B4523D0000E1C8D /* GOTHIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E8D1B4523D0000E1C8D /* GOTHIC.TTF */; };
 		CD9D8E921B4523D0000E1C8D /* GOTHICBI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E8E1B4523D0000E1C8D /* GOTHICBI.TTF */; };
 		CD9D8E931B4523D0000E1C8D /* GOTHICB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E8F1B4523D0000E1C8D /* GOTHICB.TTF */; };
@@ -358,6 +362,10 @@
 		CD46C1301B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_selectPhotosCollectViewCell.h; sourceTree = "<group>"; };
 		CD46C1311B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_selectPhotosCollectViewCell.m; sourceTree = "<group>"; };
 		CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_selectPhotosCollectViewCell.xib; sourceTree = "<group>"; };
+		CD48D3D41B469CAF0023ADAA /* MB_IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_IndicatorView.h; sourceTree = "<group>"; };
+		CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_IndicatorView.m; sourceTree = "<group>"; };
+		CD48D3D71B46A3240023ADAA /* MB_EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditViewController.h; sourceTree = "<group>"; };
+		CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditViewController.m; sourceTree = "<group>"; };
 		CD79643E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -385,6 +393,9 @@
 		CD7965F11B34154100977A7F /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		CD7B11251B41012B006C22A4 /* RKNotificationHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKNotificationHub.h; sourceTree = "<group>"; };
 		CD7B11261B41012B006C22A4 /* RKNotificationHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKNotificationHub.m; sourceTree = "<group>"; };
+		CD9CF24B1B465C3600FF4588 /* MB_AblumDescView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AblumDescView.h; sourceTree = "<group>"; };
+		CD9CF24C1B465C3700FF4588 /* MB_AblumDescView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AblumDescView.m; sourceTree = "<group>"; };
+		CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ACASLONPRO-REGULAR.OTF"; sourceTree = "<group>"; };
 		CD9D8E8D1B4523D0000E1C8D /* GOTHIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GOTHIC.TTF; sourceTree = "<group>"; };
 		CD9D8E8E1B4523D0000E1C8D /* GOTHICBI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GOTHICBI.TTF; sourceTree = "<group>"; };
 		CD9D8E8F1B4523D0000E1C8D /* GOTHICB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = GOTHICB.TTF; sourceTree = "<group>"; };
@@ -939,6 +950,7 @@
 		CD9D8E8C1B4523C2000E1C8D /* 字体 */ = {
 			isa = PBXGroup;
 			children = (
+				CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */,
 				CD9D8E951B4540F1000E1C8D /* FUTURASTD-BOOK.OTF */,
 				CD9D8E8D1B4523D0000E1C8D /* GOTHIC.TTF */,
 				CD9D8E8E1B4523D0000E1C8D /* GOTHICBI.TTF */,
@@ -1277,6 +1289,8 @@
 				CD390F771B34218E00254740 /* MB_CommentTableViewCell.h */,
 				CD390F781B34218E00254740 /* MB_CommentTableViewCell.m */,
 				CD390F791B34218E00254740 /* MB_CommentTableViewCell.xib */,
+				CD9CF24B1B465C3600FF4588 /* MB_AblumDescView.h */,
+				CD9CF24C1B465C3700FF4588 /* MB_AblumDescView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1286,6 +1300,8 @@
 			children = (
 				CDD5372C1B340CB6008B436C /* MB_SelectTemplateViewController.h */,
 				CDD5372D1B340CB6008B436C /* MB_SelectTemplateViewController.m */,
+				CD48D3D71B46A3240023ADAA /* MB_EditViewController.h */,
+				CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */,
 				CDD5372E1B340CB6008B436C /* Views */,
 			);
 			path = Template;
@@ -1294,6 +1310,8 @@
 		CDD5372E1B340CB6008B436C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD48D3D41B469CAF0023ADAA /* MB_IndicatorView.h */,
+				CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1388,6 +1406,7 @@
 				CD9D8E931B4523D0000E1C8D /* GOTHICB.TTF in Resources */,
 				CD05757B1B3416180015BBDA /* RC_PopUpADView.xib in Resources */,
 				CD9D8E961B4540F1000E1C8D /* FUTURASTD-BOOK.OTF in Resources */,
+				CD9CF2511B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF in Resources */,
 				6F55A4B51B1D7567006DA537 /* Images.xcassets in Resources */,
 				CDD537671B340D29008B436C /* b.png in Resources */,
 				CDD537571B340CB6008B436C /* MB_SummaryTableViewCell.xib in Resources */,
@@ -1445,10 +1464,12 @@
 				CD46C12D1B3A86D7000E2F0C /* MB_AddAblumMenuView.m in Sources */,
 				CD0575891B3416180015BBDA /* UIImage+WebP.m in Sources */,
 				CD0575751B3416180015BBDA /* RC_GetPath.m in Sources */,
+				CD48D3D61B469CAF0023ADAA /* MB_IndicatorView.m in Sources */,
 				CD0575861B3416180015BBDA /* UIButton+WebCache.m in Sources */,
 				CD05757A1B3416180015BBDA /* RC_PopUpADView.m in Sources */,
 				CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */,
 				CDD537441B340CB6008B436C /* MB_AblumViewController.m in Sources */,
+				CD48D3D91B46A3240023ADAA /* MB_EditViewController.m in Sources */,
 				CD0575611B3416180015BBDA /* AFHTTPSessionManager.m in Sources */,
 				CD0575621B3416180015BBDA /* AFNetworkReachabilityManager.m in Sources */,
 				CDD5374D1B340CB6008B436C /* MB_UserInfoView.m in Sources */,
@@ -1458,6 +1479,7 @@
 				CD05755F1B3416180015BBDA /* AFHTTPRequestOperation.m in Sources */,
 				CDD537321B340CB6008B436C /* MB_FilterCollectViewCell.m in Sources */,
 				CD0575601B3416180015BBDA /* AFHTTPRequestOperationManager.m in Sources */,
+				CD9CF24D1B465C3700FF4588 /* MB_AblumDescView.m in Sources */,
 				CD0575671B3416180015BBDA /* AFURLSessionManager.m in Sources */,
 				CDD5375E1B340CB6008B436C /* MB_WriteInfoViewController.m in Sources */,
 				CD05756A1B3416180015BBDA /* UIAlertView+AFNetworking.m in Sources */,

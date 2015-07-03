@@ -55,6 +55,14 @@
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectButton.selected = [self.selectedArray containsObject:self.dataArray[indexPath.row]];
+    if ([self.selectedArray containsObject:self.dataArray[indexPath.row]]) {
+        
+        cell.coverView.backgroundColor = [[UIColor redColor]colorWithAlphaComponent:0.3];
+    }
+    else{
+        cell.coverView.backgroundColor = [UIColor clearColor];
+
+    }
     cell.careerLabel.text = [[MB_Utils shareUtil].careerDic objectForKey:self.dataArray[indexPath.row]];
     return cell;
 }

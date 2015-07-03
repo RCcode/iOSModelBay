@@ -32,6 +32,17 @@
 - (void)setAblum:(MB_Ablum *)ablum {
     _ablum = ablum;
     
+    [self layoutIfNeeded];
+    CGRect rect = _imagesScrollView.frame;
+    for (int i = 0; i < 5; i ++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetHeight(rect) + 1) * i, 0, CGRectGetHeight(rect), CGRectGetHeight(rect))];
+        imageView.image = [UIImage imageNamed:@"a"];
+        imageView.backgroundColor = [UIColor greenColor];
+        [_imagesScrollView addSubview:imageView];
+    }
+    _imagesScrollView.bounces = YES;
+    _imagesScrollView.alwaysBounceHorizontal = YES;
+    _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * 5 + 1 * 4, CGRectGetHeight(rect));
 }
 
 @end

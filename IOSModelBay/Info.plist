@@ -6,6 +6,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ACASLONPRO-REGULAR.OTF</string>
 		<string>GOTHICB.TTF</string>
 		<string>GOTHICBI.TTF</string>
 		<string>GOTHICI.TTF</string>

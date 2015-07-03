@@ -15,6 +15,7 @@ static NSString * const ReuseIdentifier = @"cell";
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 //添加下拉刷新
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview

@@ -12,6 +12,11 @@
 
 @interface MB_AlbumTableViewCell : UITableViewCell
 
+
+@property (weak, nonatomic) IBOutlet UIScrollView *imagesScrollView;
+
+
+
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con1;
 
