@@ -138,7 +138,6 @@
         _skipBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
         _skipBtn.backgroundColor = [UIColor yellowColor];
         _skipBtn.center = CGPointMake(kWindowWidth/2, 400);
-        _skipBtn.titleLabel.textColor = [UIColor redColor];
         [_skipBtn setTitle:@"skip" forState:UIControlStateNormal];
         [_skipBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_skipBtn addTarget:self action:@selector(skipBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];

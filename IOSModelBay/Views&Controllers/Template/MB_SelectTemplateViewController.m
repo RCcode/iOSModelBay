@@ -87,7 +87,7 @@
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.frame = CGRectMake(0, kWindowHeight - 50, kWindowWidth, 49);
         _button.backgroundColor = colorWithHexString(@"#ff4f42");
-        _button.titleLabel.textColor = colorWithHexString(@"#ffffff");
+        [_button setTitleColor:colorWithHexString(@"#ffffff") forState:UIControlStateNormal];
         _button.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Book" size:16];
         [_button setTitle:@"USE THIS TEMPLATE" forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];

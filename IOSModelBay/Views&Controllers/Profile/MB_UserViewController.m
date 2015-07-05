@@ -79,7 +79,7 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-static CGFloat startY = -64;
+static CGFloat startY;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
         startY = scrollView.contentOffset.y;
@@ -99,6 +99,27 @@ static CGFloat startY = -64;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        if (scrollView == self.tableView) {
+            if (scrollView.contentOffset.y - startY > 0) {
+                //向上拉
+                if (scrollView.contentOffset.y != topViewHeight - 20) {
+                    NSLog(@"dddddd");
+                    [scrollView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                }
+            }else{
+                //向下拉
+                if (scrollView.contentOffset.y != -64) {
+                    NSLog(@"aaaaaa");
+                    [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
+                }
+            }
+        }
+
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉

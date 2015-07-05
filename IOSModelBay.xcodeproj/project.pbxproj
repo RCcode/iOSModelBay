@@ -23,6 +23,11 @@
 		6F8387F31B1D8C29002D2ED3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8387F21B1D8C29002D2ED3 /* StoreKit.framework */; };
 		6F8387F51B1D8C36002D2ED3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8387F41B1D8C36002D2ED3 /* SystemConfiguration.framework */; };
 		6F83880C1B1D9D6C002D2ED3 /* a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F83880B1B1D9D6C002D2ED3 /* a@2x.png */; };
+		9990C81A1B46D99000D2D496 /* MB_MessageReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990C8181B46D99000D2D496 /* MB_MessageReplyTableViewCell.m */; };
+		9990C81B1B46D99000D2D496 /* MB_MessageReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9990C8191B46D99000D2D496 /* MB_MessageReplyTableViewCell.xib */; };
+		9990C81D1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 9990C81C1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF */; };
+		99DECD2F1B49141600F5F716 /* MB_UploadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DECD2E1B49141600F5F716 /* MB_UploadView.m */; };
+		99DECD311B49142200F5F716 /* MB_UploadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99DECD301B49142200F5F716 /* MB_UploadView.xib */; };
 		CD05755E1B3416180015BBDA /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0574ED1B3416180015BBDA /* libGoogleAdMobAds.a */; };
 		CD05755F1B3416180015BBDA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0574F01B3416180015BBDA /* AFHTTPRequestOperation.m */; };
 		CD0575601B3416180015BBDA /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0574F21B3416180015BBDA /* AFHTTPRequestOperationManager.m */; };
@@ -211,6 +216,13 @@
 		6F8387F21B1D8C29002D2ED3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6F8387F41B1D8C36002D2ED3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F83880B1B1D9D6C002D2ED3 /* a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "a@2x.png"; sourceTree = "<group>"; };
+		9990C8171B46D99000D2D496 /* MB_MessageReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MessageReplyTableViewCell.h; sourceTree = "<group>"; };
+		9990C8181B46D99000D2D496 /* MB_MessageReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_MessageReplyTableViewCell.m; sourceTree = "<group>"; };
+		9990C8191B46D99000D2D496 /* MB_MessageReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_MessageReplyTableViewCell.xib; sourceTree = "<group>"; };
+		9990C81C1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FUTURASTD-MEDIUM.OTF"; sourceTree = "<group>"; };
+		99DECD2D1B49141600F5F716 /* MB_UploadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_UploadView.h; sourceTree = "<group>"; };
+		99DECD2E1B49141600F5F716 /* MB_UploadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_UploadView.m; sourceTree = "<group>"; };
+		99DECD301B49142200F5F716 /* MB_UploadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_UploadView.xib; sourceTree = "<group>"; };
 		CD0574D01B3416180015BBDA /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		CD0574D11B3416180015BBDA /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		CD0574D21B3416180015BBDA /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -950,6 +962,7 @@
 		CD9D8E8C1B4523C2000E1C8D /* 字体 */ = {
 			isa = PBXGroup;
 			children = (
+				9990C81C1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF */,
 				CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */,
 				CD9D8E951B4540F1000E1C8D /* FUTURASTD-BOOK.OTF */,
 				CD9D8E8D1B4523D0000E1C8D /* GOTHIC.TTF */,
@@ -1044,6 +1057,9 @@
 				CDD536C71B340CB6008B436C /* MB_UserTableViewCell.h */,
 				CDD536C81B340CB6008B436C /* MB_UserTableViewCell.m */,
 				CDD536C91B340CB6008B436C /* MB_UserTableViewCell.xib */,
+				99DECD2D1B49141600F5F716 /* MB_UploadView.h */,
+				99DECD2E1B49141600F5F716 /* MB_UploadView.m */,
+				99DECD301B49142200F5F716 /* MB_UploadView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1090,6 +1106,9 @@
 				CDD1174C1B3A5036002BD897 /* MB_MessageTableViewCell.h */,
 				CDD1174D1B3A5036002BD897 /* MB_MessageTableViewCell.m */,
 				CDD1174E1B3A5036002BD897 /* MB_MessageTableViewCell.xib */,
+				9990C8171B46D99000D2D496 /* MB_MessageReplyTableViewCell.h */,
+				9990C8181B46D99000D2D496 /* MB_MessageReplyTableViewCell.m */,
+				9990C8191B46D99000D2D496 /* MB_MessageReplyTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1402,7 +1421,9 @@
 				6F55A4B31B1D7567006DA537 /* Main.storyboard in Resources */,
 				CDD537611B340CB6008B436C /* MB_CareerCollectViewCell.xib in Resources */,
 				6F55A4B81B1D7567006DA537 /* LaunchScreen.xib in Resources */,
+				99DECD311B49142200F5F716 /* MB_UploadView.xib in Resources */,
 				CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */,
+				9990C81D1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF in Resources */,
 				CD9D8E931B4523D0000E1C8D /* GOTHICB.TTF in Resources */,
 				CD05757B1B3416180015BBDA /* RC_PopUpADView.xib in Resources */,
 				CD9D8E961B4540F1000E1C8D /* FUTURASTD-BOOK.OTF in Resources */,
@@ -1419,6 +1440,7 @@
 				CDD5375F1B340CB6008B436C /* MB_WriteInfoViewController.xib in Resources */,
 				CD9D8E921B4523D0000E1C8D /* GOTHICBI.TTF in Resources */,
 				CDD537381B340CB6008B436C /* MB_UserTableViewCell.xib in Resources */,
+				9990C81B1B46D99000D2D496 /* MB_MessageReplyTableViewCell.xib in Resources */,
 				CD390F7B1B34218E00254740 /* MB_CommentTableViewCell.xib in Resources */,
 				CDD537481B340CB6008B436C /* MB_SignalImageTableViewCell.xib in Resources */,
 				CD9D8E941B4523D0000E1C8D /* GOTHICI.TTF in Resources */,
@@ -1452,6 +1474,7 @@
 				CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */,
 				CD46C1271B3A6A59000E2F0C /* MB_Message.m in Sources */,
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
+				9990C81A1B46D99000D2D496 /* MB_MessageReplyTableViewCell.m in Sources */,
 				CDD537421B340CB6008B436C /* MB_TabBarViewController.m in Sources */,
 				CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */,
 				CDD5374F1B340CB6008B436C /* MB_UserViewController.m in Sources */,
@@ -1478,6 +1501,7 @@
 				CDD537431B340CB6008B436C /* MB_NoticeViewController.m in Sources */,
 				CD05755F1B3416180015BBDA /* AFHTTPRequestOperation.m in Sources */,
 				CDD537321B340CB6008B436C /* MB_FilterCollectViewCell.m in Sources */,
+				99DECD2F1B49141600F5F716 /* MB_UploadView.m in Sources */,
 				CD0575601B3416180015BBDA /* AFHTTPRequestOperationManager.m in Sources */,
 				CD9CF24D1B465C3700FF4588 /* MB_AblumDescView.m in Sources */,
 				CD0575671B3416180015BBDA /* AFURLSessionManager.m in Sources */,
@@ -1650,7 +1674,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1689,7 +1713,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1715,7 +1739,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 			};
 			name = Debug;
 		};
@@ -1739,7 +1763,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 			};
 			name = Release;
 		};
@@ -1758,6 +1782,7 @@
 				INFOPLIST_FILE = IOSModelBayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IOSModelBay.app/IOSModelBay";
 			};
 			name = Debug;
@@ -1773,6 +1798,7 @@
 				INFOPLIST_FILE = IOSModelBayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b0374ab-a53d-4061-91a1-66f877968775";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IOSModelBay.app/IOSModelBay";
 			};
 			name = Release;

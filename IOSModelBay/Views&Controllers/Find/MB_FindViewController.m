@@ -12,11 +12,14 @@
 #import "MB_UserViewController.h"
 #import "JDFPeekabooCoordinator.h"
 #import "MB_User.h"
+#import "MB_UploadView.h"
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
 @property (nonatomic, assign) NSInteger minId;//分页用的
+
+@property (nonatomic, strong) MB_UploadView *uploadView;
 
 @end
 
@@ -41,8 +44,11 @@
     [MB_Utils shareUtil].fGender = -1;
     [MB_Utils shareUtil].fCareerId = @"";
     
+    [self.view addSubview:self.uploadView];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,6 +173,15 @@
         [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
+}
+
+- (MB_UploadView *)uploadView {
+    if (!_uploadView) {
+        _uploadView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UploadView" owner:nil options:nil] firstObject];
+        _uploadView.frame = CGRectMake(0, 64, kWindowWidth, 60);
+        _uploadView.indicateView.backgroundColor = colorWithHexString(@"#ff5842");
+    }
+    return _uploadView;
 }
 
 @end

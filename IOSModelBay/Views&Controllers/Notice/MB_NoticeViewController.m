@@ -9,10 +9,12 @@
 #import "MB_NoticeViewController.h"
 #import "MB_NoticeTableViewCell.h"
 #import "MB_MessageTableViewCell.h"
+#import "MB_MessageReplyTableViewCell.h"
 #import "MB_Notice.h"
 
 static NSString * const ReuseIdentifierNotice = @"notice";
 static NSString * const ReuseIdentifierMessage = @"message";
+static NSString * const ReuseIdentifierReply = @"reply";
 
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -43,23 +45,34 @@ static NSString * const ReuseIdentifierMessage = @"message";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+//    return self.dataArray.count;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    if (indexPath.row % 3 == 0) {
+        return 68;
+    }else if (indexPath.row % 3 == 1){
+        return 70;
+    }else {
+        return 130;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row %2 == 0) {
+    if (indexPath.row % 3 == 0) {
         MB_NoticeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierNotice forIndexPath:indexPath];
-        MB_Notice *notice = self.dataArray[indexPath.row];
-        cell.notice = notice;
+//        MB_Notice *notice = self.dataArray[indexPath.row];
+//        cell.notice = notice;
+        return cell;
+    }else if (indexPath.row % 3 == 1){
+        MB_MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierMessage forIndexPath:indexPath];
+//        MB_Notice *notice = self.dataArray[indexPath.row];
+//        cell.notice = notice;
         return cell;
     }else {
-        MB_MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierMessage forIndexPath:indexPath];
-        MB_Notice *notice = self.dataArray[indexPath.row];
-        cell.notice = notice;
+        MB_MessageReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierReply forIndexPath:indexPath];
         return cell;
     }
 }
@@ -130,6 +143,7 @@ static NSString * const ReuseIdentifierMessage = @"message";
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_NoticeTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierNotice];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_MessageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierMessage];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_MessageReplyTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierReply];
     }
     return _tableView;
 }
