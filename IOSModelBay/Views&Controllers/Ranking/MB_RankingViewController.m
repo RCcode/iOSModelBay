@@ -9,6 +9,7 @@
 #import "MB_RankingViewController.h"
 #import "MB_RankingTableViewCell.h"
 #import "MB_FilterViewController.h"
+#import "MB_UserViewController.h"
 #import "MB_User.h"
 
 @interface MB_RankingViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -77,6 +78,15 @@
     [cell.collectButton addTarget:self action:@selector(collectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeUser;
+    userVC.user = self.dataArray[indexPath.row];
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+
 
 #pragma mark - private methods
 - (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
