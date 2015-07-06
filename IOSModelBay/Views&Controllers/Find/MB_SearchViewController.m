@@ -226,7 +226,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(CGRectGetMaxX(label.frame), (CGRectGetHeight(_tableHeaderView.frame) - 29) / 2, 64, 29);
         [button setBackgroundColor:[UIColor redColor]];
-        button.titleLabel.textColor = colorWithHexString(@"#ffffff");
+        [button setTitleColor:colorWithHexString(@"#ffffff") forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
         [button setTitle:@"invite" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];

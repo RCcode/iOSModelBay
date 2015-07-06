@@ -18,8 +18,11 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 @interface MB_UserSummaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *editView;
 @property (nonatomic, strong) NSDictionary *detailDic;
 @property (nonatomic, strong) MB_UserDetail *detail;
+
+@property (nonatomic, assign) BOOL editing;//标记是否是编辑状态
 
 @end
 
@@ -146,6 +149,18 @@ static CGFloat startY = 0;
     }];
 }
 
+- (void)editButtonOnClick:(UIButton *)button {
+    self.editing = button.selected;
+    [self.tableView reloadData];
+    
+    if (button.selected) {
+        //更新用户信息到服务器
+        
+    }
+    
+    button.selected = !button.selected;
+}
+
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {
@@ -159,12 +174,34 @@ static CGFloat startY = 0;
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10.5)];
         [_tableView setTableFooterView:view];
-        [_tableView setTableHeaderView:view];
+        [_tableView setTableHeaderView:self.editView];
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_IntroduceTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierIntroduce];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_SummaryTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierSummary];
     }
     return _tableView;
+}
+
+- (UIView *)editView {
+    if (!_editView) {
+        _editView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 64)];
+        _editView.backgroundColor = colorWithHexString(@"#eeeeee");
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [UIColor whiteColor];
+        button.frame = CGRectMake(10.5, 10.5, _editView.frame.size.width - 21, 43);
+        button.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Medium" size:15];
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+        [button setTitleColor:colorWithHexString(@"#222222") forState:UIControlStateNormal];
+        [button setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
+        [button setTitle:@"EDIT" forState:UIControlStateNormal];
+        [button setTitle:@"SAVE" forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        [button setImage:[UIImage new] forState:UIControlStateSelected];
+        [button addTarget:self action:@selector(editButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_editView addSubview:button];
+    }
+    return _editView;
 }
 
 @end

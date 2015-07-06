@@ -17,7 +17,7 @@
 #import "MB_SelectTemplateViewController.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 
-static NSString * const ReuseIdentifierAblum = @"ablum";
+static NSString * const ReuseIdentifierAblum = @"ablummm";
 static NSString * const ReuseIdentifierTemplate = @"template";
 
 @interface MB_AblumViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -65,10 +65,9 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //        NSLog(@"111111%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
 //            [self configureCell:cell atIndexPath:indexPath];
 //        }]);
-//        
-//        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
-//            [self configureCell:cell atIndexPath:indexPath];
-//        }];
+//
+        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+        }];
 //    }else {
 //        NSLog(@"22222%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
 //            [self configureCell2:cell atIndexPath:indexPath];
@@ -78,7 +77,7 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //        }];
 //        return 0;
 //    }
-    return 300;
+//    return 300;
 }
 
 - (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -257,8 +256,7 @@ static CGFloat startY = 0;
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(self.addView.frame)) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+
         _tableView.sectionHeaderHeight = 0.5;
         _tableView.sectionFooterHeight = 10.5;
         
@@ -266,8 +264,10 @@ static CGFloat startY = 0;
         [_tableView setTableFooterView:view];
         [_tableView setTableHeaderView:view];
         
-        [_tableView registerNib:[UINib nibWithNibName:@"MB_AlbumTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierAblum];
-        [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_AlbumTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:ReuseIdentifierAblum];
+//        [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
     return _tableView;
 }
