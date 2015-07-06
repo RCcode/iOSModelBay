@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_AddTextViewController : UIViewController
+@interface MB_AddTextViewController : MB_BaseViewController
 
 @property (nonatomic, strong) NSMutableArray * urlArray;
 

@@ -25,15 +25,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="BWp-BC-VrE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BWp-BC-VrE">
                         <rect key="frame" x="12" y="12" width="32" height="32"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="hIj-pJ-eYv"/>
                             <constraint firstAttribute="width" constant="32" id="iBd-aP-uqe"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5he-44-MyB">
-                        <rect key="frame" x="56" y="12" width="54.5" height="13"/>
+                        <rect key="frame" x="56" y="12" width="55" height="13"/>
                         <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -52,22 +53,23 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDT-cL-JSn">
-                        <rect key="frame" x="299" y="11" width="13" height="13.5"/>
+                        <rect key="frame" x="299" y="11" width="13" height="14"/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reply" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQp-dj-Urf">
-                        <rect key="frame" x="126" y="12" width="28.5" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="reply" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQp-dj-Urf">
+                        <rect key="frame" x="126" y="12" width="29" height="13"/>
                         <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
                         <color key="textColor" red="1" green="0.30980392159999998" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jpp-wA-BEL">
-                        <rect key="frame" x="56" y="69" width="256" height="48.5"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jpp-wA-BEL">
+                        <rect key="frame" x="56" y="69" width="256" height="49"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="ohF-z9-cik">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ohF-z9-cik">
                                 <rect key="frame" x="6" y="6" width="32" height="32"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="GNr-fa-Ust"/>
                                     <constraint firstAttribute="height" constant="32" id="iBE-kJ-qoB"/>
@@ -121,7 +123,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="a.png" width="30" height="30"/>
         <image name="ic_time" width="11" height="11"/>
     </resources>
 </document>

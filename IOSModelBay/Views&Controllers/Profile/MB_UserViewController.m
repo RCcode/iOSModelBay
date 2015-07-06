@@ -28,6 +28,7 @@
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, strong) UIScrollView *containerView;
+@property (nonatomic, strong) UIView *commentView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
 
@@ -40,7 +41,10 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor greenColor];
-    self.navigationItem.title = @"VINCENT";
+    
+    self.titleLabel.text = @"VINCENT";
+    self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     [self.view addSubview:self.tableView];
@@ -154,11 +158,11 @@ static CGFloat startY;
     
 //    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
     
-    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
+//    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
     
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     
-//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
@@ -190,6 +194,8 @@ static CGFloat startY;
         vc.view.frame = CGRectMake(kWindowWidth * i, 0, kWindowWidth, CGRectGetHeight(self.containerView.frame));
         [self.containerView addSubview:vc.view];
     }
+    
+    [self.containerView addSubview:self.commentView];
     self.containerView.contentSize = CGSizeMake(kWindowWidth * 5, CGRectGetHeight(self.containerView.frame));
 }
 
@@ -213,7 +219,7 @@ static CGFloat startY;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
-//        _tableView.bounces = NO;
+        _tableView.bounces = NO;
     }
     return _tableView;
 }
@@ -268,6 +274,14 @@ static CGFloat startY;
         _containerView.delegate = self;
     }
     return _containerView;
+}
+
+- (UIView *)commentView {
+    if (!_commentView) {
+        _commentView = [[UIView alloc] initWithFrame:CGRectMake(kWindowWidth * 3, 200, kWindowWidth, 60)];
+        _commentView.backgroundColor = [UIColor greenColor];
+    }
+    return _commentView;
 }
 
 - (NSArray *)menuBtns {

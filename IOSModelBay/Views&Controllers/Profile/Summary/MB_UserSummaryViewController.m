@@ -10,6 +10,7 @@
 #import "MB_IntroduceTableViewCell.h"
 #import "MB_SummaryTableViewCell.h"
 #import "MB_UserDetail.h"
+#import "MB_EditSummaryViewController.h"
 
 static NSString * const ReuseIdentifierIntroduce = @"introduce";
 static NSString * const ReuseIdentifierSummary = @"summary";
@@ -37,15 +38,17 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     [self.view addSubview:self.tableView];
     [self requestUserDetail];
     
-    if (self.comeFromType == ComeFromTypeUser) {
-        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
-        if ([self.user.fcareerId containsString:@"1"]) {
-            self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
-        }else {
-            self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"专注领域",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
-        }
-    }else if (self.comeFromType == ComeFromTypeSelf) {
-        
+//    if (self.comeFromType == ComeFromTypeUser) {
+//        
+//    }else if (self.comeFromType == ComeFromTypeSelf) {
+//        
+//    }
+    
+    self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+    if ([self.user.fcareerId containsString:@"1"]) {
+        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+    }else {
+        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"专注领域",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
     }
 }
 
@@ -80,7 +83,6 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section == 0) {
         MB_IntroduceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierIntroduce forIndexPath:indexPath];
         
@@ -92,6 +94,20 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         cell.mainLabelWidth.constant = 60;
         cell.mainLabel.text = self.dataArray[indexPath.row];
         cell.subLabel.text = @"穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
+        
+        if (self.editing) {
+            //加虚线边框
+            cell.dashLineImageView.hidden = NO;
+            if (indexPath.row == self.dataArray.count - 1) {
+                cell.dashLineImageView.image = [UIImage imageNamed:@"edit_sjieshao"];
+            }else {
+                cell.dashLineImageView.image = [UIImage imageNamed:@"edit_sjieshao_up"];
+            }
+        }else {
+            //隐藏虚线边框
+            cell.dashLineImageView.hidden = YES;
+        }
+        
         return cell;
     }else {
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
@@ -99,12 +115,23 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         cell.mainLabelWidth.constant = 0;
         cell.mainLabel.text = @"";
         cell.subLabel.text = @"穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
+        
+        if (self.editing) {
+            cell.dashLineImageView.hidden = NO;
+            cell.dashLineImageView.image = [UIImage imageNamed:@"edit_sjieshao"];
+        }else {
+            cell.dashLineImageView.hidden = YES;
+        }
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.editing) {
+        MB_EditSummaryViewController *editVC = [[MB_EditSummaryViewController alloc] init];
+        [self.navigationController pushViewController:editVC animated:YES];
+    }
 }
 
 
@@ -150,12 +177,14 @@ static CGFloat startY = 0;
 }
 
 - (void)editButtonOnClick:(UIButton *)button {
-    self.editing = button.selected;
+    self.editing = !button.selected;
     [self.tableView reloadData];
     
     if (button.selected) {
         //更新用户信息到服务器
-        
+        self.tableView.separatorColor = colorWithHexString(@"#eeeeee");
+    }else{
+        self.tableView.separatorColor = [UIColor clearColor];
     }
     
     button.selected = !button.selected;
@@ -165,12 +194,17 @@ static CGFloat startY = 0;
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(10.5, 0, kWindowWidth - 21, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.sectionHeaderHeight = 10.5;
         _tableView.sectionFooterHeight = 0;
+        
+        _tableView.layoutMargins = UIEdgeInsetsZero;
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -10.5);
+        _tableView.clipsToBounds = NO;
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10.5)];
         [_tableView setTableFooterView:view];
@@ -184,19 +218,19 @@ static CGFloat startY = 0;
 
 - (UIView *)editView {
     if (!_editView) {
-        _editView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 64)];
+        _editView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 64)];
         _editView.backgroundColor = colorWithHexString(@"#eeeeee");
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor = [UIColor whiteColor];
-        button.frame = CGRectMake(10.5, 10.5, _editView.frame.size.width - 21, 43);
+        button.frame = CGRectMake(0, 10.5, _editView.frame.size.width, 43);
         button.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Medium" size:15];
         button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         [button setTitleColor:colorWithHexString(@"#222222") forState:UIControlStateNormal];
         [button setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
         [button setTitle:@"EDIT" forState:UIControlStateNormal];
         [button setTitle:@"SAVE" forState:UIControlStateSelected];
-        [button setImage:[UIImage imageNamed:@"b"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"ic_edit"] forState:UIControlStateNormal];
         [button setImage:[UIImage new] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(editButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_editView addSubview:button];

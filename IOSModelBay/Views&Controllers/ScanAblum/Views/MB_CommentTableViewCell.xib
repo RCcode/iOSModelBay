@@ -3,46 +3,86 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FUTURASTD-BOOK.OTF">
+            <string>FuturaStd-Book</string>
+        </mutableArray>
+        <mutableArray key="GOTHIC.TTF">
+            <string>CenturyGothic</string>
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MB_CommentTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xWH-4n-B9p" customClass="MB_CommentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xWH-4n-B9p" id="PRD-Yw-6SO">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uaw-32-RXz">
-                        <rect key="frame" x="8" y="11" width="31" height="34"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="hnE-Ok-u5V">
+                        <rect key="frame" x="12" y="12" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="nDZ-Qr-DAk"/>
+                            <constraint firstAttribute="height" constant="32" id="pon-1I-F03"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb1-Xt-pUK">
-                        <rect key="frame" x="47" y="10" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gr5-Pb-1lb">
+                        <rect key="frame" x="56" y="12" width="55" height="13"/>
+                        <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
+                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91o-Hp-SF3">
-                        <rect key="frame" x="278" y="11" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message:cxzcxzczxczx\ndfdsf" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uV-0V-2hO">
+                        <rect key="frame" x="56" y="34" width="160" height="14"/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qn-Kn-aZr">
-                        <rect key="frame" x="47" y="37" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWg-2L-SEg">
+                        <rect key="frame" x="299" y="11" width="13" height="14"/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_time" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-Fk-CkW">
+                        <rect key="frame" x="283" y="13" width="11" height="11"/>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="hnE-Ok-u5V" firstAttribute="leading" secondItem="PRD-Yw-6SO" secondAttribute="leading" constant="12" id="778-Cg-FSS"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="0uV-0V-2hO" secondAttribute="bottom" constant="12" id="Am8-vJ-bbW"/>
+                    <constraint firstItem="iWg-2L-SEg" firstAttribute="centerY" secondItem="WN7-Fk-CkW" secondAttribute="centerY" id="Cpa-h8-J5s"/>
+                    <constraint firstItem="iWg-2L-SEg" firstAttribute="leading" secondItem="WN7-Fk-CkW" secondAttribute="trailing" constant="5" id="Ipq-Pf-Jh7"/>
+                    <constraint firstItem="hnE-Ok-u5V" firstAttribute="top" secondItem="gr5-Pb-1lb" secondAttribute="top" id="QE2-Bi-cvB"/>
+                    <constraint firstItem="0uV-0V-2hO" firstAttribute="top" secondItem="gr5-Pb-1lb" secondAttribute="bottom" constant="9" id="Rcf-gd-f08"/>
+                    <constraint firstItem="iWg-2L-SEg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0uV-0V-2hO" secondAttribute="trailing" id="TQQ-RH-kIf"/>
+                    <constraint firstItem="0uV-0V-2hO" firstAttribute="leading" secondItem="gr5-Pb-1lb" secondAttribute="leading" id="cyG-Uf-Qtj"/>
+                    <constraint firstItem="hnE-Ok-u5V" firstAttribute="top" secondItem="PRD-Yw-6SO" secondAttribute="top" constant="12" id="e6M-EB-htZ"/>
+                    <constraint firstAttribute="trailing" secondItem="iWg-2L-SEg" secondAttribute="trailing" constant="8" id="fEx-7m-rah"/>
+                    <constraint firstItem="gr5-Pb-1lb" firstAttribute="leading" secondItem="hnE-Ok-u5V" secondAttribute="trailing" constant="12" id="jmO-BV-IND"/>
+                    <constraint firstItem="iWg-2L-SEg" firstAttribute="centerY" secondItem="gr5-Pb-1lb" secondAttribute="centerY" id="r9L-yi-eih"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="TQQ-RH-kIf"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="commentLabel" destination="1qn-Kn-aZr" id="yHb-MG-V16"/>
-                <outlet property="timeLabel" destination="91o-Hp-SF3" id="t6I-un-rbl"/>
-                <outlet property="userImageView" destination="Uaw-32-RXz" id="W7r-xK-4za"/>
-                <outlet property="usernameLabel" destination="Sb1-Xt-pUK" id="8mk-WB-DOj"/>
+                <outlet property="commentLabel" destination="0uV-0V-2hO" id="zZj-QQ-90N"/>
+                <outlet property="timeLabel" destination="iWg-2L-SEg" id="h2a-IH-H2T"/>
+                <outlet property="userImageView" destination="hnE-Ok-u5V" id="Ksx-La-cMy"/>
+                <outlet property="usernameLabel" destination="gr5-Pb-1lb" id="251-cc-DgA"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="a.png" width="30" height="30"/>
+        <image name="ic_time" width="11" height="11"/>
+    </resources>
 </document>

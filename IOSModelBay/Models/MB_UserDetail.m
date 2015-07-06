@@ -16,8 +16,10 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
+//        [self setValue:@"没有呢" forKey:key];
         return;
     }
+    
     [super setValue:value forUndefinedKey:key];
 }
 

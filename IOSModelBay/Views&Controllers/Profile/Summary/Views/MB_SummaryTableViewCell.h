@@ -13,6 +13,8 @@
 
 //@property (nonatomic, strong) CAShapeLayer *mylayer;
 
+@property (weak, nonatomic) IBOutlet UIImageView *dashLineImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *subLabel;

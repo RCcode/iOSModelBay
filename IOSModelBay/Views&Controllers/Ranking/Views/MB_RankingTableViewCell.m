@@ -12,8 +12,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    _collectButton.layer.borderColor = [UIColor blackColor].CGColor;
-    _collectButton.layer.borderWidth = 1;
     
     _ablumScrollView.pagingEnabled = NO;
 }
@@ -24,7 +22,7 @@
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
     [_backImageView sd_setImageWithURL:[NSURL URLWithString:user.fbackPic] placeholderImage:nil];
     _usernameLabel.text = user.fname;
-    _descLabel.text = @"";
+    _descLabel.text = [[user.fcareerId componentsSeparatedByString:@"|"] componentsJoinedByString:@"  |  "];
     
     [self layoutIfNeeded];
     
@@ -33,14 +31,15 @@
     for (UIView *subView in _ablumScrollView.subviews) {
         [subView removeFromSuperview];
     }
-    CGFloat imageWidth = kWindowWidth / 3;
+    CGFloat imageWidth = 90;
     for (int i = 0; i < 5; i ++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (imageWidth+2.5), 0, imageWidth, rect.size.height)];
-        imageView.image = [UIImage imageNamed:@"a"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(2 + i * (imageWidth+2), 2, imageWidth, rect.size.height - 2)];
+        imageView.backgroundColor = placeholderColor;
+//        imageView.image = [UIImage imageNamed:@"a"];
         imageView.userInteractionEnabled = YES;
         [_ablumScrollView addSubview:imageView];
     }
-    _ablumScrollView.contentSize = CGSizeMake(5 * imageWidth +10, rect.size.height);
+    _ablumScrollView.contentSize = CGSizeMake(5 * (imageWidth + 2) + 4, 0);
 }
 
 

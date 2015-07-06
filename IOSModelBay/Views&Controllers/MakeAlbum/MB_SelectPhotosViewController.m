@@ -27,7 +27,10 @@
     [super viewDidLoad];
     
     self.navigationItem.titleView = self.menuButton;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"a"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_confirm"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     [self.view addSubview:self.collectView];
     [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
@@ -44,10 +47,6 @@
     return self.dataArray.count;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(100, 100);
-}
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_selectPhotosCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     NSURL *url = self.dataArray[indexPath.row];
@@ -60,7 +59,12 @@
     return cell;
 }
 
+
 #pragma mark - private methods
+- (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
     NSMutableArray *selectedArray = [NSMutableArray arrayWithCapacity:0];
@@ -99,6 +103,7 @@
     imagePIcker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 }
 
+
 #pragma mark - getters & setters
 - (UIButton *)menuButton {
     if (_menuButton == nil) {
@@ -113,8 +118,14 @@
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        CGFloat space = 1;
+        CGFloat itemWidth = (kWindowWidth - 2 * space) / 3;
+        layout.itemSize = CGSizeMake(itemWidth, itemWidth);
+        layout.minimumLineSpacing = 1;
+        layout.minimumInteritemSpacing = 1;
+        
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
-        _collectView.backgroundColor = [UIColor redColor];
+        _collectView.backgroundColor = colorWithHexString(@"#ffffff");
         _collectView.alwaysBounceVertical = YES;
         _collectView.allowsMultipleSelection = YES;
         _collectView.delegate        = self;

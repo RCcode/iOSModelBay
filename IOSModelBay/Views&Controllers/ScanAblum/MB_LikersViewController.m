@@ -81,9 +81,10 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor redColor];
+        _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.rowHeight = 68;
         [_tableView registerNib:[UINib nibWithNibName:@"MB_LikersTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;

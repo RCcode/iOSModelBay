@@ -53,7 +53,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 300;
+    return 263;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,15 +70,13 @@
         cell.rankImageView.hidden = YES;
     }
     
-    cell.collectButton.tag = indexPath.row;
-    if (indexPath.row %2 == 0) {
-        cell.collectButton.selected = YES;
-        cell.collectButton.backgroundColor = [UIColor redColor];
+    //第一名显示王冠
+    if (indexPath.row == 0) {
+        cell.firstImageView.hidden = NO;
     }else {
-        cell.collectButton.selected = NO;
-        cell.collectButton.backgroundColor = [UIColor whiteColor];
+        cell.firstImageView.hidden = YES;
     }
-    [cell.collectButton addTarget:self action:@selector(collectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
@@ -158,6 +156,7 @@
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [UIView new];
         _tableView.tableFooterView = [UIView new];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_RankingTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }

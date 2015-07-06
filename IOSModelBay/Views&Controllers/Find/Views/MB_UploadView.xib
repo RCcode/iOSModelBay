@@ -16,8 +16,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="MDD-mS-Ezp">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MDD-mS-Ezp">
                     <rect key="frame" x="4" y="4" width="52" height="52"/>
+                    <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="5Vh-zF-9Up"/>
                         <constraint firstAttribute="width" constant="52" id="fMV-bm-XNH"/>
@@ -35,7 +36,7 @@
                         <constraint firstAttribute="height" constant="20" id="XEg-Db-h4k"/>
                         <constraint firstAttribute="width" constant="20" id="pe0-to-9mu"/>
                     </constraints>
-                    <state key="normal" image="a.png">
+                    <state key="normal" image="upload_refresh">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -45,9 +46,10 @@
                         <constraint firstAttribute="height" constant="20" id="J2V-Dk-7MW"/>
                         <constraint firstAttribute="width" constant="20" id="fmM-J4-otk"/>
                     </constraints>
-                    <state key="normal" image="a.png">
+                    <state key="normal" image="upload_wancheng">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="upload_close"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="978-Y3-v1J">
                     <rect key="frame" x="0.0" y="56" width="320" height="4"/>
@@ -84,7 +86,9 @@
         </view>
     </objects>
     <resources>
-        <image name="a.png" width="30" height="30"/>
+        <image name="upload_close" width="20" height="20"/>
+        <image name="upload_refresh" width="20" height="20"/>
+        <image name="upload_wancheng" width="20" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

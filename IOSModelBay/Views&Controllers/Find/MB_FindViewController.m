@@ -26,7 +26,6 @@
 @implementation MB_FindViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,8 +54,8 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 
+#pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -80,6 +79,20 @@
     userVC.user = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:userVC animated:YES];
 }
+
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.collectView) {
+        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
+//            self.collectView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+            self.uploadView.frame = CGRectMake(0, self.scrollCoordinator.topView.frame.origin.y + 44, kWindowWidth, 60);
+        }else{
+//            self.collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        }
+    }
+}
+
 
 #pragma mark - private methods
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {

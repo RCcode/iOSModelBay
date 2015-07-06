@@ -59,8 +59,9 @@
 #define kUtype @"utype"
 
 #define userDefaults [NSUserDefaults standardUserDefaults]
+#define placeholderColor colorWithHexString(@"#e3e3e3")
 
-#define kCanScrollNotification @"canScrollNotification"
+//#define kCanScrollNotification @"canScrollNotification"
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)

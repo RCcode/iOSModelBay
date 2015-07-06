@@ -49,6 +49,7 @@ static CGFloat const commentViewHeight = 50;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
+    cell.usernameLabel.text = @"songge";
     return cell;
 }
 
@@ -129,7 +130,7 @@ static CGFloat const commentViewHeight = 50;
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - commentViewHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor redColor];
+        _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);

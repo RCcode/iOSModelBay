@@ -14,8 +14,9 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b.png" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-A7-3ua">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-A7-3ua">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="HQw-A7-3ua" secondAttribute="height" multiplier="1:1" id="84r-Hj-Wsn"/>
                             <constraint firstAttribute="height" constant="126" id="OWF-1A-ija"/>
@@ -69,7 +70,4 @@
             <point key="canvasLocation" x="716" y="443"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="b.png" width="20" height="20"/>
-    </resources>
 </document>

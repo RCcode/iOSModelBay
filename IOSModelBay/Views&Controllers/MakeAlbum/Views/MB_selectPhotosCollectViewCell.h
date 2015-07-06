@@ -11,7 +11,7 @@
 @interface MB_selectPhotosCollectViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 
-@property (weak, nonatomic) IBOutlet UIView *coverView;
+//@property (weak, nonatomic) IBOutlet UIView *coverView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
 

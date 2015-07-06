@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _collectButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+    _collectButton.layer.borderWidth = 1;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

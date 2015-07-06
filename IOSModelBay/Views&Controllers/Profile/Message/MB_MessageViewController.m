@@ -19,6 +19,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
 @interface MB_MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, strong) UIView *commentView;
 
 @property (nonatomic, assign) NSInteger minId;
 
@@ -32,6 +33,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.commentView];
+    
     [self addPullRefresh];
     [self requestMessageListWithMinId:0];
 }
@@ -168,7 +171,7 @@ static CGFloat startY = 0;
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect) - 60) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
@@ -184,5 +187,13 @@ static CGFloat startY = 0;
     
     return _tableView;
 }
+
+//- (UIView *)commentView {
+//    if (!_commentView) {
+//        _commentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), kWindowWidth, 60)];
+//        _commentView.backgroundColor = [UIColor greenColor];
+//    }
+//    return _commentView;
+//}
 
 @end

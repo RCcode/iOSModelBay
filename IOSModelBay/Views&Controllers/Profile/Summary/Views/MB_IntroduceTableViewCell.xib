@@ -20,10 +20,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFk-RL-LrL">
-                        <rect key="frame" x="11" y="0.0" width="298" height="65"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_sjieshao" translatesAutoresizingMaskIntoConstraints="NO" id="u4d-wf-1ec">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ome-en-J4c">
-                                <rect key="frame" x="12" y="0.0" width="275" height="65"/>
+                                <rect key="frame" x="12" y="1" width="297" height="63"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic-Italic" family="Century Gothic" pointSize="12"/>
                                 <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,9 +35,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Ome-en-J4c" secondAttribute="bottom" id="FFM-Ra-he6"/>
-                            <constraint firstItem="Ome-en-J4c" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" id="Ouc-al-DaL"/>
+                            <constraint firstAttribute="trailing" secondItem="u4d-wf-1ec" secondAttribute="trailing" id="8GT-e8-NAV"/>
+                            <constraint firstItem="u4d-wf-1ec" firstAttribute="leading" secondItem="yFk-RL-LrL" secondAttribute="leading" id="BeX-Rc-EaT"/>
+                            <constraint firstAttribute="bottom" secondItem="Ome-en-J4c" secondAttribute="bottom" constant="1" id="FFM-Ra-he6"/>
+                            <constraint firstItem="Ome-en-J4c" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" constant="1" id="Ouc-al-DaL"/>
+                            <constraint firstAttribute="bottom" secondItem="u4d-wf-1ec" secondAttribute="bottom" id="Pce-2H-0ik"/>
                             <constraint firstAttribute="trailing" secondItem="Ome-en-J4c" secondAttribute="trailing" constant="11" id="Rak-77-Pab"/>
+                            <constraint firstItem="u4d-wf-1ec" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" id="bfx-rm-INA"/>
                             <constraint firstItem="Ome-en-J4c" firstAttribute="leading" secondItem="yFk-RL-LrL" secondAttribute="leading" constant="12" id="mk7-j7-8LP"/>
                         </constraints>
                     </view>
@@ -42,9 +49,9 @@
                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="yFk-RL-LrL" secondAttribute="bottom" id="Jqt-iJ-jgb"/>
-                    <constraint firstItem="yFk-RL-LrL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="dLy-Ly-sPl"/>
+                    <constraint firstItem="yFk-RL-LrL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dLy-Ly-sPl"/>
                     <constraint firstItem="yFk-RL-LrL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lED-iJ-Qus"/>
-                    <constraint firstAttribute="trailing" secondItem="yFk-RL-LrL" secondAttribute="trailing" constant="11" id="yLW-1f-WVZ"/>
+                    <constraint firstAttribute="trailing" secondItem="yFk-RL-LrL" secondAttribute="trailing" id="yLW-1f-WVZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -52,4 +59,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="edit_sjieshao" width="299" height="43"/>
+    </resources>
 </document>

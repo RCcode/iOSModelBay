@@ -181,6 +181,8 @@
 		CDD537641B340CB6008B436C /* MB_ScanAblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD537291B340CB6008B436C /* MB_ScanAblumViewController.m */; };
 		CDD537651B340CB6008B436C /* MB_SelectTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD5372D1B340CB6008B436C /* MB_SelectTemplateViewController.m */; };
 		CDD537671B340D29008B436C /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD537661B340D29008B436C /* b.png */; };
+		CDE0338C1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */; };
+		CDE0338F1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0338E1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -529,6 +531,10 @@
 		CDD5372C1B340CB6008B436C /* MB_SelectTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SelectTemplateViewController.h; sourceTree = "<group>"; };
 		CDD5372D1B340CB6008B436C /* MB_SelectTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SelectTemplateViewController.m; sourceTree = "<group>"; };
 		CDD537661B340D29008B436C /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
+		CDE0338A1B4A5B8100E4C5D2 /* MB_ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_ScanImageViewController.h; sourceTree = "<group>"; };
+		CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_ScanImageViewController.m; sourceTree = "<group>"; };
+		CDE0338D1B4A92B000E4C5D2 /* MB_EditSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditSummaryViewController.h; sourceTree = "<group>"; };
+		CDE0338E1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditSummaryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1072,6 +1078,8 @@
 				CDD536CB1B340CB6008B436C /* MB_AddTextViewController.h */,
 				CDD536CC1B340CB6008B436C /* MB_AddTextViewController.m */,
 				CDD536CD1B340CB6008B436C /* MB_AddTextViewController.xib */,
+				CDE0338A1B4A5B8100E4C5D2 /* MB_ScanImageViewController.h */,
+				CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */,
 				CDD536D01B340CB6008B436C /* Views */,
 			);
 			path = MakeAlbum;
@@ -1221,6 +1229,8 @@
 			children = (
 				CDD537091B340CB6008B436C /* MB_UserSummaryViewController.h */,
 				CDD5370A1B340CB6008B436C /* MB_UserSummaryViewController.m */,
+				CDE0338D1B4A92B000E4C5D2 /* MB_EditSummaryViewController.h */,
+				CDE0338E1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m */,
 				CDD5370B1B340CB6008B436C /* Views */,
 			);
 			path = Summary;
@@ -1503,6 +1513,8 @@
 				CDD537321B340CB6008B436C /* MB_FilterCollectViewCell.m in Sources */,
 				99DECD2F1B49141600F5F716 /* MB_UploadView.m in Sources */,
 				CD0575601B3416180015BBDA /* AFHTTPRequestOperationManager.m in Sources */,
+				CDE0338F1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m in Sources */,
+				CDE0338C1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m in Sources */,
 				CD9CF24D1B465C3700FF4588 /* MB_AblumDescView.m in Sources */,
 				CD0575671B3416180015BBDA /* AFURLSessionManager.m in Sources */,
 				CDD5375E1B340CB6008B436C /* MB_WriteInfoViewController.m in Sources */,

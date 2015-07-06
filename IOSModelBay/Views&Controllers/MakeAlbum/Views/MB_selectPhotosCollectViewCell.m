@@ -17,7 +17,7 @@
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
-    _coverView.hidden = !selected;
+    _selectImageView.hidden = !selected;
 }
 
 @end

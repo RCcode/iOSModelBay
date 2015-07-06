@@ -24,7 +24,7 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
     
@@ -39,14 +39,13 @@
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.dataArray.count;
-    return 100;
+    return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-//    MB_InstragramModel *model = self.dataArray[indexPath.row];
-//    [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
+    MB_InstragramModel *model = self.dataArray[indexPath.row];
+    [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
     cell.careerLabel.hidden = YES;
     cell.selectButton.hidden = YES;
     return cell;

@@ -12,6 +12,11 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.layoutMargins = UIEdgeInsetsZero;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -13,9 +13,11 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView  *backImageView;
 @property (weak, nonatomic) IBOutlet UIImageView  *userImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *firstImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel      *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel      *descLabel;
-@property (weak, nonatomic) IBOutlet UIButton     *collectButton;
+//@property (weak, nonatomic) IBOutlet UIButton     *collectButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *ablumScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView  *rankImageView;
 

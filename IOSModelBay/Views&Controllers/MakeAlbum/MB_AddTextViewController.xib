@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FUTURASTD-BOOK.OTF">
+            <string>FuturaStd-Book</string>
+            <string>FuturaStd-Book</string>
+            <string>FuturaStd-Book</string>
+            <string>FuturaStd-Book</string>
+            <string>FuturaStd-Book</string>
+            <string>FuturaStd-Book</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MB_AddTextViewController">
             <connections>
-                <outlet property="addDescTextField" destination="fLm-oP-N7e" id="IwD-de-e5p"/>
+                <outlet property="addDescTextView" destination="ckW-wQ-sEA" id="qg6-Po-Uan"/>
                 <outlet property="addTitleTextField" destination="Wx7-qy-Rvf" id="xbb-SW-G2a"/>
                 <outlet property="imagesContainerView" destination="GHl-ch-M8b" id="Jeg-G8-kMZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -19,59 +29,89 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wx7-qy-Rvf">
-                    <rect key="frame" x="0.0" y="74" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="dfA-he-VXS"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="11"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="add desc" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fLm-oP-N7e">
-                    <rect key="frame" x="0.0" y="152" width="320" height="100"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ADD" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-wQ-sEA">
+                    <rect key="frame" x="0.0" y="136" width="320" height="98"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="7bU-Fc-t57"/>
+                        <constraint firstAttribute="height" constant="98" id="sNg-pK-PuJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="11"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="qnJ-XC-sx4"/>
+                        <outlet property="delegate" destination="-1" id="VIe-kR-Lej"/>
                     </connections>
-                </textField>
+                </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfN-7n-EuC">
-                    <rect key="frame" x="0.0" y="252" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="234" width="320" height="66"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vx-UT-ZIj">
-                            <rect key="frame" x="8" y="-5" width="46" height="30"/>
-                            <state key="normal" title="Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vx-UT-ZIj">
+                            <rect key="frame" x="12" y="0.0" width="72" height="24"/>
+                            <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="PF3-nS-NZB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="ic_add">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="modelButtonOnClick:" destination="-1" eventType="touchUpInside" id="iir-fZ-ECk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLl-55-PNF">
-                            <rect key="frame" x="8" y="46" width="46" height="30"/>
-                            <state key="normal" title="Button">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="hairstylistButtonOnClick:" destination="-1" eventType="touchUpInside" id="Hsi-Ni-2k8"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-NA-vDj">
-                            <rect key="frame" x="130" y="-5" width="46" height="30"/>
-                            <state key="normal" title="Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-NA-vDj">
+                            <rect key="frame" x="114" y="0.0" width="72" height="24"/>
+                            <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="fyY-Oc-1oD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="ic_add">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="photographerButtonOnClick:" destination="-1" eventType="touchUpInside" id="vzV-B4-uhu"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-Ms-698">
-                            <rect key="frame" x="130" y="46" width="46" height="30"/>
-                            <state key="normal" title="Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLl-55-PNF">
+                            <rect key="frame" x="12" y="33" width="72" height="24"/>
+                            <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="hkC-VG-xni"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="ic_add">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="hairstylistButtonOnClick:" destination="-1" eventType="touchUpInside" id="Hsi-Ni-2k8"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-Ms-698">
+                            <rect key="frame" x="114" y="33" width="72" height="24"/>
+                            <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="naZ-tp-CH2"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="ic_add">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -81,33 +121,44 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="kl7-ZH-LaI"/>
+                        <constraint firstItem="uwc-NA-vDj" firstAttribute="centerY" secondItem="5vx-UT-ZIj" secondAttribute="centerY" id="Cw8-aq-q7O"/>
+                        <constraint firstItem="5vx-UT-ZIj" firstAttribute="leading" secondItem="rLl-55-PNF" secondAttribute="leading" id="IwY-cO-bdE"/>
+                        <constraint firstItem="5vx-UT-ZIj" firstAttribute="leading" secondItem="jfN-7n-EuC" secondAttribute="leading" constant="12" id="Nhv-yi-yX1"/>
+                        <constraint firstItem="HUr-Ms-698" firstAttribute="centerY" secondItem="rLl-55-PNF" secondAttribute="centerY" id="Rnz-j9-8UP"/>
+                        <constraint firstItem="uwc-NA-vDj" firstAttribute="leading" secondItem="5vx-UT-ZIj" secondAttribute="trailing" constant="30" id="ac8-pK-Oip"/>
+                        <constraint firstItem="5vx-UT-ZIj" firstAttribute="top" secondItem="jfN-7n-EuC" secondAttribute="top" id="hcY-YU-UtI"/>
+                        <constraint firstAttribute="height" constant="66" id="kl7-ZH-LaI"/>
+                        <constraint firstItem="rLl-55-PNF" firstAttribute="top" secondItem="5vx-UT-ZIj" secondAttribute="bottom" constant="9" id="n0v-6C-kyG"/>
+                        <constraint firstItem="HUr-Ms-698" firstAttribute="leading" secondItem="rLl-55-PNF" secondAttribute="trailing" constant="30" id="tIE-mu-le7"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-ch-M8b">
-                    <rect key="frame" x="0.0" y="352" width="320" height="216"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="300" width="320" height="268"/>
+                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="GHl-ch-M8b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7ul-1d-H0C"/>
-                <constraint firstItem="fLm-oP-N7e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="C0k-rq-DY2"/>
                 <constraint firstAttribute="bottom" secondItem="GHl-ch-M8b" secondAttribute="bottom" id="Hg9-7G-hz2"/>
                 <constraint firstItem="Wx7-qy-Rvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JkD-vW-Bs0"/>
-                <constraint firstItem="jfN-7n-EuC" firstAttribute="top" secondItem="fLm-oP-N7e" secondAttribute="bottom" id="NWC-9H-zdp"/>
                 <constraint firstItem="jfN-7n-EuC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PFq-tg-Ccj"/>
                 <constraint firstAttribute="trailing" secondItem="Wx7-qy-Rvf" secondAttribute="trailing" id="TOE-fo-lVQ"/>
-                <constraint firstItem="fLm-oP-N7e" firstAttribute="top" secondItem="Wx7-qy-Rvf" secondAttribute="bottom" constant="28" id="TS6-D2-hO3"/>
                 <constraint firstAttribute="trailing" secondItem="GHl-ch-M8b" secondAttribute="trailing" id="Tzn-cJ-dPB"/>
-                <constraint firstAttribute="trailing" secondItem="fLm-oP-N7e" secondAttribute="trailing" id="YMd-xa-Orx"/>
                 <constraint firstAttribute="trailing" secondItem="jfN-7n-EuC" secondAttribute="trailing" id="dds-O9-MGE"/>
-                <constraint firstItem="Wx7-qy-Rvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="vuw-7k-Jrm"/>
+                <constraint firstItem="ckW-wQ-sEA" firstAttribute="top" secondItem="Wx7-qy-Rvf" secondAttribute="bottom" constant="11" id="emz-ro-Kxs"/>
+                <constraint firstAttribute="trailing" secondItem="ckW-wQ-sEA" secondAttribute="trailing" id="iDA-i4-U4m"/>
+                <constraint firstItem="jfN-7n-EuC" firstAttribute="top" secondItem="ckW-wQ-sEA" secondAttribute="bottom" id="o8H-d7-DPv"/>
+                <constraint firstItem="ckW-wQ-sEA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="thv-jg-L9h"/>
+                <constraint firstItem="Wx7-qy-Rvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="vuw-7k-Jrm"/>
                 <constraint firstItem="GHl-ch-M8b" firstAttribute="top" secondItem="jfN-7n-EuC" secondAttribute="bottom" id="yr5-fV-DWO"/>
             </constraints>
             <point key="canvasLocation" x="399" y="375"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_add" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
