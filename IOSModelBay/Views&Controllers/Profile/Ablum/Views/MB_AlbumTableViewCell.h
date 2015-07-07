@@ -15,19 +15,19 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *imagesScrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
-
-@property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con1;
-
-@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con2;
-@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con3;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con4;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
 
 @property (nonatomic, strong) MB_Ablum *ablum;
-
-//@property (nonatomic, strong) RKNotificationHub *hub;
 
 @end

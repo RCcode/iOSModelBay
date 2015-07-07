@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UICollectionView *collectView;
 @property (nonatomic, assign) NSInteger minId;//分页用的
 
-@property (nonatomic, strong) MB_UploadView *uploadView;
+//@property (nonatomic, strong) MB_UploadView *uploadView;
 
 @end
 
@@ -43,11 +43,10 @@
     [MB_Utils shareUtil].fGender = -1;
     [MB_Utils shareUtil].fCareerId = @"";
     
-    [self.view addSubview:self.uploadView];
+//    [self.view addSubview:self.uploadView];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,17 +80,17 @@
 }
 
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.collectView) {
-        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
-//            self.collectView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-            self.uploadView.frame = CGRectMake(0, self.scrollCoordinator.topView.frame.origin.y + 44, kWindowWidth, 60);
-        }else{
-//            self.collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        }
-    }
-}
+//#pragma mark - UIScrollViewDelegate
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView == self.collectView) {
+//        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
+////            self.collectView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+//            self.uploadView.frame = CGRectMake(0, self.scrollCoordinator.topView.frame.origin.y + 44, kWindowWidth, 60);
+//        }else{
+////            self.collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+//        }
+//    }
+//}
 
 
 #pragma mark - private methods
@@ -130,7 +129,7 @@
     NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].fGender),
                                      @"fcareerId":[MB_Utils shareUtil].fCareerId,
                                      @"minId":@(minId),
-                                     @"count":@(10)} mutableCopy];
+                                     @"count":@(3)} mutableCopy];
 //    if ([userDefaults boolForKey:kIsLogin]) {
 //        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
 //        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
@@ -164,6 +163,8 @@
 }
 
 
+
+
 #pragma mark - getters & setters
 - (UICollectionView *)collectView {
     if (_collectView == nil) {
@@ -188,13 +189,13 @@
     return _collectView;
 }
 
-- (MB_UploadView *)uploadView {
-    if (!_uploadView) {
-        _uploadView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UploadView" owner:nil options:nil] firstObject];
-        _uploadView.frame = CGRectMake(0, 64, kWindowWidth, 60);
-        _uploadView.indicateView.backgroundColor = colorWithHexString(@"#ff5842");
-    }
-    return _uploadView;
-}
+//- (MB_UploadView *)uploadView {
+//    if (!_uploadView) {
+//        _uploadView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UploadView" owner:nil options:nil] firstObject];
+//        _uploadView.frame = CGRectMake(0, 64, kWindowWidth, 60);
+//        _uploadView.indicateView.backgroundColor = colorWithHexString(@"#ff5842");
+//    }
+//    return _uploadView;
+//}
 
 @end

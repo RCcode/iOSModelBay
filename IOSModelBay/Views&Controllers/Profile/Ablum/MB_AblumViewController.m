@@ -53,61 +53,54 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return self.dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.dataArray.count;
     return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row %2 == 0) {
-//        NSLog(@"111111%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
-//            [self configureCell:cell atIndexPath:indexPath];
-//        }]);
-//
+    MB_Ablum *album = self.dataArray[indexPath.section];
+    if (album.atype == AblumTypeCollect) {
         return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
+            [self configureCell:cell atIndexPath:indexPath];
         }];
-//    }else {
-//        NSLog(@"22222%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
-//            [self configureCell2:cell atIndexPath:indexPath];
-//        }]);
-//        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
-//            [self configureCell2:cell atIndexPath:indexPath];
-//        }];
-//        return 0;
-//    }
-//    return 300;
+    }else {
+        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierTemplate cacheByIndexPath:indexPath configuration:^(MB_SignalImageTableViewCell *cell) {
+            [self configureCell2:cell atIndexPath:indexPath];
+        }];
+    }
 }
 
 - (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    cell.ablum = [[MB_Ablum alloc] init];
-    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
-    cell.label2.text = @"";
-    cell.con2.constant = 0;
-    cell.label3.text = @"";
-    cell.con3.constant = 0;
+//    cell.ablum = [[MB_Ablum alloc] init];
+//    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
+//    cell.label2.text = @"";
+//    cell.con2.constant = 0;
+//    cell.label3.text = @"";
+//    cell.con3.constant = 0;
+    cell.ablum = self.dataArray[indexPath.section];
 }
 
 - (void)configureCell2:(MB_SignalImageTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
-//    cell.label2.text = _text;
+    cell.ablum = self.dataArray[indexPath.section];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row % 2 == 0) {
+    MB_Ablum *album = self.dataArray[indexPath.section];
+    if (album.atype == AblumTypeCollect) {
         MB_AlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierAblum forIndexPath:indexPath];
-//        cell.ablum = self.dataArray[indexPath.row];
+//        cell.ablum = album;
         [self configureCell:cell atIndexPath:indexPath];
         return cell;
-//    }else {
-//        MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
-////        cell.ablum = self.dataArray[indexPath.row];
-//        [self configureCell2:cell atIndexPath:indexPath];
-//        return cell;
-//    }
+    }else {
+        MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
+//        cell.ablum = album;
+        [self configureCell2:cell atIndexPath:indexPath];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,24 +155,36 @@ static CGFloat startY = 0;
 
 //请求影集列表
 - (void)requestAblumListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@"",
-                             @"token":@"",
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
                              @"fid":@(6),
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getAblumWithParameters:params success:^(id response) {
+        NSLog(@"ablum %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
+        
         if ([self statFromResponse:response] == 10000) {
+            
             self.minId = [response[@"minId"] integerValue];
-            NSArray *array = response[@"list"];
-            for (NSDictionary *dic in array) {
-                MB_Ablum *ablum = [[MB_Ablum alloc] init];
-                [ablum setValuesForKeysWithDictionary:dic];
-                [self.dataArray addObject:ablum];
+            if (response[@"list"] != nil && ![response[@"list"] isKindOfClass:[NSNull class]]) {
+                NSArray *array = response[@"list"];
+                for (NSDictionary *dic in array) {
+                    MB_Ablum *ablum = [[MB_Ablum alloc] init];
+                    [ablum setValuesForKeysWithDictionary:dic];
+                    [self.dataArray addObject:ablum];
+                }
+                [self.tableView reloadData];
             }
-            [self.tableView reloadData];
+            
+        }else if ([self statFromResponse:response] == 10004) {
+            
+            [self showNoMoreMessageForview:self.tableView];
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
     }];
 }
 
@@ -265,7 +270,7 @@ static CGFloat startY = 0;
         [_tableView setTableHeaderView:view];
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_AlbumTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:ReuseIdentifierAblum];
-//        [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_SignalImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierTemplate];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }

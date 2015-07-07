@@ -16,9 +16,8 @@ typedef NS_ENUM(NSInteger, AblumType) {
 //作品集
 @interface MB_Ablum : NSObject
 
-@property (nonatomic, assign) NSInteger *ablId;  //相册id
-@property (nonatomic, assign) NSInteger *uid;    //用户id
-//@property (nonatomic, strong) NSString *atype;  //影集分类:0.拼图;1.相片集
+@property (nonatomic, assign) NSInteger ablId;  //相册id
+@property (nonatomic, assign) NSInteger uid;    //用户id
 @property (nonatomic, assign) AblumType atype;  //影集分类:0.拼图;1.相片集
 @property (nonatomic, strong) NSString *name;   //影集名称
 @property (nonatomic, strong) NSString *descr;  //影集描述
@@ -33,6 +32,13 @@ typedef NS_ENUM(NSInteger, AblumType) {
 @property (nonatomic, strong) NSString *mkName; //化妆师名
 @property (nonatomic, assign) NSInteger likes;  //赞个数
 @property (nonatomic, assign) NSInteger comments;//评论数
-@property (nonatomic, strong) NSArray *mlist;  //相片列表
+@property (nonatomic, strong) NSArray  *mList;  //相片列表
+
+//mList =             (
+//                     {
+//                         ablId = 40;
+//                         url = "http://192.168.0.86:8086/modelbay/7dc2240d-2c7f-43f9-af15-39dc7c90c505.png";
+//                     }
+//                     );
 
 @end

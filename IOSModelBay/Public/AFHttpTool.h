@@ -133,7 +133,12 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                            failure:(void (^)(NSError* err))failure;
 
 //获取收藏列表
-- (void)GetLikesWithParameters:params
+- (void)getLikesWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure;
+
+//添加收藏列表
+- (void)addLikesWithParameters:params
                        success:(void (^)(id response))success
                        failure:(void (^)(NSError* err))failure;
 

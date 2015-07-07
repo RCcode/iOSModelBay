@@ -115,6 +115,7 @@
 		CD9D8E961B4540F1000E1C8D /* FUTURASTD-BOOK.OTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E951B4540F1000E1C8D /* FUTURASTD-BOOK.OTF */; };
 		CD9D8E9A1B45433D000E1C8D /* MB_IntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9D8E981B45433D000E1C8D /* MB_IntroduceTableViewCell.m */; };
 		CD9D8E9B1B45433D000E1C8D /* MB_IntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E991B45433D000E1C8D /* MB_IntroduceTableViewCell.xib */; };
+		CD9DC30B1B4B7A460094EC02 /* MB_CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DC30A1B4B7A460094EC02 /* MB_CommentView.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC76B781B32662200C391E5 /* MB_InstragramModel.m */; };
 		CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9AB931B21B3E300119C18 /* MB_Ablum.m */; };
@@ -418,6 +419,8 @@
 		CD9D8E971B45433D000E1C8D /* MB_IntroduceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_IntroduceTableViewCell.h; sourceTree = "<group>"; };
 		CD9D8E981B45433D000E1C8D /* MB_IntroduceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_IntroduceTableViewCell.m; sourceTree = "<group>"; };
 		CD9D8E991B45433D000E1C8D /* MB_IntroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_IntroduceTableViewCell.xib; sourceTree = "<group>"; };
+		CD9DC3091B4B7A460094EC02 /* MB_CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CommentView.h; sourceTree = "<group>"; };
+		CD9DC30A1B4B7A460094EC02 /* MB_CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CommentView.m; sourceTree = "<group>"; };
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDC76B771B32662200C391E5 /* MB_InstragramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InstragramModel.h; sourceTree = "<group>"; };
 		CDC76B781B32662200C391E5 /* MB_InstragramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InstragramModel.m; sourceTree = "<group>"; };
@@ -1129,11 +1132,13 @@
 				CDD536EE1B340CB6008B436C /* Instragram */,
 				CDD536FE1B340CB6008B436C /* Message */,
 				CDD536F21B340CB6008B436C /* Likes */,
+				CDD536FC1B340CB6008B436C /* MB_UserViewController.h */,
+				CDD536FD1B340CB6008B436C /* MB_UserViewController.m */,
 				CDD536F91B340CB6008B436C /* MB_UserInfoView.h */,
 				CDD536FA1B340CB6008B436C /* MB_UserInfoView.m */,
 				CDD536FB1B340CB6008B436C /* MB_UserInfoView.xib */,
-				CDD536FC1B340CB6008B436C /* MB_UserViewController.h */,
-				CDD536FD1B340CB6008B436C /* MB_UserViewController.m */,
+				CD9DC3091B4B7A460094EC02 /* MB_CommentView.h */,
+				CD9DC30A1B4B7A460094EC02 /* MB_CommentView.m */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1532,6 +1537,7 @@
 				CD0575821B3416180015BBDA /* SDWebImageDownloader.m in Sources */,
 				CD05758E1B3416180015BBDA /* UIScrollView+SVPullToRefresh.m in Sources */,
 				CDD537371B340CB6008B436C /* MB_UserTableViewCell.m in Sources */,
+				CD9DC30B1B4B7A460094EC02 /* MB_CommentView.m in Sources */,
 				CDD537391B340CB6008B436C /* MB_AddTextViewController.m in Sources */,
 				CD46C1241B3A665E000E2F0C /* MB_Comment.m in Sources */,
 				CDD5374B1B340CB6008B436C /* MB_LikeCollectViewCell.m in Sources */,

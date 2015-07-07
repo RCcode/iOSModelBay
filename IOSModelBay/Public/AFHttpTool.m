@@ -32,6 +32,7 @@
 #define kAddMessageUrl       @"user/addComment.do"
 #define kReplyMessageUrl     @"user/replyComment.do"
 #define kGetLikesUrl         @"user/getLikes.do"
+#define kAddLikesUrl         @"user/addLikes.do"
 
 //#define ContentType @"text/html"
 //#define ContentType @"text/plain"
@@ -400,24 +401,24 @@ static AFHttpTool *httpTool = nil;
                         success:(void (^)(id response))success
                         failure:(void (^)(NSError* err))failure
 {
-    NSString *url = [NSString stringWithFormat:@"%@%@",kBaseUrl,kUploadPicUrl];
-    AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        for (int i = 0; i < images.count; i ++) {
-            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.5);
-            [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"anyImage_%d.jpg",i] mimeType:@"image/jpeg"];
-        }
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        success(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
-    }];
-    
-    NSLog(@"%@",operation);
-    __weak AFHTTPRequestOperation *weakOpera = operation;
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"%@",weakOpera);
-        NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
-    }];
+//    NSString *url = [NSString stringWithFormat:@"%@%@",kBaseUrl,kUploadPicUrl];
+//    AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        for (int i = 0; i < images.count; i ++) {
+//            NSData *imageData = UIImageJPEGRepresentation(images[i], 0.5);
+//            [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"anyImage_%d.jpg",i] mimeType:@"image/jpeg"];
+//        }
+//    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        success(responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failure(error);
+//    }];
+//    
+//    NSLog(@"%@",operation);
+//    __weak AFHTTPRequestOperation *weakOpera = operation;
+//    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+//        NSLog(@"%@",weakOpera);
+//        NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+//    }];
 }
 
 //获取用户留言列表
@@ -457,7 +458,7 @@ static AFHttpTool *httpTool = nil;
 }
 
 //获取收藏列表
-- (void)GetLikesWithParameters:params
+- (void)getLikesWithParameters:params
                        success:(void (^)(id response))success
                        failure:(void (^)(NSError* err))failure
 {
@@ -468,5 +469,16 @@ static AFHttpTool *httpTool = nil;
                     failure:failure];
 }
 
+//添加收藏列表
+- (void)addLikesWithParameters:params
+                       success:(void (^)(id response))success
+                       failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kAddLikesUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
 
 @end

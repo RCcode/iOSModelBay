@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) ALAssetsLibrary *assertLibrary;
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @end
 
 @implementation MB_AddTextViewController
@@ -156,23 +158,60 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"id":@(6),//用户id
                              @"token":@"abcde",//token
                              @"atype":@(1),//影集分类:0.拼图;1.相片集
                              @"name":self.addTitleTextField.text,//影集名称
                              @"descr":self.addDescTextView.text,//影集描述
                              @"cover":@"",//封面图片,当atype为0时为内容
-                             @"mId":@"",//模特id
+                             @"mId":@(-1),//模特id
                              @"mName":@"",//模特名
-                             @"pId":@"",//摄影师id
+                             @"pId":@(-1),//摄影师id
                              @"pName":@"",//摄影师名
-                             @"hId":@"",//发型师id
+                             @"hId":@(-1),//发型师id
                              @"hName":@"",//发型师名
-                             @"mkId":@"",//化妆师id
+                             @"mkId":@(-1),//化妆师id
                              @"mkName":@""//化妆师名
                              };
     [[AFHttpTool shareTool] addAblumWithParameters:params success:^(id response) {
-    
+        NSLog(@"%@",response);
+        if ([self statFromResponse:response] == 10000) {
+//            NSInteger ablId = [response[@"ablId"] integerValue];
+            //上传图片
+//            NSMutableArray *imagesArray = [NSMutableArray arrayWithCapacity:1];
+            _manager = [AFHTTPRequestOperationManager manager];
+//            _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//            [_manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+            
+            for (NSURL *url in self.urlArray) {
+                [self.assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
+                    
+                    UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+                    NSDictionary *uploadParams = @{@"id":@(6),
+                                                   @"token":@"abcde",
+                                                   @"ablId":response[@"ablId"],
+                                                   @"sort":@([self.urlArray indexOfObject:url])};
+                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"ablum/uploadPic.do"];
+                    AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                        
+                        NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+                        [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%ld.jpg",(unsigned long)[self.urlArray indexOfObject:url]] mimeType:@"image/jpeg"];
+                        
+                    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"success");
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"%@ failed", operation);
+                    }];
+                    
+                    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+                        NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+                    }];
+                } failureBlock:^(NSError *error) {
+                    
+                }];
+            }
+        }
     } failure:^(NSError *err) {
         
     }];

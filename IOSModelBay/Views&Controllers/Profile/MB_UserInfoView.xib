@@ -108,6 +108,7 @@
                 <constraint firstAttribute="bottom" secondItem="BcB-64-HJg" secondAttribute="bottom" id="tYg-bS-Uj6"/>
                 <constraint firstAttribute="bottom" secondItem="BcB-64-HJg" secondAttribute="bottom" id="tex-0f-Ob0"/>
                 <constraint firstItem="8Ju-Ry-0tj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v2l-mO-o5C"/>
+                <constraint firstItem="2cr-fY-XbY" firstAttribute="height" secondItem="kTh-XV-FcM" secondAttribute="height" id="yK5-Om-1w2"/>
                 <constraint firstItem="rCG-wP-EdG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zTa-2m-9T3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

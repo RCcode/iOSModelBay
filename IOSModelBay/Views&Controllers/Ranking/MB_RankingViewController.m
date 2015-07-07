@@ -11,6 +11,7 @@
 #import "MB_FilterViewController.h"
 #import "MB_UserViewController.h"
 #import "MB_User.h"
+#import "MB_InstragramModel.h"
 
 @interface MB_RankingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -53,7 +54,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 263;
+    if ([userDefaults boolForKey:kIsLogin]) {
+        return 263;
+    }else {
+        //没有登录的时候不显示instra的图片
+        return 160;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,28 +129,79 @@
                              @"fgender":@([MB_Utils shareUtil].rGender),
                              @"fcareerId":[MB_Utils shareUtil].rCareerId,
                              @"minId":@(minId),
-                             @"count":@(10)};
+                             @"count":@(3)};
     [[AFHttpTool shareTool] getRankListWithParameters:params success:^(id response) {
         NSLog(@"rank %@",response);
+        [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
             self.minId = [response[@"minId"] integerValue];
             NSArray *array = response[@"list"];
             for (NSDictionary *dic in array) {
                 MB_User *user = [[MB_User alloc] init];
                 [user setValuesForKeysWithDictionary:dic];
+                user.urlArray = [NSMutableArray arrayWithCapacity:1];
                 [self.dataArray addObject:user];
+                
+                //请求instra图片
+                if ([userDefaults boolForKey:kIsLogin] && user.urlArray.count <= 0) {
+                    [self requestInstragramMediasListWithUesr:user];
+                }
             }
             [self.tableView reloadData];
         }
     } failure:^(NSError *err) {
-        
+        [self endRefreshingForView:self.tableView];
     }];
 }
 
-//点击收藏按钮
-- (void)collectButtonOnClick:(UIButton *)button {
-    button.selected = YES;
-    button.backgroundColor = [UIColor redColor];
+//获取指定用户的Instragram图片
+//- (void)requestInstragramMediasListWithUid:(NSInteger)Uid {
+//    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%ld/media/recent/",(long)Uid];
+//    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
+//                                     @"count": @(10)} mutableCopy];
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        NSLog(@"instragram %@",responseObject);
+//
+//        NSArray *dataArr = responseObject[@"data"];
+//        
+//        for (NSDictionary *dic in dataArr) {
+//            for (MB_User *user in self.dataArray) {
+//                if (user.uid == Uid) {
+//                    [user.urlArray addObject:dic[@"images"][@"low_resolution"][@"url"]];
+//                }
+//            }
+//        }
+//        [self.tableView reloadData];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
+//}
+
+//获取指定用户的Instragram图片
+- (void)requestInstragramMediasListWithUesr:(MB_User *)user {
+    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%ld/media/recent/",(long)user.uid];
+    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
+                                     @"count": @(10)} mutableCopy];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"instragram %@",responseObject);
+        
+        NSArray *dataArr = responseObject[@"data"];
+        
+        for (NSDictionary *dic in dataArr) {
+            [user.urlArray addObject:dic[@"images"][@"low_resolution"][@"url"]];
+        }
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"instra err %@",error);
+    }];
 }
 
 

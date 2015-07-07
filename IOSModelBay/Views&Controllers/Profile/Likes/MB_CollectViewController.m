@@ -29,7 +29,7 @@
     
     [self addPullRefresh];
     
-    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestLikesListWithMinId:0];
 }
 
@@ -40,12 +40,12 @@
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 40;
+    return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_LikeCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.nameLabel.text = @"songge";
+    cell.collect = self.dataArray[indexPath.row];
     return cell;
 }
 
@@ -82,34 +82,41 @@ static CGFloat startY = 0;
     __weak MB_CollectViewController *weakSelf = self;
     
     [self addHeaderRefreshForView:self.collectView WithActionHandler:^{
+        NSLog(@"header");
         [weakSelf requestLikesListWithMinId:0];
     }];
     
     [self addFooterRefreshForView:self.collectView WithActionHandler:^{
+        NSLog(@"foot");
         [weakSelf requestLikesListWithMinId:weakSelf.minId];
     }];
 }
 
 //获取作品集列表
 - (void)requestLikesListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@"",
-                             @"token":@"",
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
                              @"minId":@(minId),
                              @"count":@(10)};
-    [[AFHttpTool shareTool] GetLikesWithParameters:params success:^(id response) {
+    [[AFHttpTool shareTool] getLikesWithParameters:params success:^(id response) {
         NSLog(@"likes: %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.collectView];
         if ([self statFromResponse:response] == 10000) {
             self.minId = [response[@"minId"] integerValue];
-            NSArray *array = response[@"list"];
-            for (NSDictionary *dic in array) {
-                MB_Collect *collect = [[MB_Collect alloc] init];
-                [collect setValuesForKeysWithDictionary:dic];
-                [self. dataArray addObject:collect];
+            if (response[@"list"] != nil && ![response[@"list"] isKindOfClass:[NSNull class]]) {
+                NSArray *array = response[@"list"];
+                for (NSDictionary *dic in array) {
+                    MB_Collect *collect = [[MB_Collect alloc] init];
+                    [collect setValuesForKeysWithDictionary:dic];
+                    [self. dataArray addObject:collect];
+                }
+                [self.collectView reloadData];
             }
-            [self.collectView reloadData];
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.collectView];
     }];
 }
 
@@ -130,6 +137,7 @@ static CGFloat startY = 0;
         _collectView.backgroundColor = colorWithHexString(@"#eeeeee");
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
+        _collectView.alwaysBounceVertical = YES;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_LikeCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;

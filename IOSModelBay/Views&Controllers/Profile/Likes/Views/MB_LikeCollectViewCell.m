@@ -14,4 +14,10 @@
     // Initialization code
 }
 
+- (void)setCollect:(MB_Collect *)collect {
+    _collect = collect;
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:collect.fpic] placeholderImage:nil];
+    _nameLabel.text = collect.fname;
+}
+
 @end

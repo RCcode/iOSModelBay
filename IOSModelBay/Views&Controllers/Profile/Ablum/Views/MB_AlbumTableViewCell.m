@@ -25,24 +25,58 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)setAblum:(MB_Ablum *)ablum {
     _ablum = ablum;
     
     [self layoutIfNeeded];
+    //添加影集的图片
     CGRect rect = _imagesScrollView.frame;
-    for (int i = 0; i < 5; i ++) {
+    
+    [_imagesScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    NSLog(@"mList =  %@",ablum.mList);
+    for (int i = 0; i < ablum.mList.count; i ++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetHeight(rect) + 1) * i, 0, CGRectGetHeight(rect), CGRectGetHeight(rect))];
-        imageView.image = [UIImage imageNamed:@"a"];
-        imageView.backgroundColor = [UIColor greenColor];
+        NSString *imageName = [ablum.mList[i] objectForKey:@"url"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
+        imageView.backgroundColor = placeholderColor;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        imageView.clipsToBounds = YES;
         [_imagesScrollView addSubview:imageView];
     }
     _imagesScrollView.bounces = YES;
     _imagesScrollView.alwaysBounceHorizontal = YES;
-    _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * 5 + 1 * 4, CGRectGetHeight(rect));
+    _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * ablum.mList.count + 1 * (ablum.mList.count - 1), CGRectGetHeight(rect));
+    
+    _nameLabel.text = ablum.name;
+    _countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)ablum.mList.count];
+    _descLabel.text = ablum.descr;
+    
+    _label1.text = ablum.mName;
+    _label2.text = ablum.pName;
+    _label3.text = ablum.hName;
+    _label4.text = ablum.mkName;
+//    if ([ablum.mName isEqualToString:@""]) {
+//        _con1.constant = 0;
+//    }else {
+//        _con1.constant = 5;
+//    }
+    if ([ablum.pName isEqualToString:@""]) {
+        _con2.constant = 0;
+    }else {
+        _con2.constant = 5;
+    }
+    if ([ablum.hName isEqualToString:@""]) {
+        _con3.constant = 0;
+    }else {
+        _con3.constant = 5;
+    }
+    if ([ablum.mkName isEqualToString:@""]) {
+        _con4.constant = 5;
+    }else {
+        _con4.constant = 0;
+    }
 }
 
 @end

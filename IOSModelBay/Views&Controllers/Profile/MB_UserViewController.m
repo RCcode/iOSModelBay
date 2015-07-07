@@ -13,22 +13,24 @@
 #import "MB_MessageViewController.h"
 #import "MB_CollectViewController.h"
 #import "MB_UserInfoView.h"
+#import <MessageUI/MessageUI.h>
 
 //#import "MB_SettingViewController.h"
 //#import "MB_InviteViewController.h"
 //#import "MB_SearchViewController.h"
 #import "MB_ScanAblumViewController.h"
-//#import "MB_SelectPhotosViewController.h"
+#import "MB_SelectPhotosViewController.h"
 //#import "MB_SelectTemplateViewController.h"
 #import "MB_SelectRoleViewController.h"
 #import "MB_SelectCareerViewController.h"
+#import "MB_CommentView.h"
 
-@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
 @property (nonatomic, strong) UIScrollView *containerView;
-@property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, strong) MB_CommentView *commentView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
 
@@ -40,14 +42,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor greenColor];
-    
     self.titleLabel.text = @"VINCENT";
     self.navigationItem.titleView = self.titleLabel;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.commentView];
+    
     [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addChildViewControllers];
     [self menuBtnOnClick:self.menuBtns[0]];
@@ -77,10 +79,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
-    cell.backgroundColor = [UIColor redColor];
     [cell.contentView addSubview:self.containerView];
     return cell;
 }
+
 
 #pragma mark - UIScrollViewDelegate
 static CGFloat startY;
@@ -99,6 +101,9 @@ static CGFloat startY;
         }else{
             self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         }
+//        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
+//            self.tableView.contentInset = UIEdgeInsetsMake(self.scrollCoordinator.topView.frame.origin.y + 44, 0, 0, 0);
+//        }
     }
 }
 
@@ -119,7 +124,6 @@ static CGFloat startY;
                 }
             }
         }
-
     }
 }
 
@@ -149,8 +153,55 @@ static CGFloat startY;
         }
         
         ((UIButton *)self.menuBtns[page]).selected = YES;
+        
+        //如果滚动到第四个显示输入框
+        if (scrollView.contentOffset.x == scrollView.frame.size.width * 3) {
+            self.commentView.hidden = NO;
+        }else{
+            self.commentView.hidden = YES;
+        }
     }
 }
+
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        //通过Instragram
+    }else if (buttonIndex == 1) {
+        //通过邮件
+        if ([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+            mailVC.mailComposeDelegate = self;
+            [self presentViewController:mailVC animated:YES completion:nil];
+        }else {
+            NSLog(@"不可以发邮件");
+        }
+    }
+}
+
+
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            
+            break;
+        case MFMailComposeResultSaved:
+            
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"mail error %@",error);
+            break;
+        case MFMailComposeResultSent:
+            
+            break;
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - private methods
 - (void)test {
@@ -160,9 +211,9 @@ static CGFloat startY;
     
 //    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
     
-//    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
+    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     
-    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
@@ -181,7 +232,7 @@ static CGFloat startY;
     instragramVC.containerViewRect = self.containerView.frame;
     instragramVC.uid = [userDefaults objectForKey:kUid];
     messageVC.containerViewRect    = self.containerView.frame;
-    collectVC.containerViewRect      = self.containerView.frame;
+    collectVC.containerViewRect    = self.containerView.frame;
     
     [self addChildViewController:instragramVC];
     [self addChildViewController:summaryVC];
@@ -195,7 +246,6 @@ static CGFloat startY;
         [self.containerView addSubview:vc.view];
     }
     
-    [self.containerView addSubview:self.commentView];
     self.containerView.contentSize = CGSizeMake(kWindowWidth * 5, CGRectGetHeight(self.containerView.frame));
 }
 
@@ -207,6 +257,41 @@ static CGFloat startY;
     btn.selected = YES;
     
     self.containerView.contentOffset = CGPointMake(CGRectGetWidth(self.containerView.frame) * btn.tag, 0);
+    //如果滚动到第四个显示输入框
+    if (self.containerView.contentOffset.x == self.containerView.frame.size.width * 3) {
+        self.commentView.hidden = NO;
+    }else{
+        self.commentView.hidden = YES;
+    }
+}
+
+//收藏此用户
+- (void)collectionButtonOnClick:(UIButton *)button {
+    if (!button.selected) {
+        button.selected = YES;
+        button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+        
+        NSDictionary *params = @{@"id":@(6),
+                                 @"token":@"abcde",
+                                 @"fid":@(self.user.fid)};
+        [[AFHttpTool shareTool] addLikesWithParameters:params success:^(id response) {
+            NSLog(@"collect %@", response);
+//            if ([self statFromResponse:response] == 10000) {
+//                NSLog(@"关注成功");
+//            }
+//            if ([self statFromResponse:response] == 10201) {
+//                NSLog(@"已经关注");
+//            }
+        } failure:^(NSError *err) {
+            
+        }];
+    }
+}
+
+//邀请此用户
+- (void)inviteButtonOnClick:(UIButton *)button {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Instra",@"mail", nil];
+    [action showInView:self.view];
 }
 
 
@@ -214,7 +299,6 @@ static CGFloat startY;
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-//        _tableView.backgroundColor = [UIColor redColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -236,6 +320,9 @@ static CGFloat startY;
             [careerArr addObject:[[MB_Utils shareUtil].careerDic objectForKey:career]?:@""];
         }
         _userInfoView.careerLabel.text = [careerArr componentsJoinedByString:@"  |  "];
+        
+        [_userInfoView.likeButton addTarget:self action:@selector(collectionButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_userInfoView.inviteButton addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _userInfoView;
 }
@@ -269,17 +356,18 @@ static CGFloat startY;
         }else{
             _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49 - 20)];
         }
-        _containerView.backgroundColor = [UIColor blueColor];
         _containerView.pagingEnabled = YES;
         _containerView.delegate = self;
     }
     return _containerView;
 }
 
+//添加留言的
 - (UIView *)commentView {
     if (!_commentView) {
-        _commentView = [[UIView alloc] initWithFrame:CGRectMake(kWindowWidth * 3, 200, kWindowWidth, 60)];
-        _commentView.backgroundColor = [UIColor greenColor];
+        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
+//        _commentView.backgroundColor = [UIColor greenColor];
+        _commentView.hidden = YES;
     }
     return _commentView;
 }

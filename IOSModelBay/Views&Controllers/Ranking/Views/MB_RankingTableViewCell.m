@@ -32,10 +32,10 @@
         [subView removeFromSuperview];
     }
     CGFloat imageWidth = 90;
-    for (int i = 0; i < 5; i ++) {
+    for (int i = 0; i < user.urlArray.count; i ++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(2 + i * (imageWidth+2), 2, imageWidth, rect.size.height - 2)];
         imageView.backgroundColor = placeholderColor;
-//        imageView.image = [UIImage imageNamed:@"a"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:user.urlArray[i]] placeholderImage:nil];
         imageView.userInteractionEnabled = YES;
         [_ablumScrollView addSubview:imageView];
     }
@@ -46,7 +46,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 @end

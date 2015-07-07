@@ -22,4 +22,6 @@
 @property (nonatomic, strong) NSString  *fbackPic;  //背景
 @property (nonatomic, strong) NSString  *fcareerId; //职业id,竖线分割:1|2|3
 
+@property (nonatomic, strong) NSMutableArray *urlArray;
+
 @end

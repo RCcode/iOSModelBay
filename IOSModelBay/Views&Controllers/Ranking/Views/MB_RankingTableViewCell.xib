@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1X-xe-5eu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b.png" translatesAutoresizingMaskIntoConstraints="NO" id="0tp-2J-qn6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_crown" translatesAutoresizingMaskIntoConstraints="NO" id="0tp-2J-qn6">
                                 <rect key="frame" x="136" y="17" width="49" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="KIl-7d-WfZ"/>
@@ -151,7 +151,7 @@
     </objects>
     <resources>
         <image name="a.png" width="30" height="30"/>
-        <image name="b.png" width="20" height="20"/>
+        <image name="ic_crown" width="49" height="19"/>
         <image name="num1" width="36" height="36"/>
     </resources>
 </document>

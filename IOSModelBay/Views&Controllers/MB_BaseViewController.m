@@ -101,9 +101,9 @@
     if (stat == 10003) {
         errorMsg = @"操作失败";
     }
-    if (stat == 10004) {
-        errorMsg = @"无记录";
-    }
+//    if (stat == 10004) {
+//        errorMsg = @"无记录";
+//    }
     if (stat == 10501) {
         errorMsg = @"无此用户";
     }

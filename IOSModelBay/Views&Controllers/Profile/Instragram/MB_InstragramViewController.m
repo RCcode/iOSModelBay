@@ -24,12 +24,15 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    [self.view addSubview:self.collectView];
-    [self addPullRefresh];
     
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [self requestInstragramMediasListWithMaxId:nil];
+    [self.view addSubview:self.collectView];
+    
+    if ([userDefaults boolForKey:kIsLogin]) {
+        [self addPullRefresh];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self requestInstragramMediasListWithMaxId:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
