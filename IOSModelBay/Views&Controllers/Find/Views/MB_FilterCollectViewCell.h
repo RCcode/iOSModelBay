@@ -11,6 +11,8 @@
 @interface MB_FilterCollectViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 

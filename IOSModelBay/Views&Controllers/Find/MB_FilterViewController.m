@@ -201,7 +201,7 @@
             button.frame = CGRectMake(btnWidth * i, 0, btnWidth, 61);
             button.tag = i;
             button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
-            [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
+            [button.titleLabel setFont:[UIFont fontWithName:@"FuturaStd-Book" size:14]];
             [button setTitle:titleArray[i] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@"ic_wz"] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];

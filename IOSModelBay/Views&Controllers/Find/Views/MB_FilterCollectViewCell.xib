@@ -4,6 +4,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FUTURASTD-BOOK.OTF">
+            <string>FuturaStd-Book</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -16,9 +21,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZPb-fa-8HJ">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-Hu-bLl">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bn-wu-OMk">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-Hu-bLl">
                         <rect key="frame" x="51" y="14" width="48" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,13 +37,18 @@
             <constraints>
                 <constraint firstItem="ZPb-fa-8HJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0Z6-SQ-C79"/>
                 <constraint firstItem="ZPb-fa-8HJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4Ys-Ed-fk9"/>
+                <constraint firstItem="1Bn-wu-OMk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Fw3-WN-bdX"/>
                 <constraint firstAttribute="trailing" secondItem="ZPb-fa-8HJ" secondAttribute="trailing" id="LEd-Xy-tAf"/>
+                <constraint firstItem="1Bn-wu-OMk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Rca-Pa-wir"/>
                 <constraint firstAttribute="bottom" secondItem="ZPb-fa-8HJ" secondAttribute="bottom" id="X9m-hq-D0M"/>
+                <constraint firstAttribute="trailing" secondItem="1Bn-wu-OMk" secondAttribute="trailing" id="XdH-0R-1KX"/>
                 <constraint firstAttribute="centerY" secondItem="Q43-Hu-bLl" secondAttribute="centerY" id="Y0A-mU-6J3"/>
+                <constraint firstAttribute="bottom" secondItem="1Bn-wu-OMk" secondAttribute="bottom" id="nWq-s9-nXl"/>
                 <constraint firstAttribute="centerX" secondItem="Q43-Hu-bLl" secondAttribute="centerX" id="qSX-hI-Orc"/>
             </constraints>
             <connections>
                 <outlet property="backImageView" destination="ZPb-fa-8HJ" id="dA1-ge-vPU"/>
+                <outlet property="coverView" destination="1Bn-wu-OMk" id="NMl-vw-3Pl"/>
                 <outlet property="nameLabel" destination="Q43-Hu-bLl" id="wGI-6w-Pq4"/>
             </connections>
         </collectionViewCell>
