@@ -47,6 +47,12 @@
     MB_BaseNavigationViewController *messageNC = [[MB_BaseNavigationViewController alloc] initWithRootViewController:messageVC];
     
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    MB_User *user = [[MB_User alloc] init];
+    user.fid = 6;
+    user.fname = @"songg";
+    user.fcareerId = @"1|2|3";
+    userVC.user = user;
+    userVC.comeFromType = ComeFromTypeSelf;
     MB_BaseNavigationViewController *userNC = [[MB_BaseNavigationViewController alloc] initWithRootViewController:userVC];
     
     self.viewControllers = @[findNC, rankingNC, messageNC, userNC];

@@ -24,4 +24,6 @@ typedef  NS_ENUM(NSInteger, ComeFromType) {
 
 @property (nonatomic, strong) MB_User *user;
 
+- (void)showCommentView;
+
 @end

@@ -17,25 +17,35 @@
 
 -(void)setValue:(id)value forKey:(NSString *)key
 {
+    if (value == nil || [value isKindOfClass:[NSNull class]]) {
+        if ([key isEqualToString:@"ucid"] || [key isEqualToString:@"fid"] || [key isEqualToString:@"createTime"] ||[key isEqualToString:@"state"] || [key isEqualToString:@"id"] || [key isEqualToString:@"replyTime"]) {
+            [self setValue:@(0) forKey:key];
+        }else {
+            [self setValue:@"" forKey:key];
+        }
+        return;
+    }
+    
     [super setValue:value forKey:key];
     
-    //    if ([key isEqualToString:@"id"]) {
-    //        _media_id = value;
-    //    }
-    //
-    //    if ([key isEqualToString:@"caption"]) {
-    //        _desc = value[@"text"];
-    //    }
-    //
-    //    if ([key isEqualToString:@"user"]) {
-    //        _username = value[@"username"];
-    //        _uid = value[@"id"];
-    //        _profile_picture = value[@"profile_picture"];
-    //    }
-    //
-    //    if ([key isEqualToString:@"likes"]) {
-    //        _likes = value[@"count"];
-    //    }
+    if ([key isEqualToString:@"id"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"ucid"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"fid"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"createTime"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"state"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"replyTime"]) {
+        _uid = [value integerValue];
+    }
 }
 
 @end

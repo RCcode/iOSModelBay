@@ -12,4 +12,9 @@
 
 @property (nonatomic, assign) CGRect containerViewRect;
 
+//留言
+- (void)commentWitnComment:(NSString *)comment;
+//回复
+- (void)replywithReply:(NSString *)reply;
+
 @end

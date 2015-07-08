@@ -12,6 +12,7 @@
 #import "MB_ReplyTableViewCell.h"
 #import "MB_UserViewController.h"
 #import "MB_Message.h"
+#import "UIButton+WebCache.h"
 
 static NSString * const ReuseIdentifierMsg = @"msg";
 static NSString * const ReuseIdentifierReply = @"reply";
@@ -20,6 +21,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
 
 @property (nonatomic, strong) UITableView *tableView;
 //@property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, assign) NSInteger replyIndex;//记录是回复谁
 
 @property (nonatomic, assign) NSInteger minId;
 
@@ -36,6 +38,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
 //    [self.view addSubview:self.commentView];
     
     [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestMessageListWithMinId:0];
 }
 
@@ -46,48 +50,79 @@ static NSString * const ReuseIdentifierReply = @"reply";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 9;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return 1;
 }
 
 - (void)configureCell:(MB_MsgTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
-//    cell.label2.text = _text;
+    MB_Message *message = self.dataArray[indexPath.section];
+    cell.message = message;
+    cell.nameButton.tag = indexPath.section;
+    cell.userButton.tag = indexPath.section;
+    [cell.userButton addTarget:self action:@selector(nameOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.nameButton addTarget:self action:@selector(nameOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.replyButton.tag = indexPath.section;
+    [cell.replyButton addTarget:self action:@selector(replyOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    if (userVC.comeFromType == ComeFromTypeUser) {
+        //看其他用户的留言不能点回复
+        cell.replyButton.hidden = YES;
+        cell.replyImage.hidden = YES;
+    }else {
+        cell.replyButton.hidden = NO;
+        cell.replyImage.hidden = NO;
+    }
+}
+
+- (void)configureCell2:(MB_ReplyTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    MB_Message *message = self.dataArray[indexPath.section];
+    cell.message = message;
+    cell.nameButton.tag = indexPath.section;
+    cell.userButton.tag = indexPath.section;
+    [cell.userButton addTarget:self action:@selector(nameOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.nameButton addTarget:self action:@selector(nameOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+//    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+//    cell.replyNameLabel.text = userVC.user.fname;
+//    [cell.replyUserButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userVC.user.fpic] forState:UIControlStateNormal];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return [tableView fd_heightForCellWithIdentifier:ReuseIdentifier cacheByIndexPath:indexPath configuration:^(MB_MsgTableViewCell *cell) {
-//        [self configureCell:cell atIndexPath:indexPath];
-//    }];
-    
-    return 168;
+    MB_Message *message = self.dataArray[indexPath.section];
+    if (message.state == StateTypeMessage) {
+        NSLog(@"%f",[tableView fd_heightForCellWithIdentifier:ReuseIdentifierMsg cacheByIndexPath:indexPath configuration:^(MB_MsgTableViewCell *cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }]);
+        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierMsg cacheByIndexPath:indexPath configuration:^(MB_MsgTableViewCell *cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+    }else {
+        return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierReply cacheByIndexPath:indexPath configuration:^(MB_ReplyTableViewCell *cell) {
+            [self configureCell2:cell atIndexPath:indexPath];
+        }];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self configureCell:cell atIndexPath:indexPath];
-    if (indexPath.section %2 == 0) {
+    MB_Message *message = self.dataArray[indexPath.section];
+    if (message.state == StateTypeMessage) {
         MB_MsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierMsg forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor redColor];
-        cell.message = self.dataArray[indexPath.row];
+        [self configureCell:cell atIndexPath:indexPath];
         return cell;
     }else {
         MB_ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierReply forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor yellowColor];
-        cell.message = self.dataArray[indexPath.row];
+        [self configureCell2:cell atIndexPath:indexPath];
         return cell;
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    [self.parentViewController.navigationController pushViewController:userVC animated:YES];
-}
 
 #pragma mark - UIScrollViewDelegate
 static CGFloat startY = 0;
@@ -133,20 +168,72 @@ static CGFloat startY = 0;
 
 //获取留言列表
 - (void)requestMessageListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@"",
-                             @"token":@"",
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    NSDictionary *params = @{@"id":@(userVC.user.fid),
+                             @"token":@"adcde",
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getMessagesWithParameters:params success:^(id response) {
         NSLog(@"messages: %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
-            self.minId = [response[@"minId"] integerValue];
             NSArray *array = response[@"list"];
-            for (NSDictionary *dic in array) {
-                MB_Message *message = [[MB_Message alloc] init];
-                [message setValuesForKeysWithDictionary:dic];
-                [self. dataArray addObject:message];
+            if (array == nil || [array isKindOfClass:[NSNull class]]) {
+                [self showNoMoreMessageForview:self.tableView];
+            }else {
+                if (minId == 0) {
+                    [self.dataArray removeAllObjects];
+                }
+                self.minId = [response[@"minId"] integerValue];
+                for (NSDictionary *dic in array) {
+                    MB_Message *message = [[MB_Message alloc] init];
+                    [message setValuesForKeysWithDictionary:dic];
+                    [self. dataArray addObject:message];
+                }
+                [self.tableView reloadData];
             }
+        }
+    } failure:^(NSError *err) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
+    }];
+}
+
+//点击用户名和用户头像跳到用户个人页
+- (void)nameOnClick:(UIButton *)button {
+//    MB_Message *message = self.dataArray[button.tag];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeUser;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+
+//回复留言
+- (void)replyOnClick:(UIButton *)button {
+    self.replyIndex = button.tag;
+    
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    [userVC showCommentView];
+}
+
+- (void)commentWitnComment:(NSString *)comment {
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    NSDictionary *params = @{@"id":@(6),//用户id
+                             @"token":@"abcde",
+                             @"fid":@(userVC.user.fid),//评论用户id
+                             @"comment":comment};
+    [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
+        NSLog(@"coment %@",response);
+        if ([self statFromResponse:response] == 10000) {
+//            [self requestMessageListWithMinId:0];
+            MB_Message *message = [[MB_Message alloc] init];
+            message.state = StateTypeMessage;
+            message.comment = comment;
+            message.createTime = 1000;
+            message.fid = userVC.user.fid;
+            message.fname = @"songge";
+            message.uid = 6;
+            [self.dataArray addObject:message];
             [self.tableView reloadData];
         }
     } failure:^(NSError *err) {
@@ -154,17 +241,25 @@ static CGFloat startY = 0;
     }];
 }
 
-//回复留言
-- (void)replyMessage:(UIButton *)button {
-    NSDictionary *params = @{@"id":@"",//用户id
-                             @"ucid":@(6),//评论id
-                             @"fid":@(6),//评论用户id
-                             @"reply":@(10)//评论
-                             };
+- (void)replywithReply:(NSString *)reply {
+    MB_Message *message = self.dataArray[self.replyIndex];
+    
+    NSDictionary *params = @{@"id":@(6),//用户id
+                             @"token":@"abcde",
+                             @"ucid":@(message.ucid),//评论id
+                             @"fid":@(message.fid),//评论用户id
+                             @"reply":reply//评论
+                            };
     [[AFHttpTool shareTool] replyMessageWithParameters:params success:^(id response) {
         NSLog(@"reply %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            message.reply = reply;
+            message.replyTime = 100;
+            message.state = StateTypeReply;
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.replyIndex]] withRowAnimation:UITableViewRowAnimationNone];
+        }
     } failure:^(NSError *err) {
-        
+
     }];
 }
 
@@ -175,11 +270,11 @@ static CGFloat startY = 0;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 10)];
-//        _tableView.tableHeaderView = view;
-//        _tableView.tableFooterView = view;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 10)];
+        _tableView.tableHeaderView = view;
+        _tableView.tableFooterView = view;
         _tableView.sectionHeaderHeight = 10;
-        _tableView.sectionFooterHeight = 0;
+        _tableView.sectionFooterHeight = 0.5;
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_MsgTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierMsg];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_ReplyTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierReply];

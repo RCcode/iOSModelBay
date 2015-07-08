@@ -43,4 +43,8 @@
 + (void)showAlertViewWithMessage:(NSString *)string;
 
 //+ (NSInteger)statFromResponse:(id)response;
+
+
+//用指定时区的时间戳算出当前时区应当显示的时间 timeZone格式：(+08)
++ (NSString *)dateWithTimeInterval:(double)timeInterval fromTimeZone:(NSString *)zone;
 @end

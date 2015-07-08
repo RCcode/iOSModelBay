@@ -25,7 +25,11 @@
 #import "MB_SelectCareerViewController.h"
 #import "MB_CommentView.h"
 
-@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+#define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
+#define kShareHotTags @""
+
+@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
@@ -33,6 +37,8 @@
 @property (nonatomic, strong) MB_CommentView *commentView;
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
+@property (nonatomic, strong) UIDocumentInteractionController *documetnInteractionController;
+
 
 @end
 
@@ -44,8 +50,16 @@
     
     self.titleLabel.text = @"VINCENT";
     self.navigationItem.titleView = self.titleLabel;
+    if (self.comeFromType == ComeFromTypeUser) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
+    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
+    
+    //键盘监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
@@ -168,6 +182,36 @@ static CGFloat startY;
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         //通过Instragram
+
+        UIGraphicsBeginImageContext(self.view.frame.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        [self.view.layer renderInContext:context];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+        if (![[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"没有安装Instragram" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            return;
+        }else {
+            //保存本地 如果已存在，则删除
+            if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath]){
+                [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
+            }
+            
+            NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
+            [imageData writeToFile:kToInstagramPath atomically:YES];
+            NSLog(@"kToInstagramPath [ %@",kToInstagramPath);
+            
+            //分享
+            NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
+            _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+            _documetnInteractionController.delegate = self;
+            _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
+            _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
+            [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+        }
     }else if (buttonIndex == 1) {
         //通过邮件
         if ([MFMailComposeViewController canSendMail]) {
@@ -203,7 +247,36 @@ static CGFloat startY;
 }
 
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+#pragma mark - 键盘监听
+- (void)keyBoardWillShow:(NSNotification *)noti {
+    //滚到顶部
+    if (self.tableView.contentOffset.y != topViewHeight - 20) {
+        [self.tableView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+    }
+    
+    CGRect rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect frame = self.commentView.frame;
+    frame.origin.y = CGRectGetMinY(rect) - CGRectGetHeight(frame);
+    self.commentView.frame = frame;
+}
+
+- (void)keyBoardWillHide:(NSNotification *)noti {
+    self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
+}
+
+
 #pragma mark - private methods
+- (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)test {
 //    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
     
@@ -217,6 +290,7 @@ static CGFloat startY;
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
+
 
 - (void)addChildViewControllers {
     MB_UserSummaryViewController *summaryVC   = [[MB_UserSummaryViewController alloc] init];
@@ -259,7 +333,10 @@ static CGFloat startY;
     self.containerView.contentOffset = CGPointMake(CGRectGetWidth(self.containerView.frame) * btn.tag, 0);
     //如果滚动到第四个显示输入框
     if (self.containerView.contentOffset.x == self.containerView.frame.size.width * 3) {
-        self.commentView.hidden = NO;
+        //自己的个人页的留言框需要点击回复再显示，奇特人的是滑到这页就显示
+        if (self.comeFromType == ComeFromTypeUser) {
+            self.commentView.hidden = NO;
+        }
     }else{
         self.commentView.hidden = YES;
     }
@@ -294,6 +371,29 @@ static CGFloat startY;
     [action showInView:self.view];
 }
 
+//发送留言或回复
+- (void)sendButtonOnClick:(UIButton *)button {
+    if (self.comeFromType == ComeFromTypeUser) {
+//        NSDictionary *params = @{@"id":@(6),//用户id
+//                                 @"token":@"abcde",
+//                                 @"fid":@(self.user.fid),//评论用户id
+//                                 @"comment":self.commentView.textField.text};
+//        [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
+//            NSLog(@"coment %@",response);
+//        } failure:^(NSError *err) {
+//            
+//        }];
+        MB_MessageViewController *messageVC = self.childViewControllers[3];
+        [messageVC commentWitnComment:self.commentView.textField.text];
+    }else {
+        MB_MessageViewController *messageVC = self.childViewControllers[3];
+        [messageVC replywithReply:self.commentView.textField.text];
+    }
+}
+
+- (void)showCommentView {
+    self.commentView.hidden = NO;
+}
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {
@@ -366,8 +466,9 @@ static CGFloat startY;
 - (UIView *)commentView {
     if (!_commentView) {
         _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
-//        _commentView.backgroundColor = [UIColor greenColor];
         _commentView.hidden = YES;
+        _commentView.textField.delegate = self;
+        [_commentView.sendButton addTarget:self action:@selector(sendButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _commentView;
 }

@@ -12,6 +12,7 @@
 #import "MobClick.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import "MBProgressHUD.h"
 #import "MB_Define.h"
 #import "MB_Utils.h"

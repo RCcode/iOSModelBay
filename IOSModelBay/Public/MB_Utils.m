@@ -77,6 +77,31 @@ static MB_Utils *util = nil;
     }
 }
 
++ (NSString *)dateWithTimeInterval:(double)timeInterval fromTimeZone:(NSString *)zone {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"Z"];
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    [dateFormatter setTimeZone:timeZone];
+    //+0800
+    NSString *timeZoneZ = [dateFormatter stringFromDate:[NSDate date]];
+    NSRange range = NSMakeRange(0, 3);
+    //+08
+    NSString *timeZoneInt = [timeZoneZ substringWithRange:range];
+    
+    NSLog(@"timeZoneInt%@",timeZoneInt);
+    
+    //时区相差时间戳
+    double interval = ([timeZoneInt integerValue] - [zone integerValue]) * 60;
+    //按现在时区算的时间戳应该是：
+    NSTimeInterval second = timeInterval + interval;
+    //那么对应的date是：
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:second];
+    
+    //设置格式为2015.07.03 18:12
+    [dateFormatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+    return [dateFormatter stringFromDate:date];
+}
+
 //+ (NSInteger)statFromResponse:(id)response {
 //    NSInteger stat = [response[@"stat"] integerValue];
 //    NSString *errorMsg = nil;
