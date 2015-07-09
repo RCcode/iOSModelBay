@@ -35,7 +35,8 @@
         CGFloat topSpace = _careerView.frame.size.height - width - 6;//与父视图的上间隔
         for (int i = 0; i < count; i ++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(leadingSpace + i *(width + space), topSpace, width, width)];
-            imageView.image = [UIImage imageNamed:[[MB_Utils shareUtil].careerDic objectForKey:careers[i]]];
+//            imageView.image = [UIImage imageNamed:[[MB_Utils shareUtil].careerDic objectForKey:careers[i]]];
+            imageView.image = [UIImage imageNamed:@"ic_actor2"];
             [_careerView addSubview:imageView];
         }
     }

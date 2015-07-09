@@ -44,12 +44,92 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 //        
 //    }
     
-    self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
-    if ([self.user.fcareerId containsString:@"1"]) {
-        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
-    }else {
-        self.dataArray = [@[@"介绍",@"性别",@"国家",@"年龄",@"专注领域",@"经验",@"联系方式",@"电话",@"电子邮件",@"网站"] mutableCopy];
+//    @property (nonatomic, strong) NSString *bio;//描述
+//    @property (nonatomic, strong) NSString *gender;//性别:0.女;1.男;-1隐藏
+//    @property (nonatomic, strong) NSString *country;//国家
+//    @property (nonatomic, strong) NSString *age;//年龄:-1隐藏
+//    @property (nonatomic, strong) NSString *contact;//联系方式,null为隐藏
+//    @property (nonatomic, strong) NSString *email;//邮箱, null为隐藏
+//    @property (nonatomic, strong) NSString *website;//网站, null为隐藏
+//    @property (nonatomic, strong) NSString *experience;//经验
+//    @property (nonatomic, strong) NSString *height;//身高cm
+//    @property (nonatomic, strong) NSString *weight;//体重kg
+//    @property (nonatomic, strong) NSString *chest;//胸围cm
+//    @property (nonatomic, strong) NSString *waist;//腰围cm
+//    @property (nonatomic, strong) NSString *hips;//臀围cm
+//    @property (nonatomic, strong) NSString *eyecolor;//眼睛颜色
+//    @property (nonatomic, strong) NSString *skincolor;//皮肤颜色
+//    @property (nonatomic, strong) NSString *haircolor;//头发颜色
+//    @property (nonatomic, strong) NSString *shoesize;//鞋号
+//    @property (nonatomic, strong) NSString *dress;//衣号
+    
+    
+    self.dataArray = [@[] mutableCopy];
+    
+    if (self.detail.gender != -1) {
+        [self.dataArray addObject:@"性别"];
     }
+    
+    [self.dataArray addObject:@"国家"];
+    
+    if (self.detail.age != -1) {
+        [self.dataArray addObject:@"年龄"];
+    }
+    
+    
+    //模特，新面孔
+    for (NSString *string in @[@"1", @"2"]) {
+        if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:string]) {
+            for (NSString *string in @[@"身高", @"体重", @"胸围", @"腰围", @"臀围", @"眼睛颜色", @"皮肤颜色", @"头发颜色", @"鞋号", @"衣号", @"专注领域", @"经验"]) {
+                if (![self.dataArray containsObject:string]) {
+                    [self.dataArray addObject:string];
+                }
+            }
+            break;
+        }
+    }
+    
+    
+    //演员，歌手，舞者
+    for (NSString *string in @[@"1", @"2", @"3"]) {
+        if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:string]) {
+            for (NSString *string in @[@"身高", @"体重", @"胸围", @"腰围", @"臀围", @"眼睛颜色", @"皮肤颜色", @"头发颜色", @"经验"]) {
+                if (![self.dataArray containsObject:string]) {
+                    [self.dataArray addObject:string];
+                }
+            }
+            break;
+        }
+    }
+    
+    //摄影师
+    if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:@"4"]) {
+        if (![self.dataArray containsObject:@"专注领域"]) {
+            [self.dataArray addObject:@"专注领域"];
+        }
+    }
+    
+    //不是观众就加个经验
+    if (![self.user.fcareerId isEqualToString:@""]) {
+        if (![self.dataArray containsObject:@"经验"]) {
+            [self.dataArray addObject:@"经验"];
+        }
+    }
+    
+    //最后加这几种
+    if (![self.detail.contact isEqualToString:@""]) {
+        [self.dataArray addObject:@"联系方式"];
+    }
+    if (![self.detail.email isEqualToString:@""]) {
+        [self.dataArray addObject:@"电子邮件"];
+    }
+    if (![self.detail.website isEqualToString:@""]) {
+        [self.dataArray addObject:@"网站"];
+    }
+    
+    
+    NSLog(@"dataArray ==== %@",self.dataArray);
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +166,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     if (indexPath.section == 0) {
         MB_IntroduceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierIntroduce forIndexPath:indexPath];
         
-        cell.label.text = @"穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
+        cell.label.text = @"AHSSHJSGJDDjdsdfksdjfksdjfksdjj嘻卡斯是是是是是是是是是是穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
         return cell;
     }else if (indexPath.section == 1){
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
@@ -167,10 +247,12 @@ static CGFloat startY = 0;
                              @"fid":@(6)};
     [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
         NSLog(@"detail %@",response);
-        self.detail = [[MB_UserDetail alloc] init];
-        self.detailDic = response;
-//        [self.detail setValuesForKeysWithDictionary:response];
-        [self.tableView reloadData];
+        if ([self statFromResponse:response] == 10000) {
+            self.detail = [[MB_UserDetail alloc] init];
+            self.detailDic = response;
+            //        [self.detail setValuesForKeysWithDictionary:response];
+            [self.tableView reloadData];
+        }
     } failure:^(NSError *err) {
         
     }];

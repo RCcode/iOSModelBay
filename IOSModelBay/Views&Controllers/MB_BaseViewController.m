@@ -28,11 +28,13 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.scrollCoordinator disable];
+//    [self.scrollCoordinator disableFullyExpandingViews:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.scrollCoordinator enable];
+//    [self.scrollCoordinator enableFullyExpandingViews:YES];
 }
 
 #pragma mark - Private Methods

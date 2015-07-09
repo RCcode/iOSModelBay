@@ -45,6 +45,12 @@
 @implementation MB_UserViewController
 
 #pragma mark - life cycle
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -66,7 +72,8 @@
     
     [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addChildViewControllers];
-    [self menuBtnOnClick:self.menuBtns[0]];
+    
+    [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,7 +177,11 @@ static CGFloat startY;
         
         //如果滚动到第四个显示输入框
         if (scrollView.contentOffset.x == scrollView.frame.size.width * 3) {
-            self.commentView.hidden = NO;
+            if (self.comeFromType == ComeFromTypeUser) {
+                self.commentView.hidden = NO;
+            }else{
+                self.commentView.hidden = YES;
+            }
         }else{
             self.commentView.hidden = YES;
         }
@@ -336,6 +347,8 @@ static CGFloat startY;
         //自己的个人页的留言框需要点击回复再显示，奇特人的是滑到这页就显示
         if (self.comeFromType == ComeFromTypeUser) {
             self.commentView.hidden = NO;
+        }else{
+            self.commentView.hidden = YES;
         }
     }else{
         self.commentView.hidden = YES;
@@ -347,6 +360,7 @@ static CGFloat startY;
     if (!button.selected) {
         button.selected = YES;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+        button.backgroundColor = colorWithHexString(@"#ff4f42");
         
         NSDictionary *params = @{@"id":@(6),
                                  @"token":@"abcde",
@@ -403,7 +417,7 @@ static CGFloat startY;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
-        _tableView.bounces = NO;
+//        _tableView.bounces = YES;
     }
     return _tableView;
 }
@@ -414,7 +428,7 @@ static CGFloat startY;
         _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, topViewHeight);
         [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
         [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
-        _userInfoView.nameLabel.text = _user.fname;
+        _userInfoView.nameLabel.text = _user.fname.uppercaseString;
         NSMutableArray *careerArr = [NSMutableArray arrayWithCapacity:0];
         for (NSString *career in [_user.fcareerId componentsSeparatedByString:@"|"]) {
             [careerArr addObject:[[MB_Utils shareUtil].careerDic objectForKey:career]?:@""];

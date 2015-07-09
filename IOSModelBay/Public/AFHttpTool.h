@@ -142,5 +142,10 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                        success:(void (^)(id response))success
                        failure:(void (^)(NSError* err))failure;
 
+//提交pushkey
+- (void)updatePushKeyWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure;
+
 
 @end

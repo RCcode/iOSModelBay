@@ -35,18 +35,19 @@
     CGRect rect = _imagesScrollView.frame;
     
     [_imagesScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    NSLog(@"mList =  %@",ablum.mList);
     for (int i = 0; i < ablum.mList.count; i ++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetHeight(rect) + 1) * i, 0, CGRectGetHeight(rect), CGRectGetHeight(rect))];
         NSString *imageName = [ablum.mList[i] objectForKey:@"url"];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
         imageView.backgroundColor = placeholderColor;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.userInteractionEnabled = YES;
 //        imageView.clipsToBounds = YES;
         [_imagesScrollView addSubview:imageView];
     }
     _imagesScrollView.bounces = YES;
     _imagesScrollView.alwaysBounceHorizontal = YES;
+    _imagesScrollView.delaysContentTouches = NO;
     _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * ablum.mList.count + 1 * (ablum.mList.count - 1), CGRectGetHeight(rect));
     
     _nameLabel.text = ablum.name;

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MB_Notice.h"
 
 @interface MB_MessageReplyTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) MB_Notice *notice;
 
 @end

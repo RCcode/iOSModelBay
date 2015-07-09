@@ -62,8 +62,8 @@
 #pragma mark - registe notification
 - (void)registNotification{
     if([[[UIDevice currentDevice]systemVersion] floatValue] >= 8.0){
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
     }else{
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
@@ -74,8 +74,12 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    NSLog(@"deviceToken%@",deviceToken);
 //    NSRange range = NSMakeRange(1,[[deviceToken description] length]-2);
 //    _deviceToken = [[deviceToken description] substringWithRange:range];
 //    NSLog(@"deviceTokenStr==%@",_deviceToken);
@@ -84,6 +88,16 @@
 //        //注册token
 //        [self postData:[NSString stringWithFormat:@"%@",_deviceToken]];
 //    }
+    
+    NSDictionary *params = @{@"id":@(6),
+                             @"plat":@(2),
+                             @"ikey":deviceToken};
+    [[AFHttpTool shareTool] updatePushKeyWithParameters:params success:^(id response) {
+        NSLog(@"push %@",response);
+    } failure:^(NSError *err) {
+        
+    }];
+    
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     NSLog(@"Fail to Register For Remote Notificaions With Error :error = %@",error.description);

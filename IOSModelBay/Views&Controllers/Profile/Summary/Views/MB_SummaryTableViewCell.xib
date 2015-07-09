@@ -36,16 +36,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="啦啦啦德玛西亚" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq1-PU-kgW">
-                                <rect key="frame" x="72" y="13" width="248" height="16"/>
+                                <rect key="frame" x="72" y="13" width="91" height="16"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_sanjiao" translatesAutoresizingMaskIntoConstraints="NO" id="e7i-UQ-lBF">
+                                <rect key="frame" x="304" y="16" width="11" height="11"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="11" id="ZQS-zd-jqm"/>
+                                    <constraint firstAttribute="height" constant="11" id="gEw-Da-dpi"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eNQ-sB-oFb" secondAttribute="trailing" id="4dK-DB-fMG"/>
+                            <constraint firstItem="e7i-UQ-lBF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kq1-PU-kgW" secondAttribute="trailing" id="6Bf-TJ-DUz"/>
                             <constraint firstItem="Kq1-PU-kgW" firstAttribute="leading" secondItem="5xE-vt-bOH" secondAttribute="trailing" id="CT4-QU-qqq"/>
+                            <constraint firstItem="Kq1-PU-kgW" firstAttribute="centerY" secondItem="e7i-UQ-lBF" secondAttribute="centerY" id="N6D-o0-mYX"/>
+                            <constraint firstAttribute="trailing" secondItem="e7i-UQ-lBF" secondAttribute="trailing" constant="5" id="ZQc-H1-Of7"/>
                             <constraint firstItem="5xE-vt-bOH" firstAttribute="leading" secondItem="D2W-nM-fi8" secondAttribute="leading" constant="12" id="dbI-If-4I7"/>
                             <constraint firstItem="5xE-vt-bOH" firstAttribute="top" secondItem="D2W-nM-fi8" secondAttribute="top" id="dou-I1-3Db"/>
                             <constraint firstAttribute="trailing" secondItem="Kq1-PU-kgW" secondAttribute="trailing" id="e19-hZ-PlS"/>
@@ -59,6 +69,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="rj0-UD-T2g"/>
+                                <exclude reference="e19-hZ-PlS"/>
                             </mask>
                         </variation>
                     </view>
@@ -77,10 +88,11 @@
                 <outlet property="mainLabelWidth" destination="GFG-jy-XuI" id="SUc-iR-AdP"/>
                 <outlet property="subLabel" destination="Kq1-PU-kgW" id="gmS-GH-une"/>
             </connections>
-            <point key="canvasLocation" x="175" y="386"/>
+            <point key="canvasLocation" x="175" y="385.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="edit_sjieshao_up" width="299" height="43"/>
+        <image name="ic_sanjiao" width="11" height="11"/>
     </resources>
 </document>

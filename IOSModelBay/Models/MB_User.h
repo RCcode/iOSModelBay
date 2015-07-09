@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSInteger  fid;       //用户id
 @property (nonatomic, assign) NSInteger  uid;       //第三方平台id
 @property (nonatomic, assign) NSInteger  state;     //是否本平台用户:0.不是;1.是
+@property (nonatomic, assign) NSInteger  uType;     //用户类型: 0,浏览;1:专业;
 @property (nonatomic, assign) NSInteger  fgender;   //性别:0.女;1.男
 @property (nonatomic, assign) NSInteger  liked;     //被赞数
 @property (nonatomic, strong) NSString  *fname;     //用户名

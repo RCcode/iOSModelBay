@@ -20,4 +20,43 @@
     // Configure the view for the selected state
 }
 
+- (void)setNotice:(MB_Notice *)notice {
+    _notice = notice;
+    
+//    [_userImageView sd_setImageWithURL:[NSURL URLWithString:notice.fpic] placeholderImage:nil];
+//    _usernameLabel.text = notice.fname;
+//    _messageLabel.text = notice.comment;
+//    _timeLabel.text = [NSString stringWithFormat:@"%f",notice.createTime];
+    
+    switch (notice.mtype) {
+        case NoticeTypeCollect: {
+            
+            break;
+        }
+        case NoticeTypeMention: {
+            
+            break;
+        }
+        case NoticeTypeLike: {
+            
+            break;
+        }
+        case NoticeTypeComment: {
+            
+            break;
+        }
+        case NoticeTypeMessage: {
+            
+            break;
+        }
+        case NoticeTypeReplay: {
+            
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
 @end

@@ -33,6 +33,7 @@
 #define kReplyMessageUrl     @"user/replyComment.do"
 #define kGetLikesUrl         @"user/getLikes.do"
 #define kAddLikesUrl         @"user/addLikes.do"
+#define kUpdatePushKey       @"user/updatePushKey.do"
 
 //#define ContentType @"text/html"
 //#define ContentType @"text/plain"
@@ -476,6 +477,18 @@ static AFHttpTool *httpTool = nil;
 {
     [self requestWihtMethod:RequestTypePost
                         url:kAddLikesUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//提交pushkey
+- (void)updatePushKeyWithParameters:params
+                            success:(void (^)(id response))success
+                            failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kUpdatePushKey
                      params:params
                     success:success
                     failure:failure];

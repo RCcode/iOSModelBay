@@ -113,6 +113,8 @@ static CGFloat startY = 0;
                 }
                 [self.collectView reloadData];
             }
+        }else if ([self statFromResponse:response] == 10004) {
+            [self showNoMoreMessageForview:self.collectView];
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
