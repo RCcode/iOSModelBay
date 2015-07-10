@@ -26,10 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%d)",1,10];
+    self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",1,(unsigned long)self.ablum.mList.count];
     self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     
     [self.view addSubview:self.scrollView];
@@ -70,12 +69,9 @@
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)gestureRecognizer;
         CGPoint point = [pan translationInView:pan.view];
-        NSLog(@"sss %@",NSStringFromCGPoint([pan translationInView:pan.view]));
         if (fabs(point.x) > fabs(point.y)) {
-            NSLog(@"xxx");
             return YES;
         }else {
-            NSLog(@"yyy");
             return NO;
         }
     }else {
@@ -93,7 +89,7 @@
         UIScrollView *view = (UIScrollView *)pan.view;
         NSInteger page = view.contentOffset.x / view.frame.size.width;
         if (point.x < 0) {
-            if (page + 1 < 10) {
+            if (page + 1 < self.ablum.mList.count) {
                 //横向滚动视图滚动到下一页
                 [view setContentOffset:CGPointMake((page + 1) * view.frame.size.width, 0) animated:NO];
                 //影集描述跟着移动到下一页
@@ -101,7 +97,7 @@
                 UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
                 [nextScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%d)",page + 1 + 1,10];
+                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%lu)",page + 1 + 1, (unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -115,7 +111,7 @@
                 UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
                 [lastScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%d)",page - 1 + 1,10];
+                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%lu)",page - 1 + 1,(unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -128,33 +124,30 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 #pragma mark - getters & setters
 //横向滚动视图
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
-        _scrollView.backgroundColor = [UIColor redColor];
 //        _scrollView.pagingEnabled = YES;
 //        _scrollView.delegate = self;
 //        _scrollView.directionalLockEnabled = YES;
         _scrollView.scrollEnabled = NO;
         
         //创建子滚动视图
-        for (int i = 0; i < 10; i ++) {
+        for (int i = 0; i < self.ablum.mList.count; i++) {
             UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(i * kWindowWidth, 0, kWindowWidth, CGRectGetHeight(_scrollView.frame))];
-            scrollView.backgroundColor = [UIColor greenColor];
             scrollView.directionalLockEnabled = YES;
             scrollView.tag = startTag + i;
             [_scrollView addSubview:scrollView];
             
             //第i页的图片
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(scrollView.frame) - 80)];
+            imageView.backgroundColor = placeholderColor;
             imageView.userInteractionEnabled = YES;
-            if (i %2 == 0) {
-                imageView.image = [UIImage imageNamed:@"a"];
-            }else {
-                imageView.image = [UIImage imageNamed:@"b"];
-            }
+            NSString *imageName = [self.ablum.mList[i] objectForKey:@"url"];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
             [scrollView addSubview:imageView];
             
             //开始影集描述先加在第一页
@@ -167,7 +160,7 @@
             scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(imageView.frame) + CGRectGetHeight(self.descView.frame));
         }
         
-        _scrollView.contentSize = CGSizeMake(10 * kWindowWidth, CGRectGetHeight(_scrollView.frame));
+        _scrollView.contentSize = CGSizeMake(self.ablum.mList.count * kWindowWidth, CGRectGetHeight(_scrollView.frame));
         //pan手势 用于横向的滚动视图换页
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         pan.delegate = self;

@@ -81,6 +81,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //    cell.label3.text = @"";
 //    cell.con3.constant = 0;
     cell.ablum = self.dataArray[indexPath.section];
+    cell.imagesScrollView.tag = indexPath.section;
+    [cell.tap addTarget:self action:@selector(handleTap:)];
 }
 
 - (void)configureCell2:(MB_SignalImageTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -106,7 +108,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MB_ScanAblumViewController *scanVC = [[MB_ScanAblumViewController alloc] init];
-//    scanVC.ablum = self.dataArray[indexPath.row];
+    scanVC.ablum = self.dataArray[indexPath.section];
+    scanVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:scanVC animated:YES];
 }
 
@@ -186,6 +189,10 @@ static CGFloat startY = 0;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
     }];
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)tap{
+    [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:tap.view.tag]];
 }
 
 //添加作品集

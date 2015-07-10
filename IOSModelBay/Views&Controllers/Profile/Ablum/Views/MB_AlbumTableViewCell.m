@@ -21,6 +21,9 @@
 //    //    [hub blink];//闪烁
 //    //    [hub bump];//跳跃
 //    [_hub scaleCircleSizeBy:1.0];//缩放大小
+    
+    _tap = [[UITapGestureRecognizer alloc] init];
+    [_imagesScrollView addGestureRecognizer:_tap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,13 +44,10 @@
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
         imageView.backgroundColor = placeholderColor;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.userInteractionEnabled = YES;
-//        imageView.clipsToBounds = YES;
         [_imagesScrollView addSubview:imageView];
     }
     _imagesScrollView.bounces = YES;
     _imagesScrollView.alwaysBounceHorizontal = YES;
-    _imagesScrollView.delaysContentTouches = NO;
     _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * ablum.mList.count + 1 * (ablum.mList.count - 1), CGRectGetHeight(rect));
     
     _nameLabel.text = ablum.name;
@@ -79,5 +79,15 @@
         _con4.constant = 0;
     }
 }
+
+//
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    NSLog(@"asas");
+//    if (CGRectContainsPoint(_imagesScrollView.frame, point)) {
+//        return self;
+//    }else {
+//        return [super hitTest:point withEvent:event];
+//    }
+//}
 
 @end

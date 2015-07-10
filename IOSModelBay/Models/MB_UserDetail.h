@@ -10,7 +10,7 @@
 
 @interface MB_UserDetail : NSObject
 
-@property (nonatomic, assign) NSInteger id;//用户id
+@property (nonatomic, assign) NSInteger uid;//用户id
 @property (nonatomic, strong) NSString *name;//用户名
 @property (nonatomic, strong) NSString *pic;//用户头像
 @property (nonatomic, strong) NSString *backPic;//背景
@@ -34,5 +34,6 @@
 @property (nonatomic, strong) NSString *haircolor;//头发颜色
 @property (nonatomic, strong) NSString *shoesize;//鞋号
 @property (nonatomic, strong) NSString *dress;//衣号
+@property (nonatomic, strong) NSString *fareas;//专注领域|线分割:1|2|3
 
 @end

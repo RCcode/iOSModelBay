@@ -34,9 +34,14 @@
 @property (nonatomic, strong) NSArray *chest;//胸围
 @property (nonatomic, strong) NSArray *waist;//腰围
 @property (nonatomic, strong) NSArray *hips;//臀围
-//@property (nonatomic, strong) NSArray *careerDic;//专注领域-模特
-//@property (nonatomic, strong) NSArray *careerDic;//专注领域-摄影师
+@property (nonatomic, strong) NSArray *areaModel;//专注领域-模特
+@property (nonatomic, strong) NSArray *areaPhoto;//专注领域-摄影师
 @property (nonatomic, strong) NSArray *experience;//经验
+
+//资料属性的先后关系
+@property (nonatomic, strong) NSArray *mapArray;
+//选项的对应关系
+@property (nonatomic, strong) NSDictionary *optionsDic;
 
 + (void)showPromptWithText:(NSString *)text;
 

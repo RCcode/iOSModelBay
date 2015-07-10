@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *con4;
 @property (weak, nonatomic) IBOutlet UILabel *label4;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+
 @property (nonatomic, strong) MB_Ablum *ablum;
 
 @end

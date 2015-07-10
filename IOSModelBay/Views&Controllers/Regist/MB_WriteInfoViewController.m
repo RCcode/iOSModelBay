@@ -8,6 +8,7 @@
 
 #import "MB_WriteInfoViewController.h"
 #import "MB_SelectCareerViewController.h"
+#import "MB_TabBarViewController.h"
 
 @interface MB_WriteInfoViewController ()
 
@@ -83,7 +84,28 @@
                     [self.navigationController pushViewController:careerVC animated:YES];
                 }else{
                     //注册
-                    
+                    NSDictionary *params = @{@"uid":[userDefaults objectForKey:kUid],
+                                             @"tplat":@(0),
+                                             @"plat":@(2),
+                                             @"ikey":@"ccccc",
+                                             @"akey":@"",
+                                             @"userName":[userDefaults objectForKey:kUsername],
+                                             @"fullName":[userDefaults objectForKey:kFullname],
+                                             @"token":[userDefaults objectForKey:kAccessToken],
+                                             @"utype":@(1),
+                                             @"name":@"lisong",
+                                             @"gender":@"",
+                                             @"careerId":@"",
+                                             @"pic":[userDefaults objectForKey:kPic]};
+                    [[AFHttpTool shareTool] registWithParameters:params success:^(id response) {
+                        NSLog(@"regist %@",response);
+                        if ([response[@"stat"] integerValue] == 10000) {
+                            MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+                            [self presentViewController:tabVC animated:YES completion:nil];
+                        }
+                    } failure:^(NSError *err) {
+                        
+                    }];
                 }
             }
         } failure:^(NSError *err) {

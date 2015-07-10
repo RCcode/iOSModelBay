@@ -16,11 +16,45 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
-//        [self setValue:@"没有呢" forKey:key];
+        if ([key isEqualToString:@"id"] || [key isEqualToString:@"state"] || [key isEqualToString:@"height"] || [key isEqualToString:@"weight"] ||[key isEqualToString:@"chest"] ||[key isEqualToString:@"waist"] ||[key isEqualToString:@"hips"]) {
+            [self setValue:@(0) forKey:key];
+        }else if ([key isEqualToString:@"gender"] || [key isEqualToString:@"age"]) {
+            [self setValue:@(-1) forKey:key];
+        }else {
+            [self setValue:@"" forKey:key];
+        }
         return;
     }
     
-    [super setValue:value forUndefinedKey:key];
+    [super setValue:value forKey:key];
+    
+    if ([key isEqualToString:@"id"]) {
+        _uid = [value integerValue];
+    }
+    if ([key isEqualToString:@"state"]) {
+        _state = [value integerValue];
+    }
+    if ([key isEqualToString:@"gender"]) {
+        _gender = [value integerValue];
+    }
+    if ([key isEqualToString:@"age"]) {
+        _age = [value integerValue];
+    }
+    if ([key isEqualToString:@"height"]) {
+        _height = [value integerValue];
+    }
+    if ([key isEqualToString:@"weight"]) {
+        _weight = [value integerValue];
+    }
+    if ([key isEqualToString:@"chest"]) {
+        _chest = [value integerValue];
+    }
+    if ([key isEqualToString:@"waist"]) {
+        _waist = [value integerValue];
+    }
+    if ([key isEqualToString:@"hips"]) {
+        _hips = [value integerValue];
+    }
 }
 
 @end
