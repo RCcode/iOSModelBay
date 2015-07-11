@@ -16,6 +16,8 @@
 #import "MB_SelectPhotosViewController.h"
 #import "MB_SelectTemplateViewController.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "MB_LikersViewController.h"
+#import "MB_CommentsViewController.h"
 
 static NSString * const ReuseIdentifierAblum = @"ablummm";
 static NSString * const ReuseIdentifierTemplate = @"template";
@@ -74,15 +76,17 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 
 - (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.ablum = [[MB_Ablum alloc] init];
-//    cell.label1.text = @"sfhhhhhhhhhhhhhhhhhhccdsksjd说的话就会受到疾病发生的爆发你的身份决定是否独守空房多少分阶段师傅的说法vkvsjvnncxnvxnmvnxcvxcvnmxcnvmncxvncnvmcxnvmxcnvmnxcnv     \n  xcnvxnvcxv";
-//    cell.label2.text = @"";
-//    cell.con2.constant = 0;
-//    cell.label3.text = @"";
-//    cell.con3.constant = 0;
     cell.ablum = self.dataArray[indexPath.section];
     cell.imagesScrollView.tag = indexPath.section;
     [cell.tap addTarget:self action:@selector(handleTap:)];
+    cell.likeButton.tag = indexPath.row;
+    [cell.likeButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.likeListButton.tag = indexPath.row;
+    [cell.likeListButton addTarget:self action:@selector(likeListButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.commentButton.tag = indexPath.row;
+    [cell.commentButton addTarget:self action:@selector(commentButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.shareButton.tag = indexPath.row;
+    [cell.shareButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)configureCell2:(MB_SignalImageTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -127,11 +131,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 20) {
+            if (taleView.contentOffset.y == topViewHeight - 64) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -169,7 +173,9 @@ static CGFloat startY = 0;
         [self endRefreshingForView:self.tableView];
         
         if ([self statFromResponse:response] == 10000) {
-            
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+            }
             self.minId = [response[@"minId"] integerValue];
             if (response[@"list"] != nil && ![response[@"list"] isKindOfClass:[NSNull class]]) {
                 NSArray *array = response[@"list"];
@@ -182,7 +188,6 @@ static CGFloat startY = 0;
             }
             
         }else if ([self statFromResponse:response] == 10004) {
-            
             [self showNoMoreMessageForview:self.tableView];
         }
     } failure:^(NSError *err) {
@@ -193,6 +198,42 @@ static CGFloat startY = 0;
 
 - (void)handleTap:(UITapGestureRecognizer *)tap{
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:tap.view.tag]];
+}
+
+//点赞
+- (void)likeButtonOnClick:(UIButton *)button {
+    MB_Ablum *ablum = self.dataArray[button.tag];
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
+                             @"fid":@(ablum.uid),
+                             @"ablId":@(ablum.ablId)};
+    [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
+        NSLog(@"like send %@", response);
+        if ([self statFromResponse:response] == 10000) {
+            [MB_Utils showPromptWithText:@"like success"];
+        }else {
+            [MB_Utils showPromptWithText:@"like failed"];
+        }
+    } failure:^(NSError *err) {
+        [MB_Utils showPromptWithText:@"like failed"];
+    }];
+}
+
+//查看赞列表
+- (void)likeListButtonOnClick:(UIButton *)button {
+    MB_LikersViewController *likersVC = [[MB_LikersViewController alloc] init];
+    likersVC.ablum = self.dataArray[button.tag];
+    [self.navigationController pushViewController:likersVC animated:YES];
+}
+//评论列表
+- (void)commentButtonOnClick:(UIButton *)button {
+    MB_CommentsViewController *commentsVC = [[MB_CommentsViewController alloc] init];
+    commentsVC.ablum = self.dataArray[button.tag];
+    [self.navigationController pushViewController:commentsVC animated:YES];
+}
+//分享
+- (void)shareButtonOnClick:(UIButton *)button {
+    
 }
 
 //添加作品集

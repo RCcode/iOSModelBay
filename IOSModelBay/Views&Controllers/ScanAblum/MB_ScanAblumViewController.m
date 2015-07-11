@@ -30,7 +30,7 @@
     self.navigationItem.titleView = self.titleLabel;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
-    
+     
     [self.view addSubview:self.scrollView];
 }
 
@@ -42,11 +42,13 @@
 #pragma mark - AblumDescViewDelegate
 - (void)likeButtonOnClick:(UIButton *)button {
     MB_LikersViewController *likersVC = [[MB_LikersViewController alloc] init];
+    likersVC.ablum = self.ablum;
     [self.navigationController pushViewController:likersVC animated:YES];
 }
 
-- (void)commentsButtonOnClick:(UIButton *)button {
+- (void)commentButtonOnClick:(UIButton *)button {
     MB_CommentsViewController *commentsVC = [[MB_CommentsViewController alloc] init];
+    commentsVC.ablum = self.ablum;
     [self.navigationController pushViewController:commentsVC animated:YES];
 }
 
@@ -63,6 +65,7 @@
         [scroll setContentOffset:CGPointZero animated:YES];
     }
 }
+
 
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {

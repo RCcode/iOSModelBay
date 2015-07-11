@@ -120,7 +120,7 @@ static AFHttpTool *httpTool = nil;
     NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=relationships";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"--%@",responseObject);
+        NSLog(@"instragram login %@",responseObject);
         
         [userDefaults setObject:responseObject[@"user"][@"id"] forKey:kUid];
         [userDefaults setObject:responseObject[@"user"][@"username"] forKey:kUsername];
@@ -134,7 +134,6 @@ static AFHttpTool *httpTool = nil;
                                       @"tplat":@(0),
                                       @"plat":@(2),
                                       @"ikey":@"a",
-                                      @"akey":@"a",
                                       @"fullName":responseObject[@"user"][@"full_name"],
                                       @"token":responseObject[@"access_token"]};
         NSLog(@"%@",loginParams);
@@ -149,60 +148,6 @@ static AFHttpTool *httpTool = nil;
         failure(error);
     }];
 }
-
-//instragram登录
-//- (void)loginWithCodeString:(NSString *)codeStr
-//                    success:(void (^)(id response))success
-//                    failure:(void (^)(NSError* err))failure {
-////    //获取token
-////    NSDictionary *params = @{@"client_id":kClientID,
-////                             @"client_secret":kClientSecret,
-////                             @"grant_type":@"authorization_code",
-////                             @"redirect_uri":kRedirectUri,
-////                             @"code":codeStr};
-////    NSString *url =  @"https://api.instagram.com/oauth/access_token?scope=likes+relationships";
-////    [_manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-////        NSLog(@"--%@",responseObject);
-//    
-//    NSString *uid = @"1";
-//    NSString *username = @"a";
-//    NSString *fullName = @"a";
-//    NSString *imageUrl = @"http://img1.imgtn.bdimg.com/it/u=1887538964,2552017407&fm=21&gp=0.jpg";
-//    
-//        //服务器登录
-//        NSDictionary *loginParams = @{@"uid":uid,
-//                                      @"tplat":@(0),
-//                                      @"plat":@(2),
-//                                      @"ikey":@"a",
-//                                      @"akey":@"a",
-//                                      @"userName":username,
-//                                      @"fullName":fullName,
-//                                      @"token":@"abcde"};
-//        NSLog(@"%@",loginParams);
-//        [self loginWithParameters:loginParams success:^(id response) {
-//            NSLog(@"login--%@",response);
-//            
-//            //记录用户信息
-//            [userDefaults setObject:uid forKey:kUid];
-//            [userDefaults setObject:username forKey:kUsername];
-//            [userDefaults setObject:fullName forKey:kFullname];
-//            [userDefaults setObject:imageUrl forKey:kPic];
-//            [userDefaults setObject:@"abcde" forKey:kAccessToken];
-//            [userDefaults setBool:YES forKey:kIsLogin];
-//            [userDefaults synchronize];
-//            
-//            success(response);
-//            
-//        } failure:^(NSError *err) {
-//            NSLog(@"%@",err);
-//            failure(err);
-//        }];
-//        
-////    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-////        failure(error);
-////    }];
-//}
-
 
 //登录
 - (void)loginWithParameters:params

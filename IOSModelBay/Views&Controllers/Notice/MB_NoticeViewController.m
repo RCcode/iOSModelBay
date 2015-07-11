@@ -35,7 +35,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [self.view addSubview:self.tableView];
 
     [self addPullRefresh];
-    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestNoticeListwithMinId:0];
@@ -235,7 +235,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
-            if (self.minId == 0) {
+            if (minId == 0) {
                 [self.dataArray removeAllObjects];
             }
             self.minId = [response[@"minId"] integerValue];
@@ -251,8 +251,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
         }else if ([self statFromResponse:response] == 10004) {
             //无记录
             [self showNoMoreMessageForview:self.tableView];
-//            [self.tableView removeFromSuperview];
-//            self.view.backgroundColor = [UIColor greenColor];
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -264,9 +262,9 @@ static NSString * const ReuseIdentifierReply = @"reply";
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
         
         UIView *view =[[UIView alloc] init];
         [_tableView setTableFooterView:view];

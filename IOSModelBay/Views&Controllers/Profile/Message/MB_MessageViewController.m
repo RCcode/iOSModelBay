@@ -137,11 +137,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 20) {
+            if (taleView.contentOffset.y == topViewHeight - 64) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -242,8 +242,10 @@ static CGFloat startY = 0;
 }
 
 - (void)replywithReply:(NSString *)reply {
-    MB_Message *message = self.dataArray[self.replyIndex];
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
     
+    MB_Message *message = self.dataArray[self.replyIndex];
+
     NSDictionary *params = @{@"id":@(6),//用户id
                              @"token":@"abcde",
                              @"ucid":@(message.ucid),//评论id
@@ -253,10 +255,13 @@ static CGFloat startY = 0;
     [[AFHttpTool shareTool] replyMessageWithParameters:params success:^(id response) {
         NSLog(@"reply %@",response);
         if ([self statFromResponse:response] == 10000) {
+            [userVC clearCommentText];
             message.reply = reply;
             message.replyTime = 100;
             message.state = StateTypeReply;
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.replyIndex]] withRowAnimation:UITableViewRowAnimationNone];
+        }else {
+            //回复失败
         }
     } failure:^(NSError *err) {
 
@@ -266,29 +271,26 @@ static CGFloat startY = 0;
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect) - 60) style:UITableViewStyleGrouped];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+//        if (self.parentViewController.hidesBottomBarWhenPushed) {
+//            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect) - 60) style:UITableViewStyleGrouped];
+//        }else {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) style:UITableViewStyleGrouped];
+//        }
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 10)];
         _tableView.tableHeaderView = view;
         _tableView.tableFooterView = view;
+        _tableView.allowsSelection = NO;
         _tableView.sectionHeaderHeight = 10;
         _tableView.sectionFooterHeight = 0.5;
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_MsgTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierMsg];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_ReplyTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierReply];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
     
     return _tableView;
 }
-
-//- (UIView *)commentView {
-//    if (!_commentView) {
-//        _commentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), kWindowWidth, 60)];
-//        _commentView.backgroundColor = [UIColor greenColor];
-//    }
-//    return _commentView;
-//}
 
 @end

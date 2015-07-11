@@ -70,7 +70,7 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
     
-    [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+//    [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addChildViewControllers];
     
     [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
@@ -113,29 +113,29 @@ static CGFloat startY;
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.tableView) {
-        //    NSLog(@"%@  %@",NSStringFromCGRect(scrollView.frame), NSStringFromUIEdgeInsets(scrollView.contentInset));;
-//        NSLog(@"www%@",NSStringFromCGPoint(scrollView.contentOffset));
-        if (self.scrollCoordinator.topView.frame.origin.y == -24) {
-            self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-        }else{
-            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        }
-//        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
-//            self.tableView.contentInset = UIEdgeInsetsMake(self.scrollCoordinator.topView.frame.origin.y + 44, 0, 0, 0);
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView == self.tableView) {
+//        //    NSLog(@"%@  %@",NSStringFromCGRect(scrollView.frame), NSStringFromUIEdgeInsets(scrollView.contentInset));;
+////        NSLog(@"www%@",NSStringFromCGPoint(scrollView.contentOffset));
+//        if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+//            self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+//        }else{
+//            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 //        }
-    }
-}
+////        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
+////            self.tableView.contentInset = UIEdgeInsetsMake(self.scrollCoordinator.topView.frame.origin.y + 44, 0, 0, 0);
+////        }
+//    }
+//}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
         if (scrollView == self.tableView) {
             if (scrollView.contentOffset.y - startY > 0) {
                 //向上拉
-                if (scrollView.contentOffset.y != topViewHeight - 20) {
+                if (scrollView.contentOffset.y != topViewHeight - 64) {
                     NSLog(@"dddddd");
-                    [scrollView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                    [scrollView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
                 }
             }else{
                 //向下拉
@@ -152,9 +152,9 @@ static CGFloat startY;
     if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
-            if (scrollView.contentOffset.y != topViewHeight - 20) {
+            if (scrollView.contentOffset.y != topViewHeight - 64) {
                 NSLog(@"dddddd");
-                [scrollView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                [scrollView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
             }
         }else{
             //向下拉
@@ -388,18 +388,10 @@ static CGFloat startY;
 //发送留言或回复
 - (void)sendButtonOnClick:(UIButton *)button {
     if (self.comeFromType == ComeFromTypeUser) {
-//        NSDictionary *params = @{@"id":@(6),//用户id
-//                                 @"token":@"abcde",
-//                                 @"fid":@(self.user.fid),//评论用户id
-//                                 @"comment":self.commentView.textField.text};
-//        [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
-//            NSLog(@"coment %@",response);
-//        } failure:^(NSError *err) {
-//            
-//        }];
         MB_MessageViewController *messageVC = self.childViewControllers[3];
         [messageVC commentWitnComment:self.commentView.textField.text];
     }else {
+        [self hideCommentView];
         MB_MessageViewController *messageVC = self.childViewControllers[3];
         [messageVC replywithReply:self.commentView.textField.text];
     }
@@ -407,6 +399,14 @@ static CGFloat startY;
 
 - (void)showCommentView {
     self.commentView.hidden = NO;
+}
+
+- (void)hideCommentView {
+    self.commentView.hidden = YES;
+}
+
+- (void)clearCommentText {
+    self.commentView.textField.text = @"";
 }
 
 #pragma mark - getters & setters
@@ -417,7 +417,6 @@ static CGFloat startY;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
-//        _tableView.bounces = YES;
     }
     return _tableView;
 }
@@ -466,9 +465,9 @@ static CGFloat startY;
 - (UIView *)containerView {
     if (_containerView == nil) {
         if (self.hidesBottomBarWhenPushed) {
-            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 20)];
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 64)];
         }else{
-            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49 - 20)];
+            _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - CGRectGetHeight(self.menuView.frame) - 49 - 64)];
         }
         _containerView.pagingEnabled = YES;
         _containerView.delegate = self;
@@ -479,7 +478,12 @@ static CGFloat startY;
 //添加留言的
 - (UIView *)commentView {
     if (!_commentView) {
-        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
+        if (self.hidesBottomBarWhenPushed) {
+            _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60)];
+        }else {
+            _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
+        }
+        
         _commentView.hidden = YES;
         _commentView.textField.delegate = self;
         [_commentView.sendButton addTarget:self action:@selector(sendButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -11,13 +11,21 @@
 @implementation MB_CommentTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+}
+
+- (void)setComment:(MB_Comment *)comment {
+    _comment = comment;
+    
+    [_userImageView sd_setImageWithURL:[NSURL URLWithString:comment.fpic]];
+    _usernameLabel.text = comment.fname.uppercaseString;
+    _commentLabel.text = comment.comment;
+    _timeLabel.text = [MB_Utils dateWithTimeInterval:comment.create_time * 1000 fromTimeZone:@"+08"];
 }
 
 @end

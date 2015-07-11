@@ -56,12 +56,10 @@
     [cell.selectButton addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectButton.selected = [self.selectedArray containsObject:self.dataArray[indexPath.row]];
     if ([self.selectedArray containsObject:self.dataArray[indexPath.row]]) {
-        
-        cell.coverView.backgroundColor = [[UIColor redColor]colorWithAlphaComponent:0.3];
+        cell.coverView.backgroundColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.5];
     }
     else{
-        cell.coverView.backgroundColor = [UIColor clearColor];
-
+        cell.coverView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
     }
     cell.careerLabel.text = [[MB_Utils shareUtil].careerDic objectForKey:self.dataArray[indexPath.row]];
     return cell;
@@ -82,6 +80,7 @@
         }
     }
     [self.collectView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:button.tag inSection:0]]];
+//    [self.collectView reloadData];
 }
 
 - (void)leftBarButtonItemOnClick:(UIBarButtonItem *)barButton {
@@ -96,13 +95,11 @@
         NSDictionary *params = @{@"uid":[userDefaults objectForKey:kUid],
                                  @"tplat":@(0),
                                  @"plat":@(2),
-                                 @"ikey":@"ccccc",
-                                 @"akey":@"",
-                                 @"userName":[userDefaults objectForKey:kUsername],
+                                 @"ikey":@"a",
                                  @"fullName":[userDefaults objectForKey:kFullname],
                                  @"token":[userDefaults objectForKey:kAccessToken],
                                  @"utype":@(1),
-                                 @"name":@"lisong",
+                                 @"name":self.username,
                                  @"gender":@(self.sexType),
                                  @"careerId":[self.selectedArray componentsJoinedByString:@"|"],
                                  @"pic":[userDefaults objectForKey:kPic]};

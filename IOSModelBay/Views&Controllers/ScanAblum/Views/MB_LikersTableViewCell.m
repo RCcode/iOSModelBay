@@ -23,4 +23,12 @@
     // Configure the view for the selected state
 }
 
+- (void)setLiker:(MB_Liker *)liker {
+    _liker = liker;
+    
+    [_userImageView sd_setImageWithURL:[NSURL URLWithString:liker.fpic] placeholderImage:nil];
+    _usernameLabel.text = liker.fname.uppercaseString;
+    _fullNameLabel.text = liker.ffullName;
+}
+
 @end

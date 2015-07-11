@@ -27,16 +27,14 @@
     
     if (_roleType == RoleTypeProfessional) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+        _maleBtn.selected = YES;
     }else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
-    }
-    
-    _maleBtn.selected = YES;
-    
-    if (_roleType == RoleTypeAudience) {
         _maleBtn.hidden = YES;
         _femaleBtn.hidden = YES;
     }
+    
+    self.usernameTF.text = [userDefaults objectForKey:kUsername];
 }
 
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
@@ -45,7 +43,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //点击男性
@@ -87,13 +84,11 @@
                     NSDictionary *params = @{@"uid":[userDefaults objectForKey:kUid],
                                              @"tplat":@(0),
                                              @"plat":@(2),
-                                             @"ikey":@"ccccc",
-                                             @"akey":@"",
-                                             @"userName":[userDefaults objectForKey:kUsername],
+                                             @"ikey":@"a",
                                              @"fullName":[userDefaults objectForKey:kFullname],
                                              @"token":[userDefaults objectForKey:kAccessToken],
-                                             @"utype":@(1),
-                                             @"name":@"lisong",
+                                             @"utype":@(0),
+                                             @"name":self.usernameTF.text,
                                              @"gender":@"",
                                              @"careerId":@"",
                                              @"pic":[userDefaults objectForKey:kPic]};

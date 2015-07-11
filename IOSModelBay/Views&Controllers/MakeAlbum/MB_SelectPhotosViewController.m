@@ -33,7 +33,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_confirm"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     [self.view addSubview:self.collectView];
-    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     [self getALlPhotosFromAlbum];
 }
 

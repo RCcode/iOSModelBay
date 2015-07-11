@@ -126,7 +126,7 @@ static MB_Utils *util = nil;
     //+08
     NSString *timeZoneInt = [timeZoneZ substringWithRange:range];
     
-    NSLog(@"timeZoneInt%@",timeZoneInt);
+//    NSLog(@"timeZoneInt%@",timeZoneInt);
     
     //时区相差时间戳
     double interval = ([timeZoneInt integerValue] - [zone integerValue]) * 60;

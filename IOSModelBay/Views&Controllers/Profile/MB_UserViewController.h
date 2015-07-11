@@ -27,5 +27,7 @@ typedef  NS_ENUM(NSInteger, ComeFromType) {
 @property (nonatomic, assign) NSInteger menuIndex;//进来的时候默认选中哪个菜单按钮
 
 - (void)showCommentView;
+- (void)hideCommentView;
+- (void)clearCommentText;
 
 @end

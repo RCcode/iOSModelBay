@@ -18,7 +18,7 @@
     [self layoutIfNeeded];
     _user = user;
     [_iconImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
-    _usernameLabel.text = user.fname;
+    _usernameLabel.text = user.fname.uppercaseString;
     
     //移除职业小图片
     for (UIView *subView in _careerView.subviews) {

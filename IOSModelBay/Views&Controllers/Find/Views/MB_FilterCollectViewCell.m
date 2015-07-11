@@ -19,10 +19,10 @@
     [super setSelected:selected];
     
     if (selected) {
-        self.coverView.backgroundColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.4];
+        self.coverView.backgroundColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.5];
         self.nameLabel.textColor = [UIColor redColor];
     }else{
-        self.coverView.backgroundColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.4];
+        self.coverView.backgroundColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.6];
         self.nameLabel.textColor = [UIColor blackColor];
     }
 }

@@ -26,8 +26,8 @@
     _user = user;
     
     [_iconImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
-    _usernameLabel.text = user.fname;
-    _fullnameLabel.text = user.ffullName;
+    _usernameLabel.text = user.fname.uppercaseString;
+    _fullnameLabel.text = user.ffullName.uppercaseString;
 }
 
 @end

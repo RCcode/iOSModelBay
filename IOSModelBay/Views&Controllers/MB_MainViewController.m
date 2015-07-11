@@ -53,8 +53,6 @@
         
     UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     [self presentViewController:loginNC animated:YES completion:nil];
-    
-//    [self loginWitnCodeStr:@"123"];
 }
 
 - (void)loginWitnCodeStr:(NSString *)codeStr {
@@ -67,27 +65,15 @@
             [self presentViewController:na animated:YES completion:nil];
         }else if ([self statFromResponse:response] == 10000){
             //记录用户信息
-//            {
-//            backPic = "<null>";
-//            careerId = "<null>";
-//            follow = 0;
-//            followed = 0;
-//            fullName = "<null>";
-//            gender = 0;
-//            id = 0;
-//            mess = "<null>";
-//            name = "<null>";
-//            pic = "<null>";
-//            stat = 10100;
-//            userName = "<null>";
-//            utype = 0;
-//        }
+            
+            [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
+            [userDefaults setObject:response[@"gender"] forKey:kGender];//性别:0.女;1.男
+            [userDefaults setObject:response[@"name"] forKey:kName];//本平台登录用户名
+            [userDefaults setObject:response[@"careerId"] forKey:kCareer];//职业id,竖线分割:1|2|3
+            [userDefaults setObject:response[@"utype"] forKey:kUtype];//用户类型: 0,浏览;1:专业;
+            [userDefaults setObject:response[@"pic"] forKey:kPic];//用户类型: 0,浏览;1:专业;
+            [userDefaults setObject:response[@"backPic"] forKey:kBackPic];//用户类型: 0,浏览;1:专业;
 
-            [userDefaults setObject:response[@"id"] forKey:kID];
-            [userDefaults setObject:response[@"gender"] forKey:kGender];
-            [userDefaults setObject:response[@"name"] forKey:kName];
-            [userDefaults setObject:response[@"careerId"] forKey:kCareer];
-            [userDefaults setObject:response[@"utype"] forKey:kUtype];
             [userDefaults setBool:YES forKey:kIsLogin];
             [userDefaults synchronize];
             

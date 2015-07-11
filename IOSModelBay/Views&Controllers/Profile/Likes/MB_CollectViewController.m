@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = colorWithHexString(@"#eeeeee");
     [self.view addSubview:self.collectView];
     
     [self addPullRefresh];
@@ -63,11 +64,11 @@ static CGFloat startY = 0;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+                [taleView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 20) {
+            if (taleView.contentOffset.y == topViewHeight - 64) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -103,6 +104,9 @@ static CGFloat startY = 0;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
         if ([self statFromResponse:response] == 10000) {
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+            }
             self.minId = [response[@"minId"] integerValue];
             if (response[@"list"] != nil && ![response[@"list"] isKindOfClass:[NSNull class]]) {
                 NSArray *array = response[@"list"];
@@ -135,10 +139,11 @@ static CGFloat startY = 0;
         layout.minimumInteritemSpacing = space;
         layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
         
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, self.containerViewRect.size.height) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(self.containerViewRect)) collectionViewLayout:layout];
         _collectView.backgroundColor = colorWithHexString(@"#eeeeee");
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
+        _collectView.bounces         = YES;
         _collectView.alwaysBounceVertical = YES;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_LikeCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }

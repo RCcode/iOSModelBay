@@ -9,6 +9,8 @@
 #import "MB_CommentsViewController.h"
 #import "MB_CommentTableViewCell.h"
 #import "MB_Comment.h"
+#import "MB_UserViewController.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 static CGFloat const commentViewHeight = 50;
 
@@ -29,6 +31,8 @@ static CGFloat const commentViewHeight = 50;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
+
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
     [self requestCommentsListWithMinId:0];
@@ -44,18 +48,31 @@ static CGFloat const commentViewHeight = 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.dataArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView fd_heightForCellWithIdentifier:ReuseIdentifier cacheByIndexPath:indexPath configuration:^(MB_CommentTableViewCell *cell) {
+        [self configureCell:cell atIndexPath:indexPath];
+    }];
+}
+
+- (void)configureCell:(MB_CommentTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    MB_Comment *comment = self.dataArray[indexPath.row];
+    cell.comment = comment;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.usernameLabel.text = @"songge";
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
 
@@ -79,6 +96,9 @@ static CGFloat const commentViewHeight = 50;
 
 
 #pragma mark - private methods
+- (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //添加上下拉刷新
 - (void)addPullRefresh
 {
@@ -97,9 +117,9 @@ static CGFloat const commentViewHeight = 50;
 
 //获取评论列表
 - (void)requestCommentsListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@"",
-                             @"token":@"",
-                             @"ablId":@"",//作品集id
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
+                             @"ablId":@(self.ablum.ablId),//作品集id
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getAblumCommentsWithParameters:params success:^(id response) {
@@ -122,7 +142,22 @@ static CGFloat const commentViewHeight = 50;
 
 - (void)sendButtonOnClick:(UIButton *)button {
     [self.textView resignFirstResponder];
-    NSLog(@"%@",self.textView.text);
+    
+    NSDictionary *params = @{@"id":@(6),
+                             @"token":@"abcde",
+                             @"fid":@(self.ablum.uid),
+                             @"ablId":@(self.ablum.ablId),//作品集id
+                             @"comment":self.textView.text};
+    [[AFHttpTool shareTool] commentAblumWithParameters:params success:^(id response) {
+        NSLog(@"comment send  %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            [MB_Utils showPromptWithText:@"success"];
+        }else {
+            [MB_Utils showPromptWithText:@"failed"];
+        }
+    } failure:^(NSError *err) {
+        [MB_Utils showPromptWithText:@"failed"];
+    }];
 }
 
 

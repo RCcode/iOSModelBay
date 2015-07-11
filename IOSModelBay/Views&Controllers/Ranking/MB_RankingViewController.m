@@ -32,7 +32,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
     [self.view addSubview:self.tableView];
-    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addPullRefresh];
     
     //重置筛选条件
@@ -129,7 +129,7 @@
                              @"fgender":@([MB_Utils shareUtil].rGender),
                              @"fcareerId":[MB_Utils shareUtil].rCareerId,
                              @"minId":@(minId),
-                             @"count":@(3)};
+                             @"count":@(10)};
     [[AFHttpTool shareTool] getRankListWithParameters:params success:^(id response) {
         NSLog(@"rank %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -154,6 +154,8 @@
                 }
             }
             [self.tableView reloadData];
+        }else if ([self statFromResponse:response] == 10004) {
+            [self showNoMoreMessageForview:self.tableView];
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -219,7 +221,7 @@
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 49 - 64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [UIView new];

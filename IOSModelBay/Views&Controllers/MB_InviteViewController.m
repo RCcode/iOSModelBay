@@ -136,7 +136,7 @@
 
 //点击邀请按钮
 - (void)inviteBtnOnclick:(UIButton *)btn {
-    NSLog(@"%ld",btn.tag);
+    NSLog(@"%ld",(long)btn.tag);
 }
 
 #pragma mark - getters & setters

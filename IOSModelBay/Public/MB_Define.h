@@ -48,7 +48,6 @@
 #define kUid @"uid"
 #define kUsername @"username"
 #define kFullname @"fullname"
-#define kPic @"pic"
 #define kAccessToken @"accessToken"
 
 //模特平台
@@ -57,6 +56,9 @@
 #define kCareer @"career"
 #define kGender @"gender"
 #define kUtype @"utype"
+#define kPic @"pic"
+#define kBackPic @"backPic"
+#define kToken @"token"
 
 #define userDefaults [NSUserDefaults standardUserDefaults]
 #define placeholderColor colorWithHexString(@"#e3e3e3")

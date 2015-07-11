@@ -37,7 +37,7 @@
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
-    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
+//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     
     //重置筛选条件
     [MB_Utils shareUtil].fGender = -1;
@@ -129,14 +129,16 @@
     NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].fGender),
                                      @"fcareerId":[MB_Utils shareUtil].fCareerId,
                                      @"minId":@(minId),
-                                     @"count":@(3)} mutableCopy];
-//    if ([userDefaults boolForKey:kIsLogin]) {
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
-//        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
-//    }
+                                     @"count":@(10)} mutableCopy];
+    
+    if ([userDefaults boolForKey:kIsLogin]) {
+        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
+    }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"list %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
         if ([self statFromResponse:response] == 10000) {
             NSArray *userList = response[@"list"];
@@ -156,13 +158,13 @@
                 [self.dataArray addObject:user];
             }
             [self.collectView reloadData];
+        }else if ([self statFromResponse:response] == 10501){
+            [self showNoMoreMessageForview:self.collectView];
         }
     } failure:^(NSError *err) {
         [self endRefreshingForView:self.collectView];
     }];
 }
-
-
 
 
 #pragma mark - getters & setters
@@ -188,14 +190,5 @@
     }
     return _collectView;
 }
-
-//- (MB_UploadView *)uploadView {
-//    if (!_uploadView) {
-//        _uploadView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UploadView" owner:nil options:nil] firstObject];
-//        _uploadView.frame = CGRectMake(0, 64, kWindowWidth, 60);
-//        _uploadView.indicateView.backgroundColor = colorWithHexString(@"#ff5842");
-//    }
-//    return _uploadView;
-//}
 
 @end

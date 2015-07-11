@@ -71,7 +71,7 @@
 //结束头部和尾部刷新动画
 - (void)endRefreshingForView:(UIScrollView *)scrollView {
     self.footerLabel.text = @"";
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [scrollView.pullToRefreshView stopAnimating];
     [scrollView.infiniteScrollingView stopAnimating];
 }
@@ -106,9 +106,9 @@
 //    if (stat == 10004) {
 //        errorMsg = @"无记录";
 //    }
-    if (stat == 10501) {
-        errorMsg = @"无此用户";
-    }
+//    if (stat == 10501) {
+//        errorMsg = @"无此用户";
+//    }
     [MB_Utils showAlertViewWithMessage:errorMsg];
     return stat;
 }
