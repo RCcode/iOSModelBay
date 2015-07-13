@@ -65,10 +65,18 @@
     if (indexPath.row == 0) {
         cell.nameLabel.text = @"All";
         //是否选中All
-        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""]) {
-            cell.selected = YES;
-        }else{
-            cell.selected = NO;
+        if (self.type == FilterTypeFind) {
+            if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""]) {
+                cell.selected = YES;
+            }else{
+                cell.selected = NO;
+            }
+        }else {
+            if ([[MB_Utils shareUtil].rCareerId isEqualToString:@""]) {
+                cell.selected = YES;
+            }else{
+                cell.selected = NO;
+            }
         }
     }else {
         NSString *carerrId = self.dataArray[indexPath.row - 1];

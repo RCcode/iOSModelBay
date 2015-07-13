@@ -1,0 +1,93 @@
+/* 
+  File.strings
+  IOSModelBay
+
+  Created by lisongrc on 15/7/13.
+  Copyright (c) 2015年 rcplatform. All rights reserved.
+*/
+
+//资料属性名
+"eyecolor" = "眼睛颜色";
+"skincolor" = "皮肤颜色";
+"haircolor" = "头发颜色";
+"shoesize" = "鞋号";
+"dress" = "衣号";
+"height" = "身高";
+"weight" = "体重";
+"chest" = "胸围";
+"waist" = "腰围";
+"hips" = "臀围";
+"areaModel" = "专注领域";
+"areaPhoto" = "专注领域";
+"experience" = "经验";
+"gender" = "性别";
+"country" = "国家";
+"age" = "年龄";
+"contact" = "联系方式";
+"email" = "电子邮件";
+"website" = "网站";
+
+//眼睛颜色
+"Black" = "黑色";
+"Blue"  = "蓝色";
+"Brown" = "棕色";
+"Green" = "绿色";
+"Hazel" = "褐色";
+"Other" = "其它";
+
+//皮肤颜色
+"White" = "白色";
+"Olive" = "橄榄色";
+"Tanned" = "褐色";
+
+//头发颜色
+"Blonde" = "金色";
+"Grey" = "灰色";
+"Red" = "红色";
+
+//专注领域-模特
+"Fashion/Editorial" = "时尚";
+"Runway" = "T台走秀";
+"Sport" = "运动";
+"Casual" = 	"休闲";
+"Swimwear" = "泳装";
+"Print" = "平面";
+"Hair/Makeup" = "发型/妆容";
+"Parts Modeling" = "局部模特";
+"SkillPromotional" = "宣传模特";
+"Artists Model" = "艺术模特";
+"Glamour" = "魅力写真";
+"Lingerie/Body" = "内衣模特";
+"Artistic" = "艺术";
+"Art Nude" = "艺术裸体";
+"Nude" = "裸体";
+
+//专注领域-摄影师
+"Landscape" = "风景";
+"Advertising" = "广告";
+"Lifestyle" = "日常生活";
+"Architectural" = "建筑";
+"Lingerie/Body" = "内衣/人体";
+"Artistic" = "艺术";
+"Music" = "音乐";
+"Athletic" = "运动";
+"Nude" = "裸体";
+"Beauty" = "丽人";
+"Portrait" = "人像";
+"Black and White" = "黑白";
+"Reportage/Journalism" = "写实";
+"Celebrity/Entertainment" = "活动";
+"Runway" = "走秀";
+"Fashion/Editorial" = "时尚";
+"Still Life" = "静物";
+"Fine Art" = "艺术绘画";
+"Swimwear" = "泳装";
+"Glamour" = "魅力写真";
+"Wedding" = "婚礼";
+
+//经验
+"No Experience" = "没经验";
+"Some Experience" = "一些经验";
+"Experienced" = "富有经验";
+"Very Experienced" = "经验丰富";
+"Advanced" = "高级";

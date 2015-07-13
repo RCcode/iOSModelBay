@@ -100,7 +100,7 @@
                 UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
                 [nextScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%lu)",page + 1 + 1, (unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",page + 1 + 1, (unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -114,7 +114,7 @@
                 UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
                 [lastScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%ld/%lu)",page - 1 + 1,(unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",page - 1 + 1,(unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -133,9 +133,6 @@
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
-//        _scrollView.pagingEnabled = YES;
-//        _scrollView.delegate = self;
-//        _scrollView.directionalLockEnabled = YES;
         _scrollView.scrollEnabled = NO;
         
         //创建子滚动视图

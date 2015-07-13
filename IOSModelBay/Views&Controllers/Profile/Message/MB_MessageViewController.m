@@ -193,6 +193,8 @@ static CGFloat startY = 0;
                 }
                 [self.tableView reloadData];
             }
+        }else if ([self statFromResponse:response] == 10004) {
+            [self showNoMoreMessageForview:self.tableView];
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -202,10 +204,18 @@ static CGFloat startY = 0;
 
 //点击用户名和用户头像跳到用户个人页
 - (void)nameOnClick:(UIButton *)button {
-//    MB_Message *message = self.dataArray[button.tag];
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    userVC.comeFromType = ComeFromTypeUser;
-    [self.navigationController pushViewController:userVC animated:YES];
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        MB_Message *message = self.dataArray[button.tag];
+        userVC.comeFromType = ComeFromTypeUser;
+        userVC.hidesBottomBarWhenPushed = YES;
+        MB_User *user = [[MB_User alloc] init];
+        user.fid = message.fid;
+        user.fname = message.fname;
+        user.fpic = message.fpic;
+        userVC.user = user;
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 //回复留言
@@ -218,8 +228,8 @@ static CGFloat startY = 0;
 
 - (void)commentWitnComment:(NSString *)comment {
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-    NSDictionary *params = @{@"id":@(6),//用户id
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"fid":@(userVC.user.fid),//评论用户id
                              @"comment":comment};
     [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
@@ -246,8 +256,8 @@ static CGFloat startY = 0;
     
     MB_Message *message = self.dataArray[self.replyIndex];
 
-    NSDictionary *params = @{@"id":@(6),//用户id
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"ucid":@(message.ucid),//评论id
                              @"fid":@(message.fid),//评论用户id
                              @"reply":reply//评论

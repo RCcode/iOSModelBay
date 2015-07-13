@@ -58,8 +58,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    [self.navigationController pushViewController:userVC animated:YES];
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_Liker *liker = self.dataArray[indexPath.row];
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.hidesBottomBarWhenPushed = YES;
+        userVC.comeFromType = ComeFromTypeUser;
+        MB_User *user = [[MB_User alloc] init];
+        user.fid = liker.fid;
+        user.fname = liker.fname;
+        user.fpic = liker.fpic;
+        userVC.user = user;
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 
@@ -85,8 +95,8 @@
 }
 
 - (void)requestLikesListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"ablId":@(self.ablum.ablId),//作品集id
                              @"minId":@(minId),
                              @"count":@(10),};
@@ -117,8 +127,8 @@
         button.selected = YES;
         button.backgroundColor = colorWithHexString(@"#ff4f42");
         MB_Liker *liker = self.dataArray[button.tag];
-        NSDictionary *params = @{@"id":@(6),
-                                 @"token":@"abcde",
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                                 @"token":[userDefaults objectForKey:kAccessToken],
                                  @"fid":@(liker.fid)};
         [[AFHttpTool shareTool] addLikesWithParameters:params success:^(id response) {
             NSLog(@"collect %@", response);

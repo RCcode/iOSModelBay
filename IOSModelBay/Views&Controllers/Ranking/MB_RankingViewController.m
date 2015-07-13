@@ -58,7 +58,7 @@
         return 263;
     }else {
         //没有登录的时候不显示instra的图片
-        return 160;
+        return 172;
     }
 }
 
@@ -88,10 +88,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    userVC.comeFromType = ComeFromTypeUser;
-    userVC.user = self.dataArray[indexPath.row];
-    [self.navigationController pushViewController:userVC animated:YES];
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.comeFromType = ComeFromTypeUser;
+        userVC.hidesBottomBarWhenPushed = YES;
+        userVC.user = self.dataArray[indexPath.row];
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 
@@ -101,6 +104,7 @@
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.type = FilterTypeRanking;
     filterVC.CompleteHandler = ^(){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self requestRankingListWithMinId:0];
     };
     [self.navigationController pushViewController:filterVC animated:YES];
@@ -124,12 +128,16 @@
 
 //获取排行列表
 - (void)requestRankingListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
-                             @"fgender":@([MB_Utils shareUtil].rGender),
-                             @"fcareerId":[MB_Utils shareUtil].rCareerId,
-                             @"minId":@(minId),
-                             @"count":@(10)};
+    NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].rGender),
+                                     @"fcareerId":[MB_Utils shareUtil].rCareerId,
+                                     @"minId":@(minId),
+                                     @"count":@(10)} mutableCopy];
+    
+    if ([userDefaults objectForKey:kIsLogin]) {
+        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+        [params setObject:[userDefaults objectForKey:kAccessToken] forKey:@"token"];
+    }
+    
     [[AFHttpTool shareTool] getRankListWithParameters:params success:^(id response) {
         NSLog(@"rank %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -155,7 +163,13 @@
             }
             [self.tableView reloadData];
         }else if ([self statFromResponse:response] == 10004) {
-            [self showNoMoreMessageForview:self.tableView];
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                [self.tableView reloadData];
+                [MB_Utils showPromptWithText:@"o result"];
+            }else {
+                [self showNoMoreMessageForview:self.tableView];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

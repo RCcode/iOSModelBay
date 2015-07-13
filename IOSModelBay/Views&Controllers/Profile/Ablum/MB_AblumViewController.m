@@ -40,11 +40,12 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.addView];
     [self.view addSubview:self.tableView];
     
     [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestAblumListWithMinId:0];
 }
 
@@ -162,9 +163,9 @@ static CGFloat startY = 0;
 
 //请求影集列表
 - (void)requestAblumListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
-                             @"fid":@(6),
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":@(self.user.fid),
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getAblumWithParameters:params success:^(id response) {
@@ -203,8 +204,8 @@ static CGFloat startY = 0;
 //点赞
 - (void)likeButtonOnClick:(UIButton *)button {
     MB_Ablum *ablum = self.dataArray[button.tag];
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"fid":@(ablum.uid),
                              @"ablId":@(ablum.ablId)};
     [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {

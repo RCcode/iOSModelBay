@@ -21,13 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *array = [[MB_Utils shareUtil].optionsDic objectForKey:@(_index)];
-    self.dataArray = [array copy];
-    [self.view addSubview:self.tableView];
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dong" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
+    
+    NSArray *array = [[MB_Utils shareUtil].optionsDic objectForKey:@(_index)];
+    self.dataArray = [array copy];
+    [self.view addSubview:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +54,7 @@
     _optionIndex = indexPath.row;
 }
 
+
 #pragma mark - private methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
     [self.navigationController popViewControllerAnimated:YES];
@@ -66,13 +67,13 @@
 
 
 #pragma mark - getters & setters
-
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 //        _tableView.sectionHeaderHeight = 10.5;
 //        _tableView.sectionFooterHeight = 0;
         

@@ -1,0 +1,93 @@
+/* 
+  File.strings
+  IOSModelBay
+
+  Created by lisongrc on 15/7/13.
+  Copyright (c) 2015年 rcplatform. All rights reserved.
+*/
+
+//资料属性名
+"eyecolor" = "eyecolor";
+"skincolor" = "skincolor";
+"haircolor" = "haircolor";
+"shoesize" = "shoesize";
+"dress" = "dress";
+"height" = "height";
+"weight" = "weight";
+"chest" = "chest";
+"waist" = "waist";
+"hips" = "hips";
+"areaModel" = "areaModel";
+"areaPhoto" = "areaPhoto";
+"experience" = "experience";
+"gender" = "gender";
+"country" = "country";
+"age" = "age";
+"contact" = "contact";
+"email" = "email";
+"website" = "website";
+
+//眼睛颜色
+"Black" = "Black";
+"Blue"  = "Blue";
+"Brown" = "Brown";
+"Green" = "Green";
+"Hazel" = "Hazel";
+"Other" = "Other";
+
+//皮肤颜色
+"White" = "White";
+"Olive" = "Olive";
+"Tanned" = "Tanned";
+
+//头发颜色
+"Blonde" = "Blonde";
+"Grey" = "Grey";
+"Red" = "Red";
+
+//专注领域-模特
+"Fashion/Editorial" = "Fashion/Editorial";
+"Runway" = "Runway";
+"Sport" = "Sport";
+"Casual" = 	"Casual";
+"Swimwear" = "Swimwear";
+"Print" = "Print";
+"Hair/Makeup" = "Hair/Makeup";
+"Parts Modeling" = "Parts Modeling";
+"SkillPromotional" = "SkillPromotional";
+"Artists Model" = "Artists Model";
+"Glamour" = "Glamour";
+"Lingerie/Body" = "Lingerie/Body";
+"Artistic" = "Artistic";
+"Art Nude" = "Art Nude";
+"Nude" = "Nude";
+
+//专注领域-摄影师
+"Landscape" = "Landscape";
+"Advertising" = "Advertising";
+"Lifestyle" = "Lifestyle";
+"Architectural" = "Architectural";
+"Lingerie/Body" = "Lingerie/Body";
+"Artistic" = "Artistic";
+"Music" = "Music";
+"Athletic" = "Athletic";
+"Nude" = "Nude";
+"Beauty" = "Beauty";
+"Portrait" = "Portrait";
+"Black and White" = "Black and White";
+"Reportage/Journalism" = "Reportage/Journalism";
+"Celebrity/Entertainment" = "Celebrity/Entertainment";
+"Runway" = "Runway";
+"Fashion/Editorial" = "Fashion/Editorial";
+"Still Life" = "Still Life";
+"Fine Art" = "Fine Art";
+"Swimwear" = "Swimwear";
+"Glamour" = "Glamour";
+"Wedding" = "Wedding";
+
+//经验
+"No Experience" = "No Experience";
+"Some Experience" = "Some Experience";
+"Experienced" = "Experienced";
+"Very Experienced" = "Very Experienced";
+"Advanced" = "Advanced";

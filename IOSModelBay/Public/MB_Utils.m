@@ -53,11 +53,14 @@ static MB_Utils *util = nil;
                                @"12":@"经纪人",
                                @"13":@"新面孔"};
             
-            util.eyeColor = @[@"Black", @"Blue", @"Brown", @"Green", @"Hazel", @"Other"];
+            // util.eyeColor = @[@"Black", @"Blue", @"Brown", @"Green", @"Hazel", @"Other"];
+            util.eyeColor = @[LocalizedString(@"Black", nil), LocalizedString(@"Blue", nil), LocalizedString(@"Brown", nil), LocalizedString(@"Green", nil), LocalizedString(@"Hazel", nil), LocalizedString(@"Other", nil)];
             
-            util.skincolor = @[@"Black", @"White", @"Olive", @"Tanned", @"Other"];
-            
-            util.haircolor = @[@"Black", @"Blonde", @"Brown", @"Grey", @"Red", @"Other"];
+//            util.skincolor = @[@"Black", @"White", @"Olive", @"Tanned", @"Other"];
+            util.skincolor = @[LocalizedString(@"Black", nil), LocalizedString(@"White", nil), LocalizedString(@"Olive", nil), LocalizedString(@"Tanned", nil), LocalizedString(@"Other", nil)];
+
+//            util.haircolor = @[@"Black", @"Blonde", @"Brown", @"Grey", @"Red", @"Other"];
+            util.haircolor = @[LocalizedString(@"Black", nil), LocalizedString(@"Blonde", nil), LocalizedString(@"Brown", nil), LocalizedString(@"Grey", nil), LocalizedString(@"Red", nil), LocalizedString(@"Other", nil),];
             
             util.shoesize = @[@"2", @"2.5", @"3", @"3.5", @"4", @"4.5", @"5", @"5.5", @"6", @"6.5", @"7", @"7.5", @"8", @"8.5", @"9", @"9.5", @"10", @"10.5", @"11", @"11.5", @"12", @"12.5", @"13", @"13.5", @"14", @"14.5"];
            
@@ -73,14 +76,17 @@ static MB_Utils *util = nil;
             
             util.hips = @[@"10/ 25 cm", @"11/ 27 cm", @"12/ 30 cm", @"13/ 33 cm", @"14/ 35 cm", @"15/ 38 cm", @"16/ 40 cm", @"17/ 43 cm", @"18/ 45 cm", @"19/ 48 cm", @"20/ 50 cm", @"21/ 53 cm", @"22/ 55 cm", @"23/ 58 cm", @"24/ 60 cm", @"25/ 63 cm", @"26/ 66 cm", @"27/ 68 cm", @"28/ 71 cm", @"29/ 73 cm", @"30/ 76 cm", @"31/ 78 cm", @"32/ 81 cm", @"33/ 83 cm", @"34/ 86 cm", @"35/ 88 cm", @"36/ 91 cm", @"37/ 93 cm", @"38/ 96 cm", @"39/ 99 cm", @"40/ 101 cm", @"41/ 104 cm", @"42/ 106 cm", @"43/ 109 cm", @"44/ 111 cm", @"45/ 114 cm", @"46/ 116 cm", @"47/ 119 cm", @"48/ 121 cm", @"49/ 124 cm", @"50/ 127 cm", @"51/ 129 cm", @"52/ 132 cm", @"53/ 134 cm", @"54/ 137 cm", @"55/ 139 cm", @"56/ 142 cm", @"57/ 144 cm", @"58/ 147 cm", @"59/ 149 cm", @"60/ 152 cm", @"61/ 154 cm", @"62/ 157 cm", @"63/ 160 cm", @"64/ 162 cm", @"65/ 165 cm", @"66/ 167 cm", @"67/ 170 cm", @"68/ 172 cm", @"69/ 175 cm", @"70/ 177 cm"];
             
-            util.areaModel = @[];
-            util.areaPhoto = @[];
+            util.areaModel = @[LocalizedString(@"Fashion/Editorial", nil), LocalizedString(@"Runway", nil), LocalizedString(@"Sport", nil), LocalizedString(@"Casual", nil), LocalizedString(@"Swimwear", nil), LocalizedString(@"Print", nil), LocalizedString(@"Hair/Makeup", nil), LocalizedString(@"Parts Modeling", nil), LocalizedString(@"SkillPromotional", nil), LocalizedString(@"Artists Model", nil), LocalizedString(@"Glamour", nil), LocalizedString(@"Lingerie/Body", nil), LocalizedString(@"Artistic", nil), LocalizedString(@"Art Nude", nil), LocalizedString(@"Nude", nil)];
             
-            util.experience = @[@"No Experience", @"Some Experience", @"Experienced", @"Very Experienced", @"Advanced"];
+            util.areaPhoto = @[LocalizedString(@"Landscape", nil), LocalizedString(@"Advertising", nil), LocalizedString(@"Lifestyle", nil), LocalizedString(@"Architectural", nil), LocalizedString(@"Lingerie/Body", nil), LocalizedString(@"Artistic", nil), LocalizedString(@"Music", nil), LocalizedString(@"Athletic", nil), LocalizedString(@"Nude", nil), LocalizedString(@"Beauty", nil), LocalizedString(@"Portrait", nil), LocalizedString(@"Black and White", nil), LocalizedString(@"Reportage/Journalism", nil), LocalizedString(@"Celebrity/Entertainment", nil), LocalizedString(@"Runway", nil), LocalizedString(@"Fashion/Editorial", nil), LocalizedString(@"Still Life", nil), LocalizedString(@"Fine Art", nil), LocalizedString(@"Swimwear", nil), LocalizedString(@"Glamour", nil), LocalizedString(@"Wedding", nil)];
+            
+//            util.experience = @[@"No Experience", @"Some Experience", @"Experienced", @"Very Experienced", @"Advanced"];
+            util.experience = @[LocalizedString(@"No Experience", nil), LocalizedString(@"Some Experience", nil), LocalizedString(@"Experienced", nil), LocalizedString(@"Very Experienced", nil), LocalizedString(@"Advanced", nil)];
 
-//            util.mapArray = @[@"眼睛颜色",@"皮肤颜色",@"头发颜色",@"鞋号",@"衣号",@"身高",@"体重",@"胸围",@"腰围",@"臀围",@"专注领域1",@"专注领域2",@"经验",@"性别",@"国家",@"年龄",@"联系方式",@"电子邮件",@"网站"];
             
             util.mapArray = @[@"eyecolor",@"skincolor",@"haircolor",@"shoesize",@"dress",@"height",@"weight",@"chest",@"waist",@"hips",@"areaModel",@"areaPhoto",@"experience",@"gender",@"country",@"age",@"contact",@"email",@"website"];
+//             util.mapArray = @[LocalizedString(@"eyecolor", nil), LocalizedString(@"skincolor", nil), LocalizedString(@"haircolor", nil), LocalizedString(@"shoesize", nil), LocalizedString(@"dress", nil), LocalizedString(@"height", nil), LocalizedString(@"weight", nil), LocalizedString(@"chest", nil), LocalizedString(@"waist", nil), LocalizedString(@"hips", nil), LocalizedString(@"areaModel", nil), LocalizedString(@"areaPhoto", nil), LocalizedString(@"experience", nil), LocalizedString(@"gender", nil), LocalizedString(@"country", nil), LocalizedString(@"age", nil), LocalizedString(@"contact", nil), LocalizedString(@"email", nil), LocalizedString(@"website", nil)];
+
 
             util.optionsDic = @{@(1):util.eyeColor,
                              @(2):util.skincolor,

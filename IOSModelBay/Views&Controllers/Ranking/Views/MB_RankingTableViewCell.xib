@@ -5,6 +5,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FUTURASTD-BOOK.OTF">
+            <string>FuturaStd-Book</string>
+        </mutableArray>
+        <mutableArray key="GOTHIC.TTF">
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -41,11 +49,11 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDu-Xq-gCz">
-                                <rect key="frame" x="0.0" y="98" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="98" width="320" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Onn-GE-usS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -55,11 +63,11 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZM-cw-ajf">
-                                <rect key="frame" x="0.0" y="127" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Hgz-g4-DWo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -88,7 +96,7 @@
                         <rect key="frame" x="0.0" y="160" width="320" height="89"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </scrollView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oo9-TI-QDZ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_paisan" translatesAutoresizingMaskIntoConstraints="NO" id="Oo9-TI-QDZ">
                         <rect key="frame" x="14" y="153" width="14" height="7"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14" id="ACY-Xn-xnE"/>
@@ -143,6 +151,7 @@
                 <outlet property="descLabel" destination="aZM-cw-ajf" id="fwu-Gx-Ixi"/>
                 <outlet property="firstImageView" destination="0tp-2J-qn6" id="hnr-6o-P9b"/>
                 <outlet property="rankImageView" destination="dff-fq-LBw" id="ISX-1H-XX8"/>
+                <outlet property="sanjiaoImageView" destination="Oo9-TI-QDZ" id="b9b-uq-Kpc"/>
                 <outlet property="userImageView" destination="WKP-KX-PdQ" id="dqQ-Xb-XBh"/>
                 <outlet property="usernameLabel" destination="LDu-Xq-gCz" id="RsC-uo-vsu"/>
             </connections>
@@ -150,8 +159,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="a.png" width="30" height="30"/>
         <image name="ic_crown" width="49" height="19"/>
+        <image name="ic_paisan" width="13" height="7"/>
         <image name="num1" width="36" height="36"/>
     </resources>
 </document>

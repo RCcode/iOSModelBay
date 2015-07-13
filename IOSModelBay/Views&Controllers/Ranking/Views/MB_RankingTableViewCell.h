@@ -17,7 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel      *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel      *descLabel;
-//@property (weak, nonatomic) IBOutlet UIButton     *collectButton;
+@property (weak, nonatomic) IBOutlet UIImageView *sanjiaoImageView;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *ablumScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView  *rankImageView;
 

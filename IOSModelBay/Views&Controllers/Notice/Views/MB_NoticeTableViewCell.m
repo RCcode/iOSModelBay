@@ -24,22 +24,32 @@
     
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:notice.fpic] placeholderImage:nil];
     _usernameLabel.text = notice.fname.uppercaseString;
-    _contentLabel.text = notice.comment;
     _timeLabel.text = [MB_Utils dateWithTimeInterval:notice.createTime * 1000 fromTimeZone:@"+08"];
-
+    
     switch (notice.mtype) {
         case NoticeTypeCollect:
-        case NoticeTypeMessage:
-        case NoticeTypeReplay:
         {
+            _contentLabel.text = @"收藏了你";
             _relateImageView.hidden = YES;
             break;
         }
-            
         case NoticeTypeMention:
+        {
+            _contentLabel.text = @"提到了你";
+            _relateImageView.hidden = NO;
+            [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
+            break;
+        }
         case NoticeTypeComment:
+        {
+            _contentLabel.text = [NSString stringWithFormat:@"评论了你：%@",notice.comment];
+            _relateImageView.hidden = NO;
+            [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
+            break;
+        }
         case NoticeTypeLike:
         {
+            _contentLabel.text = @"赞了你的影集";
             _relateImageView.hidden = NO;
             [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
             break;

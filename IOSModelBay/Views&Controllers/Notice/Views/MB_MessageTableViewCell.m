@@ -29,12 +29,12 @@
     
     switch (notice.mtype) {
         case NoticeTypeMessage: {
-            _typeLabel.text = @"aaaa".uppercaseString;
+            _typeLabel.text = @"留言".uppercaseString;
             break;
         }
             
         case NoticeTypeReplay: {
-            _typeLabel.text = @"bbb".uppercaseString;
+            _typeLabel.text = @"回复".uppercaseString;
             break;
         }
             

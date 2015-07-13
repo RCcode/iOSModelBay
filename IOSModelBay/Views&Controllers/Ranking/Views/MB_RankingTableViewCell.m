@@ -11,7 +11,6 @@
 @implementation MB_RankingTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
     
     _ablumScrollView.pagingEnabled = NO;
 }
@@ -21,13 +20,23 @@
     
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.fpic] placeholderImage:nil];
     [_backImageView sd_setImageWithURL:[NSURL URLWithString:user.fbackPic] placeholderImage:nil];
-    _usernameLabel.text = user.fname;
-    _descLabel.text = [[user.fcareerId componentsSeparatedByString:@"|"] componentsJoinedByString:@"  |  "];
+    _usernameLabel.text = user.fname.uppercaseString;
+    
+    NSMutableArray *careerArr = [NSMutableArray arrayWithCapacity:0];
+    for (NSString *career in [_user.fcareerId componentsSeparatedByString:@"|"]) {
+        [careerArr addObject:[[MB_Utils shareUtil].careerDic objectForKey:career]?:@""];
+    }
+    _descLabel.text = [careerArr componentsJoinedByString:@"  |  "];
+    
+    if (![userDefaults boolForKey:kIsLogin]) {
+        _sanjiaoImageView.hidden = YES;
+    }else {
+        _sanjiaoImageView.hidden = NO;
+    }
     
     [self layoutIfNeeded];
     
     CGRect rect = _ablumScrollView.frame;
-    NSLog(@"rect = %@",NSStringFromCGRect(rect));
     for (UIView *subView in _ablumScrollView.subviews) {
         [subView removeFromSuperview];
     }

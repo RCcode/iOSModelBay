@@ -71,8 +71,19 @@ static CGFloat const commentViewHeight = 50;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    [self.navigationController pushViewController:userVC animated:YES];
+    
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_Comment *comment = self.dataArray[indexPath.row];
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.hidesBottomBarWhenPushed = YES;
+        userVC.comeFromType = ComeFromTypeUser;
+        MB_User *user = [[MB_User alloc] init];
+        user.fid = comment.fid;
+        user.fname = comment.fname;
+        user.fpic = comment.fpic;
+        userVC.user = user;
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 
@@ -117,8 +128,8 @@ static CGFloat const commentViewHeight = 50;
 
 //获取评论列表
 - (void)requestCommentsListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"ablId":@(self.ablum.ablId),//作品集id
                              @"minId":@(minId),
                              @"count":@(10)};
@@ -143,8 +154,8 @@ static CGFloat const commentViewHeight = 50;
 - (void)sendButtonOnClick:(UIButton *)button {
     [self.textView resignFirstResponder];
     
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"fid":@(self.ablum.uid),
                              @"ablId":@(self.ablum.ablId),//作品集id
                              @"comment":self.textView.text};

@@ -79,10 +79,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    userVC.user = self.dataArray[indexPath.row];
-    userVC.comeFromType = ComeFromTypeUser;
-    [self.navigationController pushViewController:userVC animated:YES];
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.user = self.dataArray[indexPath.row];
+        userVC.comeFromType = ComeFromTypeUser;
+        userVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

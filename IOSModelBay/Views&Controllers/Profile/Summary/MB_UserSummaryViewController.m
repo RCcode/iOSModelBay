@@ -38,6 +38,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     self.detailDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
     [self.view addSubview:self.tableView];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestUserDetail];
     
     self.dataArray = [@[] mutableCopy];
@@ -97,9 +98,10 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         
         cell.mainLabelWidth.constant = 60;
         
-        cell.mainLabel.text = self.dataArray[indexPath.row];
-        NSInteger index = [[MB_Utils shareUtil].mapArray indexOfObject:self.dataArray[indexPath.row]];
-        cell.subLabel.text = [self getStringWithIndex:index detail:self.detail];
+        NSString *keyName = self.dataArray[indexPath.row];
+        cell.mainLabel.text = LocalizedString(keyName, nil);
+        NSInteger index = [[MB_Utils shareUtil].mapArray indexOfObject:keyName];
+        cell.subLabel.text = [self getStringWithIndex:index + 1 detail:self.detail];
         return cell;
     }else {
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
@@ -137,6 +139,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     NSLog(@"%ld,,,%ld",(long)index,(long)optionIndex);
                     [self changeValue:optionIndex ForKey:index];
                 };
+                editVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:editVC animated:YES];
                 break;
             }
@@ -172,11 +175,12 @@ static CGFloat startY = 0;
 
 #pragma mark - privtate methods
 - (void)requestUserDetail {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
-                             @"fid":@(6)};
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":@(self.user.fid)};
     [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
         NSLog(@"detail %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
 //            self.detailDic = response;
             self.detail = [[MB_UserDetail alloc] init];
@@ -186,7 +190,7 @@ static CGFloat startY = 0;
             [self.tableView reloadData];
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -196,9 +200,9 @@ static CGFloat startY = 0;
         if (self.detail.gender != -1) {
             [self.dataArray addObject:@"gender"];
         }
-        if (![self.detail.country isEqualToString:@""]) {
+//        if (![self.detail.country isEqualToString:@""]) {
             [self.dataArray addObject:@"country"];
-        }
+//        }
         if (self.detail.age != -1) {
             [self.dataArray addObject:@"age"];
         }
@@ -290,8 +294,6 @@ static CGFloat startY = 0;
 }
 
 - (NSString *)getStringWithIndex:(NSInteger)index detail:(MB_UserDetail *)detail{
-    //    util.mapArray = @[@"eyecolor",@"skincolor",@"haircolor",@"shoesize",@"dress",@"height",@"weight",@"chest",@"waist",@"hips",@"fareas1",@"fareas2",@"experience",@"gender",@"country",@"age",@"contact",@"email",@"website"];
-
     switch (index) {
         case 1:
             return [MB_Utils shareUtil].eyeColor[[detail.eyecolor integerValue]];
@@ -311,16 +313,16 @@ static CGFloat startY = 0;
             return [MB_Utils shareUtil].height[detail.height];
             break;
         case 7:
-            return [MB_Utils shareUtil].height[detail.weight];
+            return [MB_Utils shareUtil].weight[detail.weight];
             break;
         case 8:
-            return [MB_Utils shareUtil].height[detail.chest];
+            return [MB_Utils shareUtil].chest[detail.chest];
             break;
         case 9:
-            return [MB_Utils shareUtil].height[detail.waist];
+            return [MB_Utils shareUtil].waist[detail.waist];
             break;
         case 10:
-            return [MB_Utils shareUtil].height[detail.hips];
+            return [MB_Utils shareUtil].hips[detail.hips];
             break;
             //        case 11:
             //            self.changeDetail.dress = [NSString stringWithFormat:@"%ld",(long)optionIndex];

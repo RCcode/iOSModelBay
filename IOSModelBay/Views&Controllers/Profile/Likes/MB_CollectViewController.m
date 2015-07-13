@@ -50,6 +50,20 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    MB_Collect *collect = self.dataArray[indexPath.row];
+    
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeUser;
+    userVC.hidesBottomBarWhenPushed = YES;
+    MB_User *user = [[MB_User alloc] init];
+    user.fid = collect.fid;
+    user.fname = collect.fname;
+    user.fpic = collect.fpic;
+    userVC.user = user;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
 
 #pragma mark - UIScrollViewDelegate
 static CGFloat startY = 0;
@@ -95,8 +109,8 @@ static CGFloat startY = 0;
 
 //获取作品集列表
 - (void)requestLikesListWithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getLikesWithParameters:params success:^(id response) {

@@ -14,7 +14,7 @@ static NSString * const ReuseIdentifier = @"cell";
 @interface MB_BaseViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
+//@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 @property (nonatomic, strong) UILabel *titleLabel;
 
 //添加下拉刷新
@@ -36,8 +36,20 @@ static NSString * const ReuseIdentifier = @"cell";
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView;
 
 //加入上滑隐藏导航栏
-- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView;
+//- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView;
 
+//获取服务器返回的状态码
 - (NSInteger)statFromResponse:(id)response;
+
+//没登陆弹出登陆框并返回NO,登录直接返回YES；
+- (BOOL)showLoginAlertIfNotLogin;
+//弹出登录提示框
+- (void)showLoginAlert;
+//登录提示框点击按钮代理
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+//弹出登录界面
+- (void)presentLoginViewController;
+
 
 @end

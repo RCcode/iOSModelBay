@@ -48,9 +48,9 @@
     
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
     MB_User *user = [[MB_User alloc] init];
-    user.fid = 6;
-    user.fname = @"songg";
-    user.fcareerId = @"1|2|3";
+    user.fid = [[userDefaults objectForKey:kID] integerValue];
+    user.fname = [userDefaults objectForKey:kName];
+    user.fcareerId = [userDefaults objectForKey:kCareer];
     userVC.user = user;
     userVC.comeFromType = ComeFromTypeSelf;
     MB_BaseNavigationViewController *userNC = [[MB_BaseNavigationViewController alloc] initWithRootViewController:userVC];

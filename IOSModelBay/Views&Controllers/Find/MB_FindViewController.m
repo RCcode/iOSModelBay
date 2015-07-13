@@ -55,10 +55,6 @@
 
 
 #pragma mark - UICollectionViewDelegate UICollectionViewDataSource UICollectionViewDelegateFlowLayout
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -72,11 +68,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    userVC.hidesBottomBarWhenPushed = YES;
-    userVC.comeFromType = ComeFromTypeUser;
-    userVC.user = self.dataArray[indexPath.row];
-    [self.navigationController pushViewController:userVC animated:YES];
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.hidesBottomBarWhenPushed = YES;
+        userVC.comeFromType = ComeFromTypeUser;
+        userVC.user = self.dataArray[indexPath.row];
+        [self.navigationController pushViewController:userVC animated:YES];
+    }
 }
 
 
@@ -103,6 +101,7 @@
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.type = FilterTypeFind;
     filterVC.CompleteHandler = ^(){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self findUserListWithMinId:0];
     };
     [self.navigationController pushViewController:filterVC animated:YES];
@@ -133,7 +132,7 @@
     
     if ([userDefaults boolForKey:kIsLogin]) {
         [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
-        [params setObject:[userDefaults objectForKey:kID] forKey:@"token"];
+        [params setObject:[userDefaults objectForKey:kAccessToken] forKey:@"token"];
     }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
@@ -159,9 +158,16 @@
             }
             [self.collectView reloadData];
         }else if ([self statFromResponse:response] == 10501){
-            [self showNoMoreMessageForview:self.collectView];
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                [self.collectView reloadData];
+                [MB_Utils showPromptWithText:@"no result"];
+            }else {
+                [self showNoMoreMessageForview:self.collectView];
+            }
         }
     } failure:^(NSError *err) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
     }];
 }

@@ -7,35 +7,55 @@
 //
 
 #import "MB_BaseViewController.h"
+#import "MB_LoginViewController.h"
+#import "MB_SelectRoleViewController.h"
+#import "MB_TabBarViewController.h"
 
-@interface MB_BaseViewController ()
+@interface MB_BaseViewController ()<UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) UILabel *footerLabel;
+
+@property (nonatomic, strong) NSString *codeStr;
 
 @end
 
 @implementation MB_BaseViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.view.backgroundColor = colorWithHexString(@"#eeeeee");
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.scrollCoordinator disable];
-//    [self.scrollCoordinator disableFullyExpandingViews:YES];
+//    [self.scrollCoordinator disable];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.scrollCoordinator enable];
-//    [self.scrollCoordinator enableFullyExpandingViews:YES];
+//    [self.scrollCoordinator enable];
 }
+
+
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"base");
+    if (alertView.tag == 1000) {
+        if (buttonIndex == 1) {
+            [self presentLoginViewController];
+        }
+    }else if(alertView.tag == 2000) {
+        if (buttonIndex == 1) {
+            //重试
+            [self loginWitnCodeStr:_codeStr];
+        }
+    }
+}
+
 
 #pragma mark - Private Methods
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
@@ -64,7 +84,7 @@
 
 //结束尾部刷新动画
 - (void)endFooterRefreshingForView:(UIScrollView *)scrollView {
-    self.footerLabel.text = @"";
+//    self.footerLabel.text = @"";
     [scrollView.infiniteScrollingView stopAnimating];
 }
 
@@ -81,15 +101,15 @@
     self.footerLabel.text = @"没有更多了";
 }
 
-- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView {
-    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-    self.scrollCoordinator.scrollView = scrollView;
-    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-    if (self.navigationItem.titleView) {
-        self.scrollCoordinator.topViewItems = @[self.navigationItem.titleView]; 
-    }
-    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
-}
+//- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView {
+//    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
+//    self.scrollCoordinator.scrollView = scrollView;
+//    self.scrollCoordinator.topView = self.navigationController.navigationBar;
+//    if (self.navigationItem.titleView) {
+//        self.scrollCoordinator.topViewItems = @[self.navigationItem.titleView]; 
+//    }
+//    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
+//}
 
 - (NSInteger)statFromResponse:(id)response {
     NSInteger stat = [response[@"stat"] integerValue];
@@ -113,6 +133,71 @@
     return stat;
 }
 
+- (BOOL)showLoginAlertIfNotLogin {
+    if ([userDefaults boolForKey:kIsLogin]) {
+        return YES;
+    }else {
+        [self showLoginAlert];
+        return NO;
+    }
+}
+
+//弹出登录提示框
+- (void)showLoginAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"login", nil];
+    alert.tag = 1000;
+    alert.delegate = self;
+    [alert show];
+}
+
+- (void)presentLoginViewController {
+    MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
+        NSLog(@"ssss%@",codeStr);
+        _codeStr = codeStr;
+        [self loginWitnCodeStr:codeStr];
+    }];
+    
+    UINavigationController *loginNC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:loginNC animated:YES completion:nil];
+}
+
+- (void)loginWitnCodeStr:(NSString *)codeStr {
+    [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
+        NSLog(@"%@",response);
+        if ([self statFromResponse:response] == 10100) {
+            //未注册
+            MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
+            MB_BaseNavigationViewController *na = [[MB_BaseNavigationViewController alloc] initWithRootViewController:selectRoleVC];
+            [self presentViewController:na animated:YES completion:nil];
+        }else if ([self statFromResponse:response] == 10000){
+            //记录用户信息
+            
+            [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
+            [userDefaults setObject:response[@"gender"] forKey:kGender];//性别:0.女;1.男
+            [userDefaults setObject:response[@"name"] forKey:kName];//本平台登录用户名
+            [userDefaults setObject:response[@"careerId"] forKey:kCareer];//职业id,竖线分割:1|2|3
+            [userDefaults setObject:response[@"utype"] forKey:kUtype];//用户类型: 0,浏览;1:专业;
+            [userDefaults setObject:response[@"pic"] forKey:kPic];//用户类型: 0,浏览;1:专业;
+            [userDefaults setObject:response[@"backPic"] forKey:kBackPic];//用户类型: 0,浏览;1:专业;
+            
+            [userDefaults setBool:YES forKey:kIsLogin];
+            [userDefaults synchronize];
+            
+            MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+            [self presentViewController:tabVC animated:YES completion:nil];
+        }
+    } failure:^(NSError *err) {
+        NSLog(@"%@",err);
+        [self showLoginFailedAlertView];
+    }];
+}
+
+- (void)showLoginFailedAlertView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login failed,retry?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+    alert.tag = 2000;
+    [alert show];
+}
+
 
 #pragma mark - getters & setters
 - (NSMutableArray *)dataArray {
@@ -125,8 +210,9 @@
 - (UILabel *)footerLabel {
     
     if (_footerLabel == nil) {
-        _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 60)];
+        _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
         _footerLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.font = [UIFont systemFontOfSize:15];
     }
     return _footerLabel;
 }

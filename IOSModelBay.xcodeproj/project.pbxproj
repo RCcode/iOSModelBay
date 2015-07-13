@@ -182,6 +182,7 @@
 		CDD537641B340CB6008B436C /* MB_ScanAblumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD537291B340CB6008B436C /* MB_ScanAblumViewController.m */; };
 		CDD537651B340CB6008B436C /* MB_SelectTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD5372D1B340CB6008B436C /* MB_SelectTemplateViewController.m */; };
 		CDD537671B340D29008B436C /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD537661B340D29008B436C /* b.png */; };
+		CDDEC2211B539CCA00099387 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDDEC2231B539CCA00099387 /* Localizable.strings */; };
 		CDE0338C1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */; };
 		CDE0338F1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE0338E1B4A92B000E4C5D2 /* MB_EditSummaryViewController.m */; };
 /* End PBXBuildFile section */
@@ -534,6 +535,9 @@
 		CDD5372C1B340CB6008B436C /* MB_SelectTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SelectTemplateViewController.h; sourceTree = "<group>"; };
 		CDD5372D1B340CB6008B436C /* MB_SelectTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SelectTemplateViewController.m; sourceTree = "<group>"; };
 		CDD537661B340D29008B436C /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
+		CDDEC2221B539CCA00099387 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CDDEC2241B539CCD00099387 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CDDEC2251B539D0F00099387 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CDE0338A1B4A5B8100E4C5D2 /* MB_ScanImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_ScanImageViewController.h; sourceTree = "<group>"; };
 		CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_ScanImageViewController.m; sourceTree = "<group>"; };
 		CDE0338D1B4A92B000E4C5D2 /* MB_EditSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditSummaryViewController.h; sourceTree = "<group>"; };
@@ -617,6 +621,7 @@
 				6F55A4A91B1D7567006DA537 /* main.m */,
 				6F83870B1B1D843B002D2ED3 /* PrefixHeader.pch */,
 				6F55A4B61B1D7567006DA537 /* LaunchScreen.xib */,
+				CDDEC2231B539CCA00099387 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1414,6 +1419,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 6F55A49B1B1D7567006DA537;
 			productRefGroup = 6F55A4A51B1D7567006DA537 /* Products */;
@@ -1435,6 +1441,7 @@
 				CDD5373A1B340CB6008B436C /* MB_AddTextViewController.xib in Resources */,
 				CDD537331B340CB6008B436C /* MB_FilterCollectViewCell.xib in Resources */,
 				6F55A4B31B1D7567006DA537 /* Main.storyboard in Resources */,
+				CDDEC2211B539CCA00099387 /* Localizable.strings in Resources */,
 				CDD537611B340CB6008B436C /* MB_CareerCollectViewCell.xib in Resources */,
 				6F55A4B81B1D7567006DA537 /* LaunchScreen.xib in Resources */,
 				99DECD311B49142200F5F716 /* MB_UploadView.xib in Resources */,
@@ -1649,6 +1656,16 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
+		CDDEC2231B539CCA00099387 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDDEC2221B539CCA00099387 /* Base */,
+				CDDEC2241B539CCD00099387 /* en */,
+				CDDEC2251B539D0F00099387 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1693,7 +1710,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1732,7 +1749,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1742,7 +1759,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
@@ -1758,7 +1775,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 			};
 			name = Debug;
 		};
@@ -1766,7 +1783,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
@@ -1782,7 +1799,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 			};
 			name = Release;
 		};
@@ -1801,7 +1818,7 @@
 				INFOPLIST_FILE = IOSModelBayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IOSModelBay.app/IOSModelBay";
 			};
 			name = Debug;
@@ -1817,7 +1834,7 @@
 				INFOPLIST_FILE = IOSModelBayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b8ecb5d-1f09-4d07-b0db-e40a8522fa6b";
+				PROVISIONING_PROFILE = "b281c782-537c-41ee-986b-843eb9a5dd9d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IOSModelBay.app/IOSModelBay";
 			};
 			name = Release;

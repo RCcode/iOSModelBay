@@ -153,57 +153,60 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MB_Notice *notice = self.dataArray[indexPath.row];
     
-    MB_User *user = [[MB_User alloc] init];
-    user.fid = notice.fid;
-    user.fname = notice.fname;
-    user.fcareerId = notice.careerId;
-    user.fpic = notice.fpic;
-    user.fbackPic = notice.backPic;
+    if ([self showLoginAlertIfNotLogin]) {
+        MB_User *user = [[MB_User alloc] init];
+        user.fid = notice.fid;
+        user.fname = notice.fname;
+        user.fcareerId = notice.careerId;
+        user.fpic = notice.fpic;
+        user.fbackPic = notice.backPic;
+        
+        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+        userVC.comeFromType = ComeFromTypeUser;
+        userVC.hidesBottomBarWhenPushed = YES;
+        userVC.user = user;
+        
+        switch (notice.mtype) {
+            case NoticeTypeCollect:
+            {
+                userVC.menuIndex = 4;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            case NoticeTypeMention:
+            {
+                userVC.menuIndex = 2;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            case NoticeTypeLike:
+            {
+                userVC.menuIndex = 2;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            case NoticeTypeComment:
+            {
+                userVC.menuIndex = 2;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            case NoticeTypeMessage:
+            {
+                userVC.menuIndex = 3;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            case NoticeTypeReplay:
+            {
+                userVC.menuIndex = 3;
+                [self.navigationController pushViewController:userVC animated:YES];
+                break;
+            }
+            default:
+                break;
+        }
 
-    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-    userVC.comeFromType = ComeFromTypeUser;
-    userVC.user = user;
-//    userVC.hidesBottomBarWhenPushed = YES;
-
-    switch (notice.mtype) {
-        case NoticeTypeCollect:
-        {
-            userVC.menuIndex = 4;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        case NoticeTypeMention:
-        {
-            userVC.menuIndex = 2;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        case NoticeTypeLike:
-        {
-            userVC.menuIndex = 2;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        case NoticeTypeComment:
-        {
-            userVC.menuIndex = 2;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        case NoticeTypeMessage:
-        {
-            userVC.menuIndex = 3;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        case NoticeTypeReplay:
-        {
-            userVC.menuIndex = 3;
-            [self.navigationController pushViewController:userVC animated:YES];
-            break;
-        }
-        default:
-            break;
     }
 }
 
@@ -226,8 +229,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
 }
 
 - (void)requestNoticeListwithMinId:(NSInteger)minId {
-    NSDictionary *params = @{@"id":@(6),
-                             @"token":@"abcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getNoticeWithParameters:params success:^(id response) {

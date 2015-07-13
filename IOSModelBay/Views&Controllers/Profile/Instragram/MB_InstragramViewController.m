@@ -27,12 +27,10 @@
     
     [self.view addSubview:self.collectView];
     
-    if ([userDefaults boolForKey:kIsLogin]) {
-        [self addPullRefresh];
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self requestInstragramMediasListWithMaxId:nil];
-    }
+    [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self requestInstragramMediasListWithMaxId:nil];
 }
 
 - (void)didReceiveMemoryWarning {

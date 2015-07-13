@@ -159,8 +159,8 @@
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *params = @{@"id":@(6),//用户id
-                             @"token":@"abcde",//token
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
+                             @"token":[userDefaults objectForKey:kAccessToken],//token
                              @"atype":@(1),//影集分类:0.拼图;1.相片集
                              @"name":self.addTitleTextField.text,//影集名称
                              @"descr":self.addDescTextView.text,//影集描述
@@ -188,8 +188,8 @@
                 [self.assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
                     
                     UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
-                    NSDictionary *uploadParams = @{@"id":@(6),
-                                                   @"token":@"abcde",
+                    NSDictionary *uploadParams = @{@"id":[userDefaults objectForKey:kID],
+                                                   @"token":[userDefaults objectForKey:kAccessToken],
                                                    @"ablId":response[@"ablId"],
                                                    @"sort":@([self.urlArray indexOfObject:url])};
                     NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"ablum/uploadPic.do"];

@@ -45,10 +45,8 @@
 @implementation MB_UserViewController
 
 #pragma mark - life cycle
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -67,13 +65,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.commentView];
-    
-//    [super HideNavigationBarWhenScrollUpForScrollView:self.tableView];
-    [self addChildViewControllers];
-    
-    [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+    if ([self showLoginAlertIfNotLogin]) {
+        [self.view addSubview:self.tableView];
+        [self.view addSubview:self.commentView];
+        
+        [self addChildViewControllers];
+        
+        [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -279,7 +278,11 @@ static CGFloat startY;
 }
 
 - (void)keyBoardWillHide:(NSNotification *)noti {
-    self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
+    if (self.hidesBottomBarWhenPushed) {
+        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60)];
+    }else {
+        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
+    }
 }
 
 
@@ -314,6 +317,7 @@ static CGFloat startY;
     summaryVC.user = self.user;
     summaryVC.comeFromType = self.comeFromType;
     ablumVC.containerViewRect      = self.containerView.frame;
+    ablumVC.user = self.user;
     instragramVC.containerViewRect = self.containerView.frame;
     instragramVC.uid = [userDefaults objectForKey:kUid];
     messageVC.containerViewRect    = self.containerView.frame;
@@ -362,8 +366,8 @@ static CGFloat startY;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
         button.backgroundColor = colorWithHexString(@"#ff4f42");
         
-        NSDictionary *params = @{@"id":@(6),
-                                 @"token":@"abcde",
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                                 @"token":[userDefaults objectForKey:kAccessToken],
                                  @"fid":@(self.user.fid)};
         [[AFHttpTool shareTool] addLikesWithParameters:params success:^(id response) {
             NSLog(@"collect %@", response);
@@ -417,6 +421,7 @@ static CGFloat startY;
         _tableView.dataSource = self;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
+        
     }
     return _tableView;
 }

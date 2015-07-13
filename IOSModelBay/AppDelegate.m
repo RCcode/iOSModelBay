@@ -30,6 +30,10 @@
     [self cancelNotification];
     [self registNotification];
     
+    [userDefaults setObject:@(6) forKey:kID];
+    [userDefaults setObject:@"abcde" forKey:kAccessToken];
+    [userDefaults synchronize];
+    
     if ([userDefaults boolForKey:kIsLogin] == YES) {
         MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
         self.window.rootViewController = tabVC;
@@ -37,6 +41,7 @@
         MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
         self.window.rootViewController = mainVC;
     }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
