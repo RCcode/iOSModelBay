@@ -272,6 +272,7 @@ static CGFloat startY = 0;
         self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
     }];
     MB_SelectPhotosViewController *vc = [[MB_SelectPhotosViewController alloc] init];
+    vc.type = SelectTypeAll;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

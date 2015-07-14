@@ -30,9 +30,21 @@
     [self cancelNotification];
     [self registNotification];
     
-    [userDefaults setObject:@(6) forKey:kID];
-    [userDefaults setObject:@"abcde" forKey:kAccessToken];
-    [userDefaults synchronize];
+    
+//    "access_token" = "1818873576.50fe427.6304cb9af8264b71ae6f8a4b21b1b404";
+//    user =     {
+//        bio = "apple  ios  objective-c swift  coder";
+//        "full_name" = "";
+//        id = 1818873576;
+//        "profile_picture" = "https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg";
+//        username = "lisong_best";
+//        website = "http://www.baidu.com";
+//    };
+//}
+
+//    [userDefaults setObject:@(6) forKey:kID];
+//    [userDefaults setObject:@"abcde" forKey:kAccessToken];
+//    [userDefaults synchronize];
     
     if ([userDefaults boolForKey:kIsLogin] == YES) {
         MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];

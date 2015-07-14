@@ -26,4 +26,6 @@ typedef NS_ENUM(NSInteger, StateType) {
 @property (nonatomic, strong) NSString * reply;//回复内容
 @property (nonatomic, assign) NSInteger  replyTime;//回复时间
 
+@property (nonatomic, strong) NSString * replyName;
+
 @end

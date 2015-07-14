@@ -67,22 +67,22 @@
 "Advertising" = "广告";
 "Lifestyle" = "日常生活";
 "Architectural" = "建筑";
-"Lingerie/Body" = "内衣/人体";
-"Artistic" = "艺术";
+//"Lingerie/Body" = "内衣/人体";
+//"Artistic" = "艺术";
 "Music" = "音乐";
 "Athletic" = "运动";
-"Nude" = "裸体";
+//"Nude" = "裸体";
 "Beauty" = "丽人";
 "Portrait" = "人像";
 "Black and White" = "黑白";
 "Reportage/Journalism" = "写实";
 "Celebrity/Entertainment" = "活动";
-"Runway" = "走秀";
-"Fashion/Editorial" = "时尚";
+//"Runway" = "走秀";
+//"Fashion/Editorial" = "时尚";
 "Still Life" = "静物";
 "Fine Art" = "艺术绘画";
-"Swimwear" = "泳装";
-"Glamour" = "魅力写真";
+//"Swimwear" = "泳装";
+//"Glamour" = "魅力写真";
 "Wedding" = "婚礼";
 
 //经验
@@ -91,3 +91,146 @@
 "Experienced" = "富有经验";
 "Very Experienced" = "经验丰富";
 "Advanced" = "高级";
+
+
+"login_insta" = "使用Instagram账号登录";
+"Skip" = "跳过";
+"login_Privacy" = "点击登录表示你同意使用条款和隐私政策";
+"logining" = "正在登录，请稍后";
+"login_failed" = "登录失败";
+"Cancel" = "取消";
+"Retry" = "重试";
+
+
+"Discover" = "发现";
+"Rank" = "排行";
+"Activity" = "动态";
+"My" = "我的";
+"Login" = "登录";
+"select_role" = "选择角色";
+"Professional" = "专业人士";
+"Audience" = "观众";
+"become_pro" = "随时都可以申请成为专业人士";
+"General_Info" = "基本信息";
+"Username" = "用户名";
+"Gender" = "性别";
+"Career" = "职业";
+"Done" = "完成";
+
+
+//职业
+"Model" = "模特";
+"Actor" = "演员";
+"Dancer" = "舞者";
+"Singer" = "歌手";
+"Newface" = "新面孔";
+"Photographer" = "摄影师";
+"Fitness Trainer" = "健身教练";
+"Makeup Artist" = "化妆师";
+"Hair Stylist" = "发型师";
+"Stylist" = "造型师";
+"Nutritionist" = "营养师";
+"Fahsion Designer" = "时尚设计师";
+"Agency" = "经纪人";
+
+"Username_unavailable" = "用户名不可用";
+"Loading_failed" = "加载失败";
+"Filter" = "筛选";
+"Search name" = "搜索用户名";
+"All" = "全部";
+"Men" = "男性";
+"Women" = "女性";
+"Career" = "职业";
+"Submit" = "提交";
+"Invite" = "邀请xxxx";
+"No_Results" = "没有搜索到任何结果";
+"Enter_email" = "输入xxxx的邮箱";
+"Invite" = "邀请";
+"Invite_Sent" = "邀请已发出";
+
+
+"share_message" = "Hi, @username 加入ModelBay，发现全球优秀的模特、摄影师、化妆师，拓展你的专业人脉。在AppStore或Googleplay搜索ModelBay.进行下载。";
+"Favor" = "收藏";
+"Country" = "国家";
+"Age" = "年龄";
+"Phone" = "电话";
+"Email" = "邮件";
+"Website" = "网站";
+"Height" = "身高";
+"Weight" = "体重";
+"Chest" = "胸围";
+"Waist" = "腰围";
+"Hips" = "臀围";
+"Eye Color" = "眼睛";
+"Skin Color" = "皮肤";
+"Hair Color" = "头发";
+"Shoes" = "鞋号";
+"Dress" = "衣号";
+"Experiences" = "经验";
+
+
+"Reply" = "回复";
+"Message" = "留言";
+"Favored_you" = "xxxx 将你加入了收藏";
+"mentioned_you" = "xxxx 在作品中提到了你";
+"liked_your_photo" = "xxxx 赞了你的照片";
+"comment_your_photo" = "xxxx 评论了你的照片";
+"leave_you_message" = "xxxx 给你留言";
+"reply_your_message" = "xxxx 回复了你的留言";
+"xxxx and x more favored you" = "xxx和另外x人将你加入到收藏";
+"xxxx and x more mentioned you" = "xxx和另外x人在照片中提到了你";
+"xxxx and x more liked your photo" = "xxx和另外x人赞了你的照片";
+"xxxx and x more comment your photo" = "xxx和另外x人评论了你的照片";
+"xxxx and x more leave you a message" = "xxx和另外x人给你留言";
+"xxxx and x more reply your message" = "xxx和另外x人回复了你的留言";
+"Share" = "分享";
+"Invite_Friends" = "邀请好友";
+"Setting" = "设置";
+
+"Contracts" = "联系方式";
+"Only Professional" = "对专业用户公开";
+"Only Me" = "不公开";
+"General" = "选择出生日期";
+"Date of birth" = "基础信息";
+"Liker" = "称赞者";
+"Comments" = "评论";
+//"Reply" = "回复";
+
+
+"Showcase" = "影集";
+"Poster" = "海报";
+"Close" = "关闭";
+"Use" = "使用此模板";
+"Edit" = "编辑模板";
+"Add description" = "添加说明";
+"Select User" = "选择用户";
+"ALL_photo" = "所有照片";
+"Title" = "标题";
+"Description" = "说明";
+
+
+
+"Uploading" = "正在上传";
+"Upload Failure" = "上传失败";
+"Uplaod Success" = "上传成功";
+"Setting" = "设置";
+"Notification" = "通知设置";
+"Help Center" = "帮助中心";
+"Feedback" = "建议和反馈";
+"User Terms & Private Policy" = "使用条款和隐私政策";
+"Follow us on Instagram" = "在Instagram上关注我们";
+"Follow us on Facebook" = "在Facebook上关注我们";
+"Logout" = "注销";
+
+
+"New Favored" = "被收藏";
+"New Likes" = "新的赞";
+"New Mention" = "被提到";
+"New Comment" = "新评论";
+"New Message" = "留言";
+
+
+
+
+
+

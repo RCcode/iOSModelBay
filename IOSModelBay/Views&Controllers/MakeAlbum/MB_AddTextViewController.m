@@ -46,30 +46,6 @@
     
     self.assertLibrary = [[ALAssetsLibrary alloc] init];
     [self refreshImagesContainerView];
-//    //展示选择的图片
-//    NSInteger countEveryLine = 5;
-//    CGFloat imageWidth = (kWindowWidth - 6) / countEveryLine;
-//    for (int i = 0; i <= self.urlArray.count; i ++) {
-//        NSInteger row = i / countEveryLine;//所在行
-//        NSInteger col = i % countEveryLine;//所在列
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(col *(1 + imageWidth) + 1, row * (imageWidth + 1) + 1, imageWidth, imageWidth)];
-//        imageView.userInteractionEnabled = YES;
-//        imageView.tag = i;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-//        [imageView addGestureRecognizer:tap];
-//        if (i == self.urlArray.count) {
-//            imageView.image = [UIImage imageNamed:@"add_img"];
-//        }else {
-//            [self.assertLibrary assetForURL:self.urlArray[i] resultBlock:^(ALAsset *asset) {
-////                UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
-////                UIImage *resultImage =[image setMaxResolution:480.0f imageOri:image.imageOrientation];
-//                imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
-//            } failureBlock:^(NSError *error) {
-//                
-//            }];
-//        }
-//        [self. imagesContainerView addSubview:imageView];
-//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,7 +134,7 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
                              @"token":[userDefaults objectForKey:kAccessToken],//token
                              @"atype":@(1),//影集分类:0.拼图;1.相片集
@@ -176,6 +152,8 @@
                              };
     [[AFHttpTool shareTool] addAblumWithParameters:params success:^(id response) {
         NSLog(@"%@",response);
+        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        
         if ([self statFromResponse:response] == 10000) {
 //            NSInteger ablId = [response[@"ablId"] integerValue];
             //上传图片
@@ -207,13 +185,15 @@
                     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
                         NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
                     }];
-                } failureBlock:^(NSError *error) {
                     
+                } failureBlock:^(NSError *error) {
+                    [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
                 }];
             }
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [MB_Utils showPromptWithText:@"失败"];
     }];
 }
 
@@ -221,6 +201,13 @@
     if (tap.view.tag == self.urlArray.count) {
         //添加图片
         MB_SelectPhotosViewController *selectVC = [[MB_SelectPhotosViewController alloc] init];
+        selectVC.type = SelectTypeOne;
+        selectVC.block = ^(NSURL *url) {
+            NSLog(@"add url %@",url);
+            [self.urlArray addObject:url];
+            [self refreshImagesContainerView];
+        };
+        
         [self.navigationController pushViewController:selectVC animated:YES];
     }else{
         //预览删除

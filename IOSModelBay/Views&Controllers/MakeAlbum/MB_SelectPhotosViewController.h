@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef  NS_ENUM(NSInteger, SelectType) {
+    SelectTypeOne,
+    SelectTypeAll,
+};
+
+typedef void(^AddOneImageBlcok)(NSURL* url);
 
 @interface MB_SelectPhotosViewController : MB_BaseViewController
+
+@property (nonatomic, assign) SelectType type;
+
+@property (nonatomic, copy) AddOneImageBlcok block;
 
 @end

@@ -43,7 +43,6 @@
 
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"base");
     if (alertView.tag == 1000) {
         if (buttonIndex == 1) {
             [self presentLoginViewController];
@@ -154,6 +153,7 @@
     MB_LoginViewController *loginVC = [[MB_LoginViewController alloc] initWithSuccessBlock:^(NSString *codeStr) {
         NSLog(@"ssss%@",codeStr);
         _codeStr = codeStr;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self loginWitnCodeStr:codeStr];
     }];
     
@@ -164,6 +164,7 @@
 - (void)loginWitnCodeStr:(NSString *)codeStr {
     [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
         NSLog(@"%@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self statFromResponse:response] == 10100) {
             //未注册
             MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
@@ -182,12 +183,12 @@
             
             [userDefaults setBool:YES forKey:kIsLogin];
             [userDefaults synchronize];
-            
-            MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-            [self presentViewController:tabVC animated:YES completion:nil];
+        
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
         }
     } failure:^(NSError *err) {
         NSLog(@"%@",err);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self showLoginFailedAlertView];
     }];
 }

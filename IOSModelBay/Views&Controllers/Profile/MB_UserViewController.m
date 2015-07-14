@@ -20,7 +20,7 @@
 //#import "MB_SearchViewController.h"
 #import "MB_ScanAblumViewController.h"
 #import "MB_SelectPhotosViewController.h"
-//#import "MB_SelectTemplateViewController.h"
+#import "MB_WriteInfoViewController.h"
 #import "MB_SelectRoleViewController.h"
 #import "MB_SelectCareerViewController.h"
 #import "MB_CommentView.h"
@@ -267,8 +267,8 @@ static CGFloat startY;
 #pragma mark - 键盘监听
 - (void)keyBoardWillShow:(NSNotification *)noti {
     //滚到顶部
-    if (self.tableView.contentOffset.y != topViewHeight - 20) {
-        [self.tableView setContentOffset:CGPointMake(0, topViewHeight - 20) animated:YES];
+    if (self.tableView.contentOffset.y != topViewHeight - 64) {
+        [self.tableView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
     }
     
     CGRect rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -279,9 +279,9 @@ static CGFloat startY;
 
 - (void)keyBoardWillHide:(NSNotification *)noti {
     if (self.hidesBottomBarWhenPushed) {
-        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60)];
+        self.commentView.frame = CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60);
     }else {
-        _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
+        self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
     }
 }
 
@@ -298,10 +298,12 @@ static CGFloat startY;
     
 //    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
     
-    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
+//    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     
 //    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
+    MB_WriteInfoViewController *inviteVC = [[MB_WriteInfoViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
+//    inviteVC.type = SelectTypeAll;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
@@ -311,7 +313,7 @@ static CGFloat startY;
     MB_AblumViewController *ablumVC           = [[MB_AblumViewController alloc] init];
     MB_InstragramViewController *instragramVC = [[MB_InstragramViewController alloc] init];
     MB_MessageViewController *messageVC       = [[MB_MessageViewController alloc] init];
-    MB_CollectViewController *collectVC           = [[MB_CollectViewController alloc] init];
+    MB_CollectViewController *collectVC       = [[MB_CollectViewController alloc] init];
     
     summaryVC.containerViewRect    = self.containerView.frame;
     summaryVC.user = self.user;

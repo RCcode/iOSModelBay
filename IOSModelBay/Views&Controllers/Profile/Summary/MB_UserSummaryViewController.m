@@ -11,6 +11,7 @@
 #import "MB_SummaryTableViewCell.h"
 #import "MB_UserDetail.h"
 #import "MB_EditSummaryViewController.h"
+#import "MB_EditAgeViewController.h"
 
 static NSString * const ReuseIdentifierIntroduce = @"introduce";
 static NSString * const ReuseIdentifierSummary = @"summary";
@@ -20,6 +21,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *editView;
+
 @property (nonatomic, strong) NSMutableDictionary *detailDic;//用于记录修改值
 @property (nonatomic, strong) MB_UserDetail *detail;
 @property (nonatomic, strong) MB_UserDetail *changeDetail;
@@ -35,14 +37,12 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     [super viewDidLoad];
     
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
-    self.detailDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
+    self.dataArray = [@[] mutableCopy];
+
     [self.view addSubview:self.tableView];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestUserDetail];
-    
-    self.dataArray = [@[] mutableCopy];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,8 +79,14 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     if (indexPath.section == 0) {
         MB_IntroduceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierIntroduce forIndexPath:indexPath];
         
-        cell.label.text = @"AHSSHJSGJDDjdsdfksdjfksdjfksdjj嘻卡斯是是是是是是是是是是穿不不不不不不不不不不不不不不不不不不嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻卡斯是是是是是是是是是是";
+        if (self.editing) {
+            cell.dashImageView.hidden = NO;
+        }else{
+            cell.dashImageView.hidden = YES;
+        }
+        cell.label.text = self.detail.bio;
         return cell;
+        
     }else if (indexPath.section == 1){
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
         if (self.editing) {
@@ -96,7 +102,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             cell.dashLineImageView.hidden = YES;
         }
         
-        cell.mainLabelWidth.constant = 60;
+//        cell.mainLabelWidth.constant = 60;
         
         NSString *keyName = self.dataArray[indexPath.row];
         cell.mainLabel.text = LocalizedString(keyName, nil);
@@ -106,7 +112,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     }else {
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
         
-        cell.mainLabelWidth.constant = 0;
+//        cell.mainLabelWidth.constant = 0;
         cell.mainLabel.text = @"fareas";
         cell.subLabel.text = @"#啊  #大的 #fffff ";
         
@@ -122,27 +128,49 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (self.editing) {
-        NSString *title = self.dataArray[indexPath.row];
-        NSInteger index = [[MB_Utils shareUtil].mapArray indexOfObject:title];
-        NSLog(@"index =  %ld",(long)index);
-        
-        switch (index) {
-            case 1:
-                break;
-                
-            default:
+        switch (indexPath.section) {
+            case 0:
             {
-                MB_EditSummaryViewController *editVC = [[MB_EditSummaryViewController alloc] init];
-                editVC.index = index;
-                editVC.blcok = ^(NSInteger index, NSInteger optionIndex){
-                    NSLog(@"%ld,,,%ld",(long)index,(long)optionIndex);
-                    [self changeValue:optionIndex ForKey:index];
-                };
-                editVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:editVC animated:YES];
+                //修改描述
                 break;
             }
+                
+            case 1:
+            {
+                NSString *title = self.dataArray[indexPath.row];
+                NSInteger index = [[MB_Utils shareUtil].mapArray indexOfObject:title];
+                NSLog(@"index =  %ld",(long)index);
+                
+                switch (index) {
+                    case 1:
+                        break;
+                        
+                    default:
+                    {
+                        MB_EditSummaryViewController *editVC = [[MB_EditSummaryViewController alloc] init];
+                        editVC.index = index;
+                        editVC.blcok = ^(NSInteger index, NSInteger optionIndex){
+                            NSLog(@"%ld,,,%ld",(long)index,(long)optionIndex);
+                            [self changeValue:optionIndex ForKey:index];
+                        };
+                        editVC.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:editVC animated:YES];
+                        break;
+                    }
+                }
+                
+                break;
+            }
+                
+            case 2:
+            {
+                //修改专注领域
+                break;
+            }
+            default:
+                break;
         }
     }
 }
@@ -182,7 +210,7 @@ static CGFloat startY = 0;
         NSLog(@"detail %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
-//            self.detailDic = response;
+            
             self.detail = [[MB_UserDetail alloc] init];
             [self.detail setValuesForKeysWithDictionary:response];
             [self.changeDetail setValuesForKeysWithDictionary:response];
@@ -337,17 +365,9 @@ static CGFloat startY = 0;
             return @"";
             break;
     }
-    //    util.mapArray = @[@"eyecolor",@"skincolor",@"haircolor",@"shoesize",@"dress",@"height",@"weight",@"chest",@"waist",@"hips",@"fareas1",@"fareas2",@"experience",@"gender",@"country",@"age",@"contact",@"email",@"website"];
 }
 
 - (void)changeValue:(NSInteger)optionIndex ForKey:(NSInteger)index{
-    
-//    NSString *name = [MB_Utils shareUtil].mapArray[index];
-//    NSString *value = [[[MB_Utils shareUtil].optionsDic objectForKey:@(index)] objectAtIndex:optionIndex];
-//    [self.detailDic setObject:value forKey:name];
-//    NSLog(@"%@",self.detailDic);
-    
-
     switch (index) {
         case 1:
             self.changeDetail.eyecolor = [NSString stringWithFormat:@"%ld",(long)optionIndex];
@@ -428,9 +448,7 @@ static CGFloat startY = 0;
         default:
             break;
             
-            //    util.mapArray = @[@"eyecolor",@"skincolor",@"haircolor",@"shoesize",@"dress",@"height",@"weight",@"chest",@"waist",@"hips",@"fareas1",@"fareas2",@"experience",@"gender",@"country",@"age",@"contact",@"email",@"website"];
     }
-    
 }
 
 
@@ -479,6 +497,13 @@ static CGFloat startY = 0;
         [_editView addSubview:button];
     }
     return _editView;
+}
+
+- (NSMutableDictionary *)detailDic {
+    if (!_detailDic) {
+        _detailDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    return _detailDic;
 }
 
 @end

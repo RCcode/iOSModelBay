@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
     self.titleLabel.text = @"MODELBAY";
@@ -92,9 +92,9 @@
 
 
 #pragma mark - private methods
-- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 - (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     //跳转到筛选界面

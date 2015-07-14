@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MB_WriteInfoViewController">
             <connections>
+                <outlet property="backImageView" destination="4rA-AG-fMS" id="EGZ-sX-8Xl"/>
                 <outlet property="femaleBtn" destination="XGz-98-MXj" id="SKv-Na-8YN"/>
                 <outlet property="maleBtn" destination="sDL-ZM-yAR" id="sei-H0-qey"/>
                 <outlet property="usernameTF" destination="HPJ-5t-LkX" id="8Ci-iH-K4j"/>
@@ -24,28 +25,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4rA-AG-fMS">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4rA-AG-fMS">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM0-AH-06t">
-                    <rect key="frame" x="130" y="84" width="61" height="15"/>
+                    <rect key="frame" x="130" y="148" width="61" height="15"/>
                     <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPJ-5t-LkX">
-                    <rect key="frame" x="41" y="142" width="238" height="44"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
+                    <rect key="frame" x="60" y="292" width="60" height="19"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="aaJ-pT-VBN"/>
+                        <constraint firstAttribute="width" constant="60" id="R8b-dZ-H9u"/>
                     </constraints>
-                    <color key="textColor" red="0.69803921568627447" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
-                    <rect key="frame" x="40" y="228" width="53" height="19"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Male" image="ic_wz">
                         <color key="titleColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,8 +53,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-98-MXj">
-                    <rect key="frame" x="211" y="228" width="69" height="19"/>
+                    <rect key="frame" x="183" y="292" width="77" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="77" id="FJz-eb-vgn"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Female" image="ic_wz">
                         <color key="titleColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,23 +70,42 @@
                         <action selector="femaleBtnOnClick:" destination="-1" eventType="touchUpInside" id="fu9-nd-C58"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffE-vm-eJq">
+                    <rect key="frame" x="41" y="206" width="238" height="44"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPJ-5t-LkX">
+                            <rect key="frame" x="15" y="0.0" width="223" height="44"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.69803921568627447" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="HPJ-5t-LkX" firstAttribute="leading" secondItem="ffE-vm-eJq" secondAttribute="leading" constant="15" id="2wB-9a-UFy"/>
+                        <constraint firstAttribute="trailing" secondItem="HPJ-5t-LkX" secondAttribute="trailing" id="QJE-xV-9Wr"/>
+                        <constraint firstAttribute="bottom" secondItem="HPJ-5t-LkX" secondAttribute="bottom" id="bkN-KZ-RLt"/>
+                        <constraint firstItem="HPJ-5t-LkX" firstAttribute="top" secondItem="ffE-vm-eJq" secondAttribute="top" id="pGo-LP-fva"/>
+                        <constraint firstAttribute="height" constant="44" id="u56-NL-oSb"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="HPJ-5t-LkX" secondAttribute="trailing" constant="41" id="Ba3-R5-24n"/>
-                <constraint firstItem="PM0-AH-06t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="GC7-nN-pjm"/>
-                <constraint firstItem="4rA-AG-fMS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XGG-tD-ZB9"/>
-                <constraint firstAttribute="trailing" secondItem="XGz-98-MXj" secondAttribute="trailing" constant="40" id="XlL-Ts-yj9"/>
-                <constraint firstItem="sDL-ZM-yAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="hse-NP-hKr"/>
-                <constraint firstItem="HPJ-5t-LkX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="41" id="jIi-kr-5F8"/>
-                <constraint firstItem="XGz-98-MXj" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="42" id="lJA-3a-2jW"/>
+                <constraint firstItem="XGz-98-MXj" firstAttribute="top" secondItem="ffE-vm-eJq" secondAttribute="bottom" constant="42" id="8Wa-ya-KaL"/>
+                <constraint firstItem="ffE-vm-eJq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="41" id="Dyr-af-deW"/>
+                <constraint firstItem="PM0-AH-06t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="148" id="GC7-nN-pjm"/>
+                <constraint firstItem="ffE-vm-eJq" firstAttribute="top" secondItem="PM0-AH-06t" secondAttribute="bottom" constant="43" id="MpI-ej-Qws"/>
+                <constraint firstItem="4rA-AG-fMS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="XGG-tD-ZB9"/>
+                <constraint firstAttribute="trailing" secondItem="XGz-98-MXj" secondAttribute="trailing" constant="60" id="XlL-Ts-yj9"/>
+                <constraint firstItem="sDL-ZM-yAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="hse-NP-hKr"/>
                 <constraint firstItem="4rA-AG-fMS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lkl-Kl-eKG"/>
                 <constraint firstAttribute="centerX" secondItem="PM0-AH-06t" secondAttribute="centerX" id="nMc-h3-L40"/>
-                <constraint firstItem="HPJ-5t-LkX" firstAttribute="top" secondItem="PM0-AH-06t" secondAttribute="bottom" constant="43" id="oJ8-lY-S83"/>
                 <constraint firstAttribute="trailing" secondItem="4rA-AG-fMS" secondAttribute="trailing" id="pMS-Vl-nnB"/>
-                <constraint firstItem="sDL-ZM-yAR" firstAttribute="top" secondItem="HPJ-5t-LkX" secondAttribute="bottom" constant="42" id="qZ8-wR-anq"/>
-                <constraint firstAttribute="centerX" secondItem="HPJ-5t-LkX" secondAttribute="centerX" id="rcu-vB-6ud"/>
+                <constraint firstItem="sDL-ZM-yAR" firstAttribute="top" secondItem="ffE-vm-eJq" secondAttribute="bottom" constant="42" id="rKC-PY-uvJ"/>
                 <constraint firstAttribute="bottom" secondItem="4rA-AG-fMS" secondAttribute="bottom" id="zLI-rt-LC3"/>
+                <constraint firstAttribute="trailing" secondItem="ffE-vm-eJq" secondAttribute="trailing" constant="41" id="zcH-QZ-06b"/>
             </constraints>
             <point key="canvasLocation" x="540" y="418"/>
         </view>
@@ -95,6 +113,7 @@
     <resources>
         <image name="ic_cz" width="19" height="19"/>
         <image name="ic_wz" width="19" height="19"/>
+        <image name="information_bg" width="320" height="504"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

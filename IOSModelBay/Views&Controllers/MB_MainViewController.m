@@ -25,6 +25,18 @@
 @implementation MB_MainViewController
 
 #pragma mark - life cycle
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login:) name:kLoginInNotification object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -45,6 +57,10 @@
     [self presentViewController:tabVC animated:YES completion:nil];
 }
 
+- (void)login:(NSNotification *)noti {
+//    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+//    [self presentViewController:tabVC animated:YES completion:nil];
+}
 
 #pragma mark - getters & setters
 - (UIScrollView *)backScrollView{
@@ -99,7 +115,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

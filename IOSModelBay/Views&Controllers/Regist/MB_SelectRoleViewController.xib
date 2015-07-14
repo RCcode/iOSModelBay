@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MB_SelectRoleViewController">
             <connections>
+                <outlet property="VIew1" destination="TDe-hy-cOC" id="X5T-2F-d7U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view2" destination="11Q-wZ-Fed" id="n4S-dS-nDg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

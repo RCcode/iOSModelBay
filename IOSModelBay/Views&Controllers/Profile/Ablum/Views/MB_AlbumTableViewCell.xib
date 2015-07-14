@@ -210,6 +210,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentButton" destination="j0n-H6-BJC" id="4cf-5J-9Ax"/>
+                <outlet property="commentLabel" destination="eYY-ao-7Mg" id="aA9-Jn-U1E"/>
                 <outlet property="con1" destination="2Xn-Wr-q9m" id="uR5-1N-rjM"/>
                 <outlet property="con2" destination="P3A-h7-fyd" id="asQ-jh-I7D"/>
                 <outlet property="con3" destination="oeu-2Z-yaZ" id="587-jl-4sf"/>

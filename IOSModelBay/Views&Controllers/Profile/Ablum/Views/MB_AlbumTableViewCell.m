@@ -53,6 +53,8 @@
     _nameLabel.text = ablum.name;
     _countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)ablum.mList.count];
     _descLabel.text = ablum.descr;
+    _likeLabel.text = [NSString stringWithFormat:@"%ld",(long)ablum.likes];
+    _commentLabel.text = [NSString stringWithFormat:@"%ld",(long)ablum.comments];
     
     _label1.text = ablum.mName;
     _label2.text = ablum.pName;

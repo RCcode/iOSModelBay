@@ -83,6 +83,9 @@ static NSString * const ReuseIdentifierReply = @"reply";
 - (void)configureCell2:(MB_ReplyTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MB_Message *message = self.dataArray[indexPath.section];
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    message.replyName = userVC.user.fname;
+    
     cell.message = message;
     cell.nameButton.tag = indexPath.section;
     cell.userButton.tag = indexPath.section;
@@ -235,19 +238,22 @@ static CGFloat startY = 0;
     [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
         NSLog(@"coment %@",response);
         if ([self statFromResponse:response] == 10000) {
+            [MB_Utils showPromptWithText:@"success"];
 //            [self requestMessageListWithMinId:0];
-            MB_Message *message = [[MB_Message alloc] init];
-            message.state = StateTypeMessage;
-            message.comment = comment;
-            message.createTime = 1000;
-            message.fid = userVC.user.fid;
-            message.fname = @"songge";
-            message.uid = 6;
-            [self.dataArray addObject:message];
-            [self.tableView reloadData];
+//            MB_Message *message = [[MB_Message alloc] init];
+//            message.state = StateTypeMessage;
+//            message.comment = comment;
+//            message.createTime = 1000;
+//            message.fid = userVC.user.fid;
+//            message.fname = @"songge";
+//            message.uid = 6;
+//            [self.dataArray addObject:message];
+//            [self.tableView reloadData];
+        }else {
+            [MB_Utils showPromptWithText:@"failed"];
         }
     } failure:^(NSError *err) {
-        
+        [MB_Utils showPromptWithText:@"failed"];
     }];
 }
 
@@ -272,11 +278,13 @@ static CGFloat startY = 0;
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.replyIndex]] withRowAnimation:UITableViewRowAnimationNone];
         }else {
             //回复失败
+            [MB_Utils showPromptWithText:@"failed"];
         }
     } failure:^(NSError *err) {
-
+        [MB_Utils showPromptWithText:@"failed"];
     }];
 }
+
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {

@@ -28,6 +28,7 @@
     _timeLabel.text = [MB_Utils dateWithTimeInterval:message.createTime * 1000 fromTimeZone:@"+08"];
     _commentLabel.text = message.comment;
     
+    _replyNameLabel.text = message.replyName;
     _replyTimeLabel.text = [MB_Utils dateWithTimeInterval:message.replyTime * 1000 fromTimeZone:@"+08"];
     _replyLabel.text = message.reply;
 }

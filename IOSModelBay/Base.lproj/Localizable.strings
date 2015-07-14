@@ -67,22 +67,22 @@
 "Advertising" = "Advertising";
 "Lifestyle" = "Lifestyle";
 "Architectural" = "Architectural";
-"Lingerie/Body" = "Lingerie/Body";
-"Artistic" = "Artistic";
+//"Lingerie/Body" = "Lingerie/Body";
+//"Artistic" = "Artistic";
 "Music" = "Music";
 "Athletic" = "Athletic";
-"Nude" = "Nude";
+//"Nude" = "Nude";
 "Beauty" = "Beauty";
 "Portrait" = "Portrait";
 "Black and White" = "Black and White";
 "Reportage/Journalism" = "Reportage/Journalism";
 "Celebrity/Entertainment" = "Celebrity/Entertainment";
-"Runway" = "Runway";
-"Fashion/Editorial" = "Fashion/Editorial";
+//"Runway" = "Runway";
+//"Fashion/Editorial" = "Fashion/Editorial";
 "Still Life" = "Still Life";
 "Fine Art" = "Fine Art";
-"Swimwear" = "Swimwear";
-"Glamour" = "Glamour";
+//"Swimwear" = "Swimwear";
+//"Glamour" = "Glamour";
 "Wedding" = "Wedding";
 
 //经验
@@ -91,3 +91,166 @@
 "Experienced" = "Experienced";
 "Very Experienced" = "Very Experienced";
 "Advanced" = "Advanced";
+
+
+
+
+"login_insta" = "Login with Instagram";
+"Skip" = "Skip";
+"login_Privacy" = "Click login means you agree the User Terms & Privacy Policy";
+"logining" = "Logging in, just a moment";
+"login_failed" = "Login Failure";
+"Cancel" = "Cancel";
+"Retry" = "Retry";
+
+
+"Discover" = "Discover";
+"Rank" = "Rank";
+"Activity" = "Activity";
+"My" = "My";
+"Login" = "Login";
+"select_role" = "Select Role";
+"Professional" = "Professional";
+"Audience" = "Audience";
+"become_pro" = "Can become professional any time";
+"General_Info" = "General Info.";
+"Username" = "Username";
+"Gender" = "Gender";
+"Career" = "Career";
+"Done" = "Done";
+
+
+//职业
+"Model" = "Model";
+"Actor" = "Actor";
+"Dancer" = "Dancer";
+"Singer" = "Singer";
+"Newface" = "Newface";
+"Photographer" = "Photographer";
+"Fitness Trainer" = "Fitness Trainer";
+"Makeup Artist" = "Makeup Artist";
+"Hair Stylist" = "Hair Stylist";
+"Stylist" = "Stylist";
+"Nutritionist" = "Nutritionist";
+"Fahsion Designer" = "Fahsion Designer";
+"Agency" = "Agency";
+
+
+"Username_unavailable" = "Username unavailable";
+"Loading_failed" = "Loading failed";
+"Filter" = "Filter";
+"Search name" = "Search name";
+"All" = "All";
+"Men" = "Men";
+"Women" = "Women";
+"Career" = "Career";
+"Submit" = "Submit";
+"Invite" = "Invite xxxx";
+"No_Results" = "No Results";
+"Enter_email" = "Enter email";
+"Invite" = "Invite";
+"Invite_Sent" = "Invite Sent!";
+
+
+"share_message" = "Hi, @username join ModelBay, get connection with talented models, photographies, makeup artists from all over the world. Search ModelBay on Appstore or Googleplay to download. ";
+"Favor" = "Favor";
+"Country" = "Country";
+"Age" = "Age";
+"Phone" = "Phone";
+"Email" = "Email";
+"Website" = "Website";
+"Height" = "Height";
+"Weight" = "Weight";
+"Chest" = "Chest";
+"Waist" = "Waist";
+"Hips" = "Hips";
+"Eye Color" = "Eye Color";
+"Skin Color" = "Skin Color";
+"Hair Color" = "Hair Color";
+"Shoes" = "Shoes";
+"Dress" = "Dress";
+"Experiences" = "Experiences";
+
+
+"Reply" = "Reply";
+"Message" = "Message";
+"Favored_you" = "xxxx Favored you";
+"mentioned_you" = "xxxx mentioned you";
+"liked_your_photo" = "xxxx liked your photo";
+"comment_your_photo" = "xxxx comment your photo";
+"leave_you_message" = "xxxx leave you a message";
+"reply_your_message" = "xxxx reply your message";
+"xxxx and x more favored you" = "xxxx and x more favored you";
+"xxxx and x more mentioned you" = "xxxx and x more mentioned you";
+"xxxx and x more liked your photo" = "xxxx and x more liked your photo";
+"xxxx and x more comment your photo" = "xxxx and x more comment your photo";
+"xxxx and x more leave you a message" = "xxxx and x more leave you a message";
+"xxxx and x more reply your message" = "xxxx and x more reply your message";
+"Share" = "Share";
+"Invite_Friends" = "Invite Friends";
+"Setting" = "Setting";
+
+
+
+"Contracts" = "Contracts";
+"Only Professional" = "Only Professional";
+"Only Me" = "Only Me";
+"General" = "General";
+"Date of birth" = "Date of birth";
+"Liker" = "Liker";
+"Comments" = "Comments";
+//"Reply" = "Reply";
+
+
+"Showcase" = "Showcase";
+"Poster" = "Poster";
+"Close" = "Close";
+"Use" = "Use";
+"Edit" = "Edit";
+"Add description" = "Add description";
+"Select User" = "Select User";
+"ALL_photo" = "ALL";
+"Title" = "Title";
+"Description" = "Description";
+
+
+"Uploading" = "Uploading";
+"Upload Failure" = "Upload Failure";
+"Uplaod Success" = "Uplaod Success";
+"Setting" = "Setting";
+"Notification" = "Notification";
+"Help Center" = "Help Center";
+"Feedback" = "Feedback";
+"User Terms & Private Policy" = "User Terms & Private Policy";
+"Follow us on Instagram" = "Follow us on Instagram";
+"Follow us on Facebook" = "Follow us on Facebook";
+"Logout" = "Logout";
+
+
+"New Favored" = "New Favored";
+"New Likes" = "New Likes";
+"New Mention" = "New Mention";
+"New Comment" = "New Comment";
+"New Message" = "New Message";
+//"Discover and get connection with the hottest persons." = "Discover and get connection with the hottest persons.";
+//"Setup professional portfolio" = "Setup professional portfolio";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+
+
+
+
+
+
+
+
+
+
+
+
+
+

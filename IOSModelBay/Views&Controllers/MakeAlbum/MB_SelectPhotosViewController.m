@@ -66,13 +66,21 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
-    MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
-    NSMutableArray *selectedArray = [NSMutableArray arrayWithCapacity:0];
-    for (NSIndexPath *indexPath in self.collectView.indexPathsForSelectedItems) {
-        [selectedArray addObject:self.dataArray[indexPath.row]];
+    
+    if (self.type == SelectTypeAll) {
+        MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
+        NSMutableArray *selectedArray = [NSMutableArray arrayWithCapacity:0];
+        for (NSIndexPath *indexPath in self.collectView.indexPathsForSelectedItems) {
+            [selectedArray addObject:self.dataArray[indexPath.row]];
+        }
+        addTextVC.urlArray = selectedArray;
+        [self.navigationController pushViewController:addTextVC animated:YES];
+    }else {
+        NSIndexPath *indexPath = [self.collectView.indexPathsForSelectedItems firstObject];
+        NSURL *url = self.dataArray[indexPath.row];
+        self.block(url);
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    addTextVC.urlArray = selectedArray;
-    [self.navigationController pushViewController:addTextVC animated:YES];
 }
 
 - (void)getALlPhotosFromAlbum {
@@ -127,11 +135,16 @@
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
         _collectView.backgroundColor = colorWithHexString(@"#ffffff");
         _collectView.alwaysBounceVertical = YES;
-        _collectView.allowsMultipleSelection = YES;
         _collectView.delegate        = self;
         _collectView.dataSource      = self;
         _collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_collectView registerNib:[UINib nibWithNibName:@"MB_selectPhotosCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
+        
+        if (self.type == SelectTypeAll) {
+            _collectView.allowsMultipleSelection = YES;
+        }else {
+            _collectView.allowsMultipleSelection = NO;
+        }
     }
     return _collectView;
 }

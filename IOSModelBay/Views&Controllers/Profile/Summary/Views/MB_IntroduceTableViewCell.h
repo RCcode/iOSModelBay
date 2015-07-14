@@ -10,6 +10,8 @@
 
 @interface MB_IntroduceTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *dashImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end

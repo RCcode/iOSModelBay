@@ -48,7 +48,7 @@
         imageView.userInteractionEnabled = YES;
         [_ablumScrollView addSubview:imageView];
     }
-    _ablumScrollView.contentSize = CGSizeMake(5 * (imageWidth + 2) + 4, 0);
+    _ablumScrollView.contentSize = CGSizeMake(user.urlArray.count * (imageWidth + 2) + 4, 0);
 }
 
 

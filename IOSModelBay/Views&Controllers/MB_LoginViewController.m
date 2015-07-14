@@ -26,11 +26,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-//    for (NSHTTPCookie *cookie in [storage cookies])
-//    {
-//        [storage deleteCookie:cookie];
-//    }
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButonOnClick:)];
     self.navigationItem.leftBarButtonItem = barButton;
@@ -53,7 +53,6 @@
 
 
 #pragma mark - UIWebViewDelegate
-
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([request.URL.absoluteString rangeOfString:@"code="].length > 0) {

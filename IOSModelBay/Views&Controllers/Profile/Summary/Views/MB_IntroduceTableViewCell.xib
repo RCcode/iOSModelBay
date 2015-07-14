@@ -55,6 +55,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dashImageView" destination="u4d-wf-1ec" id="ztA-jW-dhV"/>
                 <outlet property="label" destination="Ome-en-J4c" id="xrl-3o-bsd"/>
             </connections>
         </tableViewCell>

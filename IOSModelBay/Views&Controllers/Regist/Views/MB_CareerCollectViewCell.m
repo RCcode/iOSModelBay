@@ -11,7 +11,7 @@
 @implementation MB_CareerCollectViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 @end
