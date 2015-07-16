@@ -32,4 +32,7 @@ typedef NS_ENUM(NSInteger, NoticeType) {
 @property (nonatomic, strong) NSString *comment;  //mtype为4:评论内容,5:回复内容
 @property (nonatomic, assign) NSTimeInterval createTime;//消息时间(时间戳)
 
+@property (nonatomic, assign) NSInteger utype;//用户类型: 0,浏览;1:专业
+@property (nonatomic, assign) NSInteger state;//是否本平台用户:0.不是;1.是
+
 @end

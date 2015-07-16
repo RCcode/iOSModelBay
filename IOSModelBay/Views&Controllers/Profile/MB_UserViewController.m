@@ -15,7 +15,7 @@
 #import "MB_UserInfoView.h"
 #import <MessageUI/MessageUI.h>
 
-//#import "MB_SettingViewController.h"
+#import "MB_SettingViewController.h"
 //#import "MB_InviteViewController.h"
 //#import "MB_SearchViewController.h"
 #import "MB_ScanAblumViewController.h"
@@ -29,7 +29,7 @@
 #define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
 #define kShareHotTags @""
 
-@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate>
+@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;
 @property (nonatomic, strong) UIView *menuView;
@@ -39,6 +39,8 @@
 @property (nonatomic, strong) NSMutableArray *menuBtns;
 @property (nonatomic, strong) UIDocumentInteractionController *documetnInteractionController;
 
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic, assign) NSInteger type;//修改背景还是修改头像 1:头像 2:背景
 
 @end
 
@@ -64,14 +66,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    //登录通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
     
-    if ([self showLoginAlertIfNotLogin]) {
+    
+    if ([userDefaults boolForKey:kIsLogin]) {
         [self.view addSubview:self.tableView];
         [self.view addSubview:self.commentView];
         
         [self addChildViewControllers];
         
         [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+    }else {
+        [self.view addSubview:self.notLoginView];
     }
 }
 
@@ -286,6 +293,75 @@ static CGFloat startY;
 }
 
 
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"user/updatePic.do"];
+//    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.172:8080/ModelBayWeb/",@"user/updatePic.do"];
+
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken]};
+    _manager = [AFHTTPRequestOperationManager manager];
+    if (self.type == 1) {
+        //修改头像
+        AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+            [formData appendPartWithFileData:imageData name:@"pic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];
+            
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"pic success %@",responseObject);
+            if ([self statFromResponse:responseObject] == 10000) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.userInfoView.userImageView.image = image;
+                if (responseObject[@"pic"] != nil && ![responseObject[@"pic"] isKindOfClass:[NSNull class]]) {
+                    [userDefaults setObject:responseObject[@"pic"] forKey:kPic];
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@ failed", operation);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        
+        [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+            NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+        }];
+        
+    }else if (self.type == 2){
+        //修改背景
+        AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+            [formData appendPartWithFileData:imageData name:@"backPic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];
+            
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"backpic success");
+            if ([self statFromResponse:responseObject] == 10000) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.userInfoView.backImageView.image = image;
+                if (responseObject[@"pic"] != nil && ![responseObject[@"pic"] isKindOfClass:[NSNull class]]) {
+                [userDefaults setObject:responseObject[@"pic"] forKey:kBackPic];
+                }
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@ failed", operation);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        
+        [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+            NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+        }];
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - private methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton{
     [self.navigationController popViewControllerAnimated:YES];
@@ -301,12 +377,25 @@ static CGFloat startY;
 //    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
     
 //    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
-    MB_WriteInfoViewController *inviteVC = [[MB_WriteInfoViewController alloc] init];
+    
+//    MB_WriteInfoViewController *inviteVC = [[MB_WriteInfoViewController alloc] init];
+    MB_SettingViewController *inviteVC = [[MB_SettingViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
 //    inviteVC.type = SelectTypeAll;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
+
+- (void)loginSuccess:(NSNotification *)noti {
+    [self.notLoginView removeFromSuperview];
+    
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.commentView];
+    
+    [self addChildViewControllers];
+    
+    [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+}
 
 - (void)addChildViewControllers {
     MB_UserSummaryViewController *summaryVC   = [[MB_UserSummaryViewController alloc] init];
@@ -321,7 +410,7 @@ static CGFloat startY;
     ablumVC.containerViewRect      = self.containerView.frame;
     ablumVC.user = self.user;
     instragramVC.containerViewRect = self.containerView.frame;
-    instragramVC.uid = [userDefaults objectForKey:kUid];
+    instragramVC.uid = [NSString stringWithFormat:@"%ld",(long)self.user.uid];
     messageVC.containerViewRect    = self.containerView.frame;
     collectVC.containerViewRect    = self.containerView.frame;
     
@@ -340,6 +429,8 @@ static CGFloat startY;
     self.containerView.contentSize = CGSizeMake(kWindowWidth * 5, CGRectGetHeight(self.containerView.frame));
 }
 
+
+//点击菜单按钮
 - (void)menuBtnOnClick:(UIButton *)btn {
     
     for (UIButton *btn in self.menuBtns) {
@@ -359,6 +450,25 @@ static CGFloat startY;
     }else{
         self.commentView.hidden = YES;
     }
+}
+
+//换背景
+- (void)changeBackPic:(UITapGestureRecognizer *)tap {
+    self.type = 2;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
+//换头像
+- (void)changePic:(UITapGestureRecognizer *)tap {
+    self.type = 1;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 //收藏此用户
@@ -432,8 +542,19 @@ static CGFloat startY;
     if (_userInfoView == nil) {
         _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
         _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, topViewHeight);
+        _userInfoView.userImageView.userInteractionEnabled = YES;
+        _userInfoView.backImageView.userInteractionEnabled = YES;
         [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
         [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
+        if (self.comeFromType == ComeFromTypeSelf) {
+            //添加换背景手势
+            UITapGestureRecognizer *tapBackPic = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeBackPic:)];
+            [_userInfoView.coverView addGestureRecognizer:tapBackPic];
+            //添加换头像手势
+            UITapGestureRecognizer *tapPic = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changePic:)];
+            [_userInfoView.userImageView addGestureRecognizer:tapPic];
+        }
+        
         _userInfoView.nameLabel.text = _user.fname.uppercaseString;
         NSMutableArray *careerArr = [NSMutableArray arrayWithCapacity:0];
         for (NSString *career in [_user.fcareerId componentsSeparatedByString:@"|"]) {
@@ -443,6 +564,19 @@ static CGFloat startY;
         
         [_userInfoView.likeButton addTarget:self action:@selector(collectionButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_userInfoView.inviteButton addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (self.comeFromType == ComeFromTypeSelf) {
+            _userInfoView.inviteButton.hidden = YES;
+            _userInfoView.likeButton.hidden = YES;
+        }else{
+            if (self.user.state == 0 && self.user.uType == 1 && [[userDefaults objectForKey:kUtype] integerValue] == 1) {
+                _userInfoView.inviteButton.hidden = NO;
+            }else{
+                _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
+                _userInfoView.inviteButton.hidden = YES;
+                
+            }
+        }
     }
     return _userInfoView;
 }

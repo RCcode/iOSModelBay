@@ -27,21 +27,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="介绍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xE-vt-bOH">
-                                <rect key="frame" x="12" y="0.0" width="60" height="42"/>
+                                <rect key="frame" x="12" y="0.0" width="100" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="GFG-jy-XuI"/>
+                                    <constraint firstAttribute="width" constant="100" id="GFG-jy-XuI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                                 <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="啦啦啦德玛西亚" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq1-PU-kgW">
-                                <rect key="frame" x="72" y="13" width="91" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="啦啦啦德玛西亚" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq1-PU-kgW">
+                                <rect key="frame" x="112" y="13" width="91" height="16"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="13"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_sanjiao" translatesAutoresizingMaskIntoConstraints="NO" id="e7i-UQ-lBF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sanjiao_edit" translatesAutoresizingMaskIntoConstraints="NO" id="e7i-UQ-lBF">
                                 <rect key="frame" x="304" y="16" width="11" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="11" id="ZQS-zd-jqm"/>
@@ -86,6 +86,7 @@
                 <outlet property="dashLineImageView" destination="eNQ-sB-oFb" id="4tg-Xz-UsL"/>
                 <outlet property="mainLabel" destination="5xE-vt-bOH" id="ylQ-pJ-o7U"/>
                 <outlet property="mainLabelWidth" destination="GFG-jy-XuI" id="SUc-iR-AdP"/>
+                <outlet property="sanjiaoImageView" destination="e7i-UQ-lBF" id="cab-eu-Htv"/>
                 <outlet property="subLabel" destination="Kq1-PU-kgW" id="gmS-GH-une"/>
             </connections>
             <point key="canvasLocation" x="175" y="385.5"/>
@@ -93,6 +94,6 @@
     </objects>
     <resources>
         <image name="edit_sjieshao_up" width="299" height="43"/>
-        <image name="ic_sanjiao" width="11" height="11"/>
+        <image name="sanjiao_edit" width="12" height="12"/>
     </resources>
 </document>

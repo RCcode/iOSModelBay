@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MB_Ablum.h"
 
 @protocol AblumDescViewDelegate <NSObject>
 
@@ -26,6 +27,10 @@
 @property (nonatomic, strong) UIButton *shareButton;
 @property (nonatomic, strong) UIButton *moreButton;
 
+@property (nonatomic, strong) MB_Ablum *ablum;
+
 @property (nonatomic, weak) id<AblumDescViewDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame ablum:(MB_Ablum *)ablum;
 
 @end

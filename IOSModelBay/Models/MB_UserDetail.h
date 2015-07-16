@@ -34,6 +34,10 @@
 @property (nonatomic, strong) NSString *haircolor;//头发颜色
 @property (nonatomic, strong) NSString *shoesize;//鞋号
 @property (nonatomic, strong) NSString *dress;//衣号
+
 @property (nonatomic, strong) NSString *fareas;//专注领域|线分割:1|2|3
+
+@property (nonatomic, strong) NSMutableArray *arrayModel;
+@property (nonatomic, strong) NSMutableArray *arrayPhoto;
 
 @end

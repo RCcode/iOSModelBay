@@ -17,4 +17,9 @@
 @property (nonatomic, strong) NSString *comment;//评论内容
 @property (nonatomic, assign) NSInteger create_time;//消息时间(时间戳)
 
+@property (nonatomic, strong) NSString *fbackPic;//赞用户头像
+@property (nonatomic, assign) NSInteger utype;//用户类型: 0,浏览;1:专业
+@property (nonatomic, assign) NSInteger state;//是否本平台用户:0.不是;1.是
+@property (nonatomic, strong) NSString *careerId;//职业id,竖线分割:1|2|3
+
 @end

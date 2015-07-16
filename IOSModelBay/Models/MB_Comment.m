@@ -18,7 +18,7 @@
 -(void)setValue:(id)value forKey:(NSString *)key
 {
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
-        if ([key isEqualToString:@"fid"] || [key isEqualToString:@"create_time"]) {
+        if ([key isEqualToString:@"fid"] || [key isEqualToString:@"create_time"] || [key isEqualToString:@"utype"] || [key isEqualToString:@"state"]) {
             [self setValue:@(0) forKey:key];
         }else {
             [self setValue:@"" forKey:key];

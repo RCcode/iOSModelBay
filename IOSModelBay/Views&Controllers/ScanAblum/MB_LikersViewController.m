@@ -67,6 +67,10 @@
         user.fid = liker.fid;
         user.fname = liker.fname;
         user.fpic = liker.fpic;
+        user.uType = liker.utype;
+        user.fbackPic = liker.fbackPic;
+        user.state = liker.state;
+        user.fcareerId = liker.careerId;
         userVC.user = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }
@@ -153,6 +157,8 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 68;
+        _tableView.tableHeaderView = [UIView new];
+        _tableView.tableFooterView = [UIView new];
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_LikersTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }

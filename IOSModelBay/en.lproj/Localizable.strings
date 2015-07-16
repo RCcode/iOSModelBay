@@ -17,8 +17,8 @@
 "chest" = "chest";
 "waist" = "waist";
 "hips" = "hips";
-"areaModel" = "areaModel";
-"areaPhoto" = "areaPhoto";
+"areaModel" = "Field(Model)";
+"areaPhoto" = "Field(Photo)";
 "experience" = "experience";
 "gender" = "gender";
 "country" = "country";

@@ -38,6 +38,8 @@
 @property (nonatomic, strong) NSArray *areaPhoto;//专注领域-摄影师
 @property (nonatomic, strong) NSArray *experience;//经验
 @property (nonatomic, strong) NSArray *country;//经验
+@property (nonatomic, strong) NSArray *gender;//经验
+
 
 //资料属性的先后关系
 @property (nonatomic, strong) NSArray *mapArray;

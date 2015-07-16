@@ -40,9 +40,12 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.addView];
-    [self.view addSubview:self.tableView];
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    if (userVC.comeFromType == ComeFromTypeSelf) {
+        [self.view addSubview:self.addView];
+    }
     
+    [self.view addSubview:self.tableView];
     [self addPullRefresh];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -226,15 +229,27 @@ static CGFloat startY = 0;
     likersVC.ablum = self.dataArray[button.tag];
     [self.navigationController pushViewController:likersVC animated:YES];
 }
+
 //评论列表
 - (void)commentButtonOnClick:(UIButton *)button {
     MB_CommentsViewController *commentsVC = [[MB_CommentsViewController alloc] init];
     commentsVC.ablum = self.dataArray[button.tag];
     [self.navigationController pushViewController:commentsVC animated:YES];
 }
+
 //分享
 - (void)shareButtonOnClick:(UIButton *)button {
+    //需要分享的内容
+//    NSString *shareContent = LocalizedString(@"root_share", nil);
+//    NSArray *activityItems = @[shareContent];
     
+//    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+//    __weak UIActivityViewController *blockActivityVC = activityVC;
+//    
+//    activityVC.completionHandler = ^(NSString *activityType,BOOL completed){
+//        [blockActivityVC dismissViewControllerAnimated:YES completion:nil];
+//    };
+//    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 //添加作品集
@@ -309,7 +324,7 @@ static CGFloat startY = 0;
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(self.addView.frame)) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(_addView.frame)) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
 
         _tableView.sectionHeaderHeight = 0.5;

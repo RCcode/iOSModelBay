@@ -61,6 +61,10 @@
     user.fid = collect.fid;
     user.fname = collect.fname;
     user.fpic = collect.fpic;
+    user.fbackPic = collect.fbackPic;
+    user.fcareerId = collect.careerId;
+    user.state = collect.state;
+    user.uType = collect.utype;
     userVC.user = user;
     [self.navigationController pushViewController:userVC animated:YES];
 }

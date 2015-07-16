@@ -47,6 +47,7 @@
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     MB_InstragramModel *model = self.dataArray[indexPath.row];
     [cell.backImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
+    cell.coverView.hidden = YES;
     cell.careerLabel.hidden = YES;
     cell.selectButton.hidden = YES;
     return cell;

@@ -28,17 +28,25 @@ static NSString * const ReuseIdentifierReply = @"reply";
 @implementation MB_NoticeViewController
 
 #pragma mark - life cycle
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.tableView];
-
-    [self addPullRefresh];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self requestNoticeListwithMinId:0];
+    if ([userDefaults boolForKey:kIsLogin]) {
+        [self.view addSubview:self.tableView];
+        
+        [self addPullRefresh];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self requestNoticeListwithMinId:0];
+    }else {
+        [self.view addSubview:self.notLoginView];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,6 +168,8 @@ static NSString * const ReuseIdentifierReply = @"reply";
         user.fcareerId = notice.careerId;
         user.fpic = notice.fpic;
         user.fbackPic = notice.backPic;
+        user.uType = notice.utype;
+        user.state = notice.state;
         
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.comeFromType = ComeFromTypeUser;
@@ -259,6 +269,16 @@ static NSString * const ReuseIdentifierReply = @"reply";
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
     }];
+}
+
+- (void)loginSuccess:(NSNotification *)noti {
+    [self.notLoginView removeFromSuperview];
+    
+    [self.view addSubview:self.tableView];
+    [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self requestNoticeListwithMinId:0];
 }
 
 

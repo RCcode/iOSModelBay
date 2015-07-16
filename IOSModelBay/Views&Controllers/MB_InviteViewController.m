@@ -9,76 +9,76 @@
 #import "MB_InviteViewController.h"
 #import "MB_AddressBookPeople.h"
 #import <AddressBook/AddressBook.h>
+#import "MB_AddressBookTableViewCell.h"
+@import MessageUI;
 
-//static NSString * const identifier = @"cell";
+@interface MB_InviteViewController ()<UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
-@interface MB_InviteViewController ()<UITableViewDelegate, UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView *listTableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
 @implementation MB_InviteViewController
 
-
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.listTableView];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
+
+    [self.view addSubview:self.tableView];
+    
     [self AddressBookGetAuthorizationStatus];
 }
 
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 64;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ReuseIdentifier];
-    }
+    MB_AddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
     
     MB_AddressBookPeople *people = self.dataArray[indexPath.row];
-    cell.textLabel.text = people.name;
-    cell.detailTextLabel.text = people.email;
+    cell.people = people;
     
-    if (cell.accessoryView == nil) {
-        NSLog(@"sssssssssssssssssssssssssss");
-        UIButton *button       = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame           = CGRectMake(0, 0, 100, 40);
-        button.tag             = indexPath.row;
-        button.backgroundColor = [UIColor redColor];
-        [button setTitle:@"邀请" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(inviteBtnOnclick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.accessoryView = button;
-    }else{
-        cell.accessoryView.tag = indexPath.row;
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.inviteButton.tag = indexPath.row;
+    [cell.inviteButton addTarget:self action:@selector(inviteBtnOnclick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"dddd");
+
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            
+            break;
+        case MFMailComposeResultSaved:
+            
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"mail error %@",error);
+            break;
+        case MFMailComposeResultSent:
+            
+            break;
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 #pragma mark - private methods
+- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barButton {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 //是否有通讯录的权限
 - (void)AddressBookGetAuthorizationStatus {
@@ -114,7 +114,7 @@
         NSString *lastName  = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
         NSString *middleName  = CFBridgingRelease(ABRecordCopyValue(person, kABPersonMiddleNameProperty));
         NSLog(@"Name:%@ ---%@---%@", firstName, lastName, middleName);
-        NSString *fullName = [NSString stringWithFormat:@"%@ %@ %@",firstName, middleName, lastName];
+        NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstName, lastName];
         
         ABMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
 //        CFIndex numberOfemail = ABMultiValueGetCount(emails);
@@ -131,29 +131,39 @@
         CFRelease(emails);
         NSLog(@"=============================================");
     }
-    [_listTableView reloadData];
+    [self.tableView reloadData];
 }
 
 //点击邀请按钮
 - (void)inviteBtnOnclick:(UIButton *)btn {
-    NSLog(@"%ld",(long)btn.tag);
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+        mailVC.mailComposeDelegate = self;
+        [self presentViewController:mailVC animated:YES completion:nil];
+    }else {
+        NSLog(@"不可以发邮件");
+    }
 }
 
-#pragma mark - getters & setters
 
-- (UITableView *)listTableView {
-    if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - 64 - 49) style:UITableViewStylePlain];
-        _listTableView.delegate = self;
-        _listTableView.dataSource = self;
-//        _listTableView.allowsSelection = NO;
+
+
+#pragma mark - getters & setters
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.allowsSelection = NO;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        [_tableView setTableFooterView:[UIView new]];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_AddressBookTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
-    return _listTableView;
+    return _tableView;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

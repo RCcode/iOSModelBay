@@ -10,8 +10,9 @@
 #import "MB_LoginViewController.h"
 #import "MB_SelectRoleViewController.h"
 #import "MB_TabBarViewController.h"
+#import "MB_MainViewController.h"
 
-@interface MB_BaseViewController ()<UIAlertViewDelegate>
+@interface MB_BaseViewController ()<UIAlertViewDelegate, NotLoginViewDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) UILabel *footerLabel;
@@ -44,9 +45,9 @@
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 1000) {
-        if (buttonIndex == 1) {
-            [self presentLoginViewController];
-        }
+//        if (buttonIndex == 1) {
+//            [self presentLoginViewController];
+//        }
     }else if(alertView.tag == 2000) {
         if (buttonIndex == 1) {
             //重试
@@ -55,6 +56,10 @@
     }
 }
 
+#pragma mark - NotLoginViewDelegate
+- (void)notLoginViewOnClick:(UITapGestureRecognizer *)tap {
+    [self presentLoginViewController];
+}
 
 #pragma mark - Private Methods
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
@@ -143,10 +148,12 @@
 
 //弹出登录提示框
 - (void)showLoginAlert {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"login", nil];
-    alert.tag = 1000;
-    alert.delegate = self;
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"login", nil];
+//    alert.tag = 1000;
+//    alert.delegate = self;
+//    [alert show];
+    MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
+    [self presentViewController:mainVC animated:YES completion:nil];
 }
 
 - (void)presentLoginViewController {
@@ -185,6 +192,11 @@
             [userDefaults synchronize];
         
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
+            
+            
+            if ([self isKindOfClass:[MB_MainViewController class]]) {
+                [self dismissViewControllerAnimated:NO completion:nil];
+            }
         }
     } failure:^(NSError *err) {
         NSLog(@"%@",err);
@@ -233,13 +245,20 @@
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
         _titleLabel.text = @"MODELBAY";
         _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
+}
+
+- (MB_NotLoginView *)notLoginView {
+    if (_notLoginView == nil) {
+        _notLoginView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"Login", nil) delegate:self];
+    }
+    return _notLoginView;
 }
 
 @end

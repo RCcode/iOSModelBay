@@ -19,6 +19,11 @@ typedef NS_ENUM(NSInteger, StateType) {
 @property (nonatomic, assign) NSInteger  fid;//评论用户id
 @property (nonatomic, strong) NSString * fname;//评论用户名
 @property (nonatomic, strong) NSString * fpic;//评论用户头像
+@property (nonatomic, strong) NSString * fbackPic;//评论用户头像
+@property (nonatomic, strong) NSString * fcareerId;//评论用户头像
+@property (nonatomic, assign) NSInteger  futype;//评论用户id
+@property (nonatomic, assign) NSInteger  fstate;//评论用户id
+
 @property (nonatomic, strong) NSString * comment;//评论内容
 @property (nonatomic, assign) NSInteger  createTime;//评论时间
 @property (nonatomic, assign) StateType  state;//是否有回复:0.无;1.有(为1下列属性有效)
@@ -27,5 +32,10 @@ typedef NS_ENUM(NSInteger, StateType) {
 @property (nonatomic, assign) NSInteger  replyTime;//回复时间
 
 @property (nonatomic, strong) NSString * replyName;
+@property (nonatomic, strong) NSString * replayPic;
+@property (nonatomic, strong) NSString * replayBackPic;
+@property (nonatomic, assign) NSInteger  replyUtype;
+@property (nonatomic, assign) NSInteger  replyState;
+@property (nonatomic, strong) NSString * replyCarerrId;
 
 @end

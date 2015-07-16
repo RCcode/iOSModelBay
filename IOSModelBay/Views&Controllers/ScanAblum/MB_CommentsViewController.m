@@ -81,6 +81,10 @@ static CGFloat const commentViewHeight = 50;
         user.fid = comment.fid;
         user.fname = comment.fname;
         user.fpic = comment.fpic;
+        user.fbackPic = comment.fbackPic;
+        user.uType = comment.utype;
+        user.state = comment.state;
+        user.fcareerId = comment.careerId;
         userVC.user = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }
@@ -179,6 +183,8 @@ static CGFloat const commentViewHeight = 50;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.tableHeaderView = [UIView new];
+        _tableView.tableFooterView = [UIView new];
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_CommentTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }

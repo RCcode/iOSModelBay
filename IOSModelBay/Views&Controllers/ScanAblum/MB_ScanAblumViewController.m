@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    
     self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",1,(unsigned long)self.ablum.mList.count];
     self.navigationItem.titleView = self.titleLabel;
     
@@ -146,6 +148,7 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(scrollView.frame) - 80)];
             imageView.backgroundColor = placeholderColor;
             imageView.userInteractionEnabled = YES;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             NSString *imageName = [self.ablum.mList[i] objectForKey:@"url"];
             [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
             [scrollView addSubview:imageView];
@@ -172,7 +175,7 @@
 //影集描述信息
 - (UIView *)descView {
     if (_descView == nil) {
-        _descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 300)];
+        _descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 300) ablum:self.ablum];
         _descView.delegate = self;
     }
     return _descView;

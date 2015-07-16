@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JDFPeekabooCoordinator.h"
+#import "MB_NotLoginView.h"
 
 static NSString * const ReuseIdentifier = @"cell";
 
@@ -16,6 +17,8 @@ static NSString * const ReuseIdentifier = @"cell";
 @property (nonatomic, strong) NSMutableArray *dataArray;
 //@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
 @property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) MB_NotLoginView *notLoginView;
 
 //添加下拉刷新
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview

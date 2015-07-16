@@ -27,32 +27,11 @@
     
     [self umengSetting];
     [self flurrySetting];
-    [self cancelNotification];
-    [self registNotification];
+//    [self cancelNotification];
+//    [self registNotification];
     
-    
-//    "access_token" = "1818873576.50fe427.6304cb9af8264b71ae6f8a4b21b1b404";
-//    user =     {
-//        bio = "apple  ios  objective-c swift  coder";
-//        "full_name" = "";
-//        id = 1818873576;
-//        "profile_picture" = "https://instagramimages-a.akamaihd.net/profiles/anonymousUser.jpg";
-//        username = "lisong_best";
-//        website = "http://www.baidu.com";
-//    };
-//}
-
-//    [userDefaults setObject:@(6) forKey:kID];
-//    [userDefaults setObject:@"abcde" forKey:kAccessToken];
-//    [userDefaults synchronize];
-    
-    if ([userDefaults boolForKey:kIsLogin] == YES) {
-        MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-        self.window.rootViewController = tabVC;
-    }else{
-        MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
-        self.window.rootViewController = mainVC;
-    }
+    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+    self.window.rootViewController = tabVC;
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -77,26 +56,26 @@
 
 
 #pragma mark - registe notification
-- (void)registNotification{
-    if([[[UIDevice currentDevice]systemVersion] floatValue] >= 8.0){
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }else{
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    }
-}
+//- (void)registNotification{
+//    if([[[UIDevice currentDevice]systemVersion] floatValue] >= 8.0){
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//    }else{
+//        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+//    }
+//}
 
-- (void)cancelNotification{
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-}
+//- (void)cancelNotification{
+//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+//}
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-}
+//- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+//}
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSLog(@"deviceToken%@",deviceToken);
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//{
+//    NSLog(@"deviceToken%@",deviceToken);
 //    NSRange range = NSMakeRange(1,[[deviceToken description] length]-2);
 //    _deviceToken = [[deviceToken description] substringWithRange:range];
 //    NSLog(@"deviceTokenStr==%@",_deviceToken);
@@ -106,23 +85,23 @@
 //        [self postData:[NSString stringWithFormat:@"%@",_deviceToken]];
 //    }
     
-    NSDictionary *params = @{@"id":@(6),
-                             @"plat":@(2),
-                             @"ikey":deviceToken};
-    [[AFHttpTool shareTool] updatePushKeyWithParameters:params success:^(id response) {
-        NSLog(@"push %@",response);
-    } failure:^(NSError *err) {
-        
-    }];
-    
-}
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    NSLog(@"Fail to Register For Remote Notificaions With Error :error = %@",error.description);
-}
+//    NSDictionary *params = @{@"id":@(6),
+//                             @"plat":@(2),
+//                             @"ikey":deviceToken};
+//    [[AFHttpTool shareTool] updatePushKeyWithParameters:params success:^(id response) {
+//        NSLog(@"push %@",response);
+//    } failure:^(NSError *err) {
+//        
+//    }];
+//    
+//}
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+//    NSLog(@"Fail to Register For Remote Notificaions With Error :error = %@",error.description);
+//}
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSLog(@"userInfo = %@",userInfo);
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+//    NSLog(@"userInfo = %@",userInfo);
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

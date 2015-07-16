@@ -17,8 +17,8 @@
 "chest" = "胸围";
 "waist" = "腰围";
 "hips" = "臀围";
-"areaModel" = "专注领域";
-"areaPhoto" = "专注领域";
+"areaModel" = "专注领域(模特)";
+"areaPhoto" = "专注领域(摄影师)";
 "experience" = "经验";
 "gender" = "性别";
 "country" = "国家";
@@ -167,7 +167,6 @@
 "Shoes" = "鞋号";
 "Dress" = "衣号";
 "Experiences" = "经验";
-
 
 "Reply" = "回复";
 "Message" = "留言";

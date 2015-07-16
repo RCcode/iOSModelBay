@@ -123,13 +123,14 @@
                 [userDefaults setBool:YES forKey:kIsLogin];
                 [userDefaults synchronize];
 
-                if ([self.presentingViewController isKindOfClass:[MB_MainViewController class]]) {
-                    NSLog(@"main");
-                    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-                    [self presentViewController:tabVC animated:YES completion:nil];
-                }else {
-                    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                }
+//                if ([self.presentingViewController isKindOfClass:[MB_MainViewController class]]) {
+//                    NSLog(@"main");
+//                    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+//                    [self presentViewController:tabVC animated:YES completion:nil];
+//                }else {
+//                    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//                }
+                [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
         } failure:^(NSError *err) {
             

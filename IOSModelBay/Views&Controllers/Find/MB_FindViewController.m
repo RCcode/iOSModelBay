@@ -19,31 +19,36 @@
 @property (nonatomic, strong) UICollectionView *collectView;
 @property (nonatomic, assign) NSInteger minId;//分页用的
 
-//@property (nonatomic, strong) MB_UploadView *uploadView;
+@property (nonatomic, assign) BOOL showLoginAuto;
 
 @end
 
 @implementation MB_FindViewController
 
 #pragma mark - life cycle
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (self.showLoginAuto == YES) {
+        self.showLoginAuto = NO;
+        [self presentLoginViewController];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
-    
     self.titleLabel.text = @"MODELBAY";
     self.navigationItem.titleView = self.titleLabel;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
+    
+    
+    if (![userDefaults boolForKey:kIsLogin]) {
+        //如果没有登录, 设置自动弹出登录页面
+        self.showLoginAuto = YES;
+    }
     
     [self.view addSubview:self.collectView];
     [self addPullRefresh];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
-    
-    //重置筛选条件
-    [MB_Utils shareUtil].fGender = -1;
-    [MB_Utils shareUtil].fCareerId = @"";
-    
-//    [self.view addSubview:self.uploadView];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
@@ -92,10 +97,6 @@
 
 
 #pragma mark - private methods
-//- (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
-
 - (void)rightBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];

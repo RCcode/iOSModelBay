@@ -24,7 +24,7 @@
     _message = message;
     _userButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_userButton sd_setBackgroundImageWithURL:[NSURL URLWithString:message.fpic] forState:UIControlStateNormal];
-    _nameLabel.text = message.fname;
+    _nameLabel.text = message.fname.uppercaseString;
     _timeLabel.text = [MB_Utils dateWithTimeInterval:message.createTime * 1000 fromTimeZone:@"+08"];
     _commentLabel.text = message.comment;
 }

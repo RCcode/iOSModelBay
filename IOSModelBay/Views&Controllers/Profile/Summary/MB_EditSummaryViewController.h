@@ -14,6 +14,7 @@ typedef void(^changeBlock)(NSInteger index, NSInteger optionIndex);
 @interface MB_EditSummaryViewController : MB_BaseViewController
 
 @property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) NSInteger optionIndex;
 
 @property (nonatomic, copy) changeBlock blcok;
 

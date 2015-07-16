@@ -53,14 +53,18 @@
 }
 
 - (void)skipBtnOnClick:(UIButton *)btn{
-    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-    [self presentViewController:tabVC animated:YES completion:nil];
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else {
+        MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
+        [self presentViewController:tabVC animated:YES completion:nil];
+    }
 }
 
 - (void)login:(NSNotification *)noti {
-//    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-//    [self presentViewController:tabVC animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 #pragma mark - getters & setters
 - (UIScrollView *)backScrollView{

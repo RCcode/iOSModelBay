@@ -85,6 +85,11 @@ static NSString * const ReuseIdentifierReply = @"reply";
     MB_Message *message = self.dataArray[indexPath.section];
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
     message.replyName = userVC.user.fname;
+    message.replayPic = userVC.user.fpic;
+    message.replayBackPic = userVC.user.fbackPic;
+    message.replyCarerrId = userVC.user.fcareerId;
+    message.replyState = userVC.user.state;
+    message.replyUtype = userVC.user.uType;
     
     cell.message = message;
     cell.nameButton.tag = indexPath.section;
@@ -172,8 +177,9 @@ static CGFloat startY = 0;
 //获取留言列表
 - (void)requestMessageListWithMinId:(NSInteger)minId {
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-    NSDictionary *params = @{@"id":@(userVC.user.fid),
-                             @"token":@"adcde",
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"fid":@(userVC.user.fid),
+                             @"token":[userDefaults objectForKey:kAccessToken],
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getMessagesWithParameters:params success:^(id response) {
@@ -216,6 +222,10 @@ static CGFloat startY = 0;
         user.fid = message.fid;
         user.fname = message.fname;
         user.fpic = message.fpic;
+        user.fbackPic = message.fbackPic;
+        user.fcareerId = message.fcareerId;
+        user.uType = message.futype;
+        user.state = message.state;
         userVC.user = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }
@@ -301,6 +311,7 @@ static CGFloat startY = 0;
         _tableView.allowsSelection = NO;
         _tableView.sectionHeaderHeight = 10;
         _tableView.sectionFooterHeight = 0.5;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [_tableView registerNib:[UINib nibWithNibName:@"MB_MsgTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierMsg];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_ReplyTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierReply];

@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nameButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *replyUserButton;
 @property (weak, nonatomic) IBOutlet UILabel *replyNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *replyNameButton;

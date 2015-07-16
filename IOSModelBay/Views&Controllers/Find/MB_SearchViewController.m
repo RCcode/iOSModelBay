@@ -12,8 +12,9 @@
 #import "MB_InviteView.h"
 #import "MB_InviteViewController.h"
 #import "MB_UserViewController.h"
+@import MessageUI;
 
-@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, InviteViewDelegate>
+@interface MB_SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, InviteViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UIView *searchView;
 @property (nonatomic, strong) UITextField *textField;
@@ -35,8 +36,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.listTableView];
@@ -141,15 +140,45 @@
 #pragma mark - InviteViewDelegate
 -(void)inviteRightViewOnClick:(UIButton *)button {
     [self.inviteView removeFromSuperview];
+    
     MB_InviteViewController *inviteVC = [[MB_InviteViewController alloc] init];
+    inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
 -(void)textFieldReturnClick:(UITextField *)textField {
     //邀请
     NSLog(@"invite textField = %@",textField.text);
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+        mailVC.mailComposeDelegate = self;
+        [self presentViewController:mailVC animated:YES completion:nil];
+    }else {
+        NSLog(@"不可以发邮件");
+    }
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            
+            break;
+        case MFMailComposeResultSaved:
+            
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"mail error %@",error);
+            break;
+        case MFMailComposeResultSent:
+            
+            break;
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - private methods
 - (void)cancelBtnOnClick:(UIButton *)btn {

@@ -155,13 +155,8 @@
         [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
         
         if ([self statFromResponse:response] == 10000) {
-//            NSInteger ablId = [response[@"ablId"] integerValue];
             //上传图片
-//            NSMutableArray *imagesArray = [NSMutableArray arrayWithCapacity:1];
-            _manager = [AFHTTPRequestOperationManager manager];
-//            _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//            [_manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-            
+            _manager = [AFHTTPRequestOperationManager manager];            
             for (NSURL *url in self.urlArray) {
                 [self.assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
                     
@@ -180,6 +175,7 @@
                         NSLog(@"success");
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"%@ failed", operation);
+                        [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
                     }];
                     
                     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
@@ -187,7 +183,7 @@
                     }];
                     
                 } failureBlock:^(NSError *error) {
-                    [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
+                    
                 }];
             }
         }
