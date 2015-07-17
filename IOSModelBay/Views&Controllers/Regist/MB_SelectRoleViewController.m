@@ -26,6 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"select_role", nil);
+    self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
 
 //    _buttonPro.layer.borderWidth = 1.5;

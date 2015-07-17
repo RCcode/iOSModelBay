@@ -31,6 +31,8 @@ static CGFloat const commentViewHeight = 50;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Comments", nil);
+    self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
 
     [self.view addSubview:self.tableView];
@@ -166,12 +168,12 @@ static CGFloat const commentViewHeight = 50;
     [[AFHttpTool shareTool] commentAblumWithParameters:params success:^(id response) {
         NSLog(@"comment send  %@",response);
         if ([self statFromResponse:response] == 10000) {
-            [MB_Utils showPromptWithText:@"success"];
+//            [MB_Utils showPromptWithText:@"success"];
         }else {
-            [MB_Utils showPromptWithText:@"failed"];
+//            [MB_Utils showPromptWithText:@"failed"];
         }
     } failure:^(NSError *err) {
-        [MB_Utils showPromptWithText:@"failed"];
+//        [MB_Utils showPromptWithText:@"failed"];
     }];
 }
 
@@ -204,7 +206,7 @@ static CGFloat const commentViewHeight = 50;
     if (_textView == nil) {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, commentViewHeight) textContainer:nil];
         _textView.backgroundColor = [UIColor whiteColor];
-        _textView.text = @"ssss";
+//        _textView.text = @"ssss";
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.delegate = self;
     }
@@ -218,8 +220,7 @@ static CGFloat const commentViewHeight = 50;
         _sendButton.backgroundColor = [UIColor grayColor];
         _sendButton.enabled = NO;
         
-        [_sendButton setTitle:@"send" forState:UIControlStateNormal];
-        [_sendButton setTitle:@"kong" forState:UIControlStateDisabled];
+        [_sendButton setTitle:LocalizedString(@"Send", nil) forState:UIControlStateNormal];
         [_sendButton addTarget:self action:@selector(sendButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendButton;

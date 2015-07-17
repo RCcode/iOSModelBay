@@ -118,6 +118,7 @@
 		CD9D8E9A1B45433D000E1C8D /* MB_IntroduceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9D8E981B45433D000E1C8D /* MB_IntroduceTableViewCell.m */; };
 		CD9D8E9B1B45433D000E1C8D /* MB_IntroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E991B45433D000E1C8D /* MB_IntroduceTableViewCell.xib */; };
 		CD9DC30B1B4B7A460094EC02 /* MB_CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DC30A1B4B7A460094EC02 /* MB_CommentView.m */; };
+		CDA16B361B59067700FB2056 /* MB_SelectUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA16B351B59067700FB2056 /* MB_SelectUserViewController.m */; };
 		CDA567A01B1EDB68006FB5C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */; };
 		CDA8666B1B55135A00D29FE5 /* MB_EditWriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA8666A1B55135A00D29FE5 /* MB_EditWriteViewController.m */; };
 		CDA8A6061B57864700865DEA /* MB_AddressBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA8A6041B57864700865DEA /* MB_AddressBookTableViewCell.m */; };
@@ -436,6 +437,8 @@
 		CD9D8E991B45433D000E1C8D /* MB_IntroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_IntroduceTableViewCell.xib; sourceTree = "<group>"; };
 		CD9DC3091B4B7A460094EC02 /* MB_CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CommentView.h; sourceTree = "<group>"; };
 		CD9DC30A1B4B7A460094EC02 /* MB_CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CommentView.m; sourceTree = "<group>"; };
+		CDA16B341B59067700FB2056 /* MB_SelectUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_SelectUserViewController.h; sourceTree = "<group>"; };
+		CDA16B351B59067700FB2056 /* MB_SelectUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_SelectUserViewController.m; sourceTree = "<group>"; };
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDA866691B55135A00D29FE5 /* MB_EditWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditWriteViewController.h; sourceTree = "<group>"; };
 		CDA8666A1B55135A00D29FE5 /* MB_EditWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditWriteViewController.m; sourceTree = "<group>"; };
@@ -1122,6 +1125,8 @@
 				CDD536CD1B340CB6008B436C /* MB_AddTextViewController.xib */,
 				CDE0338A1B4A5B8100E4C5D2 /* MB_ScanImageViewController.h */,
 				CDE0338B1B4A5B8100E4C5D2 /* MB_ScanImageViewController.m */,
+				CDA16B341B59067700FB2056 /* MB_SelectUserViewController.h */,
+				CDA16B351B59067700FB2056 /* MB_SelectUserViewController.m */,
 				CDD536D01B340CB6008B436C /* Views */,
 			);
 			path = MakeAlbum;
@@ -1661,6 +1666,7 @@
 				CDD5374A1B340CB6008B436C /* MB_CollectViewController.m in Sources */,
 				CDD5373D1B340CB6008B436C /* MB_BaseViewController.m in Sources */,
 				CDD537501B340CB6008B436C /* MB_MessageViewController.m in Sources */,
+				CDA16B361B59067700FB2056 /* MB_SelectUserViewController.m in Sources */,
 				CDD5375B1B340CB6008B436C /* MB_SelectCareerViewController.m in Sources */,
 				CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				CD0575631B3416180015BBDA /* AFSecurityPolicy.m in Sources */,

@@ -40,9 +40,10 @@
         _label.frame = rect;
         [_contanerView addSubview:_label];
         
-        _contanerView.frame = CGRectMake(100, 100, fmax(CGRectGetWidth(_label.frame), 31), CGRectGetMaxY(_label.frame));
+        _contanerView.frame = CGRectMake(0, 0, fmax(CGRectGetWidth(_label.frame), 31), CGRectGetMaxY(_label.frame));
         _contanerView.center = self.center;
         _imageView.center = CGPointMake(CGRectGetWidth(_contanerView.frame) / 2, 31.0 / 2);
+        _label.center = CGPointMake(CGRectGetWidth(_contanerView.frame) / 2, _label.center.y);
         [self addSubview:_contanerView];
     }
     return self;

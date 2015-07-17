@@ -144,10 +144,10 @@
 "Men" = "Men";
 "Women" = "Women";
 "Career" = "Career";
-"Submit" = "Submit";
-"Invite" = "Invite xxxx";
-"No_Results" = "No Results";
-"Enter_email" = "Enter email";
+"Submit" = "Submit";//
+"Invite_xxxx" = "Invite xxxx";
+"No_Results" = "No Results";//
+"Enter_email" = "Enter xxxx's email";
 "Invite" = "Invite";
 "Invite_Sent" = "Invite Sent!";
 
@@ -191,7 +191,6 @@
 "Setting" = "Setting";
 
 
-
 "Contracts" = "Contracts";
 "Only Professional" = "Only Professional";
 "Only Me" = "Only Me";
@@ -232,14 +231,8 @@
 "New Mention" = "New Mention";
 "New Comment" = "New Comment";
 "New Message" = "New Message";
-//"Discover and get connection with the hottest persons." = "Discover and get connection with the hottest persons.";
-//"Setup professional portfolio" = "Setup professional portfolio";
-//"" = "";
-//"" = "";
-//"" = "";
-//"" = "";
-//"" = "";
-//"" = "";
+
+"Send" = "Send";
 
 
 

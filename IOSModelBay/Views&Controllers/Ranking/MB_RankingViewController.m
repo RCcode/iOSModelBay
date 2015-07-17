@@ -26,13 +26,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = @"RANKING";
+    self.titleLabel.text = LocalizedString(@"Rank", nil);
     self.navigationItem.titleView = self.titleLabel;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
+    
     [self.view addSubview:self.tableView];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.tableView];
     [self addPullRefresh];
     
     //重置筛选条件
@@ -167,7 +169,7 @@
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
                 [self.tableView reloadData];
-                [MB_Utils showPromptWithText:@"o result"];
+//                [MB_Utils showPromptWithText:@"o result"];
             }else {
                 [self showNoMoreMessageForview:self.tableView];
             }
@@ -218,7 +220,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"instragram %@",responseObject);
+//        NSLog(@"instragram %@",responseObject);
         
         NSArray *dataArr = responseObject[@"data"];
         
@@ -230,6 +232,14 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"instra err %@",error);
     }];
+}
+
+- (void)loginSuccess:(NSNotification *)noti {
+    [self.tableView reloadData];
+}
+
+- (void)loginOutSuccess:(NSNotification *)noti {
+    [self.tableView reloadData];
 }
 
 

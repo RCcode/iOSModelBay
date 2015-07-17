@@ -35,7 +35,12 @@ static NSString * const ReuseIdentifierReply = @"reply";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Activity", nil);
+    self.navigationItem.titleView = self.titleLabel;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
+
     
     if ([userDefaults boolForKey:kIsLogin]) {
         [self.view addSubview:self.tableView];
@@ -281,6 +286,12 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [self requestNoticeListwithMinId:0];
 }
 
+- (void)loginOutSuccess:(NSNotification *)noti {
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+    
+    [self.view addSubview:self.notLoginView];
+}
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {

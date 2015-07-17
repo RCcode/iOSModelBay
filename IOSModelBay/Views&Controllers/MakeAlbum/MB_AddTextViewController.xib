@@ -19,6 +19,10 @@
             <connections>
                 <outlet property="addDescTextView" destination="ckW-wQ-sEA" id="qg6-Po-Uan"/>
                 <outlet property="addTitleTextField" destination="Wx7-qy-Rvf" id="xbb-SW-G2a"/>
+                <outlet property="button1" destination="5vx-UT-ZIj" id="AAp-k2-Okg"/>
+                <outlet property="button2" destination="uwc-NA-vDj" id="S7p-0h-40J"/>
+                <outlet property="button3" destination="rLl-55-PNF" id="rLt-UE-gq0"/>
+                <outlet property="button4" destination="HUr-Ms-698" id="79t-19-1ef"/>
                 <outlet property="imagesContainerView" destination="GHl-ch-M8b" id="Jeg-G8-kMZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,8 +32,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wx7-qy-Rvf">
-                    <rect key="frame" x="0.0" y="75" width="320" height="50"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCY-M5-7cG">
+                    <rect key="frame" x="0.0" y="75" width="12" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="12" id="DIB-aO-wRD"/>
+                        <constraint firstAttribute="height" constant="50" id="Qe6-ne-svR"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wx7-qy-Rvf">
+                    <rect key="frame" x="12" y="75" width="308" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="dfA-he-VXS"/>
@@ -38,8 +50,16 @@
                     <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="11"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ADD" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-wQ-sEA">
-                    <rect key="frame" x="0.0" y="136" width="320" height="98"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sln-Tq-nAZ">
+                    <rect key="frame" x="0.0" y="136" width="12" height="98"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="12" id="E1L-da-o1K"/>
+                        <constraint firstAttribute="height" constant="98" id="mX5-gO-DZ6"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-wQ-sEA">
+                    <rect key="frame" x="12" y="136" width="308" height="98"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="98" id="sNg-pK-PuJ"/>
@@ -54,66 +74,70 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfN-7n-EuC">
                     <rect key="frame" x="0.0" y="234" width="320" height="66"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vx-UT-ZIj">
-                            <rect key="frame" x="12" y="0.0" width="72" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vx-UT-ZIj">
+                            <rect key="frame" x="12" y="0.0" width="143" height="24"/>
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="PF3-nS-NZB"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
-                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
-                            <state key="normal" title="Button" image="ic_add">
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="add_name">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="add_name_c"/>
                             <connections>
                                 <action selector="modelButtonOnClick:" destination="-1" eventType="touchUpInside" id="iir-fZ-ECk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-NA-vDj">
-                            <rect key="frame" x="114" y="0.0" width="72" height="24"/>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-NA-vDj">
+                            <rect key="frame" x="165" y="0.0" width="143" height="24"/>
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="fyY-Oc-1oD"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
-                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
-                            <state key="normal" title="Button" image="ic_add">
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="add_name">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="add_name_c"/>
                             <connections>
                                 <action selector="photographerButtonOnClick:" destination="-1" eventType="touchUpInside" id="vzV-B4-uhu"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLl-55-PNF">
-                            <rect key="frame" x="12" y="33" width="72" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLl-55-PNF">
+                            <rect key="frame" x="12" y="33" width="143" height="24"/>
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="hkC-VG-xni"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
-                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
-                            <state key="normal" title="Button" image="ic_add">
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="add_name">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="add_name_c"/>
                             <connections>
                                 <action selector="hairstylistButtonOnClick:" destination="-1" eventType="touchUpInside" id="Hsi-Ni-2k8"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-Ms-698">
-                            <rect key="frame" x="114" y="33" width="72" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUr-Ms-698">
+                            <rect key="frame" x="165" y="33" width="143" height="24"/>
                             <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="naZ-tp-CH2"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
-                            <inset key="contentEdgeInsets" minX="9" minY="0.0" maxX="9" maxY="0.0"/>
-                            <state key="normal" title="Button" image="ic_add">
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
+                            <state key="normal" title="Button" image="add_name">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="selected" image="add_name_c"/>
                             <connections>
                                 <action selector="dresserButtonOnClick:" destination="-1" eventType="touchUpInside" id="Fiq-uf-BUo"/>
                             </connections>
@@ -121,15 +145,19 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="HUr-Ms-698" secondAttribute="trailing" constant="12" id="2gE-U2-zrI"/>
                         <constraint firstItem="uwc-NA-vDj" firstAttribute="centerY" secondItem="5vx-UT-ZIj" secondAttribute="centerY" id="Cw8-aq-q7O"/>
                         <constraint firstItem="5vx-UT-ZIj" firstAttribute="leading" secondItem="rLl-55-PNF" secondAttribute="leading" id="IwY-cO-bdE"/>
                         <constraint firstItem="5vx-UT-ZIj" firstAttribute="leading" secondItem="jfN-7n-EuC" secondAttribute="leading" constant="12" id="Nhv-yi-yX1"/>
+                        <constraint firstItem="5vx-UT-ZIj" firstAttribute="width" secondItem="uwc-NA-vDj" secondAttribute="width" id="R14-W0-iKZ"/>
                         <constraint firstItem="HUr-Ms-698" firstAttribute="centerY" secondItem="rLl-55-PNF" secondAttribute="centerY" id="Rnz-j9-8UP"/>
-                        <constraint firstItem="uwc-NA-vDj" firstAttribute="leading" secondItem="5vx-UT-ZIj" secondAttribute="trailing" constant="30" id="ac8-pK-Oip"/>
+                        <constraint firstItem="uwc-NA-vDj" firstAttribute="leading" secondItem="5vx-UT-ZIj" secondAttribute="trailing" constant="10" id="ac8-pK-Oip"/>
+                        <constraint firstAttribute="trailing" secondItem="uwc-NA-vDj" secondAttribute="trailing" constant="12" id="dfP-vh-X4S"/>
                         <constraint firstItem="5vx-UT-ZIj" firstAttribute="top" secondItem="jfN-7n-EuC" secondAttribute="top" id="hcY-YU-UtI"/>
                         <constraint firstAttribute="height" constant="66" id="kl7-ZH-LaI"/>
                         <constraint firstItem="rLl-55-PNF" firstAttribute="top" secondItem="5vx-UT-ZIj" secondAttribute="bottom" constant="9" id="n0v-6C-kyG"/>
-                        <constraint firstItem="HUr-Ms-698" firstAttribute="leading" secondItem="rLl-55-PNF" secondAttribute="trailing" constant="30" id="tIE-mu-le7"/>
+                        <constraint firstItem="HUr-Ms-698" firstAttribute="leading" secondItem="rLl-55-PNF" secondAttribute="trailing" constant="10" id="tIE-mu-le7"/>
+                        <constraint firstItem="rLl-55-PNF" firstAttribute="width" secondItem="HUr-Ms-698" secondAttribute="width" id="zz3-hb-kWg"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHl-ch-M8b">
@@ -140,16 +168,20 @@
             <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="GHl-ch-M8b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7ul-1d-H0C"/>
+                <constraint firstItem="sln-Tq-nAZ" firstAttribute="top" secondItem="Wx7-qy-Rvf" secondAttribute="bottom" constant="11" id="9EG-o6-Q9Q"/>
                 <constraint firstAttribute="bottom" secondItem="GHl-ch-M8b" secondAttribute="bottom" id="Hg9-7G-hz2"/>
-                <constraint firstItem="Wx7-qy-Rvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JkD-vW-Bs0"/>
+                <constraint firstItem="Wx7-qy-Rvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="JkD-vW-Bs0"/>
+                <constraint firstItem="sln-Tq-nAZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="M0G-w9-NzD"/>
                 <constraint firstItem="jfN-7n-EuC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PFq-tg-Ccj"/>
                 <constraint firstAttribute="trailing" secondItem="Wx7-qy-Rvf" secondAttribute="trailing" id="TOE-fo-lVQ"/>
                 <constraint firstAttribute="trailing" secondItem="GHl-ch-M8b" secondAttribute="trailing" id="Tzn-cJ-dPB"/>
+                <constraint firstItem="vCY-M5-7cG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="YrT-Ls-oZ9"/>
                 <constraint firstAttribute="trailing" secondItem="jfN-7n-EuC" secondAttribute="trailing" id="dds-O9-MGE"/>
                 <constraint firstItem="ckW-wQ-sEA" firstAttribute="top" secondItem="Wx7-qy-Rvf" secondAttribute="bottom" constant="11" id="emz-ro-Kxs"/>
+                <constraint firstItem="vCY-M5-7cG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hJf-ey-UqP"/>
                 <constraint firstAttribute="trailing" secondItem="ckW-wQ-sEA" secondAttribute="trailing" id="iDA-i4-U4m"/>
                 <constraint firstItem="jfN-7n-EuC" firstAttribute="top" secondItem="ckW-wQ-sEA" secondAttribute="bottom" id="o8H-d7-DPv"/>
-                <constraint firstItem="ckW-wQ-sEA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="thv-jg-L9h"/>
+                <constraint firstItem="ckW-wQ-sEA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="thv-jg-L9h"/>
                 <constraint firstItem="Wx7-qy-Rvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="vuw-7k-Jrm"/>
                 <constraint firstItem="GHl-ch-M8b" firstAttribute="top" secondItem="jfN-7n-EuC" secondAttribute="bottom" id="yr5-fV-DWO"/>
             </constraints>
@@ -157,7 +189,8 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_add" width="22" height="22"/>
+        <image name="add_name" width="24" height="24"/>
+        <image name="add_name_c" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

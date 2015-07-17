@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, RoleType){
     RoleTypeAudience//观众
 };
 
-@interface MB_WriteInfoViewController : UIViewController
+@interface MB_WriteInfoViewController : MB_BaseViewController
 
 @property (nonatomic, assign) RoleType roleType;
 

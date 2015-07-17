@@ -19,7 +19,7 @@
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
         if ([key isEqualToString:@"ablId"] || [key isEqualToString:@"id"] || [key isEqualToString:@"atype"] ||[key isEqualToString:@"mId"] || [key isEqualToString:@"pId"] || [key isEqualToString:@"hId"] ||[key isEqualToString:@"mkId"] || [key isEqualToString:@"likes"] || [key isEqualToString:@"comments"]) {
             [self setValue:@(0) forKey:key];
-        }else if ([key isEqualToString:@"mlist"]) {
+        }else if ([key isEqualToString:@"mList"]) {
             [self setValue:@[] forKey:key];
         }else {
             [self setValue:@"" forKey:key];

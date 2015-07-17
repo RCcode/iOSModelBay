@@ -11,39 +11,65 @@
 #import "MB_LikersViewController.h"
 #import "MB_SelectPhotosViewController.h"
 #import "MB_ScanImageViewController.h"
+#import "MB_SelectUserViewController.h"
 
 @import AssetsLibrary;
 
 @interface MB_AddTextViewController ()<UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *addTitleTextField;
-
-//@property (weak, nonatomic) IBOutlet UITextField *addDescTextField;
-
 @property (weak, nonatomic) IBOutlet UITextView *addDescTextView;
 
+@property (weak, nonatomic) IBOutlet UIButton *button1;
+@property (weak, nonatomic) IBOutlet UIButton *button2;
+@property (weak, nonatomic) IBOutlet UIButton *button3;
+@property (weak, nonatomic) IBOutlet UIButton *button4;
+
+@property (nonatomic, assign) NSInteger mId;//模特id
+@property (nonatomic, assign) NSInteger pId;//摄影师id
+@property (nonatomic, assign) NSInteger hId;//发型师id
+@property (nonatomic, assign) NSInteger mkId;//化妆师id
+
+@property (nonatomic, strong) NSString *mName;//模特名
+@property (nonatomic, strong) NSString *pName;//摄影师名
+@property (nonatomic, strong) NSString *hName;//发型师名
+@property (nonatomic, strong) NSString *mkName;//化妆师名
+
 @property (weak, nonatomic) IBOutlet UIView *imagesContainerView;
-
 @property (nonatomic, strong) ALAssetsLibrary *assertLibrary;
-
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 @end
 
 @implementation MB_AddTextViewController
-
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.titleLabel.text = @"ADD TEXT";
-    self.navigationItem.titleView = self.titleLabel;
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
     
+    self.titleLabel.text = LocalizedString(@"Add description", nil);
+    self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(rightBarButtonOnClick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
+    self.mId = -1;
+    self.pId = -1;
+    self.hId = -1;
+    self.mkId = -1;
+    self.mName = @"";
+    self.pName = @"";
+    self.hName = @"";
+    self.mkName = @"";
+    
+    self.addTitleTextField.placeholder = LocalizedString(@"Title", nil);
+    self.addDescTextView.text = LocalizedString(@"Description", nil);
+    
+    [self.button1 setTitle:LocalizedString(@"Model", nil) forState:UIControlStateNormal];
+    [self.button2 setTitle:LocalizedString(@"Photographer", nil) forState:UIControlStateNormal];
+    [self.button3 setTitle:LocalizedString(@"Makeup Artist", nil) forState:UIControlStateNormal];
+    [self.button4 setTitle:LocalizedString(@"Hair Stylist", nil) forState:UIControlStateNormal];
+    
+
     self.assertLibrary = [[ALAssetsLibrary alloc] init];
     [self refreshImagesContainerView];
 }
@@ -55,7 +81,7 @@
 
 #pragma mark - UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:@"ADD"]) {
+    if ([textView.text isEqualToString:LocalizedString(@"Description", nil)]) {
         textView.text = @"";
     }
     return YES;
@@ -63,13 +89,15 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"ADD";
+        textView.text = LocalizedString(@"Description", nil);
     }
     return YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = LocalizedString(@"Description", nil);
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -102,7 +130,11 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [imageView addGestureRecognizer:tap];
         if (i == self.urlArray.count) {
-            imageView.image = [UIImage imageNamed:@"add_img"];
+            if (self.urlArray.count == 9) {
+                imageView.hidden = YES;
+            }else {
+                imageView.image = [UIImage imageNamed:@"add_img"];
+            }
         }else {
             [self.assertLibrary assetForURL:self.urlArray[i] resultBlock:^(ALAsset *asset) {
                 //                UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
@@ -117,20 +149,75 @@
 }
 
 - (IBAction)modelButtonOnClick:(UIButton *)sender {
-    MB_LikersViewController *likers = [[MB_LikersViewController alloc] init];
-    [self.navigationController pushViewController:likers animated:YES];
+    if (sender.selected) {
+        sender.selected = NO;
+        self.mId = -1;
+        self.mName = @"";
+    }else {
+        MB_SelectUserViewController *selectVC = [[MB_SelectUserViewController alloc] init];
+        selectVC.selectBlock = ^(MB_Collect *user){
+            NSString *title = [NSString stringWithFormat:@"%@:%@",LocalizedString(@"Model", nil),user.fname];
+            [sender setTitle:title forState:UIControlStateSelected];
+            sender.selected = YES;
+            self.mId = user.fid;
+            self.mName = user.fname;
+        };
+        [self.navigationController pushViewController:selectVC animated:YES];
+    }
 }
 
 - (IBAction)photographerButtonOnClick:(UIButton *)sender {
-    
+    if (sender.selected) {
+        sender.selected = NO;
+        self.pId = -1;
+        self.pName = @"";
+    }else {
+        MB_SelectUserViewController *selectVC = [[MB_SelectUserViewController alloc] init];
+        selectVC.selectBlock = ^(MB_Collect *user){
+            NSString *title = [NSString stringWithFormat:@"%@:%@",LocalizedString(@"Photographer", nil),user.fname];
+            [sender setTitle:title forState:UIControlStateSelected];
+            sender.selected = YES;
+            self.pId = user.fid;
+            self.pName = user.fname;
+        };
+        [self.navigationController pushViewController:selectVC animated:YES];
+    }
 }
 
 - (IBAction)hairstylistButtonOnClick:(UIButton *)sender {
-    
+    if (sender.selected) {
+        sender.selected = NO;
+        self.hId = -1;
+        self.hName = @"";
+    }else {
+        MB_SelectUserViewController *selectVC = [[MB_SelectUserViewController alloc] init];
+        selectVC.selectBlock = ^(MB_Collect *user){
+            NSString *title = [NSString stringWithFormat:@"%@:%@",LocalizedString(@"Makeup Artist", nil),user.fname];
+            [sender setTitle:title forState:UIControlStateSelected];
+            sender.selected = YES;
+            self.hId = user.fid;
+            self.hName = user.fname;
+        };
+        [self.navigationController pushViewController:selectVC animated:YES];
+    }
 }
 
 - (IBAction)dresserButtonOnClick:(UIButton *)sender {
-    
+    if (sender.selected) {
+        sender.selected = NO;
+        self.mkId = -1;
+        self.mkName = @"";
+    }else {
+        MB_SelectUserViewController *selectVC = [[MB_SelectUserViewController alloc] init];
+        selectVC.selectBlock = ^(MB_Collect *user){
+            NSString *title = [NSString stringWithFormat:@"%@:%@",LocalizedString(@"Hair Stylist", nil),user.fname];
+            [sender setTitle:title forState:UIControlStateSelected];
+            sender.selected = YES;
+            self.mkId = user.fid;
+            self.mkName = user.fname;
+        };
+        [self.navigationController pushViewController:selectVC animated:YES];
+    }
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
@@ -141,14 +228,14 @@
                              @"name":self.addTitleTextField.text,//影集名称
                              @"descr":self.addDescTextView.text,//影集描述
                              @"cover":@"",//封面图片,当atype为0时为内容
-                             @"mId":@(-1),//模特id
-                             @"mName":@"",//模特名
-                             @"pId":@(-1),//摄影师id
-                             @"pName":@"",//摄影师名
-                             @"hId":@(-1),//发型师id
-                             @"hName":@"",//发型师名
-                             @"mkId":@(-1),//化妆师id
-                             @"mkName":@""//化妆师名
+                             @"mId":@(self.mId),//模特id
+                             @"mName":self.mName,//模特名
+                             @"pId":@(self.pId),//摄影师id
+                             @"pName":self.pName,//摄影师名
+                             @"hId":@(self.hId),//发型师id
+                             @"hName":self.hName,//发型师名
+                             @"mkId":@(self.mkId),//化妆师id
+                             @"mkName":self.mkName//化妆师名
                              };
     [[AFHttpTool shareTool] addAblumWithParameters:params success:^(id response) {
         NSLog(@"%@",response);
@@ -165,7 +252,9 @@
                                                    @"token":[userDefaults objectForKey:kAccessToken],
                                                    @"ablId":response[@"ablId"],
                                                    @"sort":@([self.urlArray indexOfObject:url])};
-                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"ablum/uploadPic.do"];
+//                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"ablum/uploadPic.do"];
+                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"ablum/uploadPic.do"];
+                    
                     AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                         
                         NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
@@ -175,7 +264,7 @@
                         NSLog(@"success");
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"%@ failed", operation);
-                        [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
+//                        [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
                     }];
                     
                     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
@@ -189,17 +278,20 @@
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        [MB_Utils showPromptWithText:@"失败"];
+//        [MB_Utils showPromptWithText:@"失败"];
     }];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
+    
     if (tap.view.tag == self.urlArray.count) {
         //添加图片
+        if (self.urlArray.count >= 9) {
+            return;
+        }
         MB_SelectPhotosViewController *selectVC = [[MB_SelectPhotosViewController alloc] init];
         selectVC.type = SelectTypeOne;
         selectVC.block = ^(NSURL *url) {
-            NSLog(@"add url %@",url);
             [self.urlArray addObject:url];
             [self refreshImagesContainerView];
         };
@@ -207,6 +299,10 @@
         [self.navigationController pushViewController:selectVC animated:YES];
     }else{
         //预览删除
+        if (self.urlArray.count <= 3) {
+            return;
+        }
+        
         MB_ScanImageViewController *scanVC = [[MB_ScanImageViewController alloc] init];
         [self.assertLibrary assetForURL:self.urlArray[tap.view.tag] resultBlock:^(ALAsset *asset) {
             scanVC.image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];

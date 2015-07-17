@@ -13,21 +13,14 @@
 #import "MB_MessageViewController.h"
 #import "MB_CollectViewController.h"
 #import "MB_UserInfoView.h"
-#import <MessageUI/MessageUI.h>
-
 #import "MB_SettingViewController.h"
-//#import "MB_InviteViewController.h"
-//#import "MB_SearchViewController.h"
-#import "MB_ScanAblumViewController.h"
-#import "MB_SelectPhotosViewController.h"
-#import "MB_WriteInfoViewController.h"
-#import "MB_SelectRoleViewController.h"
-#import "MB_SelectCareerViewController.h"
 #import "MB_CommentView.h"
 
-#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-#define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
-#define kShareHotTags @""
+#import <MessageUI/MessageUI.h>
+
+//#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+//#define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
+//#define kShareHotTags @""
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -54,13 +47,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = @"VINCENT";
+    self.titleLabel.text = LocalizedString(@"My", nil);
     self.navigationItem.titleView = self.titleLabel;
     if (self.comeFromType == ComeFromTypeUser) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
+    }else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     }
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(test)];
     
     //键盘监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -68,6 +61,7 @@
     
     //登录通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
     
     
     if ([userDefaults boolForKey:kIsLogin]) {
@@ -195,73 +189,73 @@ static CGFloat startY;
 }
 
 
-#pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        //通过Instragram
-
-        UIGraphicsBeginImageContext(self.view.frame.size);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [self.view.layer renderInContext:context];
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
-        if (![[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"没有安装Instragram" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
-            return;
-        }else {
-            //保存本地 如果已存在，则删除
-            if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath]){
-                [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
-            }
-            
-            NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
-            [imageData writeToFile:kToInstagramPath atomically:YES];
-            NSLog(@"kToInstagramPath [ %@",kToInstagramPath);
-            
-            //分享
-            NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
-            _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-            _documetnInteractionController.delegate = self;
-            _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
-            _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
-            [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
-        }
-    }else if (buttonIndex == 1) {
-        //通过邮件
-        if ([MFMailComposeViewController canSendMail]) {
-            MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-            mailVC.mailComposeDelegate = self;
-            [self presentViewController:mailVC animated:YES completion:nil];
-        }else {
-            NSLog(@"不可以发邮件");
-        }
-    }
-}
-
-
-#pragma mark - MFMailComposeViewControllerDelegate
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            
-            break;
-        case MFMailComposeResultSaved:
-            
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"mail error %@",error);
-            break;
-        case MFMailComposeResultSent:
-            
-            break;
-        default:
-            break;
-    }
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
+//#pragma mark - UIActionSheetDelegate
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    if (buttonIndex == 0) {
+//        //通过Instragram
+//
+//        UIGraphicsBeginImageContext(self.view.frame.size);
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        [self.view.layer renderInContext:context];
+//        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        
+//        NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+//        if (![[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"没有安装Instragram" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//            [alertView show];
+//            return;
+//        }else {
+//            //保存本地 如果已存在，则删除
+//            if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath]){
+//                [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
+//            }
+//            
+//            NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
+//            [imageData writeToFile:kToInstagramPath atomically:YES];
+//            NSLog(@"kToInstagramPath = %@",kToInstagramPath);
+//            
+//            //分享
+//            NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
+//            _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+//            _documetnInteractionController.delegate = self;
+//            _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
+//            _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
+//            [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+//        }
+//    }else if (buttonIndex == 1) {
+//        //通过邮件
+//        if ([MFMailComposeViewController canSendMail]) {
+//            MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+//            mailVC.mailComposeDelegate = self;
+//            [self presentViewController:mailVC animated:YES completion:nil];
+//        }else {
+//            NSLog(@"不可以发邮件");
+//        }
+//    }
+//}
+//
+//
+//#pragma mark - MFMailComposeViewControllerDelegate
+//- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+//    switch (result) {
+//        case MFMailComposeResultCancelled:
+//            
+//            break;
+//        case MFMailComposeResultSaved:
+//            
+//            break;
+//        case MFMailComposeResultFailed:
+//            NSLog(@"mail error %@",error);
+//            break;
+//        case MFMailComposeResultSent:
+//            
+//            break;
+//        default:
+//            break;
+//    }
+//    [controller dismissViewControllerAnimated:YES completion:nil];
+//}
 
 
 #pragma mark - UITextFieldDelegate
@@ -299,9 +293,9 @@ static CGFloat startY;
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"user/updatePic.do"];
-//    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.172:8080/ModelBayWeb/",@"user/updatePic.do"];
-
+//    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"user/updatePic.do"];
+    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"user/updatePic.do"];
+    
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken]};
     _manager = [AFHTTPRequestOperationManager manager];
@@ -313,9 +307,9 @@ static CGFloat startY;
             [formData appendPartWithFileData:imageData name:@"pic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];
             
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"pic success %@",responseObject);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([self statFromResponse:responseObject] == 10000) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                NSLog(@"pic success %@",responseObject);
                 self.userInfoView.userImageView.image = image;
                 if (responseObject[@"pic"] != nil && ![responseObject[@"pic"] isKindOfClass:[NSNull class]]) {
                     [userDefaults setObject:responseObject[@"pic"] forKey:kPic];
@@ -335,12 +329,12 @@ static CGFloat startY;
         AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
             NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
-            [formData appendPartWithFileData:imageData name:@"backPic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:imageData name:@"backPic" fileName:@"backPic.jpg" mimeType:@"image/jpeg"];
             
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"backpic success");
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([self statFromResponse:responseObject] == 10000) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                NSLog(@"backpic success");
                 self.userInfoView.backImageView.image = image;
                 if (responseObject[@"pic"] != nil && ![responseObject[@"pic"] isKindOfClass:[NSNull class]]) {
                 [userDefaults setObject:responseObject[@"pic"] forKey:kBackPic];
@@ -367,21 +361,9 @@ static CGFloat startY;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)test {
-//    MB_InviteViewController*inviteVC = [[MB_InviteViewController alloc] init];
-    
-//    MB_SearchViewController *inviteVC = [[MB_SearchViewController alloc] init];
-    
-//    MB_SelectRoleViewController *inviteVC = [[MB_SelectRoleViewController alloc] init];
-    
-//    MB_SelectPhotosViewController *inviteVC = [[MB_SelectPhotosViewController alloc] init];
-    
-//    MB_ScanAblumViewController *inviteVC = [[MB_ScanAblumViewController alloc] init];
-    
-//    MB_WriteInfoViewController *inviteVC = [[MB_WriteInfoViewController alloc] init];
+- (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     MB_SettingViewController *inviteVC = [[MB_SettingViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
-//    inviteVC.type = SelectTypeAll;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
@@ -395,7 +377,17 @@ static CGFloat startY;
     [self addChildViewControllers];
     
     [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+    
+    [self.tableView setContentOffset:CGPointMake(0, -64)];
 }
+
+- (void)loginOutSuccess:(NSNotification *)noti {
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+    
+    [self.view addSubview:self.notLoginView];
+}
+
 
 - (void)addChildViewControllers {
     MB_UserSummaryViewController *summaryVC   = [[MB_UserSummaryViewController alloc] init];
@@ -497,8 +489,15 @@ static CGFloat startY;
 
 //邀请此用户
 - (void)inviteButtonOnClick:(UIButton *)button {
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Instra",@"mail", nil];
-    [action showInView:self.view];
+//    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Instra",@"mail", nil];
+//    [action showInView:self.view];
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+        mailVC.mailComposeDelegate = self;
+        [self presentViewController:mailVC animated:YES completion:nil];
+    }else {
+        NSLog(@"不可以发邮件");
+    }
 }
 
 //发送留言或回复
@@ -524,6 +523,7 @@ static CGFloat startY;
 - (void)clearCommentText {
     self.commentView.textField.text = @"";
 }
+
 
 #pragma mark - getters & setters
 - (UITableView *)tableView {
@@ -562,22 +562,26 @@ static CGFloat startY;
         }
         _userInfoView.careerLabel.text = [careerArr componentsJoinedByString:@"  |  "];
         
+        [_userInfoView.likeButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateNormal];
+        [_userInfoView.likeButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateSelected];
         [_userInfoView.likeButton addTarget:self action:@selector(collectionButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_userInfoView.inviteButton addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.comeFromType == ComeFromTypeSelf) {
             _userInfoView.inviteButton.hidden = YES;
-            _userInfoView.likeButton.hidden = YES;
+            _userInfoView.likeButton.hidden = NO;
+            _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
+
         }else{
             if (self.user.state == 0 && self.user.uType == 1 && [[userDefaults objectForKey:kUtype] integerValue] == 1) {
                 _userInfoView.inviteButton.hidden = NO;
             }else{
                 _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
                 _userInfoView.inviteButton.hidden = YES;
-                
             }
         }
     }
+    
     return _userInfoView;
 }
 

@@ -25,17 +25,17 @@
 @implementation MB_MainViewController
 
 #pragma mark - life cycle
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login:) name:kLoginInNotification object:nil];
-}
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login:) name:kLoginInNotification object:nil];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,9 +61,9 @@
     }
 }
 
-- (void)login:(NSNotification *)noti {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)login:(NSNotification *)noti {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 
 #pragma mark - getters & setters
@@ -98,7 +98,7 @@
         _loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.skipBtn.frame) - kWindowHeight * 44 / 568, kWindowWidth, kWindowHeight * 44 / 568)];
         _loginBtn.backgroundColor = colorWithHexString(@"#2e5e86");
         _loginBtn.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Medium" size:15];
-        [_loginBtn setTitle:@"LOGIN WITH INSTRAGRAM" forState:UIControlStateNormal];
+        [_loginBtn setTitle:LocalizedString(@"login_insta", nil) forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn addTarget:self action:@selector(loginBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -110,7 +110,7 @@
         _skipBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kWindowHeight - kWindowHeight * 52 / 568, kWindowWidth, kWindowHeight * 52 / 568)];
         _skipBtn.backgroundColor = [UIColor clearColor];
         _skipBtn.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Medium" size:15];
-        [_skipBtn setTitle:@"SKIP >>" forState:UIControlStateNormal];
+        [_skipBtn setTitle:[NSString stringWithFormat:@"%@ >>",LocalizedString(@"Skip", nil)] forState:UIControlStateNormal];
         [_skipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_skipBtn addTarget:self action:@selector(skipBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

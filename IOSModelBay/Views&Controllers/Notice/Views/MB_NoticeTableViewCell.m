@@ -29,27 +29,27 @@
     switch (notice.mtype) {
         case NoticeTypeCollect:
         {
-            _contentLabel.text = @"收藏了你";
+            _contentLabel.text = [LocalizedString(@"Favored_you", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:notice.fname];
             _relateImageView.hidden = YES;
             break;
         }
         case NoticeTypeMention:
         {
-            _contentLabel.text = @"提到了你";
+            _contentLabel.text = [LocalizedString(@"mentioned_you", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:notice.fname];
             _relateImageView.hidden = NO;
             [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
             break;
         }
         case NoticeTypeComment:
         {
-            _contentLabel.text = [NSString stringWithFormat:@"评论了你：%@",notice.comment];
+            _contentLabel.text = [LocalizedString(@"comment_your_photo", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:notice.fname];
             _relateImageView.hidden = NO;
             [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
             break;
         }
         case NoticeTypeLike:
         {
-            _contentLabel.text = @"赞了你的影集";
+            _contentLabel.text = [LocalizedString(@"liked_your_photo", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:notice.fname];
             _relateImageView.hidden = NO;
             [_relateImageView sd_setImageWithURL:[NSURL URLWithString:notice.mpic] placeholderImage:nil];
             break;

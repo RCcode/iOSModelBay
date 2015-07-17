@@ -25,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Username", nil);
+    self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     
     if (_roleType == RoleTypeProfessional) {
@@ -34,7 +37,7 @@
         _femaleBtn.hidden = NO;
         _maleBtn.selected = YES;
     }else{
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
         _backImageView.image = [UIImage imageNamed:@"information_bg2"];
         _maleBtn.hidden = YES;
         _femaleBtn.hidden = YES;
@@ -66,8 +69,7 @@
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     if (_usernameTF.text == nil || [_usernameTF.text isEqualToString:@""]) {
         //请输入用户名
-        [MB_Utils showAlertViewWithMessage:@"请输入用户名"];
-        NSLog(@"请输入用户名");
+        [MB_Utils showAlertViewWithMessage:LocalizedString(@"Username_unavailable", nil)];
     }else{
         //验证用户名
         NSDictionary *params = @{@"name":_usernameTF.text};
@@ -75,7 +77,7 @@
             NSLog(@"check username %@",response);
             if ([response[@"stat"] integerValue] == 10201) {
                 //用户名已经存在
-                [MB_Utils showAlertViewWithMessage:@"用户名已存在"];
+                [MB_Utils showAlertViewWithMessage:LocalizedString(@"Username_unavailable", nil)];
             }else if ([response[@"stat"] integerValue] == 10000){
                 if (_roleType == RoleTypeProfessional) {
                     MB_SelectCareerViewController *careerVC = [[MB_SelectCareerViewController alloc] init];
@@ -121,6 +123,7 @@
 //                            }else {
 //                                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 //                            }
+                            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
                             [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                         }
                     } failure:^(NSError *err) {

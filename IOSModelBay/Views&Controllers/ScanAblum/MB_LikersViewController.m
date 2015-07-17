@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Liker", nil);
+    self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     
     [self.view addSubview:self.tableView];

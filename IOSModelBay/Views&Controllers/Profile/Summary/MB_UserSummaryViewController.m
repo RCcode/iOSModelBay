@@ -434,12 +434,12 @@ static CGFloat startY = 0;
         [[AFHttpTool shareTool] updateUserDetailWithParameters:self.detailDic success:^(id response) {
             NSLog(@"update user detail %@",response);
             if ([self statFromResponse:response] == 10000) {
-                [MB_Utils showPromptWithText:@"update success"];
+//                [MB_Utils showPromptWithText:@"update success"];
             }else {
-                [MB_Utils showPromptWithText:@"update failed"];
+//                [MB_Utils showPromptWithText:@"update failed"];
             }
         } failure:^(NSError *err) {
-            [MB_Utils showPromptWithText:@"update failed"];
+//            [MB_Utils showPromptWithText:@"update failed"];
         }];
     }else{
         self.tableView.separatorColor = [UIColor clearColor];

@@ -24,9 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Career", nil);
+    self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemOnClick:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(rightBarButtonItemOnClick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItem)];
     
     [self.view addSubview:self.collectView];
     
@@ -130,6 +133,7 @@
 //                }else {
 //                    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 //                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
                 [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
         } failure:^(NSError *err) {

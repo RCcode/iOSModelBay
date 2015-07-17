@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MB_SelectRoleViewController : UIViewController
+@interface MB_SelectRoleViewController : MB_BaseViewController
 
 @end

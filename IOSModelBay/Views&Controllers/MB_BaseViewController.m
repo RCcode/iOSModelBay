@@ -58,7 +58,7 @@
 
 #pragma mark - NotLoginViewDelegate
 - (void)notLoginViewOnClick:(UITapGestureRecognizer *)tap {
-    [self presentLoginViewController];
+    [self showLoginAlert];
 }
 
 #pragma mark - Private Methods
@@ -117,23 +117,23 @@
 
 - (NSInteger)statFromResponse:(id)response {
     NSInteger stat = [response[@"stat"] integerValue];
-    NSString *errorMsg = nil;
-    if (stat == 10001) {
-        errorMsg = @"参数异常";
-    }
-    if (stat == 10002) {
-        errorMsg = @"服务器异常";
-    }
-    if (stat == 10003) {
-        errorMsg = @"操作失败";
-    }
+//    NSString *errorMsg = nil;
+//    if (stat == 10001) {
+//        errorMsg = @"参数异常";
+//    }
+//    if (stat == 10002) {
+//        errorMsg = @"服务器异常";
+//    }
+//    if (stat == 10003) {
+//        errorMsg = @"操作失败";
+//    }
 //    if (stat == 10004) {
 //        errorMsg = @"无记录";
 //    }
 //    if (stat == 10501) {
 //        errorMsg = @"无此用户";
 //    }
-    [MB_Utils showAlertViewWithMessage:errorMsg];
+//    [MB_Utils showAlertViewWithMessage:errorMsg];
     return stat;
 }
 
@@ -195,7 +195,7 @@
             
             
             if ([self isKindOfClass:[MB_MainViewController class]]) {
-                [self dismissViewControllerAnimated:NO completion:nil];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
     } failure:^(NSError *err) {
@@ -206,7 +206,7 @@
 }
 
 - (void)showLoginFailedAlertView {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login failed,retry?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:LocalizedString(@"login_failed", nil) delegate:self cancelButtonTitle:LocalizedString(@"Cancel", nil) otherButtonTitles:LocalizedString(@"Retry", nil), nil];
     alert.tag = 2000;
     [alert show];
 }
@@ -256,7 +256,7 @@
 
 - (MB_NotLoginView *)notLoginView {
     if (_notLoginView == nil) {
-        _notLoginView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"Login", nil) delegate:self];
+        _notLoginView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"login_insta", nil) delegate:self];
     }
     return _notLoginView;
 }

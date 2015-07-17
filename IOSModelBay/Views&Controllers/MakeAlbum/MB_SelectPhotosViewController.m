@@ -29,11 +29,13 @@
     self.navigationItem.titleView = self.menuButton;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_confirm"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    
+    if (self.type == SelectTypeAll) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_confirm"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
     
     [self.view addSubview:self.collectView];
-//    [self HideNavigationBarWhenScrollUpForScrollView:self.collectView];
     [self getALlPhotosFromAlbum];
 }
 
@@ -59,6 +61,42 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.type == SelectTypeAll) {
+        NSArray  *array = self.collectView.indexPathsForSelectedItems;
+        
+        if (array.count > 9) {
+            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        }
+        
+        if (array.count < 3) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }else {
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }
+        
+    }else {
+        NSIndexPath *indexPath = [self.collectView.indexPathsForSelectedItems firstObject];
+        NSURL *url = self.dataArray[indexPath.row];
+        self.block(url);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.type == SelectTypeAll) {
+        NSArray  *array = self.collectView.indexPathsForSelectedItems;
+        
+        if (array.count < 3) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }else {
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }
+        
+    }else {
+        
+    }
+}
 
 #pragma mark - private methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
@@ -67,7 +105,7 @@
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
     
-    if (self.type == SelectTypeAll) {
+//    if (self.type == SelectTypeAll) {
         MB_AddTextViewController *addTextVC = [[MB_AddTextViewController alloc] init];
         NSMutableArray *selectedArray = [NSMutableArray arrayWithCapacity:0];
         for (NSIndexPath *indexPath in self.collectView.indexPathsForSelectedItems) {
@@ -75,12 +113,12 @@
         }
         addTextVC.urlArray = selectedArray;
         [self.navigationController pushViewController:addTextVC animated:YES];
-    }else {
-        NSIndexPath *indexPath = [self.collectView.indexPathsForSelectedItems firstObject];
-        NSURL *url = self.dataArray[indexPath.row];
-        self.block(url);
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+//    }else {
+//        NSIndexPath *indexPath = [self.collectView.indexPathsForSelectedItems firstObject];
+//        NSURL *url = self.dataArray[indexPath.row];
+//        self.block(url);
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 
 - (void)getALlPhotosFromAlbum {
@@ -107,8 +145,8 @@
 }
 
 - (void)menuButtonOnClick:(UIButton *)button {
-    UIImagePickerController *imagePIcker = [[UIImagePickerController alloc] init];
-    imagePIcker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    UIImagePickerController *imagePIcker = [[UIImagePickerController alloc] init];
+//    imagePIcker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 }
 
 
@@ -117,7 +155,7 @@
     if (_menuButton == nil) {
         _menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _menuButton.frame = CGRectMake(0, 0, 100, 44);
-        [_menuButton setTitle:@"all photos" forState:UIControlStateNormal];
+        [_menuButton setTitle:LocalizedString(@"ALL_photo", nil) forState:UIControlStateNormal];
         [_menuButton addTarget:self action:@selector(menuButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menuButton;

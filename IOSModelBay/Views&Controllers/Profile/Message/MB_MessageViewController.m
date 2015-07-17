@@ -248,7 +248,7 @@ static CGFloat startY = 0;
     [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
         NSLog(@"coment %@",response);
         if ([self statFromResponse:response] == 10000) {
-            [MB_Utils showPromptWithText:@"success"];
+//            [MB_Utils showPromptWithText:@"success"];
 //            [self requestMessageListWithMinId:0];
 //            MB_Message *message = [[MB_Message alloc] init];
 //            message.state = StateTypeMessage;
@@ -260,10 +260,10 @@ static CGFloat startY = 0;
 //            [self.dataArray addObject:message];
 //            [self.tableView reloadData];
         }else {
-            [MB_Utils showPromptWithText:@"failed"];
+//            [MB_Utils showPromptWithText:@"failed"];
         }
     } failure:^(NSError *err) {
-        [MB_Utils showPromptWithText:@"failed"];
+//        [MB_Utils showPromptWithText:@"failed"];
     }];
 }
 
@@ -288,10 +288,10 @@ static CGFloat startY = 0;
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.replyIndex]] withRowAnimation:UITableViewRowAnimationNone];
         }else {
             //回复失败
-            [MB_Utils showPromptWithText:@"failed"];
+//            [MB_Utils showPromptWithText:@"failed"];
         }
     } failure:^(NSError *err) {
-        [MB_Utils showPromptWithText:@"failed"];
+//        [MB_Utils showPromptWithText:@"failed"];
     }];
 }
 

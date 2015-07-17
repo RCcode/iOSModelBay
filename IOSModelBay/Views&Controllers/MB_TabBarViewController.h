@@ -10,4 +10,7 @@
 
 @interface MB_TabBarViewController : UITabBarController
 
+//退出登陆回到首页
+- (void)scrollToHome;
+
 @end

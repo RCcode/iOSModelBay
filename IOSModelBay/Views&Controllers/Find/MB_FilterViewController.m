@@ -26,9 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.titleLabel.text = LocalizedString(@"Filter", nil);
+    self.navigationItem.titleView = self.titleLabel;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     if (self.type == FilterTypeFind) {
         [self.view addSubview:self.searchView];
@@ -63,7 +66,7 @@
     cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",indexPath.row + 1]];
     
     if (indexPath.row == 0) {
-        cell.nameLabel.text = @"All";
+        cell.nameLabel.text = LocalizedString(@"All", nil);
         //是否选中All
         if (self.type == FilterTypeFind) {
             if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""]) {
@@ -186,7 +189,7 @@
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(_searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(_searchView.frame))];
         label.font = [UIFont systemFontOfSize:15];
-        label.text = @"songge";
+        label.text = LocalizedString(@"Search name", nil);
         label.textColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.5];
         [_searchView addSubview:label];
     }
@@ -202,7 +205,7 @@
         }
         _sexView.backgroundColor = [UIColor whiteColor];
         
-        NSArray *titleArray = @[@"All",@"Male",@"Female"];
+        NSArray *titleArray = @[LocalizedString(@"All", nil),LocalizedString(@"Men", nil),LocalizedString(@"Women", nil),];
         CGFloat btnWidth = kWindowWidth/3;
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

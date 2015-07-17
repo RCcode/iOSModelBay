@@ -13,6 +13,8 @@
 #import "MB_NoticeViewController.h"
 #import "MB_UserViewController.h"
 
+#define baseTag 100
+
 @interface MB_TabBarViewController ()
 
 @property (nonatomic, strong) UIView *customTabBar;
@@ -77,14 +79,18 @@
     
     button.selected = YES;
     self.selectedButton = button;
-    self.selectedIndex = button.tag;
+    self.selectedIndex = button.tag - 100;
     
     //修改指示条的位置
     [UIView animateWithDuration:0.2 animations:^{
         CGRect rect = self.indicateView.frame;
-        rect.origin.x = button.tag * rect.size.width;
+        rect.origin.x = (button.tag - 100) * rect.size.width;
         self.indicateView.frame = rect;
     }];
+}
+
+- (void)scrollToHome {
+    [self tabBarButtonOnClick:(UIButton *)[self.customTabBar viewWithTag:baseTag + 0]];
 }
 
 - (UIView *)customTabBar {
@@ -98,7 +104,7 @@
         CGFloat btnHeight = 49 - 3;
         for (int i = 0; i < 4; i ++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.tag = i;
+            button.tag = baseTag + i;
             [button setFrame:CGRectMake(btnWidth * i, 0, btnWidth, btnHeight)];
             [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:images_h[i]] forState:UIControlStateSelected];

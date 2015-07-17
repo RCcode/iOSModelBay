@@ -29,12 +29,12 @@
     
     switch (notice.mtype) {
         case NoticeTypeMessage: {
-            _typeLabel.text = @"留言".uppercaseString;
+            _typeLabel.text = LocalizedString(@"Message", nil).uppercaseString;
             break;
         }
             
         case NoticeTypeReplay: {
-            _typeLabel.text = @"回复".uppercaseString;
+            _typeLabel.text = LocalizedString(@"Reply", nil).uppercaseString;
             break;
         }
             

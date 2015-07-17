@@ -18,11 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = colorWithHexString(@"#eeeeee");
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
-    
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 100, kWindowWidth - 20, 200)];
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(12, 100, kWindowWidth - 24, 200)];
     _textView.delegate = self;
+    _textView.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
+    _textView.textColor = colorWithHexString(@"#9a9a9a");
     _textView.text = self.text;
     [self.view addSubview:_textView];
 }

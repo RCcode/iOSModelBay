@@ -31,13 +31,14 @@
     
     if (self.showLoginAuto == YES) {
         self.showLoginAuto = NO;
-        [self presentLoginViewController];
+        [self showLoginAlert];
     }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = @"MODELBAY";
+    self.titleLabel.text = LocalizedString(@"Discover", nil);
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
@@ -162,7 +163,7 @@
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
                 [self.collectView reloadData];
-                [MB_Utils showPromptWithText:@"no result"];
+//                [MB_Utils showPromptWithText:@"no result"];
             }else {
                 [self showNoMoreMessageForview:self.collectView];
             }

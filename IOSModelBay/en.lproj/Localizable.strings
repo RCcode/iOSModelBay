@@ -144,9 +144,9 @@
 "Women" = "Women";
 "Career" = "Career";
 "Submit" = "Submit";
-"Invite" = "Invite xxxx";
+"Invite_xxxx" = "Invite xxxx";
 "No_Results" = "No Results";
-"Enter_email" = "Enter email";
+"Enter_email" = "Enter xxxx's email";
 "Invite" = "Invite";
 "Invite_Sent" = "Invite Sent!";
 
@@ -228,4 +228,5 @@
 "New Comment" = "New Comment";
 "New Message" = "New Message";
 
+"Send" = "Send";
 

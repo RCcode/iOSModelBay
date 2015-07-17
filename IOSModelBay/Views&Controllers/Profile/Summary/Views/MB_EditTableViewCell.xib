@@ -25,8 +25,8 @@
                         <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_xuanze" translatesAutoresizingMaskIntoConstraints="NO" id="0L2-rt-diw">
-                        <rect key="frame" x="289" y="12" width="21" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_xuanze" translatesAutoresizingMaskIntoConstraints="NO" id="0L2-rt-diw">
+                        <rect key="frame" x="286" y="11" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="9DY-pt-I2p"/>
                             <constraint firstAttribute="height" constant="21" id="xuR-ga-d5L"/>
@@ -35,7 +35,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="B0T-bi-Sql" secondAttribute="centerY" id="DPx-mG-OPc"/>
-                    <constraint firstAttribute="trailing" secondItem="0L2-rt-diw" secondAttribute="trailing" constant="10" id="gv1-Ma-T3P"/>
+                    <constraint firstAttribute="trailing" secondItem="0L2-rt-diw" secondAttribute="trailing" constant="13" id="gv1-Ma-T3P"/>
                     <constraint firstItem="B0T-bi-Sql" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="hMj-x2-Hpv"/>
                     <constraint firstAttribute="centerY" secondItem="0L2-rt-diw" secondAttribute="centerY" id="jki-1O-1tX"/>
                 </constraints>

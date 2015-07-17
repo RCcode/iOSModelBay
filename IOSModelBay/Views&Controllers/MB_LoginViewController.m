@@ -81,7 +81,7 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-        [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
+        [MB_Utils showPromptWithText:LocalizedString(@"login_failed", nil)];
     }];
 }
 

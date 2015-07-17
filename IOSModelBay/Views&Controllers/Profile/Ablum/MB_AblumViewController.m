@@ -28,8 +28,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) NSInteger minId;
 
-@property (nonatomic, strong) UIView *coverView;
-@property (nonatomic, strong) MB_AddAblumMenuView *menuView;
+//@property (nonatomic, strong) UIView *coverView;
+//@property (nonatomic, strong) MB_AddAblumMenuView *menuView;
 
 
 @end
@@ -214,12 +214,12 @@ static CGFloat startY = 0;
     [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
         NSLog(@"like send %@", response);
         if ([self statFromResponse:response] == 10000) {
-            [MB_Utils showPromptWithText:@"like success"];
+//            [MB_Utils showPromptWithText:@"like success"];
         }else {
-            [MB_Utils showPromptWithText:@"like failed"];
+//            [MB_Utils showPromptWithText:@"like failed"];
         }
     } failure:^(NSError *err) {
-        [MB_Utils showPromptWithText:@"like failed"];
+//        [MB_Utils showPromptWithText:@"like failed"];
     }];
 }
 
@@ -254,55 +254,60 @@ static CGFloat startY = 0;
 
 //添加作品集
 - (void)addButtonOnClick:(UIButton *)button{
-    //使菜单出现
-    self.menuView.isShowing = YES;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.coverView];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.menuView];
+//    //使菜单出现
+//    self.menuView.isShowing = YES;
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.coverView];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.menuView];
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.coverView.hidden = 0;
+//        CGRect rect = self.menuView.frame;
+//        self.menuView.frame = CGRectMake(0, kWindowHeight - rect.size.height, kWindowWidth, rect.size.height);
+//    }];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.coverView.hidden = 0;
-        CGRect rect = self.menuView.frame;
-        self.menuView.frame = CGRectMake(0, kWindowHeight - rect.size.height, kWindowWidth, rect.size.height);
-    }];
-}
-
-- (void)handleCoverViewTap:(UITapGestureRecognizer *)tap {
-    //使菜单消失
-    self.menuView.isShowing = NO;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.coverView.hidden = 1;
-        CGRect rect = self.menuView.frame;
-        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
-    } completion:^(BOOL finished) {
-        [self.coverView removeFromSuperview];
-        [self.menuView removeFromSuperview];
-    }];
-}
-
-//添加相册
-- (void)albumButtonOnClick:(UIButton *)button {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.coverView.hidden = YES;
-        CGRect rect = self.menuView.frame;
-        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
-    }];
     MB_SelectPhotosViewController *vc = [[MB_SelectPhotosViewController alloc] init];
     vc.type = SelectTypeAll;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//- (void)handleCoverViewTap:(UITapGestureRecognizer *)tap {
+//    //使菜单消失
+//    self.menuView.isShowing = NO;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.coverView.hidden = 1;
+//        CGRect rect = self.menuView.frame;
+//        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
+//    } completion:^(BOOL finished) {
+//        [self.coverView removeFromSuperview];
+//        [self.menuView removeFromSuperview];
+//    }];
+//}
+
+//添加相册
+//- (void)albumButtonOnClick:(UIButton *)button {
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.coverView.hidden = YES;
+//        CGRect rect = self.menuView.frame;
+//        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
+//    }];
+//    MB_SelectPhotosViewController *vc = [[MB_SelectPhotosViewController alloc] init];
+//    vc.type = SelectTypeAll;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
+
 //添加模板
-- (void)templateButtonOnClick:(UIButton *)button {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.coverView.hidden = YES;
-        CGRect rect = self.menuView.frame;
-        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
-    }];
-    MB_SelectTemplateViewController *vc = [[MB_SelectTemplateViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)templateButtonOnClick:(UIButton *)button {
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.coverView.hidden = YES;
+//        CGRect rect = self.menuView.frame;
+//        self.menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, rect.size.height);
+//    }];
+//    MB_SelectTemplateViewController *vc = [[MB_SelectTemplateViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 
 #pragma mark - getters & setters
@@ -326,6 +331,7 @@ static CGFloat startY = 0;
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addView.frame), kWindowWidth, CGRectGetHeight(self.containerViewRect) - CGRectGetMaxY(_addView.frame)) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
 
         _tableView.sectionHeaderHeight = 0.5;
         _tableView.sectionFooterHeight = 10.5;
@@ -343,26 +349,26 @@ static CGFloat startY = 0;
 }
 
 //黑色半透明背景
--(UIView *)coverView {
-    if (_coverView == nil) {
-        _coverView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
-        _coverView.backgroundColor = [colorWithHexString(@"#000000") colorWithAlphaComponent:0.3];
-        _coverView.hidden = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCoverViewTap:)];
-        [_coverView addGestureRecognizer:tap];
-    }
-    return _coverView;
-}
+//-(UIView *)coverView {
+//    if (_coverView == nil) {
+//        _coverView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+//        _coverView.backgroundColor = [colorWithHexString(@"#000000") colorWithAlphaComponent:0.3];
+//        _coverView.hidden = YES;
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCoverViewTap:)];
+//        [_coverView addGestureRecognizer:tap];
+//    }
+//    return _coverView;
+//}
 
 //制作相册和模板的选项菜单
-- (UIView *)menuView {
-    if (_menuView == nil) {
-        _menuView = [[[NSBundle mainBundle] loadNibNamed:@"MB_AddAblumMenuView" owner:nil options:nil] firstObject];
-        _menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, 139);
-        [_menuView.albumButton addTarget:self action:@selector(albumButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_menuView.templateButton addTarget:self action:@selector(templateButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _menuView;
-}
+//- (UIView *)menuView {
+//    if (_menuView == nil) {
+//        _menuView = [[[NSBundle mainBundle] loadNibNamed:@"MB_AddAblumMenuView" owner:nil options:nil] firstObject];
+//        _menuView.frame = CGRectMake(0, kWindowHeight, kWindowWidth, 139);
+//        [_menuView.albumButton addTarget:self action:@selector(albumButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_menuView.templateButton addTarget:self action:@selector(templateButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _menuView;
+//}
 
 @end

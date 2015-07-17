@@ -57,4 +57,13 @@
 
 }
 
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    if (CGRectContainsPoint(self.ablumScrollView.frame, point)) {
+//        NSLog(@"444 %d %d %f ",event.type,event.subtype,event.timestamp);
+//        return self;
+//    }else {
+//        return [super hitTest:point withEvent:event];
+//    }
+//}
+
 @end

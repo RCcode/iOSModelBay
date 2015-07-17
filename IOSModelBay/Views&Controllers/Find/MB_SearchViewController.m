@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = colorWithHexString(@"#222222");
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.listTableView];
 }
@@ -97,7 +98,8 @@
     [MB_Utils shareUtil].fName = textField.text;
     
     self.listTableView.tableHeaderView = self.tableHeaderView;
-    self.inviteLabel.text = [NSString stringWithFormat:@"invite %@",textField.text];
+    
+    self.inviteLabel.text = [LocalizedString(@"Invite_xxxx", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:textField.text];
     
     //搜索用户
     NSMutableDictionary *params = [@{@"fname":textField.text,
@@ -172,7 +174,7 @@
             NSLog(@"mail error %@",error);
             break;
         case MFMailComposeResultSent:
-            
+            [MB_Utils showPromptWithText:LocalizedString(@"Invite_Sent", nil)];
             break;
         default:
             break;
@@ -192,7 +194,9 @@
 }
 
 - (void)inviteButtonOnClick:(UIButton *)button {
-    NSString *string = [NSString stringWithFormat:@"Enter %@'s email",self.textField.text];
+    
+//    NSString *string = [NSString stringWithFormat:@"Enter %@'s email",self.textField.text];
+    NSString *string = [LocalizedString(@"Enter_email", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:self.textField.text];
     NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:string];
     [attribute addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#a8a8a8") range:NSMakeRange(0, string.length)];
     self.inviteView.textField.attributedPlaceholder = attribute;
@@ -216,7 +220,7 @@
         //输入框
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(_searchView.frame) - CGRectGetMaxX(imageView.frame) - 66 - 12, CGRectGetHeight(_searchView.frame))];
         
-        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"search username"];
+        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:LocalizedString(@"Search name", nil)];
         [attributeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, attributeStr.length)];
         textField.attributedPlaceholder = attributeStr;
         textField.font = [UIFont systemFontOfSize:15];
@@ -260,7 +264,7 @@
         [button setBackgroundColor:[UIColor redColor]];
         [button setTitleColor:colorWithHexString(@"#ffffff") forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont fontWithName:@"CenturyGothic" size:15];
-        [button setTitle:@"invite" forState:UIControlStateNormal];
+        [button setTitle:LocalizedString(@"Invite", nil) forState:UIControlStateNormal];
         [button addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_tableHeaderView addSubview:button];
     }

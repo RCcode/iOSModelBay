@@ -58,7 +58,9 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
         cell.colorImageView.layer.cornerRadius = CGRectGetWidth(cell.colorImageView.frame) / 2;
         cell.colorImageView.layer.masksToBounds = YES;
         cell.colorImageView.backgroundColor = [UIColor redColor];
-        cell.nameLabel.text = self.dataArray[indexPath.row + 1];
+        
+        NSString *colorString = self.dataArray[indexPath.row + 1];
+        cell.nameLabel.text = colorString;
     
         if (indexPath.row + 1 == self.optionIndex) {
             cell.selectImageView.hidden = NO;
@@ -66,6 +68,47 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
             cell.selectImageView.hidden = YES;
         }
         
+        if ([colorString isEqualToString:LocalizedString(@"Black", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#000000");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Blue", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#2f4ed6");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Brown", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#9a630b");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Green", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#39a14d");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Hazel", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#8f0d00");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"White", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#ffffff");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Olive", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#518b19");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Tanned", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#751208");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Blonde", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#f7e83e");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Grey", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#9e9e9e");
+        }
+        if ([colorString isEqualToString:LocalizedString(@"Red", nil)]) {
+            cell.colorImageView.backgroundColor = colorWithHexString(@"#ff3a26");
+        }
+        
+        if ([colorString isEqualToString:LocalizedString(@"Other", nil)]) {
+            cell.colorImageView.hidden = YES;
+        }else {
+            cell.colorImageView.hidden = NO;
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
         MB_EditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierOther forIndexPath:indexPath];
@@ -77,11 +120,13 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
             cell.selectedImageView.hidden = YES;
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _optionIndex = indexPath.row + 1;
     [self.tableView reloadData];
     self.blcok(self.index, self.optionIndex);
@@ -98,7 +143,7 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(12, 12, kWindowWidth - 24, kWindowHeight - 12) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");

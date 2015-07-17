@@ -14,7 +14,8 @@
     // Initialization code
     _collectButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
     _collectButton.layer.borderWidth = 1;
-    
+    [_collectButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateNormal];
+    [_collectButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateSelected];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
