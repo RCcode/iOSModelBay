@@ -72,14 +72,17 @@
         [MB_Utils showAlertViewWithMessage:LocalizedString(@"Username_unavailable", nil)];
     }else{
         //验证用户名
+        [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
         NSDictionary *params = @{@"name":_usernameTF.text};
         [[AFHttpTool shareTool] checkNameWithParameters:params success:^(id response) {
             NSLog(@"check username %@",response);
             if ([response[@"stat"] integerValue] == 10201) {
                 //用户名已经存在
+                [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                 [MB_Utils showAlertViewWithMessage:LocalizedString(@"Username_unavailable", nil)];
             }else if ([response[@"stat"] integerValue] == 10000){
                 if (_roleType == RoleTypeProfessional) {
+                    [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                     MB_SelectCareerViewController *careerVC = [[MB_SelectCareerViewController alloc] init];
                     careerVC.username = _usernameTF.text;
                     if (_maleBtn.selected) {
@@ -104,6 +107,7 @@
                                              @"pic":[userDefaults objectForKey:kPic]};
                     [[AFHttpTool shareTool] registWithParameters:params success:^(id response) {
                         NSLog(@"regist %@",response);
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                         if ([response[@"stat"] integerValue] == 10000) {
                             //记录用户信息
                             [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
@@ -127,12 +131,12 @@
                             [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                         }
                     } failure:^(NSError *err) {
-                        
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                     }];
                 }
             }
         } failure:^(NSError *err) {
-            
+            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
         }];
     }
 }

@@ -22,8 +22,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:kMoreAppID];
-    [[RC_moreAPPsLib shareAdManager] setAdmobKey:kAdmobID];
+//    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:kMoreAppID];
+//    [[RC_moreAPPsLib shareAdManager] setAdmobKey:kAdmobID];
     
     [self umengSetting];
     [self flurrySetting];

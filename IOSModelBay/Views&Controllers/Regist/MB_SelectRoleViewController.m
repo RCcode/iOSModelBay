@@ -41,6 +41,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap1:)];
     [_VIew1 addGestureRecognizer:tap];
+    
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap2:)];
     [_view2 addGestureRecognizer:tap2];
     

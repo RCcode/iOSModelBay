@@ -99,6 +99,7 @@
         [MB_Utils showAlertViewWithMessage:@"最多三个最少一个"];
     }else{
         //注册
+        [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
         NSDictionary *params = @{@"uid":[userDefaults objectForKey:kUid],
                                  @"tplat":@(0),
                                  @"plat":@(2),
@@ -113,6 +114,7 @@
                                  @"pic":[userDefaults objectForKey:kPic]};
         [[AFHttpTool shareTool] registWithParameters:params success:^(id response) {
             NSLog(@"regist %@",response);
+            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
             if ([response[@"stat"] integerValue] == 10000) {
                 //记录用户信息
                 [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
@@ -137,7 +139,7 @@
                 [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
         } failure:^(NSError *err) {
-            
+            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
         }];
     }
 }

@@ -22,9 +22,9 @@
 #define kUmengAppKey  @"556e66fd67e58ee877006d64"
 #define kFlurryAppKey @"JVB6C3SPS7K7NPNN86ZH"
 
-#define kAppID     @"878086629"
-#define kMoreAppID 20051
-#define kAdmobID   @"ca-app-pub-3747943735238482/3196343450"
+//#define kAppID     @"878086629"
+//#define kMoreAppID 20051
+//#define kAdmobID   @"ca-app-pub-3747943735238482/3196343450"
 
 //Instragram平台用户信息
 #define kUid @"uid"
