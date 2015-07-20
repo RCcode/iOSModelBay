@@ -261,10 +261,16 @@
                         [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%ld.jpg",(unsigned long)[self.urlArray indexOfObject:url]] mimeType:@"image/jpeg"];
                         
                     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        if (_manager.operationQueue.operationCount == 0) {
+                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        }
                         NSLog(@"success");
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"%@ failed", operation);
-//                        [MB_Utils showPromptWithText:[NSString stringWithFormat:@"第%lu张失败",(unsigned long)[self.urlArray indexOfObject:url]]];
+                        
+                        if (_manager.operationQueue.operationCount == 0) {
+                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        }
                     }];
                     
                     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
@@ -277,8 +283,8 @@
             }
         }
     } failure:^(NSError *err) {
+        [MB_Utils showPromptWithText:LocalizedString(@"Upload Failure", nil)];
         [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
-//        [MB_Utils showPromptWithText:@"失败"];
     }];
 }
 

@@ -65,7 +65,7 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_Ablum *album = self.dataArray[indexPath.section];
     if (album.atype == AblumTypeCollect) {
         return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierAblum cacheByIndexPath:indexPath configuration:^(MB_AlbumTableViewCell *cell) {
@@ -83,13 +83,13 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     cell.ablum = self.dataArray[indexPath.section];
     cell.imagesScrollView.tag = indexPath.section;
     [cell.tap addTarget:self action:@selector(handleTap:)];
-    cell.likeButton.tag = indexPath.row;
+    cell.likeButton.tag = indexPath.section;
     [cell.likeButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.likeListButton.tag = indexPath.row;
+    cell.likeListButton.tag = indexPath.section;
     [cell.likeListButton addTarget:self action:@selector(likeListButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.commentButton.tag = indexPath.row;
+    cell.commentButton.tag = indexPath.section;
     [cell.commentButton addTarget:self action:@selector(commentButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.shareButton.tag = indexPath.row;
+    cell.shareButton.tag = indexPath.section;
     [cell.shareButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 

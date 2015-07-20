@@ -32,19 +32,19 @@
         _uid = [value integerValue];
     }
     if ([key isEqualToString:@"ucid"]) {
-        _uid = [value integerValue];
+        _ucid = [value integerValue];
     }
     if ([key isEqualToString:@"fid"]) {
-        _uid = [value integerValue];
+        _fid = [value integerValue];
     }
     if ([key isEqualToString:@"createTime"]) {
-        _uid = [value integerValue];
+        _createTime = [value integerValue];
     }
     if ([key isEqualToString:@"state"]) {
-        _uid = [value integerValue];
+        _state = [value integerValue];
     }
     if ([key isEqualToString:@"replyTime"]) {
-        _uid = [value integerValue];
+        _replyTime = [value integerValue];
     }
 }
 

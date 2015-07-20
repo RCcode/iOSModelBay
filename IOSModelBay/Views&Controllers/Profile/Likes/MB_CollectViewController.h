@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MB_User.h"
 
 @interface MB_CollectViewController : MB_BaseViewController
 
 @property (nonatomic, assign) CGRect containerViewRect;
+@property (nonatomic, strong) MB_User *user;
 
 @end

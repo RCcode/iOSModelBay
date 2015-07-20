@@ -8,8 +8,8 @@
 
 #import "AFHttpTool.h"
 
-//#define kBaseUrl             @"http://model.rcplatformhk.net/ModelBayWeb/"
-#define kBaseUrl             @"http://192.168.0.89:8082/ModelBayWeb/"
+#define kBaseUrl             @"http://model.rcplatformhk.net/ModelBayWeb/"
+//#define kBaseUrl             @"http://192.168.0.89:8082/ModelBayWeb/"
 
 #define kLoginUrl            @"user/login.do"
 #define kCheckNameUrl        @"user/checkName.do"

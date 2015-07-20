@@ -62,9 +62,10 @@
     user.fname = collect.fname;
     user.fpic = collect.fpic;
     user.fbackPic = collect.fbackPic;
-    user.fcareerId = collect.careerId;
+    user.fcareerId = collect.fcareerId;
     user.state = collect.state;
     user.uType = collect.utype;
+    user.uid = collect.fuid;
     userVC.user = user;
     [self.navigationController pushViewController:userVC animated:YES];
 }
@@ -116,6 +117,7 @@ static CGFloat startY = 0;
 - (void)requestLikesListWithMinId:(NSInteger)minId {
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":@(self.user.fid),
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getLikesWithParameters:params success:^(id response) {

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^TextBlock)(NSInteger index, NSString *text);
+typedef void(^TextBlock)(NSInteger index, NSString *text, BOOL hide);
 
 @interface MB_EditWriteViewController : UIViewController
 

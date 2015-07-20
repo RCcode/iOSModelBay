@@ -24,7 +24,7 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
 #pragma mark - life cycle
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.optionIndex inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.optionIndex - 1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
@@ -85,6 +85,8 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
         }
         if ([colorString isEqualToString:LocalizedString(@"White", nil)]) {
             cell.colorImageView.backgroundColor = colorWithHexString(@"#ffffff");
+            cell.colorImageView.layer.borderWidth = 1;
+            cell.colorImageView.layer.borderColor = colorWithHexString(@"#a2a2a2").CGColor;
         }
         if ([colorString isEqualToString:LocalizedString(@"Olive", nil)]) {
             cell.colorImageView.backgroundColor = colorWithHexString(@"#518b19");

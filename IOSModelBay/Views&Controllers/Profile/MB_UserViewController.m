@@ -405,6 +405,7 @@ static CGFloat startY;
     instragramVC.uid = [NSString stringWithFormat:@"%ld",(long)self.user.uid];
     messageVC.containerViewRect    = self.containerView.frame;
     collectVC.containerViewRect    = self.containerView.frame;
+    collectVC.user = self.user;
     
     [self addChildViewController:instragramVC];
     [self addChildViewController:summaryVC];

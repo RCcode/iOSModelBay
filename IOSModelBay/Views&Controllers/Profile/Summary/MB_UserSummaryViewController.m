@@ -121,7 +121,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         cell.sanjiaoImageView.hidden = YES;
     }
     
-    if (indexPath.row == self.dataArray.count - 1) {
+    if (indexPath.row == [self tableView:self.tableView numberOfRowsInSection:2] - 1) {
         cell.dashLineImageView.image = [UIImage imageNamed:@"edit_sjieshao"];
     }else {
         cell.dashLineImageView.image = [UIImage imageNamed:@"edit_sjieshao_up"];
@@ -179,7 +179,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 //修改描述
                 MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
                 editVC.text = self.changeDetail.bio;
-                editVC.blcok = ^(NSInteger index, NSString *text){
+                editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                     self.changeDetail.bio = text;
                     [self.detailDic setObject:text forKey:@"bio"];
                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -196,12 +196,64 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 
                 switch (index) {
                     case 15://age
-                    case 16://Contracts
-                    case 17://Email
-                    case 18://Website
-                        
+                    {
+                        MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
+                        editVC.text = [NSString stringWithFormat:@"%ld",(long)self.changeDetail.age];
+                        editVC.index = 15;
+                        editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
+                            self.changeDetail.age = [text integerValue];
+                            [self.detailDic setObject:@([text integerValue]) forKey:@"birth"];
+                            [self.detailDic setObject:hide?@(1):@(0) forKey:@"btype"];
+                            [self.tableView reloadData];
+                        };
+                        [self.navigationController pushViewController:editVC animated:YES];
                         break;
-            
+                    }
+
+                    case 16://Contracts
+                    {
+                        MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
+                        editVC.text = self.changeDetail.contact;
+                        editVC.index = 16;
+                        editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
+                            self.changeDetail.contact = text;
+                            [self.detailDic setObject:text forKey:@"contact"];
+                            [self.detailDic setObject:hide?@(1):@(0) forKey:@"ctype"];
+                            [self.tableView reloadData];
+                    };
+                        [self.navigationController pushViewController:editVC animated:YES];
+                        break;
+                    }
+
+                    case 17://Email
+                    {
+                        MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
+                        editVC.text = self.changeDetail.email;
+                        editVC.index = 17;
+                        editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
+                            self.changeDetail.email = text;
+                            [self.detailDic setObject:text forKey:@"email"];
+                            [self.detailDic setObject:hide?@(1):@(0) forKey:@"etype"];
+                            [self.tableView reloadData];
+                        };
+                        [self.navigationController pushViewController:editVC animated:YES];
+                        break;
+                    }
+
+                    case 18://Website
+                    {
+                        MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
+                        editVC.text = self.changeDetail.website;
+                        editVC.index = 18;
+                        editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
+                            self.changeDetail.website = text;
+                            [self.detailDic setObject:text forKey:@"website"];
+                            [self.tableView reloadData];
+                        };
+                        [self.navigationController pushViewController:editVC animated:YES];
+                        break;
+                    }
+
                     default:
                     {
                         MB_EditSummaryViewController *editVC = [[MB_EditSummaryViewController alloc] init];
@@ -333,22 +385,16 @@ static CGFloat startY = 0;
 
 - (void)createMenuTitles{
     
+    [self.dataArray addObject:@"Gender"];
+    [self.dataArray addObject:@"Country"];
+    
     if (self.comeFromType == ComeFromTypeUser) {
-        if (self.detail.gender != -1) {
-            [self.dataArray addObject:@"Gender"];
-        }
-//        if (![self.detail.country isEqualToString:@""]) {
-            [self.dataArray addObject:@"Country"];
-//        }
-        if (self.detail.age != -1) {
+        if (self.detail.btype == 0) {
             [self.dataArray addObject:@"Age"];
         }
     }else {
-        [self.dataArray addObject:@"Gender"];
-        [self.dataArray addObject:@"Country"];
         [self.dataArray addObject:@"Age"];
     }
-    
     
     //模特，新面孔
     for (NSString *string in @[@"1", @"2"]) {
@@ -392,20 +438,18 @@ static CGFloat startY = 0;
     
     //最后加这几种
     if (self.comeFromType == ComeFromTypeUser) {
-        if (![self.detail.contact isEqualToString:@""]) {
+        if (self.detail.ctype == 0) {
             [self.dataArray addObject:@"Contracts"];
         }
-        if (![self.detail.email isEqualToString:@""]) {
+        if (self.detail.etype == 0) {
             [self.dataArray addObject:@"Email"];
-        }
-        if (![self.detail.website isEqualToString:@""]) {
-            [self.dataArray addObject:@"Website"];
         }
     }else{
         [self.dataArray addObject:@"Contracts"];
         [self.dataArray addObject:@"Email"];
-        [self.dataArray addObject:@"Website"];
     }
+    
+    [self.dataArray addObject:@"Website"];
     
     NSLog(@"dataArray ==== %@",self.dataArray);
     
@@ -434,12 +478,11 @@ static CGFloat startY = 0;
         [[AFHttpTool shareTool] updateUserDetailWithParameters:self.detailDic success:^(id response) {
             NSLog(@"update user detail %@",response);
             if ([self statFromResponse:response] == 10000) {
-//                [MB_Utils showPromptWithText:@"update success"];
+                
             }else {
-//                [MB_Utils showPromptWithText:@"update failed"];
+                
             }
         } failure:^(NSError *err) {
-//            [MB_Utils showPromptWithText:@"update failed"];
         }];
     }else{
         self.tableView.separatorColor = [UIColor clearColor];
@@ -488,6 +531,18 @@ static CGFloat startY = 0;
             break;
         case 14:
             return [MB_Utils shareUtil].country[[detail.country integerValue]];
+            break;
+        case 15:
+            return [NSString stringWithFormat:@"%ld",(long)detail.age];
+            break;
+        case 16:
+            return detail.contact;
+            break;
+        case 17:
+            return detail.email;
+            break;
+        case 18:
+            return detail.website;
             break;
         default:
             return @"";
@@ -584,7 +639,6 @@ static CGFloat startY = 0;
             self.changeDetail.hips = optionIndex;
             [self.detailDic setObject:@(optionIndex) forKey:@"hips"];
             break;
-            
         case 12:
             self.changeDetail.experience = [NSString stringWithFormat:@"%ld",(long)optionIndex];
             [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"experience"];
@@ -596,22 +650,6 @@ static CGFloat startY = 0;
         case 14:
             self.changeDetail.country = [NSString stringWithFormat:@"%ld",(long)optionIndex];
             [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"country"];
-            break;
-        case 15:
-            self.changeDetail.age = optionIndex;
-            [self.detailDic setObject:@(optionIndex) forKey:@"age"];
-            break;
-        case 16:
-            self.changeDetail.contact = [NSString stringWithFormat:@"%ld",(long)optionIndex];
-            [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"contact"];
-            break;
-        case 17:
-            self.changeDetail.email = [NSString stringWithFormat:@"%ld",(long)optionIndex];
-            [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"email"];
-            break;
-        case 18:
-            self.changeDetail.website = [NSString stringWithFormat:@"%ld",(long)optionIndex];
-            [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"website"];
             break;
         default:
             break;

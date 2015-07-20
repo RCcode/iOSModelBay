@@ -39,6 +39,8 @@
         [_shareButton addTarget:self action:@selector(shareButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_shareButton];
         
+        _shareButton.hidden = YES;
+        
         _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _moreButton.frame = CGRectMake((kWindowWidth - 11) / 2, CGRectGetMaxY(_likeButton.frame) + 13, 20, 20);
         [_moreButton setImage:[UIImage imageNamed:@"ic_sanjiao"] forState:UIControlStateNormal];
@@ -64,7 +66,7 @@
             descLabel1.textColor = colorWithHexString(@"#ffffff");
             NSString *str11 = LocalizedString(@"Model", nil);
             NSString *str12 = ablum.mName;
-            NSMutableAttributedString *string1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",str11,str12]];
+            NSMutableAttributedString *string1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str11,str12]];
             [string1 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str11.length + 1, str12.length)];
             descLabel1.attributedText = string1;
             [descLabel1 sizeToFit];
@@ -73,7 +75,7 @@
         }
 
         UILabel *descLabel2 = [[UILabel alloc] init];
-        if ([ablum.mName isEqualToString:@""]) {
+        if ([ablum.pName isEqualToString:@""]) {
             descLabel2.frame = CGRectMake(0, CGRectGetMaxY(descLabel1.frame), kWindowWidth, 0);
         }else {
             descLabel2.frame = CGRectMake(0, CGRectGetMaxY(descLabel1.frame) + 10, kWindowWidth, 0);
@@ -82,7 +84,7 @@
             descLabel2.font = [UIFont fontWithName:@"CenturyGothic-Italic" size:10];
             NSString *str21 = LocalizedString(@"Photographer", nil);
             NSString *str22 = ablum.pName;
-            NSMutableAttributedString *string2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",str21,str22]];
+            NSMutableAttributedString *string2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str21,str22]];
             [string2 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str21.length + 1, str22.length)];
             descLabel2.attributedText = string2;
             [descLabel2 sizeToFit];
@@ -92,7 +94,7 @@
         
         
         UILabel *descLabel3 = [[UILabel alloc] init];
-        if ([ablum.pName isEqualToString:@""]) {
+        if ([ablum.hName isEqualToString:@""]) {
             descLabel3.frame = CGRectMake(0, CGRectGetMaxY(descLabel2.frame), kWindowWidth, 0);
         }else {
             descLabel3.frame = CGRectMake(0, CGRectGetMaxY(descLabel2.frame) + 10, kWindowWidth, 0);
@@ -112,24 +114,23 @@
         
         
         UILabel *descLabel4 = [[UILabel alloc] init];
-        if ([ablum.hName isEqualToString:@""]) {
+        if ([ablum.mkName isEqualToString:@""]) {
             descLabel4.frame = CGRectMake(0, CGRectGetMaxY(descLabel3.frame), kWindowWidth, 0);
         }else {
             descLabel4.frame = CGRectMake(0, CGRectGetMaxY(descLabel3.frame) + 10, kWindowWidth, 0);
-            
-        }
-        
-        if (![ablum.mkName isEqualToString:@""]) {
-            descLabel4.textAlignment = NSTextAlignmentCenter;
-            descLabel4.textColor = colorWithHexString(@"#ffffff");
-            descLabel4.font = [UIFont fontWithName:@"CenturyGothic-Italic" size:10];
-            NSString *str41 = LocalizedString(@"Makeup Artist", nil);
-            NSString *str42 = ablum.mkName;
-            NSMutableAttributedString *string4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",str41,str42]];
-            descLabel4.attributedText = string4;
-            [descLabel4 sizeToFit];
-            descLabel4.center = CGPointMake(kWindowWidth / 2, CGRectGetMidY(descLabel4.frame));
-            [self addSubview:descLabel4];
+            if (![ablum.mkName isEqualToString:@""]) {
+                descLabel4.textAlignment = NSTextAlignmentCenter;
+                descLabel4.textColor = colorWithHexString(@"#ffffff");
+                descLabel4.font = [UIFont fontWithName:@"CenturyGothic-Italic" size:10];
+                NSString *str41 = LocalizedString(@"Makeup Artist", nil);
+                NSString *str42 = ablum.mkName;
+                NSMutableAttributedString *string4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str41,str42]];
+                [string4 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str41.length + 1, str42.length)];
+                descLabel4.attributedText = string4;
+                [descLabel4 sizeToFit];
+                descLabel4.center = CGPointMake(kWindowWidth / 2, CGRectGetMidY(descLabel4.frame));
+                [self addSubview:descLabel4];
+            }
         }
         
         //调整总大小

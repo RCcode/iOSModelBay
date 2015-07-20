@@ -73,13 +73,14 @@
         cell.textLabel.text = _titleArray[indexPath.row];
         cell.textLabel.font = [UIFont fontWithName:@"FuturaStd-Book" size:17];
 
-    }else {
-        if ([userDefaults boolForKey:kIsLogin]) {
-            cell.textLabel.text = LocalizedString(@"Logout", nil);
-        }else {
-            cell.textLabel.text = LocalizedString(@"Login", nil);
-        }
     }
+//    else {
+//        if ([userDefaults boolForKey:kIsLogin]) {
+//            cell.textLabel.text = LocalizedString(@"Logout", nil);
+//        }else {
+//            cell.textLabel.text = LocalizedString(@"Login", nil);
+//        }
+//    }
     return cell;
 }
 
@@ -239,7 +240,11 @@
         button.titleLabel.textColor = colorWithHexString(@"#ffffff");
         button.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
         button.frame = CGRectMake(0, 21, kWindowWidth - 24, 43);
-        [button setTitle:LocalizedString(@"Login", nil) forState:UIControlStateNormal];
+        if ([userDefaults boolForKey:kIsLogin]) {
+            [button setTitle:LocalizedString(@"Logout", nil) forState:UIControlStateNormal];
+        }else{
+            [button setTitle:LocalizedString(@"Login", nil) forState:UIControlStateNormal];
+        }
         [button addTarget:self action:@selector(loginButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_footView addSubview:button];
     }

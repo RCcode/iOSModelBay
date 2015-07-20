@@ -175,6 +175,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
         user.fbackPic = notice.backPic;
         user.uType = notice.utype;
         user.state = notice.state;
+        user.uid = notice.fuid;
         
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.comeFromType = ComeFromTypeUser;

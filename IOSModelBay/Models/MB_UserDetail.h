@@ -17,12 +17,15 @@
 @property (nonatomic, strong) NSString *careerId;//职业id,竖线分割:1|2|3
 @property (nonatomic, assign) NSInteger state;//是否本平台用户:0.不是;1.是
 @property (nonatomic, strong) NSString *bio;//描述
-@property (nonatomic, assign) NSInteger gender;//性别:0.女;1.男;-1隐藏
+@property (nonatomic, assign) NSInteger gender;//性别:0.女;1.男;
 @property (nonatomic, strong) NSString *country;//国家
-@property (nonatomic, assign) NSInteger age;//年龄:-1隐藏
-@property (nonatomic, strong) NSString *contact;//联系方式,null为隐藏
-@property (nonatomic, strong) NSString *email;//邮箱, null为隐藏
-@property (nonatomic, strong) NSString *website;//网站, null为隐藏
+@property (nonatomic, assign) NSInteger age;//年龄
+@property (nonatomic, assign) NSInteger btype;//分享年龄:0.是;1.否
+@property (nonatomic, strong) NSString *contact;//联系方式
+@property (nonatomic, assign) NSInteger ctype;//分享联系方式:0.是;1.否
+@property (nonatomic, strong) NSString *email;//邮箱
+@property (nonatomic, assign) NSInteger etype;//分享游戏：0是；1否
+@property (nonatomic, strong) NSString *website;//网站
 @property (nonatomic, strong) NSString *experience;//经验
 @property (nonatomic, assign) NSInteger height;//身高cm
 @property (nonatomic, assign) NSInteger weight;//体重kg

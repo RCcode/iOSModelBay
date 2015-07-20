@@ -83,13 +83,13 @@ static NSString * const ReuseIdentifierReply = @"reply";
 - (void)configureCell2:(MB_ReplyTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MB_Message *message = self.dataArray[indexPath.section];
-    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-    message.replyName = userVC.user.fname;
-    message.replayPic = userVC.user.fpic;
-    message.replayBackPic = userVC.user.fbackPic;
-    message.replyCarerrId = userVC.user.fcareerId;
-    message.replyState = userVC.user.state;
-    message.replyUtype = userVC.user.uType;
+//    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+//    message.replyName = userVC.user.fname;
+//    message.replayPic = userVC.user.fpic;
+//    message.replayBackPic = userVC.user.fbackPic;
+//    message.replyCarerrId = userVC.user.fcareerId;
+//    message.replyState = userVC.user.state;
+//    message.replyUtype = userVC.user.uType;
     
     cell.message = message;
     cell.nameButton.tag = indexPath.section;
@@ -226,6 +226,7 @@ static CGFloat startY = 0;
         user.fcareerId = message.fcareerId;
         user.uType = message.futype;
         user.state = message.state;
+        user.uid = message.fuid;
         userVC.user = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }

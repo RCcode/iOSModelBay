@@ -16,10 +16,8 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
-        if ([key isEqualToString:@"id"] || [key isEqualToString:@"state"] || [key isEqualToString:@"height"] || [key isEqualToString:@"weight"] ||[key isEqualToString:@"chest"] ||[key isEqualToString:@"waist"] ||[key isEqualToString:@"hips"]) {
+        if ([key isEqualToString:@"id"] || [key isEqualToString:@"state"] || [key isEqualToString:@"height"] || [key isEqualToString:@"weight"] ||[key isEqualToString:@"chest"] ||[key isEqualToString:@"waist"] ||[key isEqualToString:@"hips"]||[key isEqualToString:@"age"] ||[key isEqualToString:@"gender"]) {
             [self setValue:@(0) forKey:key];
-        }else if ([key isEqualToString:@"gender"] || [key isEqualToString:@"age"]) {
-            [self setValue:@(-1) forKey:key];
         }else {
             [self setValue:@"" forKey:key];
         }
