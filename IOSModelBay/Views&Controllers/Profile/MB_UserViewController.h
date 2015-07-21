@@ -10,6 +10,8 @@
 #import "MB_User.h"
 
 #define topViewHeight 186
+//#define topViewHeight   self.comeFromType == ComeFromTypeSelf?186:160
+
 
 typedef  NS_ENUM(NSInteger, ComeFromType) {
     ComeFromTypeUser,

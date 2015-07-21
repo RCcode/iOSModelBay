@@ -56,7 +56,7 @@
         {
             _picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 0)];
             _picker.datePickerMode = UIDatePickerModeDate;
-            _picker.date = [NSDate date];
+            _picker.date = [NSDate dateWithTimeIntervalSince1970:[self.text integerValue]];
             _picker.maximumDate = [NSDate date];
             [self.view addSubview:_picker];
             break;
@@ -112,12 +112,7 @@
     switch (self.index) {
         case 15://age
         {
-            NSDate *date = self.picker.date;
-            NSDateFormatter *formattor = [[NSDateFormatter alloc] init];
-            [formattor setDateFormat:@"YYYY"];
-            NSString *str1 = [formattor stringFromDate:date];
-            NSString *str2 = [formattor stringFromDate:[NSDate date]];
-            NSString *age = [NSString stringWithFormat:@"%ld",(long)([str2 integerValue] - [str1 integerValue])];
+            NSString *age = [NSString stringWithFormat:@"%.0f",[self.picker.date timeIntervalSince1970]];
             self.blcok(self.index, age, _hideButton.selected);
             break;
         }

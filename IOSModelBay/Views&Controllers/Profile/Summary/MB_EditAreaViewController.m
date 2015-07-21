@@ -7,11 +7,11 @@
 //
 
 #import "MB_EditAreaViewController.h"
+#import "MB_EditTableViewCell.h"
 
 @interface MB_EditAreaViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *selectArray;
 
 @end
 
@@ -23,7 +23,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dong" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     if (self.name == EditNameAreaModel) {
         self.dataArray = [[MB_Utils shareUtil].areaModel copy];
@@ -49,19 +49,35 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
+    MB_EditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    cell.nameLabel.text = self.dataArray[indexPath.row];
+    
+    if ([self.selectArray containsObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]]) {
+        cell.selectedImageView.hidden = NO;
+    }else {
+        cell.selectedImageView.hidden = YES;
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.name == EditNameAreaModel) {
-        [self.selectArray addObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-    }else {
-        [self.selectArray addObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row + 100]];
-    }
+    
+//    if (self.name == EditNameAreaModel) {
+        if ([self.selectArray containsObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]]) {
+            [self.selectArray removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        }else {
+            [self.selectArray addObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        }
+    
+    [self.tableView reloadData];
+//    }else {
+//        if (self.selectArray) {
+//            <#statements#>
+//        }
+//        [self.selectArray addObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row + 100]];
+//    }
 }
 
 #pragma mark - private methods
@@ -83,15 +99,10 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-        //        _tableView.sectionHeaderHeight = 10.5;
-        //        _tableView.sectionFooterHeight = 0;
-        
-        //        _tableView.layoutMargins = UIEdgeInsetsZero;
-        //        _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         
         UIView *view = [[UIView alloc] init];
         [_tableView setTableFooterView:view];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ReuseIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_EditTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
 }

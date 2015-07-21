@@ -42,7 +42,6 @@
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
-    
     if (![userDefaults boolForKey:kIsLogin]) {
         //如果没有登录, 设置自动弹出登录页面
         self.showLoginAuto = YES;
@@ -102,6 +101,7 @@
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.type = FilterTypeFind;
+    filterVC.hidesBottomBarWhenPushed = YES;
     filterVC.CompleteHandler = ^(){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self findUserListWithMinId:0];

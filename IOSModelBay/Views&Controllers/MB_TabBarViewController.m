@@ -106,8 +106,8 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = baseTag + i;
             [button setFrame:CGRectMake(btnWidth * i, 0, btnWidth, btnHeight)];
-            [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:images_h[i]] forState:UIControlStateSelected];
+            [button setImage:[UIImage imageNamed:images_h[i]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:images[i]] forState:UIControlStateSelected];
             [button addTarget:self action:@selector(tabBarButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
             [_customTabBar addSubview:button];
             

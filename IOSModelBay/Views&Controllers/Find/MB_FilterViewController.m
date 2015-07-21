@@ -22,10 +22,11 @@
 @implementation MB_FilterViewController
 
 #pragma mark - life cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = colorWithHexString(@"#444444");
+
     self.titleLabel.text = LocalizedString(@"Filter", nil);
     self.navigationItem.titleView = self.titleLabel;
     
@@ -246,7 +247,7 @@
         layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
         layout.minimumLineSpacing = space;
         layout.minimumInteritemSpacing = space;
-        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sexView.frame), kWindowWidth, kWindowHeight - 49 - CGRectGetMaxY(self.sexView.frame)) collectionViewLayout:layout];
+        _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sexView.frame), kWindowWidth, kWindowHeight - CGRectGetMaxY(self.sexView.frame)) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor whiteColor];
         _collectView.delegate        = self;
         _collectView.dataSource      = self;

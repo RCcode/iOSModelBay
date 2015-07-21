@@ -43,6 +43,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
     
     [self.view addSubview:self.tableView];
+    [self addPullRefresh];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestUserDetail];
@@ -55,7 +56,14 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    if (self.detail == nil) {
+        //请求完成之前什么都不显示
+        self.editView.hidden = YES;
+        return 0;
+    }else {
+        self.editView.hidden = NO;
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -102,14 +110,14 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             NSString *str = [NSString stringWithFormat:@"#%@",LocalizedString([[MB_Utils shareUtil].areaModel objectAtIndex:[string integerValue]], nil)];
             [array addObject: str];
         }
-        cell.subLabel.text = [array componentsJoinedByString:@" "];
+        cell.subLabel.text = [array componentsJoinedByString:@"  "];
     }else {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
         for (NSString * string in self.changeDetail.arrayPhoto) {
         NSString *str = [NSString stringWithFormat:@"#%@",LocalizedString([[MB_Utils shareUtil].areaPhoto objectAtIndex:[string integerValue] - 100], nil)];
         [array addObject: str];
         }
-        cell.subLabel.text = [array componentsJoinedByString:@" "];
+        cell.subLabel.text = [array componentsJoinedByString:@"  "];
     }
     
     if (self.editing) {
@@ -285,6 +293,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 if ([title isEqualToString:@"areaModel"]) {
                     //修改专注领域(模特)
                     editVC.name = EditNameAreaModel;
+                    editVC.selectArray = self.changeDetail.arrayModel;
                     editVC.block = ^(NSMutableArray *array) {
                         self.changeDetail.arrayModel = array;
                         
@@ -299,6 +308,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 }else if ([title isEqualToString:@"areaPhoto"]){
                     //修改专注领域(摄影师)
                     editVC.name = EditNameAreaPhoto;
+                    editVC.selectArray = self.changeDetail.arrayPhoto;
                     editVC.block = ^(NSMutableArray *array) {
                         self.changeDetail.arrayPhoto = array;
                         
@@ -347,6 +357,17 @@ static CGFloat startY = 0;
 
 
 #pragma mark - privtate methods
+//添加上下拉刷新
+- (void)addPullRefresh
+{
+    __weak MB_UserSummaryViewController *weakSelf = self;
+    
+    [self addHeaderRefreshForView:self.tableView WithActionHandler:^{
+        NSLog(@"header");
+        [weakSelf requestUserDetail];
+    }];
+}
+
 - (void)requestUserDetail {
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken],
@@ -354,11 +375,12 @@ static CGFloat startY = 0;
     [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
         NSLog(@"detail %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
             
             self.detail = [[MB_UserDetail alloc] init];
-            self.detail.arrayModel = [NSMutableArray arrayWithCapacity:0];
-            self.detail.arrayPhoto = [NSMutableArray arrayWithCapacity:0];
+            self.detail.arrayModel = [[NSMutableArray alloc] initWithCapacity:0];
+            self.detail.arrayPhoto = [[NSMutableArray alloc] initWithCapacity:0];
             self.changeDetail = [[MB_UserDetail alloc] init];
             self.changeDetail.arrayModel = [NSMutableArray arrayWithCapacity:0];
             self.changeDetail.arrayPhoto = [NSMutableArray arrayWithCapacity:0];
@@ -366,6 +388,9 @@ static CGFloat startY = 0;
             [self.changeDetail setValuesForKeysWithDictionary:response];
             
             for (NSString *string in [self.detail.fareas componentsSeparatedByString:@"|"]) {
+                if ([string isEqualToString:@""]) {
+                    continue;
+                }
                 if ([string integerValue] < 100) {
                     [self.detail.arrayModel addObject:string];
                     [self.changeDetail.arrayModel addObject:string];
@@ -380,10 +405,13 @@ static CGFloat startY = 0;
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
     }];
 }
 
 - (void)createMenuTitles{
+    [self.dataArray removeAllObjects];
+    [self.areaArray removeAllObjects];
     
     [self.dataArray addObject:@"Gender"];
     [self.dataArray addObject:@"Country"];
@@ -399,7 +427,6 @@ static CGFloat startY = 0;
     //模特，新面孔
     for (NSString *string in @[@"1", @"2"]) {
         if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:string]) {
-//            for (NSString *string in @[@"Height", @"Weight", @"Chest", @"Waist", @"Hips", @"Eye Color", @"Skin Color", @"Hair Color", @"Shoes", @"Dress", @"areaModel", @"Experiences"]) {
             for (NSString *string in @[@"Height", @"Weight", @"Chest", @"Waist", @"Hips", @"Eye Color", @"Skin Color", @"Hair Color", @"Shoes", @"Dress", @"Experiences"]) {
                 if (![self.dataArray containsObject:string]) {
                     [self.dataArray addObject:string];
@@ -422,12 +449,6 @@ static CGFloat startY = 0;
         }
     }
     
-//    //摄影师
-//    if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:@"4"]) {
-//        if (![self.dataArray containsObject:@"areaPhoto"]) {
-//            [self.dataArray addObject:@"areaPhoto"];
-//        }
-//    }
     
     //不是观众就加个experience
     if (self.user.uType != 0) {
@@ -450,8 +471,6 @@ static CGFloat startY = 0;
     }
     
     [self.dataArray addObject:@"Website"];
-    
-    NSLog(@"dataArray ==== %@",self.dataArray);
     
     for (NSString *string in @[@"1", @"5"]) {
         if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:string]) {
@@ -533,8 +552,16 @@ static CGFloat startY = 0;
             return [MB_Utils shareUtil].country[[detail.country integerValue]];
             break;
         case 15:
-            return [NSString stringWithFormat:@"%ld",(long)detail.age];
+        {
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:detail.age];
+            NSDateFormatter *formattor = [[NSDateFormatter alloc] init];
+            [formattor setDateFormat:@"YYYY"];
+            NSString *str1 = [formattor stringFromDate:date];
+            NSString *str2 = [formattor stringFromDate:[NSDate date]];
+            NSString *age = [NSString stringWithFormat:@"%ld",(long)([str2 integerValue] - [str1 integerValue])];
+            return age;
             break;
+        }
         case 16:
             return detail.contact;
             break;
@@ -669,6 +696,7 @@ static CGFloat startY = 0;
         
         _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _tableView.separatorColor = colorWithHexString(@"#eeeeee");
         _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -10.5);
         _tableView.clipsToBounds = NO;
         [_tableView registerNib:[UINib nibWithNibName:@"MB_IntroduceTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierIntroduce];

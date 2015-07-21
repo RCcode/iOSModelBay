@@ -106,6 +106,7 @@
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.type = FilterTypeRanking;
+    filterVC.hidesBottomBarWhenPushed = YES;
     filterVC.CompleteHandler = ^(){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self requestRankingListWithMinId:0];

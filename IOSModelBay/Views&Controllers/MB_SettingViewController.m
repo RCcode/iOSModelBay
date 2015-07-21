@@ -209,13 +209,13 @@
 #pragma mark - getters & setters
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(12, 12, kWindowWidth - 24, kWindowHeight- 12 - 64) style:UITableViewStylePlain];
+        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(12, 0, kWindowWidth - 24, kWindowHeight- 12 - 64) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
         _listTableView.tableHeaderView = [UIView new];
         _listTableView.tableFooterView = self.footView;
         _listTableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _listTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _listTableView.contentInset = UIEdgeInsetsMake(76, 0, 0, 0);
         _listTableView.scrollEnabled = NO;
     }
     return _listTableView;

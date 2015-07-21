@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = colorWithHexString(@"#222222");
+    
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.listTableView];
 }
@@ -273,7 +274,7 @@
 
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
-        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, kWindowHeight - CGRectGetMaxY(self.searchView.frame)) style:UITableViewStylePlain];
         _listTableView.delegate = self;
         _listTableView.dataSource = self;
         _listTableView.layoutMargins = UIEdgeInsetsZero;

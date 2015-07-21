@@ -38,13 +38,10 @@ static MB_Utils *util = nil;
                                @"12":LocalizedString(@"Fahsion Designer", nil),
                                @"13":LocalizedString(@"Agency", nil)};
             
-            // util.eyeColor = @[@"Black", @"Blue", @"Brown", @"Green", @"Hazel", @"Other"];
             util.eyeColor = @[@"", LocalizedString(@"Black", nil), LocalizedString(@"Blue", nil), LocalizedString(@"Brown", nil), LocalizedString(@"Green", nil), LocalizedString(@"Hazel", nil), LocalizedString(@"Other", nil)];
             
-//            util.skincolor = @[@"Black", @"White", @"Olive", @"Tanned", @"Other"];
             util.skincolor = @[@"", LocalizedString(@"Black", nil), LocalizedString(@"White", nil), LocalizedString(@"Olive", nil), LocalizedString(@"Tanned", nil), LocalizedString(@"Other", nil)];
 
-//            util.haircolor = @[@"Black", @"Blonde", @"Brown", @"Grey", @"Red", @"Other"];
             util.haircolor = @[@"", LocalizedString(@"Black", nil), LocalizedString(@"Blonde", nil), LocalizedString(@"Brown", nil), LocalizedString(@"Grey", nil), LocalizedString(@"Red", nil), LocalizedString(@"Other", nil),];
             
             util.shoesize = @[@"", @"2", @"2.5", @"3", @"3.5", @"4", @"4.5", @"5", @"5.5", @"6", @"6.5", @"7", @"7.5", @"8", @"8.5", @"9", @"9.5", @"10", @"10.5", @"11", @"11.5", @"12", @"12.5", @"13", @"13.5", @"14", @"14.5"];
@@ -65,7 +62,6 @@ static MB_Utils *util = nil;
             
             util.areaPhoto = @[LocalizedString(@"Landscape", nil), LocalizedString(@"Advertising", nil), LocalizedString(@"Lifestyle", nil), LocalizedString(@"Architectural", nil), LocalizedString(@"Lingerie/Body", nil), LocalizedString(@"Artistic", nil), LocalizedString(@"Music", nil), LocalizedString(@"Athletic", nil), LocalizedString(@"Nude", nil), LocalizedString(@"Beauty", nil), LocalizedString(@"Portrait", nil), LocalizedString(@"Black and White", nil), LocalizedString(@"Reportage/Journalism", nil), LocalizedString(@"Celebrity/Entertainment", nil), LocalizedString(@"Runway", nil), LocalizedString(@"Fashion/Editorial", nil), LocalizedString(@"Still Life", nil), LocalizedString(@"Fine Art", nil), LocalizedString(@"Swimwear", nil), LocalizedString(@"Glamour", nil), LocalizedString(@"Wedding", nil)];
             
-//            util.experience = @[@"No Experience", @"Some Experience", @"Experienced", @"Very Experienced", @"Advanced"];
             util.experience = @[@"", LocalizedString(@"No Experience", nil), LocalizedString(@"Some Experience", nil), LocalizedString(@"Experienced", nil), LocalizedString(@"Very Experienced", nil), LocalizedString(@"Advanced", nil)];
 
             util.gender = @[@"", LocalizedString(@"Men", nil), LocalizedString(@"Women", nil)];
@@ -74,8 +70,6 @@ static MB_Utils *util = nil;
 
 
             util.mapArray = @[@"Eye Color",@"Skin Color",@"Hair Color",@"Shoes",@"Dress",@"Height",@"Weight",@"Chest",@"Waist",@"Hips",@"areaModel",@"areaPhoto",@"Experiences",@"Gender",@"Country",@"Age",@"Contracts",@"Email",@"Website"];
-            //             util.mapArray = @[LocalizedString(@"eyecolor", nil), LocalizedString(@"skincolor", nil), LocalizedString(@"haircolor", nil), LocalizedString(@"shoesize", nil), LocalizedString(@"dress", nil), LocalizedString(@"height", nil), LocalizedString(@"weight", nil), LocalizedString(@"chest", nil), LocalizedString(@"waist", nil), LocalizedString(@"hips", nil), LocalizedString(@"areaModel", nil), LocalizedString(@"areaPhoto", nil), LocalizedString(@"experience", nil), LocalizedString(@"gender", nil), LocalizedString(@"country", nil), LocalizedString(@"age", nil), LocalizedString(@"contact", nil), LocalizedString(@"email", nil), LocalizedString(@"website", nil)];
-
             
             util.optionsDic = @{@(0):util.eyeColor,
                                 @(1):util.skincolor,

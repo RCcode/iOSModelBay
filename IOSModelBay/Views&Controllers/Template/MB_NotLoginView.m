@@ -19,7 +19,7 @@
         _delegate = delegate;
         _text = text;
         
-        _contanerView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 300, 100)];
+        _contanerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame) - 30, 0)];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(notLoginViewTaped:)];
         [_contanerView addGestureRecognizer:tap];
         
@@ -28,7 +28,7 @@
         _imageView.image = [UIImage imageNamed:@"ic_nologin"];
         [_contanerView addSubview:_imageView];
         
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_imageView.frame) + 14, CGRectGetWidth(_contanerView.frame), 10)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_imageView.frame) + 14, CGRectGetWidth(_contanerView.frame), 0)];
         _label.numberOfLines = 0;
         _label.font = [UIFont fontWithName:@"FuturaStd-Book" size:12];
         _label.textColor = colorWithHexString(@"#595959");

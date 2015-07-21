@@ -20,6 +20,8 @@ typedef void(^ChangeBlock)(NSMutableArray *array);
 
 @property (nonatomic, assign) EditName name;
 
+@property (nonatomic, strong) NSMutableArray *selectArray;
+
 @property (nonatomic, copy) ChangeBlock block;
 
 @end

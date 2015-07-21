@@ -63,7 +63,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
     
-    
     if ([userDefaults boolForKey:kIsLogin]) {
         [self.view addSubview:self.tableView];
         [self.view addSubview:self.commentView];
@@ -369,8 +368,21 @@ static CGFloat startY;
 
 
 - (void)loginSuccess:(NSNotification *)noti {
-    [self.notLoginView removeFromSuperview];
+    if (self.type == ComeFromTypeSelf) {
+        MB_User *user = [[MB_User alloc] init];
+        user.fid = [[userDefaults objectForKey:kID] integerValue];
+        user.fname = [userDefaults objectForKey:kName];
+        user.fcareerId = [userDefaults objectForKey:kCareer];
+        user.fbackPic = [userDefaults objectForKey:kBackPic];
+        user.fpic = [userDefaults objectForKey:kPic];
+        user.uid = [[userDefaults objectForKey:kUid] integerValue];
+        user.uType = [[userDefaults objectForKey:kUtype] integerValue];
+        user.state = 1;
+        self.user = user;
+    }
     
+    [self.notLoginView removeFromSuperview];
+        
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
     
@@ -383,7 +395,11 @@ static CGFloat startY;
 
 - (void)loginOutSuccess:(NSNotification *)noti {
     [self.tableView removeFromSuperview];
-    self.tableView = nil;
+    _tableView = nil;
+    _commentView = nil;
+    _userInfoView = nil;
+    _containerView = nil;
+    _menuIndex = 0;
     
     [self.view addSubview:self.notLoginView];
 }
@@ -570,8 +586,7 @@ static CGFloat startY;
         
         if (self.comeFromType == ComeFromTypeSelf) {
             _userInfoView.inviteButton.hidden = YES;
-            _userInfoView.likeButton.hidden = NO;
-            _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
+            _userInfoView.likeButton.hidden = YES;
 
         }else{
             if (self.user.state == 0 && self.user.uType == 1 && [[userDefaults objectForKey:kUtype] integerValue] == 1) {
