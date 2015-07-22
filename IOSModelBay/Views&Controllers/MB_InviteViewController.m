@@ -139,6 +139,8 @@
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
         mailVC.mailComposeDelegate = self;
+        MB_AddressBookPeople *people = self.dataArray[btn.tag];
+        [mailVC setToRecipients:@[people.email]];
         [self presentViewController:mailVC animated:YES completion:nil];
     }else {
         NSLog(@"不可以发邮件");

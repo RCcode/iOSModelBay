@@ -28,48 +28,55 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
     
-    
-    if (self.index != 18 && self.index != 0) {
+    if (self.index != 18) {
         _hideButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _hideButton.frame = CGRectMake(0, 250, 100, 100);
         [_hideButton setImage:[UIImage imageNamed:@"ic_wz"] forState:UIControlStateNormal];
         [_hideButton setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
         [_hideButton setTitleColor:colorWithHexString(@"#8f8f8f") forState:UIControlStateNormal];
         [_hideButton setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
-        [_hideButton setTitle:@"aaa" forState:UIControlStateNormal];
+        [_hideButton setTitle:LocalizedString(@"Only Professional", nil) forState:UIControlStateNormal];
         [_hideButton addTarget:self action:@selector(hideOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_hideButton];
         
         _noHideButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _noHideButton.frame = CGRectMake(200, 250, 100, 100);
         [_noHideButton setImage:[UIImage imageNamed:@"ic_wz"] forState:UIControlStateNormal];
         [_noHideButton setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
         [_noHideButton setTitleColor:colorWithHexString(@"#8f8f8f") forState:UIControlStateNormal];
         [_noHideButton setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
-        [_noHideButton setTitle:@"bbb" forState:UIControlStateNormal];
+        [_noHideButton setTitle:LocalizedString(@"Only Me", nil) forState:UIControlStateNormal];
         [_noHideButton addTarget:self action:@selector(notHideOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_noHideButton];
+        
+        _hideButton.selected = YES;
     }
     
     switch (self.index) {
         case 15://age
         {
-            _picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 0)];
+            _picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 100, kWindowWidth, 0)];
             _picker.datePickerMode = UIDatePickerModeDate;
             _picker.date = [NSDate dateWithTimeIntervalSince1970:[self.text integerValue]];
             _picker.maximumDate = [NSDate date];
             [self.view addSubview:_picker];
+            
+            _hideButton.frame = CGRectMake(0, CGRectGetMaxY(_picker.frame) + 20, kWindowWidth / 2, 50);
+            _noHideButton.frame = CGRectMake(kWindowWidth / 2, CGRectGetMaxY(_picker.frame) + 20, kWindowWidth / 2, 50);
+            
             break;
         }
         case 0://bio
         {
-            _textView = [[UITextView alloc] initWithFrame:CGRectMake(12, 64, kWindowWidth - 24, 216)];
+            _textView = [[UITextView alloc] initWithFrame:CGRectMake(12, 100, kWindowWidth - 24, 216)];
             _textView.delegate = self;
             _textView.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
             _textView.textColor = colorWithHexString(@"#9a9a9a");
             _textView.text = self.text;
             _textView.backgroundColor = [UIColor whiteColor];
             [self.view addSubview:_textView];
+            
+            _hideButton.frame = CGRectMake(0, CGRectGetMaxY(_textView.frame) + 20, kWindowWidth / 2, 50);
+            _noHideButton.frame = CGRectMake(kWindowWidth / 2, CGRectGetMaxY(_textView.frame) + 20, kWindowWidth / 2, 50);
+            
             break;
         }
             
@@ -83,6 +90,10 @@
             _textField.text = self.text;
             _textField.backgroundColor = [UIColor whiteColor];
             [self.view addSubview:_textField];
+            
+            _hideButton.frame = CGRectMake(0, CGRectGetMaxY(_textField.frame) + 20, kWindowWidth / 2, 50);
+            _noHideButton.frame = CGRectMake(kWindowWidth / 2, CGRectGetMaxY(_textField.frame) + 20, kWindowWidth / 2, 50);
+            
             break;
         }
             

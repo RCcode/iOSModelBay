@@ -82,6 +82,7 @@
 - (void)requestLikesListWithMinId:(NSInteger)minId {
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":[userDefaults objectForKey:kID],
                              @"minId":@(minId),
                              @"count":@(10)};
     [[AFHttpTool shareTool] getLikesWithParameters:params success:^(id response) {

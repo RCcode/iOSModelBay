@@ -51,15 +51,15 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sln-Tq-nAZ">
-                    <rect key="frame" x="0.0" y="136" width="12" height="98"/>
+                    <rect key="frame" x="0.0" y="136" width="8" height="98"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="12" id="E1L-da-o1K"/>
+                        <constraint firstAttribute="width" constant="8" id="E1L-da-o1K"/>
                         <constraint firstAttribute="height" constant="98" id="mX5-gO-DZ6"/>
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-wQ-sEA">
-                    <rect key="frame" x="12" y="136" width="308" height="98"/>
+                    <rect key="frame" x="8" y="136" width="312" height="98"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="98" id="sNg-pK-PuJ"/>
@@ -181,7 +181,7 @@
                 <constraint firstItem="vCY-M5-7cG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hJf-ey-UqP"/>
                 <constraint firstAttribute="trailing" secondItem="ckW-wQ-sEA" secondAttribute="trailing" id="iDA-i4-U4m"/>
                 <constraint firstItem="jfN-7n-EuC" firstAttribute="top" secondItem="ckW-wQ-sEA" secondAttribute="bottom" id="o8H-d7-DPv"/>
-                <constraint firstItem="ckW-wQ-sEA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="thv-jg-L9h"/>
+                <constraint firstItem="ckW-wQ-sEA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="thv-jg-L9h"/>
                 <constraint firstItem="Wx7-qy-Rvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="vuw-7k-Jrm"/>
                 <constraint firstItem="GHl-ch-M8b" firstAttribute="top" secondItem="jfN-7n-EuC" secondAttribute="bottom" id="yr5-fV-DWO"/>
             </constraints>

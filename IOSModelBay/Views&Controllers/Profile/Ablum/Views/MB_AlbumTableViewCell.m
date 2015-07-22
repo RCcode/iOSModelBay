@@ -56,29 +56,53 @@
     _likeLabel.text = [NSString stringWithFormat:@"%ld",(long)ablum.likes];
     _commentLabel.text = [NSString stringWithFormat:@"%ld",(long)ablum.comments];
     
-    _label1.text = ablum.mName;
-    _label2.text = ablum.pName;
-    _label3.text = ablum.hName;
-    _label4.text = ablum.mkName;
-//    if ([ablum.mName isEqualToString:@""]) {
-//        _con1.constant = 0;
-//    }else {
-//        _con1.constant = 5;
-//    }
+    NSString *str11 = LocalizedString(@"Model", nil);
+    NSString *str12 = ablum.mName;
+    NSMutableAttributedString *string1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str11,str12]];
+    [string1 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str11.length + 1, str12.length)];
+    
+    NSString *str21 = LocalizedString(@"Photographer", nil);
+    NSString *str22 = ablum.pName;
+    NSMutableAttributedString *string2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str21,str22]];
+    [string2 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str21.length + 1, str22.length)];
+    
+    NSString *str31 = LocalizedString(@"Hair Stylist", nil);
+    NSString *str32 = ablum.hName;
+    NSMutableAttributedString *string3 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str31,str32]];
+    [string3 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str31.length + 1, str32.length)];
+    
+    NSString *str41 = LocalizedString(@"Makeup Artist", nil);
+    NSString *str42 = ablum.mkName;
+    NSMutableAttributedString *string4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",str41,str42]];
+    [string4 addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ff4f42") range:NSMakeRange(str41.length + 1, str42.length)];
+    
+    if ([ablum.mName isEqualToString:@""]) {
+        _con1.constant = 7;
+        _label1.text = ablum.mName;
+    }else {
+        _con1.constant = 12;
+        _label1.attributedText = string1;
+    }
     if ([ablum.pName isEqualToString:@""]) {
         _con2.constant = 0;
+        _label2.text = ablum.pName;
     }else {
         _con2.constant = 5;
+        _label2.attributedText = string2;
     }
     if ([ablum.hName isEqualToString:@""]) {
         _con3.constant = 0;
+        _label3.text = ablum.hName;
     }else {
         _con3.constant = 5;
+        _label3.attributedText = string3;
     }
     if ([ablum.mkName isEqualToString:@""]) {
-        _con4.constant = 5;
-    }else {
         _con4.constant = 0;
+        _label4.text = ablum.mkName;
+    }else {
+        _con4.constant = 5;
+        _label4.attributedText = string4;
     }
 }
 

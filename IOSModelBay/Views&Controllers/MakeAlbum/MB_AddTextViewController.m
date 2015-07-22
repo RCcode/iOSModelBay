@@ -39,6 +39,8 @@
 @property (nonatomic, strong) ALAssetsLibrary *assertLibrary;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
+@property (nonatomic, strong) NSMutableDictionary *progressDic;
+
 @end
 
 @implementation MB_AddTextViewController
@@ -221,7 +223,12 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
-    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.detailsLabelText = LocalizedString(@"Uploading", nil);
+    hud.detailsLabelFont = [UIFont systemFontOfSize:17.0];
+    hud.mode = MBProgressHUDModeDeterminate;
+    
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
                              @"token":[userDefaults objectForKey:kAccessToken],//token
                              @"atype":@(1),//影集分类:0.拼图;1.相片集
@@ -239,8 +246,6 @@
                              };
     [[AFHttpTool shareTool] addAblumWithParameters:params success:^(id response) {
         NSLog(@"%@",response);
-        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
-        
         if ([self statFromResponse:response] == 10000) {
             //上传图片
             _manager = [AFHTTPRequestOperationManager manager];            
@@ -252,7 +257,6 @@
                                                    @"token":[userDefaults objectForKey:kAccessToken],
                                                    @"ablId":response[@"ablId"],
                                                    @"sort":@([self.urlArray indexOfObject:url])};
-//                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"ablum/uploadPic.do"];
                     NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"ablum/uploadPic.do"];
                     
                     AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -262,30 +266,60 @@
                         
                     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         if (_manager.operationQueue.operationCount == 0) {
-                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                            
+                            hud.detailsLabelText = LocalizedString(@"Uplaod Success", nil);
+                            [hud hide:YES afterDelay:0.7];
                         }
                         NSLog(@"success");
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"%@ failed", operation);
                         
                         if (_manager.operationQueue.operationCount == 0) {
-                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                            
+                            hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
+                            [hud hide:YES afterDelay:0.7];
                         }
                     }];
                     
+
+//                    __weak AFHTTPRequestOperation *weakop = operation;
+                    __weak NSMutableDictionary *dic = self.progressDic;
+                    __weak NSNumber *index = [uploadParams objectForKey:@"sort"];
+                    __weak NSMutableArray *allArray = self.urlArray;
+                    __weak MBProgressHUD *weakHub = hud;
+                    [dic setObject:@(0) forKey:index];
+                    
                     [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-                        NSLog(@"百分比:%f",totalBytesWritten*1.0/totalBytesExpectedToWrite);
+                        
+                        double progress = totalBytesWritten*1.0/totalBytesExpectedToWrite;
+                        NSLog(@"pro  %f",progress);
+                        [dic setObject:@(progress) forKey:index];
+                        
+                        NSArray *array = [dic allValues];
+                        
+                        double sum = 0;
+                        for (NSNumber *num in array) {
+                            sum += [num doubleValue];
+                        }
+                        NSLog(@"progressDic = %@",dic);
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            weakHub.progress = sum / allArray.count;
+                        });
+                        
                     }];
                     
                 } failureBlock:^(NSError *error) {
                     
                 }];
             }
+        }else {
+            hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
+            [hud hide:YES afterDelay:0.7];
         }
     } failure:^(NSError *err) {
-        [MB_Utils showPromptWithText:LocalizedString(@"Upload Failure", nil)];
-        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
-    }];
+        hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
+        [hud hide:YES afterDelay:0.7];    }];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
@@ -326,5 +360,11 @@
 }
 
 #pragma mark - getters & setters
+- (NSDictionary *)progressDic {
+    if (!_progressDic) {
+        _progressDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    return _progressDic;
+}
 
 @end

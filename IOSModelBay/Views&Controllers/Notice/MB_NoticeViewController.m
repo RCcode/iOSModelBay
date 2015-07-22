@@ -35,7 +35,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = LocalizedString(@"Activity", nil);
+    self.titleLabel.text = LocalizedString(@"Activity", nil).uppercaseString;
     self.navigationItem.titleView = self.titleLabel;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];

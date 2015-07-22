@@ -10,12 +10,17 @@
 #import "MB_UserViewController.h"
 #import "MB_InstragramModel.h"
 #import "MB_CareerCollectViewCell.h"
+#import "MB_ImageTableViewCell.h"
 
-@interface MB_InstragramViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+static NSString * const ReuseIdentifierInstagram = @"instagram";
+
+@interface MB_InstragramViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collectView;
 @property (nonatomic, strong) NSString *maxId;
 @property (nonatomic, assign) BOOL noMore;
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -53,27 +58,84 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+
+    self.tableView.alpha = 0;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.tableView];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+#pragma mark UITableViewDelegate, UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataArray.count + 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kWindowWidth;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.dataArray.count) {
+        MB_ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierInstagram forIndexPath:indexPath];
+        cell.instaImageView.image = nil;
+        [MBProgressHUD showHUDAddedTo:cell.instaImageView animated:YES];
+        return cell;
+    }else {
+        MB_ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierInstagram forIndexPath:indexPath];
+        [MBProgressHUD hideHUDForView:cell.instaImageView animated:YES];
+        MB_InstragramModel *model = self.dataArray[indexPath.row];
+        [cell.instaImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
+        cell.contentView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];}
 
 #pragma mark - UIScrollViewDelegate
 static CGFloat startY = 0;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    startY = scrollView.contentOffset.y;
+    if (scrollView == self.collectView) {
+        startY = scrollView.contentOffset.y;
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-    UITableView *taleView = userVC.tableView;
-    if (scrollView.dragging) {
-        if (scrollView.contentOffset.y - startY > 0) {
-            //向上拉
-            if (taleView.contentOffset.y == -64) {
-                [taleView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
+    if (scrollView == self.collectView) {
+        MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+        UITableView *taleView = userVC.tableView;
+        if (scrollView.dragging) {
+            if (scrollView.contentOffset.y - startY > 0) {
+                //向上拉
+                if (taleView.contentOffset.y == -64) {
+                    [taleView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
+                }
+            }else{
+                //向下拉
+                if (taleView.contentOffset.y == topViewHeight - 64) {
+                    [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
+                }
             }
-        }else{
-            //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 64) {
-                [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
-            }
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView) {
+        if (scrollView.contentOffset.y / kWindowWidth == self.dataArray.count) {
+            [self requestInstragramMediasListWithMaxId:self.maxId];
         }
     }
 }
@@ -105,7 +167,7 @@ static CGFloat startY = 0;
 - (void)requestInstragramMediasListWithMaxId:(NSString *)maxId {
     NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
     NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
-                                     @"count": @(24)} mutableCopy];
+                                     @"count": @(20)} mutableCopy];
     if (maxId) {
         [params setValue:maxId forKey:@"max_id"];
     }
@@ -137,6 +199,7 @@ static CGFloat startY = 0;
             [self.dataArray addObject:model];
         }
         [self.collectView reloadData];
+        [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -163,6 +226,21 @@ static CGFloat startY = 0;
         [_collectView registerNib:[UINib nibWithNibName:@"MB_CareerCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;
+}
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowHeight, kWindowWidth) style:UITableViewStylePlain];
+        _tableView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        _tableView.center = [UIApplication sharedApplication].keyWindow.center;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.pagingEnabled =YES;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerNib:[UINib nibWithNibName:@"MB_ImageTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifierInstagram];
+    }
+    return _tableView;
 }
 
 @end

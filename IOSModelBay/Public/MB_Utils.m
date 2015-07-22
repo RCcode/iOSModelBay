@@ -131,23 +131,4 @@ static MB_Utils *util = nil;
     return [dateFormatter stringFromDate:date];
 }
 
-//+ (NSInteger)statFromResponse:(id)response {
-//    NSInteger stat = [response[@"stat"] integerValue];
-//    NSString *errorMsg = nil;
-//    if (stat == 10001) {
-//        errorMsg = @"参数异常";
-//    }
-//    if (stat == 10002) {
-//        errorMsg = @"服务器异常";
-//    }
-//    if (stat == 10003) {
-//        errorMsg = @"操作失败";
-//    }
-//    if (stat == 10004) {
-//        errorMsg = @"无记录";
-//    }
-//    [MB_Utils showAlertViewWithMessage:errorMsg];
-//    return stat;
-//}
-
 @end

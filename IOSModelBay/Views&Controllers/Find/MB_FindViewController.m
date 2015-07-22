@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = LocalizedString(@"Discover", nil);
+    self.titleLabel.text = LocalizedString(@"Discover", nil).uppercaseString;
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
@@ -156,6 +156,10 @@
             for (NSDictionary *dic in response[@"list"]) {
                 MB_User *user = [[MB_User alloc] init];
                 [user setValuesForKeysWithDictionary:dic];
+                //不出现自己
+                if ([userDefaults boolForKey:kIsLogin] && user.fid == [[userDefaults objectForKey:kID] integerValue]) {
+                    continue;
+                }
                 [self.dataArray addObject:user];
             }
             [self.collectView reloadData];
@@ -163,7 +167,6 @@
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
                 [self.collectView reloadData];
-//                [MB_Utils showPromptWithText:@"no result"];
             }else {
                 [self showNoMoreMessageForview:self.collectView];
             }

@@ -31,6 +31,8 @@
 #define kUsername @"username"
 #define kFullname @"fullname"
 #define kAccessToken @"accessToken"
+#define kBio @"bio"
+#define kWebsite @"website"
 
 //模特平台用户信息
 #define kIsLogin @"isLogin"

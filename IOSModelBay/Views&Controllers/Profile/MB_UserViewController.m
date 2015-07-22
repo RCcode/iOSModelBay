@@ -7,7 +7,6 @@
 //
 
 #import "MB_UserViewController.h"
-#import "MB_UserSummaryViewController.h"
 #import "MB_AblumViewController.h"
 #import "MB_InstragramViewController.h"
 #import "MB_MessageViewController.h"
@@ -15,6 +14,7 @@
 #import "MB_UserInfoView.h"
 #import "MB_SettingViewController.h"
 #import "MB_CommentView.h"
+#import "MB_UserDetailViewController.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -47,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLabel.text = LocalizedString(@"My", nil);
+    self.titleLabel.text = self.user.fname.uppercaseString;
     self.navigationItem.titleView = self.titleLabel;
     if (self.comeFromType == ComeFromTypeUser) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
@@ -114,16 +114,11 @@ static CGFloat startY;
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    if (scrollView == self.tableView) {
-//        //    NSLog(@"%@  %@",NSStringFromCGRect(scrollView.frame), NSStringFromUIEdgeInsets(scrollView.contentInset));;
-////        NSLog(@"www%@",NSStringFromCGPoint(scrollView.contentOffset));
-//        if (self.scrollCoordinator.topView.frame.origin.y == -24) {
+//        if (scrollView.contentOffset.y - startY > 0) {
 //            self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 //        }else{
 //            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 //        }
-////        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
-////            self.tableView.contentInset = UIEdgeInsetsMake(self.scrollCoordinator.topView.frame.origin.y + 44, 0, 0, 0);
-////        }
 //    }
 //}
 
@@ -406,15 +401,15 @@ static CGFloat startY;
 
 
 - (void)addChildViewControllers {
-    MB_UserSummaryViewController *summaryVC   = [[MB_UserSummaryViewController alloc] init];
+    MB_UserDetailViewController *detailVC   = [[MB_UserDetailViewController alloc] init];
     MB_AblumViewController *ablumVC           = [[MB_AblumViewController alloc] init];
     MB_InstragramViewController *instragramVC = [[MB_InstragramViewController alloc] init];
     MB_MessageViewController *messageVC       = [[MB_MessageViewController alloc] init];
     MB_CollectViewController *collectVC       = [[MB_CollectViewController alloc] init];
     
-    summaryVC.containerViewRect    = self.containerView.frame;
-    summaryVC.user = self.user;
-    summaryVC.comeFromType = self.comeFromType;
+    detailVC.containerViewRect    = self.containerView.frame;
+    detailVC.user = self.user;
+    detailVC.comeFromType = self.comeFromType;
     ablumVC.containerViewRect      = self.containerView.frame;
     ablumVC.user = self.user;
     instragramVC.containerViewRect = self.containerView.frame;
@@ -424,7 +419,7 @@ static CGFloat startY;
     collectVC.user = self.user;
     
     [self addChildViewController:instragramVC];
-    [self addChildViewController:summaryVC];
+    [self addChildViewController:detailVC];
     [self addChildViewController:ablumVC];
     [self addChildViewController:messageVC];
     [self addChildViewController:collectVC];
@@ -559,6 +554,7 @@ static CGFloat startY;
     if (_userInfoView == nil) {
         _userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"MB_UserInfoView" owner:nil options:nil] firstObject];
         _userInfoView.frame = CGRectMake(0, 0, kWindowWidth, topViewHeight);
+        _userInfoView.clipsToBounds = YES;
         _userInfoView.userImageView.userInteractionEnabled = YES;
         _userInfoView.backImageView.userInteractionEnabled = YES;
         [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];

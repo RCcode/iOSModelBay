@@ -37,6 +37,8 @@ static CGFloat const commentViewHeight = 50;
 
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.commentView];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestCommentsListWithMinId:0];
 }
 
@@ -142,7 +144,13 @@ static CGFloat const commentViewHeight = 50;
                              @"count":@(10)};
     [[AFHttpTool shareTool] getAblumCommentsWithParameters:params success:^(id response) {
         NSLog(@"comments %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+            }
+            
             self.minId = [response[@"minId"] integerValue];
             NSArray *array = response[@"list"];
             for (NSDictionary *dic in array) {
@@ -154,7 +162,8 @@ static CGFloat const commentViewHeight = 50;
         }
         
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
     }];
 }
 

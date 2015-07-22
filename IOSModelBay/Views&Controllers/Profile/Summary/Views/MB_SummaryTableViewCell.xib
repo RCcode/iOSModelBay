@@ -23,7 +23,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2W-nM-fi8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_sjieshao_up" translatesAutoresizingMaskIntoConstraints="NO" id="eNQ-sB-oFb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eNQ-sB-oFb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="介绍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xE-vt-bOH">
@@ -63,6 +63,7 @@
                             <constraint firstItem="5xE-vt-bOH" firstAttribute="top" secondItem="D2W-nM-fi8" secondAttribute="top" id="dou-I1-3Db"/>
                             <constraint firstAttribute="trailing" secondItem="Kq1-PU-kgW" secondAttribute="trailing" id="e19-hZ-PlS"/>
                             <constraint firstAttribute="bottom" secondItem="Kq1-PU-kgW" secondAttribute="bottom" constant="13" id="eYs-fj-dPw"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5xE-vt-bOH" secondAttribute="bottom" constant="13" id="g1l-OP-sVc"/>
                             <constraint firstAttribute="bottom" secondItem="5xE-vt-bOH" secondAttribute="bottom" id="gBP-sg-VNp"/>
                             <constraint firstItem="eNQ-sB-oFb" firstAttribute="leading" secondItem="D2W-nM-fi8" secondAttribute="leading" id="gC8-rQ-OU7"/>
                             <constraint firstItem="eNQ-sB-oFb" firstAttribute="top" secondItem="D2W-nM-fi8" secondAttribute="top" id="ggW-Je-TB6"/>
@@ -101,7 +102,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="edit_sjieshao_up" width="299" height="43"/>
         <image name="sanjiao_edit" width="12" height="12"/>
     </resources>
 </document>

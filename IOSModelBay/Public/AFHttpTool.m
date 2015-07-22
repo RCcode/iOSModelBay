@@ -127,6 +127,8 @@ static AFHttpTool *httpTool = nil;
         [userDefaults setObject:responseObject[@"user"][@"full_name"] forKey:kFullname];
         [userDefaults setObject:responseObject[@"user"][@"profile_picture"] forKey:kPic];
         [userDefaults setObject:responseObject[@"access_token"] forKey:kAccessToken];
+        [userDefaults setObject:responseObject[@"user"][@"bio"] forKey:kBio];
+        [userDefaults setObject:responseObject[@"user"][@"website"] forKey:kWebsite];
         [userDefaults synchronize];
         
         //服务器登录

@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "MB_User.h"
 #import "MB_UserViewController.h"
+#import "MB_UserDetail.h"
 
 @interface MB_UserSummaryViewController : MB_BaseViewController
 
-@property (nonatomic, assign) CGRect containerViewRect;
-@property (nonatomic, assign) ComeFromType comeFromType;
+@property (nonatomic, strong) NSMutableArray *areaArray;//专注领域(包括模特或者摄影师或者没有)
+
+//@property (nonatomic, assign) ComeFromType comeFromType;
 @property (nonatomic, strong) MB_User *user;
+
+@property (nonatomic, strong) MB_UserDetail *detail;
+@property (nonatomic, strong) MB_UserDetail *changeDetail;
 
 @end

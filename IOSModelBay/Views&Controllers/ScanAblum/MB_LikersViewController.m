@@ -30,6 +30,8 @@
     
     [self.view addSubview:self.tableView];
     [self addPullRefresh];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestLikesListWithMinId:0];
 }
 
@@ -109,6 +111,8 @@
                              @"count":@(10),};
     [[AFHttpTool shareTool] getAblumLikesWithParameters:params success:^(id response) {
         NSLog(@"LIKERS %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
@@ -125,7 +129,8 @@
             [self showNoMoreMessageForview:self.tableView];
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.tableView];
     }];
 }
 
