@@ -152,6 +152,8 @@
 -(void)textFieldReturnClick:(UITextField *)textField {
     //邀请
     NSLog(@"invite textField = %@",textField.text);
+    
+    
     [self.inviteView removeFromSuperview];
 
     if ([MFMailComposeViewController canSendMail]) {
