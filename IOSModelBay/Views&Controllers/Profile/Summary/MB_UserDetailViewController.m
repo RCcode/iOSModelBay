@@ -86,7 +86,11 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 - (void)configureCell2:(MB_IntroduceTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     if ([self.changeDetail.bio isEqualToString:@""]) {
-        cell.label.text = [userDefaults objectForKey:kBio];
+        if ([userDefaults objectForKey:kBio]) {
+            cell.label.text = [userDefaults objectForKey:kBio];
+        }else {
+            cell.label.text = LocalizedString(@"introduce", nil);
+        }
     }else {
         cell.label.text = self.changeDetail.bio;
     }

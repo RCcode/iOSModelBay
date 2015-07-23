@@ -26,12 +26,10 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = colorWithHexString(@"#444444");
-
+    
     self.titleLabel.text = LocalizedString(@"Filter", nil);
     self.navigationItem.titleView = self.titleLabel;
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
     if (self.type == FilterTypeFind) {
@@ -102,28 +100,6 @@
         }
     }
     
-//    if (self.type == FilterTypeFind) {
-//        if ([[MB_Utils shareUtil].fCareerId isEqualToString:@""] && indexPath.row == 0) {
-//            //默认选中All
-//            cell.selected = YES;
-//        }else if ([[MB_Utils shareUtil].fCareerId integerValue] == indexPath.row) {
-//            //上次选中的
-//            cell.selected = YES;
-//        }else{
-//            cell.selected = NO;
-//        }
-//    }else {
-//        if ([[MB_Utils shareUtil].rCareerId isEqualToString:@""] && indexPath.row == 0) {
-//            //默认选中All
-//            cell.selected = YES;
-//        }else if ([[MB_Utils shareUtil].rCareerId integerValue] == indexPath.row) {
-//            //上次选中的
-//            cell.selected = YES;
-//        }else{
-//            cell.selected = NO;
-//        }
-//    }
-    
     return cell;
 }
 
@@ -147,12 +123,13 @@
 
 
 #pragma mark - private methods
-//点击性别选择按钮
+//点击搜索
 - (void)handleTap:(UITapGestureRecognizer *)tap {
     MB_SearchViewController *searchVC = [[MB_SearchViewController alloc] init];
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
+//选择性别
 - (void)sexBtnOnClick:(UIButton *)btn {
     for (UIButton *btn in self.sexView.subviews) {
         btn.selected = NO;
@@ -171,16 +148,16 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
-    [self.navigationController popViewControllerAnimated:YES];
     self.CompleteHandler();
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark - getters & setters
 - (UIView *)searchView {
     if (_searchView == nil) {
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 49)];
         _searchView.backgroundColor = colorWithHexString(@"#444444");
+        //添加点击手势,点击跳到搜索界面
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [_searchView addGestureRecognizer:tap];
         
@@ -189,8 +166,8 @@
         [_searchView addSubview:imageView];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(_searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(_searchView.frame))];
-        label.font = [UIFont systemFontOfSize:15];
-        label.text = LocalizedString(@"Search name", nil);
+        label.font      = [UIFont systemFontOfSize:15];
+        label.text      = LocalizedString(@"Search name", nil);
         label.textColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.5];
         [_searchView addSubview:label];
     }
@@ -211,7 +188,7 @@
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(btnWidth * i, 0, btnWidth, 61);
-            button.tag = i;
+            button.tag   = i;
             button.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 10);
             [button.titleLabel setFont:[UIFont fontWithName:@"FuturaStd-Book" size:14]];
             [button setTitle:titleArray[i] forState:UIControlStateNormal];
@@ -237,15 +214,14 @@
 }
 
 - (UICollectionView *)collectView {
-    
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         CGFloat space = 2;
         CGFloat itemWidth = (kWindowWidth - 3 * space) / 2;
         CGFloat itemHeight = itemWidth * 128 / 314;
-        layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-        layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
-        layout.minimumLineSpacing = space;
+        layout.itemSize                = CGSizeMake(itemWidth, itemHeight);
+        layout.sectionInset            = UIEdgeInsetsMake(2, 2, 2, 2);
+        layout.minimumLineSpacing      = space;
         layout.minimumInteritemSpacing = space;
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sexView.frame), kWindowWidth, kWindowHeight - CGRectGetMaxY(self.sexView.frame)) collectionViewLayout:layout];
         _collectView.backgroundColor = [UIColor whiteColor];

@@ -136,6 +136,8 @@ static CGFloat startY = 0;
     if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y / kWindowWidth == self.dataArray.count) {
             [self requestInstragramMediasListWithMaxId:self.maxId];
+        }else {
+            [self.collectView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:scrollView.contentOffset.y / kWindowWidth inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
         }
     }
 }

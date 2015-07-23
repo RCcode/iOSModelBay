@@ -90,7 +90,14 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     cell.commentButton.tag = indexPath.section;
     [cell.commentButton addTarget:self action:@selector(commentButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.shareButton.tag = indexPath.section;
-    [cell.shareButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.shareButton addTarget:self action:@selector(deleteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    if (userVC.comeFromType == ComeFromTypeSelf) {
+        cell.shareButton.hidden = NO;
+    }else {
+        cell.shareButton.hidden = YES;
+    }
 }
 
 - (void)configureCell2:(MB_SignalImageTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -237,19 +244,23 @@ static CGFloat startY = 0;
     [self.navigationController pushViewController:commentsVC animated:YES];
 }
 
-//分享
-- (void)shareButtonOnClick:(UIButton *)button {
-    //需要分享的内容
-//    NSString *shareContent = LocalizedString(@"root_share", nil);
-//    NSArray *activityItems = @[shareContent];
+//删除影集
+- (void)deleteButtonOnClick:(UIButton *)button {
+    MB_Ablum *ablum = self.dataArray[button.tag];
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"adlId":@(ablum.ablId)};
     
-//    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-//    __weak UIActivityViewController *blockActivityVC = activityVC;
-//    
-//    activityVC.completionHandler = ^(NSString *activityType,BOOL completed){
-//        [blockActivityVC dismissViewControllerAnimated:YES completion:nil];
-//    };
-//    [self presentViewController:activityVC animated:YES completion:nil];
+    [[AFHttpTool shareTool] deleteAblumWithParameters:params success:^(id response) {
+        NSLog(@"delete ablum: %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            [self.dataArray removeObject:ablum];
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:button.tag] withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *err) {
+        
+    }];
 }
 
 //添加作品集

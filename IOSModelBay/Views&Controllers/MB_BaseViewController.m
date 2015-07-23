@@ -14,10 +14,9 @@
 
 @interface MB_BaseViewController ()<UIAlertViewDelegate, NotLoginViewDelegate>
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, strong) UILabel *footerLabel;
-
-@property (nonatomic, strong) NSString *codeStr;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;//下拉刷新的菊花
+@property (nonatomic, strong) UILabel                 *footerLabel;//用于在scrollView的底部提示用
+@property (nonatomic, strong) NSString                *codeStr;//Instagram登录的code
 
 @end
 
@@ -31,24 +30,14 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-//    [self.scrollCoordinator disable];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    [self.scrollCoordinator enable];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 1000) {
-//        if (buttonIndex == 1) {
-//            [self presentLoginViewController];
-//        }
-    }else if(alertView.tag == 2000) {
+    if(alertView.tag == 2000) {
         if (buttonIndex == 1) {
             //重试
             [self loginWitnCodeStr:_codeStr];
@@ -56,10 +45,12 @@
     }
 }
 
+
 #pragma mark - NotLoginViewDelegate
 - (void)notLoginViewOnClick:(UITapGestureRecognizer *)tap {
     [self showLoginAlert];
 }
+
 
 #pragma mark - Private Methods
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
@@ -82,20 +73,18 @@
 }
 
 //结束头部刷新动画
-- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView {
-    [scrollView.pullToRefreshView stopAnimating];
-}
+//- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView {
+//    [scrollView.pullToRefreshView stopAnimating];
+//}
 
 //结束尾部刷新动画
-- (void)endFooterRefreshingForView:(UIScrollView *)scrollView {
-//    self.footerLabel.text = @"";
-    [scrollView.infiniteScrollingView stopAnimating];
-}
+//- (void)endFooterRefreshingForView:(UIScrollView *)scrollView {
+//    [scrollView.infiniteScrollingView stopAnimating];
+//}
 
 //结束头部和尾部刷新动画
 - (void)endRefreshingForView:(UIScrollView *)scrollView {
     self.footerLabel.text = @"";
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [scrollView.pullToRefreshView stopAnimating];
     [scrollView.infiniteScrollingView stopAnimating];
 }
@@ -104,16 +93,6 @@
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView {
     self.footerLabel.text = @"没有更多了";
 }
-
-//- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView {
-//    self.scrollCoordinator = [[JDFPeekabooCoordinator alloc] init];
-//    self.scrollCoordinator.scrollView = scrollView;
-//    self.scrollCoordinator.topView = self.navigationController.navigationBar;
-//    if (self.navigationItem.titleView) {
-//        self.scrollCoordinator.topViewItems = @[self.navigationItem.titleView]; 
-//    }
-//    self.scrollCoordinator.topViewMinimisedHeight = 20.0f;
-//}
 
 - (NSInteger)statFromResponse:(id)response {
     NSInteger stat = [response[@"stat"] integerValue];
@@ -146,12 +125,7 @@
     }
 }
 
-//弹出登录提示框
 - (void)showLoginAlert {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"login" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"login", nil];
-//    alert.tag = 1000;
-//    alert.delegate = self;
-//    [alert show];
     MB_MainViewController *mainVC = [[MB_MainViewController alloc] init];
     [self presentViewController:mainVC animated:YES completion:nil];
 }
@@ -172,14 +146,15 @@
     [[AFHttpTool shareTool] loginWithCodeString:codeStr success:^(id response) {
         NSLog(@"%@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
         if ([self statFromResponse:response] == 10100) {
             //未注册
             MB_SelectRoleViewController *selectRoleVC = [[MB_SelectRoleViewController alloc] init];
             MB_BaseNavigationViewController *na = [[MB_BaseNavigationViewController alloc] initWithRootViewController:selectRoleVC];
             [self presentViewController:na animated:YES completion:nil];
+            
         }else if ([self statFromResponse:response] == 10000){
             //记录用户信息
-            
             [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
             [userDefaults setObject:response[@"gender"] forKey:kGender];//性别:0.女;1.男
             [userDefaults setObject:response[@"name"] forKey:kName];//本平台登录用户名
@@ -187,19 +162,17 @@
             [userDefaults setObject:response[@"utype"] forKey:kUtype];//用户类型: 0,浏览;1:专业;
             [userDefaults setObject:response[@"pic"] forKey:kPic];//用户类型: 0,浏览;1:专业;
             [userDefaults setObject:response[@"backPic"] forKey:kBackPic];//用户类型: 0,浏览;1:专业;
-            
             [userDefaults setBool:YES forKey:kIsLogin];
             [userDefaults synchronize];
         
+            //发送登录通知，各个界面作相应的变化
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
-            
             
             if ([self isKindOfClass:[MB_MainViewController class]]) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
     } failure:^(NSError *err) {
-        NSLog(@"%@",err);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self showLoginFailedAlertView];
     }];
@@ -221,17 +194,15 @@
 }
 
 - (UILabel *)footerLabel {
-    
     if (_footerLabel == nil) {
         _footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 50)];
         _footerLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _footerLabel.font          = [UIFont systemFontOfSize:15];
     }
     return _footerLabel;
 }
 
 -(UIActivityIndicatorView *)activityIndicatorView {
-    
     if (_activityIndicatorView == nil) {
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_activityIndicatorView startAnimating];
@@ -239,15 +210,11 @@
     return _activityIndicatorView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-        _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont systemFontOfSize:16];
+        _titleLabel.textColor     = [UIColor whiteColor];
+        _titleLabel.font          = [UIFont systemFontOfSize:16];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;

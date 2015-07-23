@@ -11,8 +11,8 @@
 typedef void(^CompleteHandler)(void);
 
 typedef NS_ENUM(NSInteger, FilterType) {
-    FilterTypeFind,
-    FilterTypeRanking
+    FilterTypeFind,   //发现页面
+    FilterTypeRanking //排行页面
 };
 
 @interface MB_FilterViewController : MB_BaseViewController

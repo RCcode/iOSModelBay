@@ -50,7 +50,6 @@
 		CD05756F1B3416180015BBDA /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575131B3416180015BBDA /* UIWebView+AFNetworking.m */; };
 		CD0575701B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575161B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m */; };
 		CD0575711B3416180015BBDA /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0575191B3416180015BBDA /* libFlurry_6.3.0.a */; };
-		CD0575721B3416180015BBDA /* JDFPeekabooCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = CD05751C1B3416180015BBDA /* JDFPeekabooCoordinator.m */; };
 		CD0575731B3416180015BBDA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CD05751F1B3416180015BBDA /* MBProgressHUD.m */; };
 		CD0575741B3416180015BBDA /* RC_AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575221B3416180015BBDA /* RC_AppInfo.m */; };
 		CD0575751B3416180015BBDA /* RC_GetPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575241B3416180015BBDA /* RC_GetPath.m */; };
@@ -80,7 +79,6 @@
 		CD05758D1B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575571B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m */; };
 		CD05758E1B3416180015BBDA /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575591B3416180015BBDA /* UIScrollView+SVPullToRefresh.m */; };
 		CD05758F1B3416180015BBDA /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD05755B1B3416180015BBDA /* libMobClickLibrary.a */; };
-		CD33D92B1B561158003CC833 /* MB_PrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD33D92A1B561158003CC833 /* MB_PrivateViewController.m */; };
 		CD33D92E1B5650D4003CC833 /* MB_EditAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD33D92D1B5650D4003CC833 /* MB_EditAreaViewController.m */; };
 		CD390F751B34216700254740 /* MB_LikersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD390F731B34216700254740 /* MB_LikersTableViewCell.m */; };
 		CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD390F741B34216700254740 /* MB_LikersTableViewCell.xib */; };
@@ -97,7 +95,6 @@
 		CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */; };
 		CD48D3D61B469CAF0023ADAA /* MB_IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */; };
 		CD48D3D91B46A3240023ADAA /* MB_EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */; };
-		CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
 		CD7964511B340EC400977A7F /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964451B340EC400977A7F /* UIDevice+DeviceInfo.m */; };
@@ -109,7 +106,6 @@
 		CD7965F31B34154100977A7F /* CMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EC1B34154100977A7F /* CMethods.m */; };
 		CD7965F41B34154100977A7F /* MB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965EF1B34154100977A7F /* MB_Utils.m */; };
 		CD7965F51B34154100977A7F /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7965F11B34154100977A7F /* UIImageEffects.m */; };
-		CD7B11271B41012B006C22A4 /* RKNotificationHub.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7B11261B41012B006C22A4 /* RKNotificationHub.m */; };
 		CD9CF24D1B465C3700FF4588 /* MB_AblumDescView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CF24C1B465C3700FF4588 /* MB_AblumDescView.m */; };
 		CD9CF2511B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */; };
 		CD9D8E911B4523D0000E1C8D /* GOTHIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CD9D8E8D1B4523D0000E1C8D /* GOTHIC.TTF */; };
@@ -311,8 +307,6 @@
 		CD0575161B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		CD0575181B3416180015BBDA /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		CD0575191B3416180015BBDA /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
-		CD05751B1B3416180015BBDA /* JDFPeekabooCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFPeekabooCoordinator.h; sourceTree = "<group>"; };
-		CD05751C1B3416180015BBDA /* JDFPeekabooCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFPeekabooCoordinator.m; sourceTree = "<group>"; };
 		CD05751E1B3416180015BBDA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CD05751F1B3416180015BBDA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		CD0575211B3416180015BBDA /* RC_AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_AppInfo.h; sourceTree = "<group>"; };
@@ -372,8 +366,6 @@
 		CD05755B1B3416180015BBDA /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		CD05755C1B3416180015BBDA /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		CD05755D1B3416180015BBDA /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		CD33D9291B561158003CC833 /* MB_PrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_PrivateViewController.h; sourceTree = "<group>"; };
-		CD33D92A1B561158003CC833 /* MB_PrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_PrivateViewController.m; sourceTree = "<group>"; };
 		CD33D92C1B5650D4003CC833 /* MB_EditAreaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditAreaViewController.h; sourceTree = "<group>"; };
 		CD33D92D1B5650D4003CC833 /* MB_EditAreaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditAreaViewController.m; sourceTree = "<group>"; };
 		CD390F721B34216700254740 /* MB_LikersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LikersTableViewCell.h; sourceTree = "<group>"; };
@@ -402,8 +394,6 @@
 		CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_IndicatorView.m; sourceTree = "<group>"; };
 		CD48D3D71B46A3240023ADAA /* MB_EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditViewController.h; sourceTree = "<group>"; };
 		CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditViewController.m; sourceTree = "<group>"; };
-		CD79643E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
-		CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		CD7964411B340EC400977A7F /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		CD7964421B340EC400977A7F /* UIButton+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+helper.h"; sourceTree = "<group>"; };
@@ -427,8 +417,6 @@
 		CD7965EF1B34154100977A7F /* MB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_Utils.m; sourceTree = "<group>"; };
 		CD7965F01B34154100977A7F /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
 		CD7965F11B34154100977A7F /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
-		CD7B11251B41012B006C22A4 /* RKNotificationHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKNotificationHub.h; sourceTree = "<group>"; };
-		CD7B11261B41012B006C22A4 /* RKNotificationHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKNotificationHub.m; sourceTree = "<group>"; };
 		CD9CF24B1B465C3600FF4588 /* MB_AblumDescView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AblumDescView.h; sourceTree = "<group>"; };
 		CD9CF24C1B465C3700FF4588 /* MB_AblumDescView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AblumDescView.m; sourceTree = "<group>"; };
 		CD9CF2501B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ACASLONPRO-REGULAR.OTF"; sourceTree = "<group>"; };
@@ -447,9 +435,9 @@
 		CDA5679F1B1EDB68006FB5C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CDA866691B55135A00D29FE5 /* MB_EditWriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditWriteViewController.h; sourceTree = "<group>"; };
 		CDA8666A1B55135A00D29FE5 /* MB_EditWriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditWriteViewController.m; sourceTree = "<group>"; };
-		CDA8A6031B57864700865DEA /* MB_AddressBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_AddressBookTableViewCell.h; sourceTree = "<group>"; };
-		CDA8A6041B57864700865DEA /* MB_AddressBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_AddressBookTableViewCell.m; sourceTree = "<group>"; };
-		CDA8A6051B57864700865DEA /* MB_AddressBookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_AddressBookTableViewCell.xib; sourceTree = "<group>"; };
+		CDA8A6031B57864700865DEA /* MB_AddressBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MB_AddressBookTableViewCell.h; path = ../../MB_AddressBookTableViewCell.h; sourceTree = "<group>"; };
+		CDA8A6041B57864700865DEA /* MB_AddressBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MB_AddressBookTableViewCell.m; path = ../../MB_AddressBookTableViewCell.m; sourceTree = "<group>"; };
+		CDA8A6051B57864700865DEA /* MB_AddressBookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MB_AddressBookTableViewCell.xib; path = ../../MB_AddressBookTableViewCell.xib; sourceTree = "<group>"; };
 		CDA8A6081B5791A000865DEA /* MB_EditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditTableViewCell.h; sourceTree = "<group>"; };
 		CDA8A6091B5791A000865DEA /* MB_EditTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditTableViewCell.m; sourceTree = "<group>"; };
 		CDA8A60A1B5791A000865DEA /* MB_EditTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_EditTableViewCell.xib; sourceTree = "<group>"; };
@@ -500,8 +488,8 @@
 		CDD536D21B340CB6008B436C /* MB_BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_BaseNavigationViewController.m; sourceTree = "<group>"; };
 		CDD536D31B340CB6008B436C /* MB_BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_BaseViewController.h; sourceTree = "<group>"; };
 		CDD536D41B340CB6008B436C /* MB_BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_BaseViewController.m; sourceTree = "<group>"; };
-		CDD536D51B340CB6008B436C /* MB_InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_InviteViewController.h; sourceTree = "<group>"; };
-		CDD536D61B340CB6008B436C /* MB_InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_InviteViewController.m; sourceTree = "<group>"; };
+		CDD536D51B340CB6008B436C /* MB_InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MB_InviteViewController.h; path = ../MB_InviteViewController.h; sourceTree = "<group>"; };
+		CDD536D61B340CB6008B436C /* MB_InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MB_InviteViewController.m; path = ../MB_InviteViewController.m; sourceTree = "<group>"; };
 		CDD536D71B340CB6008B436C /* MB_LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_LoginViewController.h; sourceTree = "<group>"; };
 		CDD536D81B340CB6008B436C /* MB_LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_LoginViewController.m; sourceTree = "<group>"; };
 		CDD536D91B340CB6008B436C /* MB_MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_MainViewController.h; sourceTree = "<group>"; };
@@ -699,14 +687,12 @@
 				CD0574EE1B3416180015BBDA /* AFNetworking */,
 				CD0575141B3416180015BBDA /* FDTemplateLayoutCell */,
 				CD0575171B3416180015BBDA /* FlurryAnalytics */,
-				CD05751A1B3416180015BBDA /* JDFPeekabooCoordinator */,
 				CD05751D1B3416180015BBDA /* MBProgressHUD */,
 				CD0575201B3416180015BBDA /* MoreApp */,
 				CD05752F1B3416180015BBDA /* Reachability */,
 				CD0575321B3416180015BBDA /* SDWebImage */,
 				CD0575541B3416180015BBDA /* SVPullToRefresh */,
 				CD05755A1B3416180015BBDA /* Umeng */,
-				CD7B11241B41011D006C22A4 /* RKNotificationHub */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -847,15 +833,6 @@
 			path = FlurryAnalytics;
 			sourceTree = "<group>";
 		};
-		CD05751A1B3416180015BBDA /* JDFPeekabooCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				CD05751B1B3416180015BBDA /* JDFPeekabooCoordinator.h */,
-				CD05751C1B3416180015BBDA /* JDFPeekabooCoordinator.m */,
-			);
-			path = JDFPeekabooCoordinator;
-			sourceTree = "<group>";
-		};
 		CD05751D1B3416180015BBDA /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,8 +937,6 @@
 		CD79643D1B340EC400977A7F /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				CD79643E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.h */,
-				CD79643F1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 				CD7964401B340EC400977A7F /* NSString+Helper.h */,
 				CD7964411B340EC400977A7F /* NSString+Helper.m */,
 				CD7964421B340EC400977A7F /* UIButton+helper.h */,
@@ -994,15 +969,6 @@
 				CD7965F11B34154100977A7F /* UIImageEffects.m */,
 			);
 			path = Public;
-			sourceTree = "<group>";
-		};
-		CD7B11241B41011D006C22A4 /* RKNotificationHub */ = {
-			isa = PBXGroup;
-			children = (
-				CD7B11251B41012B006C22A4 /* RKNotificationHub.h */,
-				CD7B11261B41012B006C22A4 /* RKNotificationHub.m */,
-			);
-			path = RKNotificationHub;
 			sourceTree = "<group>";
 		};
 		CD9D8E8C1B4523C2000E1C8D /* 字体 */ = {
@@ -1061,23 +1027,16 @@
 				CDD536D21B340CB6008B436C /* MB_BaseNavigationViewController.m */,
 				CDD536D31B340CB6008B436C /* MB_BaseViewController.h */,
 				CDD536D41B340CB6008B436C /* MB_BaseViewController.m */,
+				CDD536DD1B340CB6008B436C /* MB_TabBarViewController.h */,
+				CDD536DE1B340CB6008B436C /* MB_TabBarViewController.m */,
 				CDD536D91B340CB6008B436C /* MB_MainViewController.h */,
 				CDD536DA1B340CB6008B436C /* MB_MainViewController.m */,
 				CDD536D71B340CB6008B436C /* MB_LoginViewController.h */,
 				CDD536D81B340CB6008B436C /* MB_LoginViewController.m */,
-				CDD536DD1B340CB6008B436C /* MB_TabBarViewController.h */,
-				CDD536DE1B340CB6008B436C /* MB_TabBarViewController.m */,
 				CDD536DB1B340CB6008B436C /* MB_SettingViewController.h */,
 				CDD536DC1B340CB6008B436C /* MB_SettingViewController.m */,
-				CD33D9291B561158003CC833 /* MB_PrivateViewController.h */,
-				CD33D92A1B561158003CC833 /* MB_PrivateViewController.m */,
 				CDA8A6121B57A46800865DEA /* MB_NotLoginView.h */,
 				CDA8A6131B57A46800865DEA /* MB_NotLoginView.m */,
-				CDD536D51B340CB6008B436C /* MB_InviteViewController.h */,
-				CDD536D61B340CB6008B436C /* MB_InviteViewController.m */,
-				CDA8A6031B57864700865DEA /* MB_AddressBookTableViewCell.h */,
-				CDA8A6041B57864700865DEA /* MB_AddressBookTableViewCell.m */,
-				CDA8A6051B57864700865DEA /* MB_AddressBookTableViewCell.xib */,
 			);
 			path = "Views&Controllers";
 			sourceTree = "<group>";
@@ -1091,6 +1050,8 @@
 				CDD536B91B340CB6008B436C /* MB_FilterViewController.m */,
 				CDD536BC1B340CB6008B436C /* MB_SearchViewController.h */,
 				CDD536BD1B340CB6008B436C /* MB_SearchViewController.m */,
+				CDD536D51B340CB6008B436C /* MB_InviteViewController.h */,
+				CDD536D61B340CB6008B436C /* MB_InviteViewController.m */,
 				CDD536BE1B340CB6008B436C /* Views */,
 			);
 			path = Find;
@@ -1110,6 +1071,9 @@
 				CDD536C71B340CB6008B436C /* MB_UserTableViewCell.h */,
 				CDD536C81B340CB6008B436C /* MB_UserTableViewCell.m */,
 				CDD536C91B340CB6008B436C /* MB_UserTableViewCell.xib */,
+				CDA8A6031B57864700865DEA /* MB_AddressBookTableViewCell.h */,
+				CDA8A6041B57864700865DEA /* MB_AddressBookTableViewCell.m */,
+				CDA8A6051B57864700865DEA /* MB_AddressBookTableViewCell.xib */,
 				99DECD2D1B49141600F5F716 /* MB_UploadView.h */,
 				99DECD2E1B49141600F5F716 /* MB_UploadView.m */,
 				99DECD301B49142200F5F716 /* MB_UploadView.xib */,
@@ -1578,7 +1542,6 @@
 				CD0575611B3416180015BBDA /* AFHTTPSessionManager.m in Sources */,
 				CD0575621B3416180015BBDA /* AFNetworkReachabilityManager.m in Sources */,
 				CDD5374D1B340CB6008B436C /* MB_UserInfoView.m in Sources */,
-				CD0575721B3416180015BBDA /* JDFPeekabooCoordinator.m in Sources */,
 				CDD537641B340CB6008B436C /* MB_ScanAblumViewController.m in Sources */,
 				CDD537431B340CB6008B436C /* MB_NoticeViewController.m in Sources */,
 				CD05755F1B3416180015BBDA /* AFHTTPRequestOperation.m in Sources */,
@@ -1622,7 +1585,6 @@
 				CD0575801B3416180015BBDA /* SDWebImageCompat.m in Sources */,
 				CD05758D1B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				CD0575681B3416180015BBDA /* AFNetworkActivityIndicatorManager.m in Sources */,
-				CD33D92B1B561158003CC833 /* MB_PrivateViewController.m in Sources */,
 				CD05756B1B3416180015BBDA /* UIButton+AFNetworking.m in Sources */,
 				CD0575761B3416180015BBDA /* RC_moreAPPsLib.m in Sources */,
 				CDD1174F1B3A5036002BD897 /* MB_MessageTableViewCell.m in Sources */,
@@ -1631,7 +1593,6 @@
 				CDD5372F1B340CB6008B436C /* MB_FilterViewController.m in Sources */,
 				CDC9AB9A1B21B3E300119C18 /* MB_Ablum.m in Sources */,
 				CD00CBF81B5F7E48001F43A8 /* MB_ImageTableViewCell.m in Sources */,
-				CD7B11271B41012B006C22A4 /* RKNotificationHub.m in Sources */,
 				CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */,
 				CDD1174A1B3A4D44002BD897 /* MB_NoticeTableViewCell.m in Sources */,
 				CD0575811B3416180015BBDA /* SDWebImageDecoder.m in Sources */,
@@ -1675,7 +1636,6 @@
 				CDD537501B340CB6008B436C /* MB_MessageViewController.m in Sources */,
 				CDA16B361B59067700FB2056 /* MB_SelectUserViewController.m in Sources */,
 				CDD5375B1B340CB6008B436C /* MB_SelectCareerViewController.m in Sources */,
-				CD79644E1B340EC400977A7F /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				CD00CBF41B5F4987001F43A8 /* MB_UserDetailViewController.m in Sources */,
 				CD0575631B3416180015BBDA /* AFSecurityPolicy.m in Sources */,
 				CD05756F1B3416180015BBDA /* UIWebView+AFNetworking.m in Sources */,

@@ -71,16 +71,6 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                                success:(void (^)(id response))success
                                failure:(void (^)(NSError* err))failure;
 
-//修改用户头像
-- (void)updateUserPicWithParameters:params
-                            success:(void (^)(id response))success
-                            failure:(void (^)(NSError* err))failure;
-
-//修改用户背景
-- (void)updateBackgroundWithParameters:params
-                               success:(void (^)(id response))success
-                               failure:(void (^)(NSError* err))failure;
-
 //获取用户作品集
 - (void)getAblumWithParameters:params
                        success:(void (^)(id response))success
@@ -146,6 +136,11 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
 - (void)updatePushKeyWithParameters:params
                             success:(void (^)(id response))success
                             failure:(void (^)(NSError* err))failure;
+
+//删除影集
+- (void)deleteAblumWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure;
 
 
 @end

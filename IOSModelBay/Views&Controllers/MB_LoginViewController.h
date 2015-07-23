@@ -12,7 +12,7 @@ typedef void(^LoginSuccessBlock)(NSString *codeStr);
 
 @interface MB_LoginViewController : UIViewController
 
-@property (nonatomic, copy) LoginSuccessBlock loginSuccessBlock;
+@property (nonatomic, copy) LoginSuccessBlock loginSuccessBlock;//登录成功后的回调
 
 - (instancetype)initWithSuccessBlock:(LoginSuccessBlock)success;
 

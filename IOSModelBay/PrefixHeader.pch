@@ -18,7 +18,6 @@
 #import "MB_Utils.h"
 #import "CMethods.h"
 #import "SVPullToRefresh.h"
-#import "MobClick.h"
 #import "AFHttpTool.h"
 #import "MB_BaseViewController.h"
 #import "MB_BaseNavigationViewController.h"

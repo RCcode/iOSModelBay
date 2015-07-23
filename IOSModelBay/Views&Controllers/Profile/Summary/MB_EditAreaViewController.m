@@ -63,8 +63,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if (self.name == EditNameAreaModel) {
         if ([self.selectArray containsObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]]) {
             [self.selectArray removeObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
         }else {
@@ -72,12 +70,6 @@
         }
     
     [self.tableView reloadData];
-//    }else {
-//        if (self.selectArray) {
-//            <#statements#>
-//        }
-//        [self.selectArray addObject:[NSString stringWithFormat:@"%ld",(long)indexPath.row + 100]];
-//    }
 }
 
 #pragma mark - private methods
@@ -95,10 +87,10 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 0, 0);
         
         UIView *view = [[UIView alloc] init];
         [_tableView setTableFooterView:view];

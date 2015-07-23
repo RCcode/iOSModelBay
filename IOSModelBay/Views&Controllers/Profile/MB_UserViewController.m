@@ -16,23 +16,20 @@
 #import "MB_CommentView.h"
 #import "MB_UserDetailViewController.h"
 
-#import <MessageUI/MessageUI.h>
-
-//#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-//#define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
-//#define kShareHotTags @""
+@import MessageUI;
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic, strong) MB_UserInfoView *userInfoView;
-@property (nonatomic, strong) UIView *menuView;
-@property (nonatomic, strong) UIScrollView *containerView;
-@property (nonatomic, strong) MB_CommentView *commentView;
+@property (nonatomic, strong) MB_UserInfoView *userInfoView;//上部用户信息视图
+@property (nonatomic, strong) UIView          *menuView;//选项菜单
+@property (nonatomic, strong) UIScrollView    *containerView;//下边几个小view的容器
+@property (nonatomic, strong) MB_CommentView  *commentView;//留言输入框
 
 @property (nonatomic, strong) NSMutableArray *menuBtns;
-@property (nonatomic, strong) UIDocumentInteractionController *documetnInteractionController;
+//@property (nonatomic, strong) UIDocumentInteractionController *documetnInteractionController;
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @property (nonatomic, assign) NSInteger type;//修改背景还是修改头像 1:头像 2:背景
 
 @end
@@ -287,9 +284,8 @@ static CGFloat startY;
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://192.168.0.89:8082/ModelBayWeb/",@"user/updatePic.do"];
-    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"user/updatePic.do"];
     
+    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"user/updatePic.do"];
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken]};
     _manager = [AFHTTPRequestOperationManager manager];
@@ -364,15 +360,15 @@ static CGFloat startY;
 
 - (void)loginSuccess:(NSNotification *)noti {
     if (self.type == ComeFromTypeSelf) {
-        MB_User *user = [[MB_User alloc] init];
-        user.fid = [[userDefaults objectForKey:kID] integerValue];
-        user.fname = [userDefaults objectForKey:kName];
+        MB_User *user  = [[MB_User alloc] init];
+        user.fid       = [[userDefaults objectForKey:kID] integerValue];
+        user.fname     = [userDefaults objectForKey:kName];
         user.fcareerId = [userDefaults objectForKey:kCareer];
-        user.fbackPic = [userDefaults objectForKey:kBackPic];
-        user.fpic = [userDefaults objectForKey:kPic];
-        user.uid = [[userDefaults objectForKey:kUid] integerValue];
-        user.uType = [[userDefaults objectForKey:kUtype] integerValue];
-        user.state = 1;
+        user.fbackPic  = [userDefaults objectForKey:kBackPic];
+        user.fpic      = [userDefaults objectForKey:kPic];
+        user.uid       = [[userDefaults objectForKey:kUid] integerValue];
+        user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
+        user.state     = 1;
         self.user = user;
     }
     
@@ -390,15 +386,14 @@ static CGFloat startY;
 
 - (void)loginOutSuccess:(NSNotification *)noti {
     [self.tableView removeFromSuperview];
-    _tableView = nil;
-    _commentView = nil;
-    _userInfoView = nil;
+    _tableView     = nil;
+    _commentView   = nil;
+    _userInfoView  = nil;
     _containerView = nil;
-    _menuIndex = 0;
+    _menuIndex     = 0;
     
     [self.view addSubview:self.notLoginView];
 }
-
 
 - (void)addChildViewControllers {
     MB_UserDetailViewController *detailVC   = [[MB_UserDetailViewController alloc] init];
@@ -407,15 +402,19 @@ static CGFloat startY;
     MB_MessageViewController *messageVC       = [[MB_MessageViewController alloc] init];
     MB_CollectViewController *collectVC       = [[MB_CollectViewController alloc] init];
     
-    detailVC.containerViewRect    = self.containerView.frame;
+    detailVC.containerViewRect = self.containerView.frame;
     detailVC.user = self.user;
     detailVC.comeFromType = self.comeFromType;
-    ablumVC.containerViewRect      = self.containerView.frame;
+    
+    ablumVC.containerViewRect = self.containerView.frame;
     ablumVC.user = self.user;
+    
     instragramVC.containerViewRect = self.containerView.frame;
     instragramVC.uid = [NSString stringWithFormat:@"%ld",(long)self.user.uid];
-    messageVC.containerViewRect    = self.containerView.frame;
-    collectVC.containerViewRect    = self.containerView.frame;
+    
+    messageVC.containerViewRect = self.containerView.frame;
+    
+    collectVC.containerViewRect = self.containerView.frame;
     collectVC.user = self.user;
     
     [self addChildViewController:instragramVC];
@@ -541,9 +540,9 @@ static CGFloat startY;
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
         
     }
@@ -603,7 +602,7 @@ static CGFloat startY;
         _menuView.backgroundColor = colorWithHexString(@"#222222");
         
         NSArray *images = @[@"ic_instagram",@"ic_information",@"ic_set",@"ic_message",@"ic_collection"];
-        NSArray *images_h  = @[@"ic_instagram_h",@"ic_information_h",@"ic_set_h",@"ic_message_h",@"ic_collection_h"];
+        NSArray *images_h = @[@"ic_instagram_h",@"ic_information_h",@"ic_set_h",@"ic_message_h",@"ic_collection_h"];
         CGFloat btnWidth = kWindowWidth / 5;
         for (int i = 0; i < 5; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -641,7 +640,7 @@ static CGFloat startY;
             _commentView = [[MB_CommentView alloc] initWithFrame:CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60)];
         }
         
-        _commentView.hidden = YES;
+        _commentView.hidden             = YES;
         _commentView.textField.delegate = self;
         [_commentView.sendButton addTarget:self action:@selector(sendButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

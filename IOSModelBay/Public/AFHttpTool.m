@@ -8,8 +8,8 @@
 
 #import "AFHttpTool.h"
 
-#define kBaseUrl             @"http://model.rcplatformhk.net/ModelBayWeb/"
 //#define kBaseUrl             @"http://192.168.0.89:8082/ModelBayWeb/"
+#define kBaseUrl             @"http://model.rcplatformhk.net/ModelBayWeb/"
 
 #define kLoginUrl            @"user/login.do"
 #define kCheckNameUrl        @"user/checkName.do"
@@ -27,22 +27,20 @@
 #define kGetAblumCommentsUrl @"ablum/getAblumComments.do"
 #define kCommentAblumUrl     @"ablum/commentAblum.do"
 #define kAddAblumUrl         @"ablum/addAblum.do"
-#define kUploadPicUrl        @"ablum/uploadPic.do"
+//#define kUploadPicUrl        @"ablum/uploadPic.do"
 #define kGetMessagesUrl      @"user/getComments.do"
 #define kAddMessageUrl       @"user/addComment.do"
 #define kReplyMessageUrl     @"user/replyComment.do"
 #define kGetLikesUrl         @"user/getLikes.do"
 #define kAddLikesUrl         @"user/addLikes.do"
 #define kUpdatePushKey       @"user/updatePushKey.do"
-
-//#define ContentType @"text/html"
-//#define ContentType @"text/plain"
+#define kDeleteAblumUrl      @"ablum/deleAblum.do"
 
 @implementation AFHttpTool
 
 static AFHttpTool *httpTool = nil;
+
 + (instancetype)shareTool {
-    
     if (httpTool == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -55,7 +53,6 @@ static AFHttpTool *httpTool = nil;
     return httpTool;
 }
 
-
 - (void)requestWihtMethod:(RequestMethodType)methodType
                       url:(NSString*)url
                    params:(NSDictionary*)params
@@ -64,10 +61,6 @@ static AFHttpTool *httpTool = nil;
 {
     url = [NSString stringWithFormat:@"%@%@",kBaseUrl,url];
     NSLog(@"url = %@",url);
-//#ifdef ContentType
-//    _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:ContentType];
-//#endif
-//    _manager.requestSerializer.HTTPShouldHandleCookies = YES;
     switch (methodType) {
         case RequestTypeGet:
             {
@@ -247,30 +240,6 @@ static AFHttpTool *httpTool = nil;
                     failure:failure];
 }
 
-//修改用户头像
-- (void)updateUserPicWithParameters:params
-                            success:(void (^)(id response))success
-                            failure:(void (^)(NSError* err))failure
-{
-    [self requestWihtMethod:RequestTypePost
-                        url:kUpdateUserPicUrl
-                     params:params
-                    success:success
-                    failure:failure];
-}
-
-//修改用户背景
-- (void)updateBackgroundWithParameters:params
-                               success:(void (^)(id response))success
-                               failure:(void (^)(NSError* err))failure
-{
-    [self requestWihtMethod:RequestTypePost
-                        url:kUpdateBackgroudUrl
-                     params:params
-                    success:success
-                    failure:failure];
-}
-
 //获取用户作品集
 - (void)getAblumWithParameters:params
                        success:(void (^)(id response))success
@@ -436,6 +405,18 @@ static AFHttpTool *httpTool = nil;
 {
     [self requestWihtMethod:RequestTypePost
                         url:kUpdatePushKey
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//删除影集
+- (void)deleteAblumWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kDeleteAblumUrl
                      params:params
                     success:success
                     failure:failure];

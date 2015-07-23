@@ -12,10 +12,9 @@
 #import "MB_SelectRoleViewController.h"
 #import "MB_User.h"
 
-
 @interface MB_MainViewController ()
 
-@property (nonatomic, strong) UIScrollView * backScrollView;
+@property (nonatomic, strong) UIScrollView * backScrollView;//背景滚动视图
 @property (nonatomic, strong) UIImageView  * titleImageView;
 @property (nonatomic, strong) UIButton     * loginBtn;
 @property (nonatomic, strong) UIButton     * skipBtn;
@@ -25,18 +24,6 @@
 @implementation MB_MainViewController
 
 #pragma mark - life cycle
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//    
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login:) name:kLoginInNotification object:nil];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,6 +31,10 @@
     [self.view addSubview:self.titleImageView];
     [self.view addSubview:self.loginBtn];
     [self.view addSubview:self.skipBtn];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 
@@ -61,24 +52,19 @@
     }
 }
 
-//- (void)login:(NSNotification *)noti {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
-
 
 #pragma mark - getters & setters
 - (UIScrollView *)backScrollView{
     if (_backScrollView == nil) {
         _backScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        _backScrollView.pagingEnabled = YES;
-        _backScrollView.bounces = NO;
+        _backScrollView.pagingEnabled                  = YES;
+        _backScrollView.bounces                        = NO;
         _backScrollView.showsHorizontalScrollIndicator = NO;
-        _backScrollView.contentSize = CGSizeMake(kWindowWidth * 4, 0);
+        _backScrollView.contentSize                    = CGSizeMake(kWindowWidth * 4, 0);
         
         for (int i = 0; i < 5; i++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kWindowWidth, 0, kWindowWidth, CGRectGetHeight(_backScrollView.frame))];
-            NSString *imageName = [NSString stringWithFormat:@"bg%d",i + 1];
-            imageView.image = [UIImage imageNamed:imageName];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bg%d",i + 1]];
             [_backScrollView addSubview:imageView];
         }
     }
@@ -116,10 +102,5 @@
     }
     return _skipBtn;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end

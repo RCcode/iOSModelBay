@@ -10,18 +10,7 @@
 
 @interface MB_InstragramModel : NSObject
 
-//@property (nonatomic, strong) NSArray *tags;
-//@property (nonatomic, strong) NSString *desc;
-//@property (nonatomic, strong) NSString *media_id;
-//@property (nonatomic, strong) NSString *type;       //image or video
 @property (nonatomic, strong) NSDictionary *images; // 图片地址
-//@property (nonatomic, strong) NSDictionary *videos; // 视频地址
-
-//@property (nonatomic, strong) NSString *username;   //作者名
-//@property (nonatomic, strong) NSString *profile_picture;//作者头像
-//@property (nonatomic, strong) NSString *uid;        //作者id
-
-//@property (nonatomic, strong) NSURL *localFilePath;//视频下载后的本地地址÷
 
 //
 //images =             {
@@ -42,17 +31,4 @@
 //    };
 //};
 
-
-
-//"videos": {
-//    "low_resolution": {
-//        "url": "http://distilleryvesper9-13.ak.instagram.com/090d06dad9cd11e2aa0912313817975d_102.mp4",
-//        "width": 480,
-//        "height": 480
-//    },
-//    "standard_resolution": {
-//        "url": "http://distilleryvesper9-13.ak.instagram.com/090d06dad9cd11e2aa0912313817975d_101.mp4",
-//        "width": 640,
-//        "height": 640
-//    },
 @end

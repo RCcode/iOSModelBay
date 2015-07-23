@@ -26,6 +26,7 @@
     
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
     
     if (self.index != 18) {
@@ -55,7 +56,7 @@
         {
             _picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 100, kWindowWidth, 0)];
             _picker.datePickerMode = UIDatePickerModeDate;
-            _picker.date = [NSDate dateWithTimeIntervalSince1970:[self.text integerValue]];
+            [_picker setDate:[NSDate dateWithTimeIntervalSince1970:[self.text integerValue]] animated:YES];
             _picker.maximumDate = [NSDate date];
             [self.view addSubview:_picker];
             
@@ -85,13 +86,13 @@
         case 18://Website
         {
             _textField = [[UITextField alloc] initWithFrame:CGRectMake(12, 100, kWindowWidth - 24, 50)];
-            _textField.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
+            _textField.font      = [UIFont fontWithName:@"FuturaStd-Book" size:14];
             _textField.textColor = colorWithHexString(@"#9a9a9a");
-            _textField.text = self.text;
+            _textField.text      = self.text;
             _textField.backgroundColor = [UIColor whiteColor];
             [self.view addSubview:_textField];
             
-            _hideButton.frame = CGRectMake(0, CGRectGetMaxY(_textField.frame) + 20, kWindowWidth / 2, 50);
+            _hideButton.frame   = CGRectMake(0, CGRectGetMaxY(_textField.frame) + 20, kWindowWidth / 2, 50);
             _noHideButton.frame = CGRectMake(kWindowWidth / 2, CGRectGetMaxY(_textField.frame) + 20, kWindowWidth / 2, 50);
             
             break;
@@ -107,16 +108,14 @@
 }
 
 
-#pragma mark - UITextViewDelegate
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:@"a"]) {
-        textView.text = @"";
-    }
-    return YES;
-}
+//#pragma mark - UITextViewDelegate
 
 
 #pragma mark - private methods
+- (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)rightBarButtonItemOnClick:(UIBarButtonItem *)barButton {
     [self.textView resignFirstResponder];
     

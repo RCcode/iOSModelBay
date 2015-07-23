@@ -7,26 +7,21 @@
 //
 
 #import "MB_SettingViewController.h"
-#import "MB_PrivateViewController.h"
 #import "MB_MainViewController.h"
 #import "MB_TabBarViewController.h"
 
 @import MessageUI;
 
-#define kFeedbackEmail @"rcplatform.help@gmail.com"
-
+#define kFeedbackEmail           @"rcplatform.help@gmail.com"
 #define kFollwUsInstagramAccount @"modelbayapp"
-#define kFollwUsInstagramURL @"http://www.instagram.com/modelbayapp"
-
-//#define kFollowUsFacebookAccount @"123455"
-#define kFollowUsFacebookUrl @"https://www.facebook.com/pages/ModelBay/832690196767719"
-
+#define kFollwUsInstagramURL     @"http://www.instagram.com/modelbayapp"
+#define kFollowUsFacebookUrl     @"https://www.facebook.com/pages/ModelBay/832690196767719"
 
 @interface MB_SettingViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *listTableView;
-@property (nonatomic, strong) UIView *footView;
-@property (nonatomic, strong) NSArray *titleArray;
+@property (nonatomic, strong) UIView      *footView;
+@property (nonatomic, strong) NSArray     *titleArray;
 
 @end
 
@@ -40,13 +35,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = colorWithHexString(@"#eeeeee");
-    self.titleLabel.text = LocalizedString(@"Setting", nil);
+    self.view.backgroundColor     = colorWithHexString(@"#eeeeee");
+    
+    self.titleLabel.text          = LocalizedString(@"Setting", nil);
     self.navigationItem.titleView = self.titleLabel;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
+    
     [self.view addSubview:self.listTableView];
 }
 
@@ -74,13 +71,6 @@
         cell.textLabel.font = [UIFont fontWithName:@"FuturaStd-Book" size:17];
 
     }
-//    else {
-//        if ([userDefaults boolForKey:kIsLogin]) {
-//            cell.textLabel.text = LocalizedString(@"Logout", nil);
-//        }else {
-//            cell.textLabel.text = LocalizedString(@"Login", nil);
-//        }
-//    }
     return cell;
 }
 
@@ -156,6 +146,7 @@
 
 #pragma mark - MFMailComposeViewControllerDelegate
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
     switch (result) {
         case MFMailComposeResultCancelled:
             
@@ -172,6 +163,7 @@
         default:
             break;
     }
+    
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -183,19 +175,25 @@
 
 - (void)loginButtonOnClick:(UIButton *)button {
     if ([userDefaults boolForKey:kIsLogin]) {
+        
+        //注销
         [userDefaults setBool:NO forKey:kIsLogin];
         
+        //发送注销通知
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginOutNotification object:nil];
         
+        //tabBar回到首页
         MB_TabBarViewController *tab = (MB_TabBarViewController *)self.tabBarController;
         [tab scrollToHome];
         
+        //tabBar的所有页面回到首页
         for (UIViewController *vc in self.tabBarController.viewControllers) {
             UINavigationController *na = (UINavigationController *)vc;
             [na popToRootViewControllerAnimated:YES];
         }
         
     }else {
+        //登录
         [self showLoginAlert];
     }
 }
@@ -210,24 +208,20 @@
 - (UITableView *)listTableView {
     if (_listTableView == nil) {
         _listTableView = [[UITableView alloc] initWithFrame:CGRectMake(12, 0, kWindowWidth - 24, kWindowHeight- 12 - 64) style:UITableViewStylePlain];
-        _listTableView.delegate = self;
-        _listTableView.dataSource = self;
+        _listTableView.backgroundColor = colorWithHexString(@"#eeeeee");
+        _listTableView.delegate        = self;
+        _listTableView.dataSource      = self;
         _listTableView.tableHeaderView = [UIView new];
         _listTableView.tableFooterView = self.footView;
-        _listTableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _listTableView.contentInset = UIEdgeInsetsMake(76, 0, 0, 0);
-        _listTableView.scrollEnabled = NO;
+        _listTableView.contentInset    = UIEdgeInsetsMake(76, 0, 0, 0);
+        _listTableView.scrollEnabled   = NO;
     }
     return _listTableView;
 }
 
 - (NSArray *)titleArray {
     if (_titleArray == nil) {
-        if ([userDefaults boolForKey:kIsLogin]) {
-            _titleArray = @[LocalizedString(@"Feedback", nil),  LocalizedString(@"Follow us on Instagram", nil), LocalizedString(@"Follow us on Facebook", nil)];
-        }else {
-            _titleArray = @[LocalizedString(@"Feedback", nil), LocalizedString(@"Follow us on Instagram", nil), LocalizedString(@"Follow us on Facebook", nil)];
-        }
+        _titleArray = @[LocalizedString(@"Feedback", nil), LocalizedString(@"Follow us on Instagram", nil), LocalizedString(@"Follow us on Facebook", nil)];
     }
     return _titleArray;
 }
@@ -236,10 +230,10 @@
     if (!_footView) {
         _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = colorWithHexString(@"#ff6358");
+        button.backgroundColor      = colorWithHexString(@"#ff6358");
         button.titleLabel.textColor = colorWithHexString(@"#ffffff");
-        button.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
-        button.frame = CGRectMake(0, 21, kWindowWidth - 24, 43);
+        button.titleLabel.font      = [UIFont fontWithName:@"FuturaStd-Book" size:14];
+        button.frame                = CGRectMake(0, 21, kWindowWidth - 24, 43);
         if ([userDefaults boolForKey:kIsLogin]) {
             [button setTitle:LocalizedString(@"Logout", nil) forState:UIControlStateNormal];
         }else{

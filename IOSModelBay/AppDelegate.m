@@ -7,10 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "MB_MainViewController.h"
-#import "MB_TabBarViewController.h"
 #import "Flurry.h"
 #import "RC_moreAPPsLib.h"
+#import "MB_TabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,11 +23,10 @@
     
 //    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:kMoreAppID];
 //    [[RC_moreAPPsLib shareAdManager] setAdmobKey:kAdmobID];
-    
+//    [self registNotification];
+
     [self umengSetting];
     [self flurrySetting];
-//    [self cancelNotification];
-//    [self registNotification];
     
     MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
     self.window.rootViewController = tabVC;
@@ -39,8 +37,7 @@
 
 
 #pragma mark - 配置友盟
-- (void)umengSetting
-{
+- (void)umengSetting{
     [MobClick startWithAppkey:kUmengAppKey reportPolicy:SEND_ON_EXIT channelId:@"App Store"];
     //在线参数配置
     [MobClick setAppVersion:XcodeAppVersion];
@@ -49,8 +46,7 @@
 
 
 #pragma mark - Flurry Setting
-- (void)flurrySetting
-{
+- (void)flurrySetting{
     [Flurry startSession:kFlurryAppKey];
 }
 
@@ -63,11 +59,6 @@
 //    }else{
 //        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 //    }
-//}
-
-//- (void)cancelNotification{
-//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 //}
 
 //- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{

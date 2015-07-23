@@ -33,14 +33,6 @@ typedef NS_ENUM(NSInteger, StateType) {
 @property (nonatomic, strong) NSString * reply;//回复内容
 @property (nonatomic, assign) NSInteger  replyTime;//回复时间
 
-//@property (nonatomic, strong) NSString * replyName;
-//@property (nonatomic, strong) NSString * replayPic;
-//@property (nonatomic, strong) NSString * replayBackPic;
-//@property (nonatomic, assign) NSInteger  replyUtype;
-//@property (nonatomic, assign) NSInteger  replyState;
-//@property (nonatomic, strong) NSString * replyCarerrId;
-
-
 @property (nonatomic, strong) NSString * rname;
 @property (nonatomic, strong) NSString * rpic;
 @property (nonatomic, strong) NSString * rbackPic;

@@ -46,11 +46,8 @@ static CGFloat const commentViewHeight = 50;
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - UITableViewDelegate UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 
+#pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -81,16 +78,16 @@ static CGFloat const commentViewHeight = 50;
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.hidesBottomBarWhenPushed = YES;
         userVC.comeFromType = ComeFromTypeUser;
-        MB_User *user = [[MB_User alloc] init];
-        user.fid = comment.fid;
-        user.fname = comment.fname;
-        user.fpic = comment.fpic;
-        user.fbackPic = comment.fbackPic;
-        user.uType = comment.utype;
-        user.state = comment.state;
+        MB_User *user  = [[MB_User alloc] init];
+        user.fid       = comment.fid;
+        user.fname     = comment.fname;
+        user.fpic      = comment.fpic;
+        user.fbackPic  = comment.fbackPic;
+        user.uType     = comment.utype;
+        user.state     = comment.state;
         user.fcareerId = comment.careerId;
-        user.uid = comment.fuid;
-        userVC.user = user;
+        user.uid       = comment.fuid;
+        userVC.user    = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }
 }
@@ -119,6 +116,7 @@ static CGFloat const commentViewHeight = 50;
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 //添加上下拉刷新
 - (void)addPullRefresh
 {
@@ -152,6 +150,7 @@ static CGFloat const commentViewHeight = 50;
             }
             
             self.minId = [response[@"minId"] integerValue];
+            
             NSArray *array = response[@"list"];
             for (NSDictionary *dic in array) {
                 MB_Comment *comment = [[MB_Comment alloc] init];
@@ -178,12 +177,12 @@ static CGFloat const commentViewHeight = 50;
     [[AFHttpTool shareTool] commentAblumWithParameters:params success:^(id response) {
         NSLog(@"comment send  %@",response);
         if ([self statFromResponse:response] == 10000) {
-//            [MB_Utils showPromptWithText:@"success"];
+            
         }else {
-//            [MB_Utils showPromptWithText:@"failed"];
+    
         }
     } failure:^(NSError *err) {
-//        [MB_Utils showPromptWithText:@"failed"];
+        
     }];
 }
 
@@ -193,11 +192,11 @@ static CGFloat const commentViewHeight = 50;
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight - commentViewHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
         _tableView.tableHeaderView = [UIView new];
         _tableView.tableFooterView = [UIView new];
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_CommentTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
@@ -216,7 +215,6 @@ static CGFloat const commentViewHeight = 50;
     if (_textView == nil) {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, commentViewHeight) textContainer:nil];
         _textView.backgroundColor = [UIColor whiteColor];
-//        _textView.text = @"ssss";
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.delegate = self;
     }

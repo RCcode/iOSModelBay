@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JDFPeekabooCoordinator.h"
 #import "MB_NotLoginView.h"
 
+//重用标识
 static NSString * const ReuseIdentifier = @"cell";
 
 @interface MB_BaseViewController : UIViewController
 
+//通用数据源数组
 @property (nonatomic, strong) NSMutableArray *dataArray;
-//@property (nonatomic, strong) JDFPeekabooCoordinator *scrollCoordinator;
+//导航栏标题
 @property (nonatomic, strong) UILabel *titleLabel;
-
+//未登录时的提示，点击弹出登录界面
 @property (nonatomic, strong) MB_NotLoginView *notLoginView;
 
 //添加下拉刷新
@@ -29,29 +30,22 @@ static NSString * const ReuseIdentifier = @"cell";
               WithActionHandler:(void (^)(void))actionHandler;
 
 //结束头部刷新动画
-- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView;
+//- (void)endHeaderRefreshingForView:(UIScrollView *)scrollView;
 //结束尾部刷新动画
-- (void)endFooterRefreshingForView:(UIScrollView *)scrollView;
+//- (void)endFooterRefreshingForView:(UIScrollView *)scrollView;
 //结束头部和尾部刷新动画
 - (void)endRefreshingForView:(UIScrollView *)scrollView;
-
 //没有更多数据时调用
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView;
-
-//加入上滑隐藏导航栏
-//- (void)HideNavigationBarWhenScrollUpForScrollView:(UIScrollView *)scrollView;
 
 //获取服务器返回的状态码
 - (NSInteger)statFromResponse:(id)response;
 
-//没登陆弹出登陆框并返回NO,登录直接返回YES；
+//没登陆弹出登录提示页面并返回NO,登录直接返回YES
 - (BOOL)showLoginAlertIfNotLogin;
-//弹出登录提示框
+//弹出登录提示界面
 - (void)showLoginAlert;
-//登录提示框点击按钮代理
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-
-//弹出登录界面
+//弹出Instagram登录界面
 - (void)presentLoginViewController;
 
 

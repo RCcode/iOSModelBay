@@ -11,17 +11,18 @@
 @implementation MB_Utils
 
 static MB_Utils *util = nil;
+
 + (instancetype)shareUtil {
     if (util == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             util = [[MB_Utils alloc] init];
             
-            util.fName = @"";
-            util.fGender = -1;
+            util.fName     = @"";
+            util.fGender   = -1;
             util.fCareerId = @"";
             
-            util.rGender = -1;
+            util.rGender   = -1;
             util.rCareerId = @"";
     
             util.careerDic = @{@"1":LocalizedString(@"Model", nil),
@@ -68,7 +69,6 @@ static MB_Utils *util = nil;
             
             util.country = @[@"", @"Afghanistan", @"Albania",@"Algeria", @"American Samoa", @"Andorra", @"Angola", @"Anguilla", @"Antarctica", @"Antigua and Barbuda", @"Argentina", @"Armenia", @"Aruba", @"Australia", @"Austria", @"Azerbaijan", @"Bahamas", @"Bahrain", @"Bangladesh", @"Barbados", @"Belarus", @"Belgium", @"Belize", @"Benin", @"Bermuda", @"Bhutan", @"Bolivia", @"Bosnia and Herzegovina", @"Botswana", @"Bouvet Island", @"Brazil", @"British Indian Ocean Territory", @"Brunei Darussalam", @"Bulgaria", @"Burkina Faso", @"Burundi", @"Cambodia", @"Cameroon", @"Canada", @"Cape Verde", @"Cayman Islands", @"Central African Republic", @"Chad", @"Chile", @"China", @"Christmas Island", @"Cocos (Keeling) Islands", @"Colombia", @"Comoros", @"Congo", @"Congo, The Democratic Republic Of The", @"Cook Islands", @"Costa Rica", @"Cote D\"Ivoire", @"Croatia (local name: Hrvatska)", @"Cuba", @"Cyprus", @"Czech Republic", @"Denmark", @"Djibouti", @"Dominica", @"Dominican Republic", @"East Timor", @"Ecuador", @"Egypt", @"El Salvador", @"Equatorial Guinea", @"Eritrea", @"Estonia", @"Ethiopia", @"Falkland Islands (Malvinas)", @"Faroe Islands", @"Fiji", @"Finland", @"France", @"France Metropolitan", @"French Guiana", @"French Polynesia", @"French Southern Territories", @"Gabon", @"Gambia", @"Georgia", @"Germany", @"Ghana", @"Gibraltar", @"Greece", @"Greenland", @"Grenada", @"Guadeloupe", @"Guam", @"Guatemala", @"Guinea", @"Guinea-Bissau", @"Guyana", @"Haiti", @"Heard and Mc Donald Islands", @"Honduras", @"Hong Kong", @"Hungary", @"Iceland", @"India", @"Indonesia", @"Iran (Islamic Republic of)", @"Iraq", @"Ireland", @"Isle of Man", @"Israel", @"Italy", @"Jamaica", @"Japan", @"Jordan", @"Kazakhstan", @"Kenya", @"Kiribati", @"Kuwait", @"Kyrgyzstan", @"Lao People\"s Democratic Republic", @"Latvia", @"Lebanon", @"Lesotho", @"Liberia", @"Libyan Arab Jamahiriya", @"Liechtenstein", @"Lithuania", @"Luxembourg", @"Macau", @"Madagascar", @"Malawi", @"Malaysia", @"Maldives", @"Mali", @"Malta", @"Marshall Islands", @"Martinique", @"Mauritania", @"Mauritius", @"Mayotte", @"Mexico", @"Micronesia", @"Moldova", @"Monaco", @"Mongolia", @"Montenegro", @"Montserrat", @"Morocco", @"Mozambique", @"Myanmar", @"Namibia", @"Nauru", @"Nepal", @"Netherlands", @"Netherlands Antilles", @"New Caledonia", @"New Zealand", @"Nicaragua", @"Niger", @"Nigeria", @"Niue", @"Norfolk Island", @"North Korea", @"Northern Mariana Islands", @"Norway", @"Oman", @"Pakistan", @"Palau", @"Palestine", @"Panama", @"Papua New Guinea", @"Paraguay", @"Peru", @"Philippines", @"Pitcairn", @"Poland", @"Portugal", @"Puerto Rico", @"Qatar", @"Reunion", @"Romania", @"Russian Federation", @"Rwanda", @"Saint Kitts and Nevis", @"Saint Lucia", @"Saint Vincent and the Grenadines", @"Samoa", @"San Marino", @"Sao Tome and Principe", @"Saudi Arabia", @"Senegal", @"Serbia", @"Seychelles", @"Sierra Leone", @"Singapore", @"Slovakia (Slovak Republic)", @"Slovenia", @"Solomon Islands", @"Somalia", @"South Africa", @"South Korea", @"Spain", @"Sri Lanka", @"St. Helena", @"St. Pierre and Miquelon", @"Sudan", @"Suriname", @"Svalbard and Jan Mayen Islands", @"Swaziland", @"Sweden", @"Switzerland", @"Syrian Arab Republic", @"Taiwan", @"Tajikistan", @"Tanzania", @"Thailand", @"The former Yugoslav Republic of Macedonia", @"Togo", @"Tokelau", @"Tonga", @"Trinidad and Tobago", @"Tunisia", @"Turkey", @"Turkmenistan", @"Turks and Caicos Islands", @"Tuvalu", @"Uganda", @"Ukraine", @"United Arab Emirates", @"United Kingdom", @"United States", @"United States Minor Outlying Islands", @"Uruguay", @"Uzbekistan", @"Vanuatu", @"Vatican City State (Holy See)", @"Venezuela", @"Vietnam", @"Virgin Islands (British)", @"Virgin Islands (U.S.)", @"Wallis And Futuna Islands", @"Western Sahara", @"Yemen", @"Yugoslavia", @"Zambia", @"Zimbabwe"];
 
-
             util.mapArray = @[@"Eye Color",@"Skin Color",@"Hair Color",@"Shoes",@"Dress",@"Height",@"Weight",@"Chest",@"Waist",@"Hips",@"areaModel",@"areaPhoto",@"Experiences",@"Gender",@"Country",@"Age",@"Contracts",@"Email",@"Website"];
             
             util.optionsDic = @{@(0):util.eyeColor,
@@ -88,14 +88,15 @@ static MB_Utils *util = nil;
                                 @(14):util.country,};
         });
     }
+    
     return util;
 }
 
 + (void)showPromptWithText:(NSString *)text {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode             = MBProgressHUDModeText;
     hud.detailsLabelText = text;
     hud.detailsLabelFont = [UIFont systemFontOfSize:17.0];
-    hud.mode = MBProgressHUDModeText;
     [hud hide:YES afterDelay:0.8];
 }
 
@@ -107,17 +108,17 @@ static MB_Utils *util = nil;
 }
 
 + (NSString *)dateWithTimeInterval:(double)timeInterval fromTimeZone:(NSString *)zone {
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"Z"];
     NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
     [dateFormatter setTimeZone:timeZone];
+    
     //+0800
     NSString *timeZoneZ = [dateFormatter stringFromDate:[NSDate date]];
     NSRange range = NSMakeRange(0, 3);
     //+08
     NSString *timeZoneInt = [timeZoneZ substringWithRange:range];
-    
-//    NSLog(@"timeZoneInt%@",timeZoneInt);
     
     //时区相差时间戳
     double interval = ([timeZoneInt integerValue] - [zone integerValue]) * 60;
@@ -128,6 +129,7 @@ static MB_Utils *util = nil;
     
     //设置格式为2015.07.03 18:12
     [dateFormatter setDateFormat:@"YYYY.MM.dd HH:mm"];
+    
     return [dateFormatter stringFromDate:date];
 }
 

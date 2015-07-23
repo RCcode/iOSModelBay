@@ -18,24 +18,6 @@
 -(void)setValue:(id)value forKey:(NSString *)key
 {
     [super setValue:value forKey:key];
-    
-//    if ([key isEqualToString:@"id"]) {
-//        _media_id = value;
-//    }
-//    
-//    if ([key isEqualToString:@"caption"]) {
-//        _desc = value[@"text"];
-//    }
-//    
-//    if ([key isEqualToString:@"user"]) {
-//        _username = value[@"username"];
-//        _uid = value[@"id"];
-//        _profile_picture = value[@"profile_picture"];
-//    }
-//    
-//    if ([key isEqualToString:@"likes"]) {
-//        _likes = value[@"count"];
-//    }
 }
 
 @end

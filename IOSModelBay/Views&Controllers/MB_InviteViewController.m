@@ -10,6 +10,7 @@
 #import "MB_AddressBookPeople.h"
 #import <AddressBook/AddressBook.h>
 #import "MB_AddressBookTableViewCell.h"
+
 @import MessageUI;
 
 @interface MB_InviteViewController ()<UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
@@ -71,6 +72,7 @@
         default:
             break;
     }
+    
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -148,16 +150,14 @@
 }
 
 
-
-
 #pragma mark - getters & setters
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
         _tableView.allowsSelection = NO;
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 49, 0);
         [_tableView setTableFooterView:[UIView new]];
         [_tableView registerNib:[UINib nibWithNibName:@"MB_AddressBookTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }

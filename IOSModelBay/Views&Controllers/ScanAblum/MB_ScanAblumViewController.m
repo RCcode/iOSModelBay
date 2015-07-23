@@ -15,8 +15,8 @@
 
 @interface MB_ScanAblumViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate, AblumDescViewDelegate>
 
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) MB_AblumDescView *descView;
+@property (nonatomic, strong) UIScrollView     *scrollView;
+@property (nonatomic, strong) MB_AblumDescView *descView;//影集信息
 
 @end
 
@@ -28,9 +28,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
     
-    self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",1,(unsigned long)self.ablum.mList.count];
+    self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",1,(unsigned long)self.ablum.mList.count];
     self.navigationItem.titleView = self.titleLabel;
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
      
     [self.view addSubview:self.scrollView];
@@ -102,7 +101,7 @@
                 UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
                 [nextScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",page + 1 + 1, (unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",page + 1 + 1, (unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -116,7 +115,7 @@
                 UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
                 [lastScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"VINCENT(%d/%lu)",page - 1 + 1,(unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",page - 1 + 1,(unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -146,9 +145,9 @@
             
             //第i页的图片
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, CGRectGetHeight(scrollView.frame) - 80)];
-            imageView.backgroundColor = placeholderColor;
+            imageView.backgroundColor        = placeholderColor;
             imageView.userInteractionEnabled = YES;
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
+            imageView.contentMode            = UIViewContentModeScaleAspectFit;
             NSString *imageName = [self.ablum.mList[i] objectForKey:@"url"];
             [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
             [scrollView addSubview:imageView];

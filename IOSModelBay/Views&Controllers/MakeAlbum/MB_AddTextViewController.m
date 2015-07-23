@@ -80,6 +80,12 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 #pragma mark - UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView {
@@ -102,14 +108,14 @@
     }
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }else {
-        return YES;
-    }
-}
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    }else {
+//        return YES;
+//    }
+//}
 
 
 #pragma mark - private methods
@@ -223,7 +229,7 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
-//    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    //显示进度
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.detailsLabelText = LocalizedString(@"Uploading", nil);
     hud.detailsLabelFont = [UIFont systemFontOfSize:17.0];
@@ -281,8 +287,6 @@
                         }
                     }];
                     
-
-//                    __weak AFHTTPRequestOperation *weakop = operation;
                     __weak NSMutableDictionary *dic = self.progressDic;
                     __weak NSNumber *index = [uploadParams objectForKey:@"sort"];
                     __weak NSMutableArray *allArray = self.urlArray;
@@ -316,10 +320,29 @@
         }else {
             hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
             [hud hide:YES afterDelay:0.7];
+            
+            [self deleteAblumWithAblId:[response[@"ablId"] integerValue]];
         }
     } failure:^(NSError *err) {
         hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
-        [hud hide:YES afterDelay:0.7];    }];
+        [hud hide:YES afterDelay:0.7];
+    }];
+}
+
+//删除影集
+- (void)deleteAblumWithAblId:(NSInteger)ablId {
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"adlId":@(ablId)};
+    
+    [[AFHttpTool shareTool] deleteAblumWithParameters:params success:^(id response) {
+        NSLog(@"delete ablum: %@",response);
+        if ([self statFromResponse:response] == 10000) {
+            
+        }
+    } failure:^(NSError *err) {
+        
+    }];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {

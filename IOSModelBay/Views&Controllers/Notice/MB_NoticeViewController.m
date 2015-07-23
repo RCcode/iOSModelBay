@@ -14,9 +14,9 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "MB_UserViewController.h"
 
-static NSString * const ReuseIdentifierNotice = @"notice";
+static NSString * const ReuseIdentifierNotice  = @"notice";
 static NSString * const ReuseIdentifierMessage = @"message";
-static NSString * const ReuseIdentifierReply = @"reply";
+static NSString * const ReuseIdentifierReply   = @"reply";
 
 @interface MB_NoticeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -40,11 +40,9 @@ static NSString * const ReuseIdentifierReply = @"reply";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
-
     
     if ([userDefaults boolForKey:kIsLogin]) {
         [self.view addSubview:self.tableView];
-        
         [self addPullRefresh];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -65,13 +63,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.row % 3 == 0) {
-//        return 68;
-//    }else if (indexPath.row % 3 == 1){
-//        return 70;
-//    }else {
-//        return 130;
-//    }
     
     MB_Notice *notice = self.dataArray[indexPath.row];
     
@@ -82,12 +73,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
                 [self configureCell2:cell atIndexPath:indexPath];
             }];
             break;
-            
-//        case NoticeTypeReplay:
-//            return [tableView fd_heightForCellWithIdentifier:ReuseIdentifierReply cacheByIndexPath:indexPath configuration:^(MB_MessageReplyTableViewCell *cell) {
-//                [self configureCell3:cell atIndexPath:indexPath];
-//            }];
-//            break;
             
         case NoticeTypeCollect:
         case NoticeTypeMention:
@@ -101,14 +86,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
         default:
             break;
     }
-    
-//    NoticeTypeCollect = 0,//收藏
-//    NoticeTypeMention,//提到
-//    NoticeTypeLike,//赞照片
-//    NoticeTypeComment,//评论照片
-//    NoticeTypeMessage,//留言
-//    NoticeTypeReplay//回复留言
-
 }
 
 - (void)configureCell:(MB_NoticeTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -123,12 +100,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
     cell.notice = notice;
 }
 
-//- (void)configureCell3:(MB_MessageReplyTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-//{
-//    MB_Notice *notice = self.dataArray[indexPath.row];
-//    cell.notice = notice;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MB_Notice *notice = self.dataArray[indexPath.row];
     switch (notice.mtype) {
@@ -139,13 +110,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
             [self configureCell2:cell atIndexPath:indexPath];
             return cell;
         }
-            
-//        case NoticeTypeReplay:
-//        {
-//            MB_MessageReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierReply forIndexPath:indexPath];
-//            [self configureCell3:cell atIndexPath:indexPath];
-//            return cell;
-//        }
             
         case NoticeTypeCollect:
         case NoticeTypeMention:
@@ -167,19 +131,19 @@ static NSString * const ReuseIdentifierReply = @"reply";
     MB_Notice *notice = self.dataArray[indexPath.row];
     
     if ([self showLoginAlertIfNotLogin]) {
-        MB_User *user = [[MB_User alloc] init];
-        user.fid = notice.fid;
-        user.fname = notice.fname;
-        user.fcareerId = notice.careerId;
-        user.fpic = notice.fpic;
-        user.fbackPic = notice.backPic;
-        user.uType = notice.utype;
-        user.state = notice.state;
-        user.uid = notice.fuid;
-        
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.comeFromType = ComeFromTypeUser;
         userVC.hidesBottomBarWhenPushed = YES;
+        
+        MB_User *user  = [[MB_User alloc] init];
+        user.fid       = notice.fid;
+        user.fname     = notice.fname;
+        user.fcareerId = notice.careerId;
+        user.fpic      = notice.fpic;
+        user.fbackPic  = notice.backPic;
+        user.uType     = notice.utype;
+        user.state     = notice.state;
+        user.uid       = notice.fuid;
         userVC.user = user;
         
         switch (notice.mtype) {
@@ -253,6 +217,7 @@ static NSString * const ReuseIdentifierReply = @"reply";
         NSLog(@"notice = %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
+        
         if ([self statFromResponse:response] == 10000) {
             if (minId == 0) {
                 [self.dataArray removeAllObjects];

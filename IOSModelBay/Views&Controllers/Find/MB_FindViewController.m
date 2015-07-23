@@ -10,16 +10,14 @@
 #import "MB_FilterViewController.h"
 #import "MB_UserCollectViewCell.h"
 #import "MB_UserViewController.h"
-#import "JDFPeekabooCoordinator.h"
 #import "MB_User.h"
-#import "MB_UploadView.h"
 
 @interface MB_FindViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectView;
-@property (nonatomic, assign) NSInteger minId;//分页用的
+@property (nonatomic, assign) NSInteger         minId;//分页用的
 
-@property (nonatomic, assign) BOOL showLoginAuto;
+@property (nonatomic, assign) BOOL showLoginAuto;//是否自动弹出登录
 
 @end
 
@@ -29,7 +27,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.showLoginAuto == YES) {
+    if (self.showLoginAuto) {
         self.showLoginAuto = NO;
         [self showLoginAlert];
     }
@@ -66,8 +64,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_UserCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    MB_User *user = self.dataArray[indexPath.row];
-    cell.user = user;
+    cell.user = self.dataArray[indexPath.row];
     return cell;
 }
 
@@ -81,19 +78,6 @@
         [self.navigationController pushViewController:userVC animated:YES];
     }
 }
-
-
-//#pragma mark - UIScrollViewDelegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView == self.collectView) {
-//        if (self.scrollCoordinator.topView.frame.origin.y >= -24 && self.scrollCoordinator.topView.frame.origin.y <= 20) {
-////            self.collectView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-//            self.uploadView.frame = CGRectMake(0, self.scrollCoordinator.topView.frame.origin.y + 44, kWindowWidth, 60);
-//        }else{
-////            self.collectView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-//        }
-//    }
-//}
 
 
 #pragma mark - private methods
@@ -138,7 +122,7 @@
     }
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
-        NSLog(@"list %@",response);
+        NSLog(@"find %@",response);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
         if ([self statFromResponse:response] == 10000) {
@@ -164,6 +148,7 @@
             }
             [self.collectView reloadData];
         }else if ([self statFromResponse:response] == 10501){
+            //没有用户
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
                 [self.collectView reloadData];
@@ -183,7 +168,7 @@
     if (_collectView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         CGFloat space = 4;
-        CGFloat itemWidth = (kWindowWidth - 3 * space) / 2;
+        CGFloat itemWidth  = (kWindowWidth - 3 * space) / 2;
         CGFloat itemHeight = itemWidth + 34;
         layout.sectionInset = UIEdgeInsetsMake(space, space, space, space);
         layout.minimumInteritemSpacing = space;
@@ -191,12 +176,12 @@
         layout.itemSize = CGSizeMake(itemWidth, itemHeight);
         
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) collectionViewLayout:layout];
-        _collectView.bounces = YES;
+        _collectView.bounces              = YES;
         _collectView.alwaysBounceVertical = YES;
-        _collectView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _collectView.delegate        = self;
-        _collectView.dataSource      = self;
-        _collectView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        _collectView.backgroundColor      = colorWithHexString(@"#eeeeee");
+        _collectView.delegate             = self;
+        _collectView.dataSource           = self;
+        _collectView.contentInset         = UIEdgeInsetsMake(64, 0, 49, 0);
         [_collectView registerNib:[UINib nibWithNibName:@"MB_UserCollectViewCell" bundle:nil] forCellWithReuseIdentifier:ReuseIdentifier];
     }
     return _collectView;

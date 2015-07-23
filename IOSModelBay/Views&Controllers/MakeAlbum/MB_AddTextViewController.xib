@@ -48,7 +48,10 @@
                     </constraints>
                     <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="11"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="5DL-Fd-6YH"/>
+                    </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sln-Tq-nAZ">
                     <rect key="frame" x="0.0" y="136" width="8" height="98"/>
@@ -66,7 +69,7 @@
                     </constraints>
                     <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="11"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="VIe-kR-Lej"/>
                     </connections>

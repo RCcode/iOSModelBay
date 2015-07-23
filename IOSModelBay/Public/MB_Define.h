@@ -27,23 +27,23 @@
 //#define kAdmobID   @"ca-app-pub-3747943735238482/3196343450"
 
 //Instragram平台用户信息
-#define kUid @"uid"
-#define kUsername @"username"
-#define kFullname @"fullname"
+#define kUid         @"uid"
+#define kUsername    @"username"
+#define kFullname    @"fullname"
 #define kAccessToken @"accessToken"
-#define kBio @"bio"
-#define kWebsite @"website"
+#define kBio         @"bio"
+#define kWebsite     @"website"
 
 //模特平台用户信息
 #define kIsLogin @"isLogin"
-#define kID   @"id"
-#define kName @"name"
-#define kCareer @"career"
-#define kGender @"gender"
-#define kUtype @"utype"
-#define kPic @"pic"
+#define kID      @"id"
+#define kName    @"name"
+#define kCareer  @"career"
+#define kGender  @"gender"
+#define kUtype   @"utype"
+#define kPic     @"pic"
 #define kBackPic @"backPic"
-#define kToken @"token"
+#define kToken   @"token"
 
 
 #ifdef DEBUG
@@ -61,21 +61,8 @@
 #define placeholderColor colorWithHexString(@"#e3e3e3")
 
 //登录通知
-#define kLoginInNotification @"loginInNotification"
+#define kLoginInNotification  @"loginInNotification"
 //退出登录通知
 #define kLoginOutNotification @"loginOutNotification"
-
-
-
-
-
-//AppStore
-//#define kAppStoreUrlPre @"itms-apps://itunes.apple.com/app/id"
-//#define kAppStoreUrl [NSString stringWithFormat:@"%@%@", kAppStoreUrlPre, kAppID]
-//#define kAppStoreScoreUrlPre @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
-//#define kAppStoreScoreUrl [NSString stringWithFormat:@"%@%@", kAppStoreScoreUrlPre, kAppID]
-
-//#define FEEDBACK_EMAIL @"rcplatform.help@gmail.com"
-//#define FOLLOW_US_URL  @"http://www.instagram.com/nocrop_rc"
 
 #endif

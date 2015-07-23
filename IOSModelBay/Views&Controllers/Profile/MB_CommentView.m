@@ -14,13 +14,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = colorWithHexString(@"#747474");
+        
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(15, 0, CGRectGetWidth(frame) - 66, CGRectGetHeight(frame))];
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:LocalizedString(@"Leave Message", nil)];
         [string addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#ffffff") range:NSMakeRange(0, string.length)];
         _textField.attributedPlaceholder = string;
-        _textField.textColor = colorWithHexString(@"#ffffff");
-        _textField.font = [UIFont fontWithName:@"CenturyGothic" size:13];
-        _textField.returnKeyType = UIReturnKeyDone;
+        _textField.textColor             = colorWithHexString(@"#ffffff");
+        _textField.font                  = [UIFont fontWithName:@"CenturyGothic" size:13];
+        _textField.returnKeyType         = UIReturnKeyDone;
         [self addSubview:_textField];
         
         _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];

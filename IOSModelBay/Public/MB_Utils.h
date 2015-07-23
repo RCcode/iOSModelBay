@@ -24,6 +24,7 @@
 //所有职业
 @property (nonatomic, strong) NSDictionary *careerDic;
 
+//用户资料选项
 @property (nonatomic, strong) NSArray *eyeColor;//眼睛颜色
 @property (nonatomic, strong) NSArray *skincolor;//肤色
 @property (nonatomic, strong) NSArray *haircolor;//发色
@@ -43,14 +44,13 @@
 
 //资料属性的先后关系
 @property (nonatomic, strong) NSArray *mapArray;
+
 //选项的对应关系
 @property (nonatomic, strong) NSDictionary *optionsDic;
 
 + (void)showPromptWithText:(NSString *)text;
 
 + (void)showAlertViewWithMessage:(NSString *)string;
-
-//+ (NSInteger)statFromResponse:(id)response;
 
 
 //用指定时区的时间戳算出当前时区应当显示的时间 timeZone格式：(+08)

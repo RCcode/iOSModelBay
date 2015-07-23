@@ -20,15 +20,14 @@
 //    [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    self.navigationBar.shadowImage = [UIImage new];
 //    
-    self.navigationBar.translucent = YES;
+    self.navigationBar.translucent  = YES;
     self.navigationBar.barTintColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.95];
-    self.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationBar.tintColor    = [UIColor whiteColor];
+    self.navigationBar.barStyle     = UIBarStyleBlack;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 @end

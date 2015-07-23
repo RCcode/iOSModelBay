@@ -14,7 +14,7 @@
 @interface MB_LikersViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) NSInteger minId;
+@property (nonatomic, assign) NSInteger    minId;
 
 @end
 
@@ -67,16 +67,16 @@
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.hidesBottomBarWhenPushed = YES;
         userVC.comeFromType = ComeFromTypeUser;
-        MB_User *user = [[MB_User alloc] init];
-        user.fid = liker.fid;
-        user.fname = liker.fname;
-        user.fpic = liker.fpic;
-        user.uType = liker.utype;
-        user.fbackPic = liker.fbackPic;
-        user.state = liker.state;
+        MB_User *user  = [[MB_User alloc] init];
+        user.fid       = liker.fid;
+        user.fname     = liker.fname;
+        user.fpic      = liker.fpic;
+        user.uType     = liker.utype;
+        user.fbackPic  = liker.fbackPic;
+        user.state     = liker.state;
         user.fcareerId = liker.careerId;
-        user.uid = liker.fuid;
-        userVC.user = user;
+        user.uid       = liker.fuid;
+        userVC.user    = user;
         [self.navigationController pushViewController:userVC animated:YES];
     }
 }
@@ -162,12 +162,12 @@
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 68;
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
+        _tableView.rowHeight       = 68;
         _tableView.tableHeaderView = [UIView new];
         _tableView.tableFooterView = [UIView new];
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 0, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_LikersTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;

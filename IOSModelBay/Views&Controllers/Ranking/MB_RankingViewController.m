@@ -16,7 +16,7 @@
 @interface MB_RankingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) NSInteger minId;
+@property (nonatomic, assign) NSInteger    minId;
 
 @end
 
@@ -28,7 +28,6 @@
     
     self.titleLabel.text = LocalizedString(@"Rank", nil).uppercaseString;
     self.navigationItem.titleView = self.titleLabel;
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
@@ -91,11 +90,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if ([self showLoginAlertIfNotLogin]) {
         MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
         userVC.comeFromType = ComeFromTypeUser;
-        userVC.hidesBottomBarWhenPushed = YES;
         userVC.user = self.dataArray[indexPath.row];
+        userVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:userVC animated:YES];
     }
 }
@@ -106,11 +106,11 @@
     //跳转到筛选界面
     MB_FilterViewController *filterVC = [[MB_FilterViewController alloc] init];
     filterVC.type = FilterTypeRanking;
-    filterVC.hidesBottomBarWhenPushed = YES;
     filterVC.CompleteHandler = ^(){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self requestRankingListWithMinId:0];
     };
+    filterVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:filterVC animated:YES];
 }
 
@@ -153,6 +153,7 @@
             }
             
             self.minId = [response[@"minId"] integerValue];
+            
             NSArray *array = response[@"list"];
             for (NSDictionary *dic in array) {
                 MB_User *user = [[MB_User alloc] init];
@@ -170,7 +171,6 @@
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
                 [self.tableView reloadData];
-//                [MB_Utils showPromptWithText:@"o result"];
             }else {
                 [self showNoMoreMessageForview:self.tableView];
             }
@@ -182,37 +182,6 @@
 }
 
 //获取指定用户的Instragram图片
-- (void)requestInstragramMediasListWithUid:(NSInteger)Uid {
-    NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%ld/media/recent/",(long)Uid];
-    NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
-                                     @"count": @(10)} mutableCopy];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"instragram %@",responseObject);
-
-        NSArray *dataArr = responseObject[@"data"];
-        
-        NSInteger index = -1;
-        for (NSDictionary *dic in dataArr) {
-            for (MB_User *user in self.dataArray) {
-                if (user.uid == Uid) {
-                    index = [self.dataArray indexOfObject:user];
-                    [user.urlArray addObject:dic[@"images"][@"low_resolution"][@"url"]];
-                }
-            }
-        }
-        
-        if (index != -1) {
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-}
-
-//获取指定用户的Instragram图片
 - (void)requestInstragramMediasListWithUesr:(MB_User *)user {
     NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%ld/media/recent/",(long)user.uid];
     NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
@@ -220,15 +189,14 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        NSLog(@"instragram %@",responseObject);
         
         NSArray *dataArr = responseObject[@"data"];
         
         for (NSDictionary *dic in dataArr) {
             [user.urlArray addObject:dic[@"images"][@"low_resolution"][@"url"]];
         }
-        [self.tableView reloadData];
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.dataArray indexOfObject:user] inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"instra err %@",error);
@@ -248,12 +216,12 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
+        _tableView.delegate        = self;
+        _tableView.dataSource      = self;
         _tableView.tableHeaderView = [UIView new];
         _tableView.tableFooterView = [UIView new];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+        _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 49, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_RankingTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;
