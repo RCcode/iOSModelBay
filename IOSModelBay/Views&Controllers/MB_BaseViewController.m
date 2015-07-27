@@ -91,7 +91,7 @@
 
 //没有更多数据时调用
 - (void)showNoMoreMessageForview:(UIScrollView *)scrollView {
-    self.footerLabel.text = @"没有更多了";
+    self.footerLabel.text = LocalizedString(@"NoMore", nil);
 }
 
 - (NSInteger)statFromResponse:(id)response {
@@ -158,7 +158,9 @@
             [userDefaults setObject:response[@"id"] forKey:kID];//模特平台用户唯一标识
             [userDefaults setObject:response[@"gender"] forKey:kGender];//性别:0.女;1.男
             [userDefaults setObject:response[@"name"] forKey:kName];//本平台登录用户名
-            [userDefaults setObject:response[@"careerId"] forKey:kCareer];//职业id,竖线分割:1|2|3
+            if (response[@"careerId"] != nil && ![response[@"careerId"] isKindOfClass:[NSNull class]]) {
+                [userDefaults setObject:response[@"careerId"] forKey:kCareer];//职业id,竖线分割:1|2|3
+            }
             [userDefaults setObject:response[@"utype"] forKey:kUtype];//用户类型: 0,浏览;1:专业;
             [userDefaults setObject:response[@"pic"] forKey:kPic];//用户类型: 0,浏览;1:专业;
             [userDefaults setObject:response[@"backPic"] forKey:kBackPic];//用户类型: 0,浏览;1:专业;
@@ -229,7 +231,7 @@
 
 - (MB_NotLoginView *)noResultView {
     if (_noResultView == nil) {
-        _noResultView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:@"aaaa" delegate:self];
+        _noResultView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"NoMore", nil) delegate:self];
     }
     return _noResultView;
 }

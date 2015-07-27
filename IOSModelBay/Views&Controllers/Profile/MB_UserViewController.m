@@ -16,6 +16,9 @@
 #import "MB_SettingViewController.h"
 #import "MB_UserDetailViewController.h"
 
+
+#import "MB_SelectRoleViewController.h"
+
 @import MessageUI;
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -76,6 +79,7 @@
         
     }else {
         [self.view addSubview:self.notLoginView];
+        self.titleLabel.text = @"";
     }
 }
 
@@ -301,8 +305,7 @@ static CGFloat startY;
         AFHTTPRequestOperation *operation = [_manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
             NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
-            [formData appendPartWithFileData:imageData name:@"pic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];
-            
+            [formData appendPartWithFileData:imageData name:@"pic" fileName:@"pic.jpg" mimeType:@"image/jpeg"];            
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([self statFromResponse:responseObject] == 10000) {
@@ -362,6 +365,9 @@ static CGFloat startY;
     MB_SettingViewController *inviteVC = [[MB_SettingViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
+//    MB_SelectRoleViewController *select = [[MB_SelectRoleViewController alloc] init];
+//    select.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:select animated:YES];
 }
 
 - (void)requestLikedTypeWithFid:(NSInteger)fid {
@@ -437,7 +443,7 @@ static CGFloat startY;
 
 
 - (void)loginSuccess:(NSNotification *)noti {
-    if (self.type == ComeFromTypeSelf) {
+    if (self.comeFromType == ComeFromTypeSelf) {
         MB_User *user  = [[MB_User alloc] init];
         user.fid       = [[userDefaults objectForKey:kID] integerValue];
         user.fname     = [userDefaults objectForKey:kName];
@@ -448,18 +454,20 @@ static CGFloat startY;
         user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
         user.state     = 1;
         self.user = user;
-    }
-    
-    [self.notLoginView removeFromSuperview];
         
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.commentView];
-    
-    [self addChildViewControllers];
-    
-    [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
-    
-    [self.tableView setContentOffset:CGPointMake(0, -64)];
+        self.titleLabel.text = user.fname.uppercaseString;
+        
+        [self.notLoginView removeFromSuperview];
+        
+        [self.view addSubview:self.tableView];
+        [self.view addSubview:self.commentView];
+        
+        [self addChildViewControllers];
+        
+        [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+        
+        [self.tableView setContentOffset:CGPointMake(0, -64)];
+    }
 }
 
 - (void)loginOutSuccess:(NSNotification *)noti {

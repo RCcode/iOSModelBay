@@ -224,12 +224,12 @@
 "New Message" = "留言";
 
 "Send" = "Send";
-
 "Leave Message" = "Leave Message";
-
 "Edit_detail" = "编辑";
-
-
 "introduce" = "介绍";
+"NoMore" = "没有更多";
+
+"max_select" = "最多选择3个";
+"min_select" = "至少选择1个";
 
 

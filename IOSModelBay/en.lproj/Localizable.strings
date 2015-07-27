@@ -232,4 +232,7 @@
 "Leave Message" = "Leave Message";
 "Edit_detail" = "Edit";
 "introduce" = "Introduce";
+"NoMore" = "No more";
 
+"max_select" = "Maximum select 3";
+"min_select" = "Select 1 at least";

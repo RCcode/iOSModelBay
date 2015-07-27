@@ -29,7 +29,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemOnClick:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItem)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
     
     [self.view addSubview:self.collectView];
     
@@ -73,6 +73,11 @@
 }
 
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    MB_CareerCollectViewCell *cell = (MB_CareerCollectViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self selectButtonOnClick:cell.selectButton];
+}
+
 #pragma mark - private methods
 - (void)selectButtonOnClick:(UIButton *)button {
     if (button.selected) {
@@ -80,14 +85,13 @@
         [self.selectedArray removeObject:self.dataArray[button.tag]];
     }else{
         if (self.selectedArray.count >= 3) {
-            [MB_Utils showAlertViewWithMessage:@"最多三个最少一个"];
+            [MB_Utils showAlertViewWithMessage:LocalizedString(@"max_select", nil)];
             return;
         }else{
             [self.selectedArray addObject:self.dataArray[button.tag]];
         }
     }
     [self.collectView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:button.tag inSection:0]]];
-//    [self.collectView reloadData];
 }
 
 - (void)leftBarButtonItemOnClick:(UIBarButtonItem *)barButton {
@@ -95,8 +99,10 @@
 }
 
 - (void)rightBarButtonItemOnClick:(UIBarButtonItem *)barButton {
-    if (self.selectedArray.count < 1 || self.selectedArray.count > 3) {
-        [MB_Utils showAlertViewWithMessage:@"最多三个最少一个"];
+    if (self.selectedArray.count < 1) {
+        [MB_Utils showAlertViewWithMessage:LocalizedString(@"min_select", nil)];
+    }else if (self.selectedArray.count > 3){
+        [MB_Utils showAlertViewWithMessage:LocalizedString(@"max_select", nil)];
     }else{
         //注册
         [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -128,15 +134,10 @@
                 [userDefaults setBool:YES forKey:kIsLogin];
                 [userDefaults synchronize];
 
-//                if ([self.presentingViewController isKindOfClass:[MB_MainViewController class]]) {
-//                    NSLog(@"main");
-//                    MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-//                    [self presentViewController:tabVC animated:YES completion:nil];
-//                }else {
-//                    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//                }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
                 [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            }else if ([response[@"stat"] integerValue] == 10000) {
+                //已经注册
             }
         } failure:^(NSError *err) {
             [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];

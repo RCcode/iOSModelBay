@@ -12,8 +12,8 @@
 #define topViewHeight 186
 
 typedef  NS_ENUM(NSInteger, ComeFromType) {
+    ComeFromTypeSelf = 0,//看自己
     ComeFromTypeUser,//看其他用户
-    ComeFromTypeSelf,//看自己
     ComeFromTypeAblum
 };
 
