@@ -30,6 +30,12 @@
     [_userImageView sd_setImageWithURL:[NSURL URLWithString:liker.fpic] placeholderImage:nil];
     _usernameLabel.text = liker.fname.uppercaseString;
     _fullNameLabel.text = liker.ffullName;
+    _collectButton.selected = liker.hasLike;
+    if (liker.hasLike == LikedTypeLiked) {
+        _collectButton.backgroundColor = colorWithHexString(@"#ff4f42");
+    }else {
+        _collectButton.backgroundColor = colorWithHexString(@"#ffffff");
+    }
 }
 
 @end

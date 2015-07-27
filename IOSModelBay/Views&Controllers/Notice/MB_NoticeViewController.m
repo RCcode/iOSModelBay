@@ -231,6 +231,12 @@ static NSString * const ReuseIdentifierReply   = @"reply";
                 [self.dataArray addObject:notice];
             }
             
+            if (self.dataArray.count <= 0) {
+                self.tableView.backgroundView = self.noResultView;
+            }else {
+                self.tableView.backgroundView = nil;
+            }
+            
             [self.tableView reloadData];
         }else if ([self statFromResponse:response] == 10004) {
             //无记录
@@ -239,6 +245,11 @@ static NSString * const ReuseIdentifierReply   = @"reply";
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
+        if (self.dataArray.count <= 0) {
+            self.tableView.backgroundView = self.noResultView;
+        }else {
+            self.tableView.backgroundView = nil;
+        }
     }];
 }
 

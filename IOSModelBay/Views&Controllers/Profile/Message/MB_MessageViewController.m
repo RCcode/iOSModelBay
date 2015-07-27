@@ -35,7 +35,6 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
-//    [self.view addSubview:self.commentView];
     
     [self addPullRefresh];
     
@@ -70,13 +69,13 @@ static NSString * const ReuseIdentifierReply = @"reply";
     [cell.replyButton addTarget:self action:@selector(replyOnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
-    if (userVC.comeFromType == ComeFromTypeUser) {
+    if (userVC.comeFromType == ComeFromTypeSelf) {
         //看其他用户的留言不能点回复
-        cell.replyButton.hidden = YES;
-        cell.replyImage.hidden = YES;
-    }else {
         cell.replyButton.hidden = NO;
         cell.replyImage.hidden = NO;
+    }else {
+        cell.replyButton.hidden = YES;
+        cell.replyImage.hidden = YES;
     }
 }
 
@@ -149,7 +148,7 @@ static CGFloat startY = 0;
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 64) {
+            if (taleView.contentOffset.y == topViewHeight - 64 && scrollView.contentOffset.y < 0) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -193,6 +192,7 @@ static CGFloat startY = 0;
             }else {
                 if (minId == 0) {
                     [self.dataArray removeAllObjects];
+                    [self.tableView setContentOffset:CGPointMake(0, 0)];
                 }
                 self.minId = [response[@"minId"] integerValue];
                 for (NSDictionary *dic in array) {
@@ -241,6 +241,7 @@ static CGFloat startY = 0;
 }
 
 - (void)commentWitnComment:(NSString *)comment {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
                              @"token":[userDefaults objectForKey:kAccessToken],
@@ -260,11 +261,15 @@ static CGFloat startY = 0;
 //            message.uid = 6;
 //            [self.dataArray addObject:message];
 //            [self.tableView reloadData];
+            [userVC clearCommentText];
+            [self requestMessageListWithMinId:0];
         }else {
 //            [MB_Utils showPromptWithText:@"failed"];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     } failure:^(NSError *err) {
 //        [MB_Utils showPromptWithText:@"failed"];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -287,6 +292,8 @@ static CGFloat startY = 0;
             message.replyTime = 100;
             message.state = StateTypeReply;
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.replyIndex]] withRowAnimation:UITableViewRowAnimationNone];
+            [userVC hideCommentView];
+            [userVC clearCommentText];
         }else {
             //回复失败
 //            [MB_Utils showPromptWithText:@"failed"];

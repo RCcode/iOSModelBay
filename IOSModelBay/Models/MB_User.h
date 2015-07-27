@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSInteger {
+    LikedTypeNone = -1,
+    LikedTypeNotLiked,
+    LikedTypeLiked,
+} LikedType;
+
 //用户
 @interface MB_User : NSObject
 
@@ -24,5 +30,7 @@
 @property (nonatomic, strong) NSString  *fcareerId; //职业id,竖线分割:1|2|3
 
 @property (nonatomic, strong) NSMutableArray *urlArray;
+
+@property (nonatomic, assign) LikedType likeType;
 
 @end

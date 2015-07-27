@@ -65,6 +65,9 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sQM-b2-Fpu">
+                    <rect key="frame" x="77" y="145" width="20" height="20"/>
+                </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-fY-XbY">
                     <rect key="frame" x="178" y="142" width="110" height="26"/>
                     <constraints>
@@ -89,10 +92,12 @@
                 <constraint firstItem="BcB-64-HJg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4P2-8f-1pV"/>
                 <constraint firstItem="BcB-64-HJg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7th-Nd-Naa"/>
                 <constraint firstItem="BcB-64-HJg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8w0-No-UjG"/>
+                <constraint firstItem="sQM-b2-Fpu" firstAttribute="centerY" secondItem="kTh-XV-FcM" secondAttribute="centerY" id="9n4-VD-C5x"/>
                 <constraint firstAttribute="trailing" secondItem="8Ju-Ry-0tj" secondAttribute="trailing" id="A5Q-4c-U93"/>
                 <constraint firstItem="WoQ-Lz-vR7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="C3y-Ls-EMP"/>
                 <constraint firstAttribute="trailing" secondItem="fRf-1J-0Zg" secondAttribute="trailing" id="ILa-g7-hVL"/>
                 <constraint firstAttribute="bottom" secondItem="rCG-wP-EdG" secondAttribute="bottom" id="IfG-2C-iAG"/>
+                <constraint firstItem="sQM-b2-Fpu" firstAttribute="centerX" secondItem="kTh-XV-FcM" secondAttribute="centerX" id="Pzq-KR-9MM"/>
                 <constraint firstAttribute="trailing" secondItem="2cr-fY-XbY" secondAttribute="trailing" constant="32" id="S6C-te-AqZ"/>
                 <constraint firstItem="fRf-1J-0Zg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V6J-hr-2hD"/>
                 <constraint firstItem="2cr-fY-XbY" firstAttribute="top" secondItem="8Ju-Ry-0tj" secondAttribute="bottom" constant="14" id="Zo8-kt-sMi"/>
@@ -113,6 +118,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="activeView" destination="sQM-b2-Fpu" id="jd9-EP-ww4"/>
                 <outlet property="backImageView" destination="BcB-64-HJg" id="thd-OA-B5f"/>
                 <outlet property="careerLabel" destination="8Ju-Ry-0tj" id="OM1-s1-f6e"/>
                 <outlet property="coverView" destination="rCG-wP-EdG" id="wB0-96-eeZ"/>

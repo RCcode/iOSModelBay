@@ -81,8 +81,22 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)configureCell:(MB_AlbumTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.ablum = self.dataArray[indexPath.section];
+    
+    //影集点击手势进详情
     cell.imagesScrollView.tag = indexPath.section;
     [cell.tap addTarget:self action:@selector(handleTap:)];
+    
+    cell.label1.tag = indexPath.section;
+    cell.label2.tag = indexPath.section;
+    cell.label3.tag = indexPath.section;
+    cell.label4.tag = indexPath.section;
+    
+    [cell.tap1 addTarget:self action:@selector(mButtonOnClick:)];
+    [cell.tap2 addTarget:self action:@selector(pButtonOnClick:)];
+    [cell.tap3 addTarget:self action:@selector(hButtonOnClick:)];
+    [cell.tap4 addTarget:self action:@selector(mkButtonOnClick:)];
+    
+    //对影集的操作
     cell.likeButton.tag = indexPath.section;
     [cell.likeButton addTarget:self action:@selector(likeButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.likeListButton.tag = indexPath.section;
@@ -109,19 +123,16 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     MB_Ablum *album = self.dataArray[indexPath.section];
     if (album.atype == AblumTypeCollect) {
         MB_AlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierAblum forIndexPath:indexPath];
-//        cell.ablum = album;
         [self configureCell:cell atIndexPath:indexPath];
         return cell;
     }else {
         MB_SignalImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierTemplate forIndexPath:indexPath];
-//        cell.ablum = album;
         [self configureCell2:cell atIndexPath:indexPath];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MB_ScanAblumViewController *scanVC = [[MB_ScanAblumViewController alloc] init];
     scanVC.ablum = self.dataArray[indexPath.section];
     scanVC.hidesBottomBarWhenPushed = YES;
@@ -146,7 +157,7 @@ static CGFloat startY = 0;
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 64) {
+            if (taleView.contentOffset.y == topViewHeight - 64 && scrollView.contentOffset.y < 0) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -211,28 +222,92 @@ static CGFloat startY = 0;
     [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:tap.view.tag]];
 }
 
+//模特
+- (void)mButtonOnClick:(UITapGestureRecognizer *)tap {
+    MB_Ablum *ablum = self.dataArray[tap.view.tag];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeAblum;
+    MB_User *user = [[MB_User alloc] init];
+    user.likeType = LikedTypeNone;
+    user.fid = ablum.mId;
+    user.fname = ablum.mName;
+    userVC.user = user;
+    userVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+//摄影师
+- (void)pButtonOnClick:(UITapGestureRecognizer *)tap {
+    MB_Ablum *ablum = self.dataArray[tap.view.tag];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeAblum;
+    MB_User *user = [[MB_User alloc] init];
+    user.likeType = LikedTypeNone;
+    user.fid = ablum.pId;
+    user.fname = ablum.pName;
+    userVC.user = user;
+    userVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+//发型师
+- (void)hButtonOnClick:(UITapGestureRecognizer *)tap {
+    MB_Ablum *ablum = self.dataArray[tap.view.tag];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeAblum;
+    MB_User *user = [[MB_User alloc] init];
+    user.likeType = LikedTypeNone;
+    user.fid = ablum.hId;
+    user.fname = ablum.hName;
+    userVC.user = user;
+    userVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+//化妆师
+- (void)mkButtonOnClick:(UITapGestureRecognizer *)tap {
+    MB_Ablum *ablum = self.dataArray[tap.view.tag];
+    MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+    userVC.comeFromType = ComeFromTypeAblum;
+    MB_User *user = [[MB_User alloc] init];
+    user.likeType = LikedTypeNone;
+    user.fid = ablum.mkId;
+    user.fname = ablum.mkName;
+    userVC.user = user;
+    userVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userVC animated:YES];
+}
+
 //点赞
 - (void)likeButtonOnClick:(UIButton *)button {
-    MB_Ablum *ablum = self.dataArray[button.tag];
-    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
-                             @"token":[userDefaults objectForKey:kAccessToken],
-                             @"fid":@(ablum.uid),
-                             @"ablId":@(ablum.ablId)};
-    [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
-        NSLog(@"like send %@", response);
-        if ([self statFromResponse:response] == 10000) {
-//            [MB_Utils showPromptWithText:@"like success"];
-        }else {
-//            [MB_Utils showPromptWithText:@"like failed"];
-        }
-    } failure:^(NSError *err) {
-//        [MB_Utils showPromptWithText:@"like failed"];
-    }];
+//    if (!button.selected) {
+//        button.selected = YES;
+        MB_Ablum *ablum = self.dataArray[button.tag];
+        ablum.likes += 1;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
+        //    MB_AlbumTableViewCell *cell = (MB_AlbumTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:button.tag]];
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                                 @"token":[userDefaults objectForKey:kAccessToken],
+                                 @"fid":@(ablum.uid),
+                                 @"ablId":@(ablum.ablId)};
+        [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
+            NSLog(@"like send %@", response);
+            if ([self statFromResponse:response] == 10000) {
+                
+            }else {
+                ablum.likes -= 1;
+//                button.selected = NO;
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        } failure:^(NSError *err) {
+//            button.selected = NO;
+            ablum.likes -= 1;
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+//    }
 }
 
 //查看赞列表
 - (void)likeListButtonOnClick:(UIButton *)button {
     MB_LikersViewController *likersVC = [[MB_LikersViewController alloc] init];
+    likersVC.hidesBottomBarWhenPushed = YES;
     likersVC.ablum = self.dataArray[button.tag];
     [self.navigationController pushViewController:likersVC animated:YES];
 }
@@ -241,6 +316,7 @@ static CGFloat startY = 0;
 - (void)commentButtonOnClick:(UIButton *)button {
     MB_CommentsViewController *commentsVC = [[MB_CommentsViewController alloc] init];
     commentsVC.ablum = self.dataArray[button.tag];
+    commentsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:commentsVC animated:YES];
 }
 
@@ -346,6 +422,7 @@ static CGFloat startY = 0;
 
         _tableView.sectionHeaderHeight = 0.5;
         _tableView.sectionFooterHeight = 10.5;
+        _tableView.allowsSelection = NO;
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0.5)];
         [_tableView setTableFooterView:view];

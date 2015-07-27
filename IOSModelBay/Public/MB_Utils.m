@@ -25,19 +25,34 @@ static MB_Utils *util = nil;
             util.rGender   = -1;
             util.rCareerId = @"";
     
+//            util.careerDic = @{@"1":LocalizedString(@"Model", nil),
+//                               @"2":LocalizedString(@"Actor", nil),
+//                               @"3":LocalizedString(@"Dancer", nil),
+//                               @"4":LocalizedString(@"Singer", nil),
+//                               @"5":LocalizedString(@"Newface", nil),
+//                               @"6":LocalizedString(@"Photographer", nil),
+//                               @"7":LocalizedString(@"Fitness Trainer", nil),
+//                               @"8":LocalizedString(@"Makeup Artist", nil),
+//                               @"9":LocalizedString(@"Hair Stylist", nil),
+//                               @"10":LocalizedString(@"Stylist", nil),
+//                               @"11":LocalizedString(@"Nutritionist", nil),
+//                               @"12":LocalizedString(@"Fahsion Designer", nil),
+//                               @"13":LocalizedString(@"Agency", nil)};
+            
             util.careerDic = @{@"1":LocalizedString(@"Model", nil),
                                @"2":LocalizedString(@"Actor", nil),
                                @"3":LocalizedString(@"Dancer", nil),
                                @"4":LocalizedString(@"Singer", nil),
-                               @"5":LocalizedString(@"Newface", nil),
-                               @"6":LocalizedString(@"Photographer", nil),
-                               @"7":LocalizedString(@"Fitness Trainer", nil),
-                               @"8":LocalizedString(@"Makeup Artist", nil),
-                               @"9":LocalizedString(@"Hair Stylist", nil),
-                               @"10":LocalizedString(@"Stylist", nil),
-                               @"11":LocalizedString(@"Nutritionist", nil),
-                               @"12":LocalizedString(@"Fahsion Designer", nil),
-                               @"13":LocalizedString(@"Agency", nil)};
+                               @"5":LocalizedString(@"Photographer", nil),
+                               @"6":LocalizedString(@"Fitness Trainer", nil),
+                               @"7":LocalizedString(@"Makeup Artist", nil),
+                               @"8":LocalizedString(@"Hair Stylist", nil),
+                               @"9":LocalizedString(@"Stylist", nil),
+                               @"10":LocalizedString(@"Nutritionist", nil),
+                               @"11":LocalizedString(@"Fahsion Designer", nil),
+                               @"12":LocalizedString(@"Agency", nil),
+                               @"13":LocalizedString(@"Newface", nil)};
+            
             
             util.eyeColor = @[@"", LocalizedString(@"Black", nil), LocalizedString(@"Blue", nil), LocalizedString(@"Brown", nil), LocalizedString(@"Green", nil), LocalizedString(@"Hazel", nil), LocalizedString(@"Other", nil)];
             

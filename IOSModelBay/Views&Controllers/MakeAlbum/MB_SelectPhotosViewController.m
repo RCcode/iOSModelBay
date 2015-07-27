@@ -130,8 +130,10 @@
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 if (result) {
                     NSLog(@"result  %@",result);
-                    NSURL *urlstr=[result valueForProperty:ALAssetPropertyAssetURL];//图片的url
-                    [self.dataArray addObject:urlstr];
+                    if ([result valueForProperty:ALAssetPropertyType] == ALAssetTypePhoto) {
+                        NSURL *urlstr=[result valueForProperty:ALAssetPropertyAssetURL];//图片的url
+                        [self.dataArray addObject:urlstr];
+                    }
                 }
             }];
             [self.collectView reloadData];

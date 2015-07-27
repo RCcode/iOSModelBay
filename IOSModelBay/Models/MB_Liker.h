@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MB_User.h"
 
 @interface MB_Liker : NSObject
 
@@ -21,5 +22,7 @@
 @property (nonatomic, strong) NSString *careerId;//职业id,竖线分割:1|2|3
 
 @property (nonatomic, assign) NSInteger fuid;//用户id(第三方用户标识)
+
+@property (nonatomic, assign) LikedType hasLike;//收藏关系：0未收藏，1已收藏
 
 @end

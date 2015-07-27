@@ -12,6 +12,7 @@
 #import "MB_SelectPhotosViewController.h"
 #import "MB_ScanImageViewController.h"
 #import "MB_SelectUserViewController.h"
+#import "UIImage+SubImage.h"
 
 @import AssetsLibrary;
 
@@ -45,6 +46,11 @@
 
 @implementation MB_AddTextViewController
 #pragma mark - life cycle
+
+- (void)dealloc {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
@@ -157,6 +163,8 @@
 }
 
 - (IBAction)modelButtonOnClick:(UIButton *)sender {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     if (sender.selected) {
         sender.selected = NO;
         self.mId = -1;
@@ -175,6 +183,8 @@
 }
 
 - (IBAction)photographerButtonOnClick:(UIButton *)sender {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     if (sender.selected) {
         sender.selected = NO;
         self.pId = -1;
@@ -193,6 +203,8 @@
 }
 
 - (IBAction)hairstylistButtonOnClick:(UIButton *)sender {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     if (sender.selected) {
         sender.selected = NO;
         self.hId = -1;
@@ -211,6 +223,8 @@
 }
 
 - (IBAction)dresserButtonOnClick:(UIButton *)sender {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     if (sender.selected) {
         sender.selected = NO;
         self.mkId = -1;
@@ -229,6 +243,8 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     //显示进度
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.detailsLabelText = LocalizedString(@"Uploading", nil);
@@ -259,6 +275,9 @@
                 [self.assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
                     
                     UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+                    UIImage *scaleImage = [image rescaleImageToPX:480];
+                    NSLog(@"%@",NSStringFromCGSize(scaleImage.size));
+
                     NSDictionary *uploadParams = @{@"id":[userDefaults objectForKey:kID],
                                                    @"token":[userDefaults objectForKey:kAccessToken],
                                                    @"ablId":response[@"ablId"],
@@ -267,7 +286,7 @@
                     
                     AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                         
-                        NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+                        NSData *imageData = UIImageJPEGRepresentation(scaleImage, 0.7);
                         [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%ld.jpg",(unsigned long)[self.urlArray indexOfObject:url]] mimeType:@"image/jpeg"];
                         
                     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -275,6 +294,7 @@
                             
                             hud.detailsLabelText = LocalizedString(@"Uplaod Success", nil);
                             [hud hide:YES afterDelay:0.7];
+                            [self.navigationController popToRootViewControllerAnimated:YES];
                         }
                         NSLog(@"success");
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -282,8 +302,9 @@
                         
                         if (_manager.operationQueue.operationCount == 0) {
                             
-                            hud.detailsLabelText = LocalizedString(@"Upload Failure", nil);
+                            hud.detailsLabelText = LocalizedString(@"Upload Success", nil);
                             [hud hide:YES afterDelay:0.7];
+                            [self.navigationController popToRootViewControllerAnimated:YES];
                         }
                     }];
                     
@@ -346,6 +367,8 @@
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
+    [self.addTitleTextField resignFirstResponder];
+    [self.addDescTextView resignFirstResponder];
     
     if (tap.view.tag == self.urlArray.count) {
         //添加图片

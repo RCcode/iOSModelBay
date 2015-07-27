@@ -124,7 +124,7 @@ static CGFloat startY = 0;
                 }
             }else{
                 //向下拉
-                if (taleView.contentOffset.y == topViewHeight - 64) {
+                if (taleView.contentOffset.y == topViewHeight - 64 && scrollView.contentOffset.y < 0) {
                     [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
                 }
             }
@@ -169,7 +169,7 @@ static CGFloat startY = 0;
 - (void)requestInstragramMediasListWithMaxId:(NSString *)maxId {
     NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
     NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
-                                     @"count": @(20)} mutableCopy];
+                                     @"count": @(18)} mutableCopy];
     if (maxId) {
         [params setValue:maxId forKey:@"max_id"];
     }

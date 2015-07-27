@@ -13,7 +13,8 @@
 
 typedef  NS_ENUM(NSInteger, ComeFromType) {
     ComeFromTypeUser,//看其他用户
-    ComeFromTypeSelf //看自己
+    ComeFromTypeSelf,//看自己
+    ComeFromTypeAblum
 };
 
 @interface MB_UserViewController : MB_BaseViewController
@@ -23,6 +24,9 @@ typedef  NS_ENUM(NSInteger, ComeFromType) {
 @property (nonatomic, assign) ComeFromType comeFromType;
 
 @property (nonatomic, strong) MB_User *user;
+
+
+@property (nonatomic, assign) NSInteger fid;
 
 @property (nonatomic, assign) NSInteger menuIndex;//进来的时候默认选中哪个菜单按钮
 

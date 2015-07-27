@@ -227,4 +227,11 @@
     return _notLoginView;
 }
 
+- (MB_NotLoginView *)noResultView {
+    if (_noResultView == nil) {
+        _noResultView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:@"aaaa" delegate:self];
+    }
+    return _noResultView;
+}
+
 @end

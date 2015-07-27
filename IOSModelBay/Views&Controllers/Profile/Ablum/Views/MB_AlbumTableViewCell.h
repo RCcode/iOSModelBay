@@ -36,6 +36,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) UITapGestureRecognizer *tap1;
+@property (nonatomic, strong) UITapGestureRecognizer *tap2;
+@property (nonatomic, strong) UITapGestureRecognizer *tap3;
+@property (nonatomic, strong) UITapGestureRecognizer *tap4;
 
 @property (nonatomic, strong) MB_Ablum *ablum;
 

@@ -28,14 +28,24 @@ static CGFloat const commentViewHeight = 50;
 @implementation MB_CommentsViewController
 
 #pragma mark - life cycle
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.titleLabel.text = LocalizedString(@"Comments", nil);
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
+    
+    //键盘监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     [self.view addSubview:self.tableView];
+    [self addPullRefresh];
+    
     [self.view addSubview:self.commentView];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -95,15 +105,6 @@ static CGFloat const commentViewHeight = 50;
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"%s",__FUNCTION__);
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"%s",__FUNCTION__);
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%s",__FUNCTION__);
     if (textView.text && ![textView.text isEqualToString:@""]) {
         self.sendButton.enabled = YES;
     }else {
@@ -111,6 +112,37 @@ static CGFloat const commentViewHeight = 50;
     }
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text && ![textView.text isEqualToString:@""]) {
+        self.sendButton.enabled = YES;
+    }else {
+        self.sendButton.enabled = NO;
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text && ![textView.text isEqualToString:@""]) {
+        self.sendButton.enabled = YES;
+    }else {
+        self.sendButton.enabled = NO;
+    }
+}
+
+#pragma mark - 键盘监听
+- (void)keyBoardWillShow:(NSNotification *)noti {
+    CGRect rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect frame = self.commentView.frame;
+    frame.origin.y = CGRectGetMinY(rect) - CGRectGetHeight(frame);
+    self.commentView.frame = frame;
+}
+
+- (void)keyBoardWillHide:(NSNotification *)noti {
+//    if (self.hidesBottomBarWhenPushed) {
+        self.commentView.frame = CGRectMake(0, kWindowHeight - commentViewHeight, kWindowWidth, commentViewHeight);
+//    }else {
+//        self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
+//    }
+}
 
 #pragma mark - private methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
@@ -147,6 +179,7 @@ static CGFloat const commentViewHeight = 50;
         if ([self statFromResponse:response] == 10000) {
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
+                [self.tableView setContentOffset:CGPointMake(0, -64)];
             }
             
             self.minId = [response[@"minId"] integerValue];
@@ -169,6 +202,7 @@ static CGFloat const commentViewHeight = 50;
 - (void)sendButtonOnClick:(UIButton *)button {
     [self.textView resignFirstResponder];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                              @"token":[userDefaults objectForKey:kAccessToken],
                              @"fid":@(self.ablum.uid),
@@ -177,12 +211,13 @@ static CGFloat const commentViewHeight = 50;
     [[AFHttpTool shareTool] commentAblumWithParameters:params success:^(id response) {
         NSLog(@"comment send  %@",response);
         if ([self statFromResponse:response] == 10000) {
-            
+            self.textView.text = @"";
+            [self requestCommentsListWithMinId:0];
         }else {
-    
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -214,7 +249,7 @@ static CGFloat const commentViewHeight = 50;
 - (UITextView *)textView {
     if (_textView == nil) {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, commentViewHeight) textContainer:nil];
-        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.backgroundColor = [UIColor colorWithRed:96/255.0 green:96/255.0 blue:96/255.0 alpha:1];
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.delegate = self;
     }
@@ -225,7 +260,7 @@ static CGFloat const commentViewHeight = 50;
     if (_sendButton == nil) {
         _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _sendButton.frame = CGRectMake(kWindowWidth - 50, 0, 50, commentViewHeight);
-        _sendButton.backgroundColor = [UIColor grayColor];
+        _sendButton.backgroundColor = [UIColor colorWithRed:52/255.0 green:52/255.0 blue:52/255.0 alpha:1];
         _sendButton.enabled = NO;
         
         [_sendButton setTitle:LocalizedString(@"Send", nil) forState:UIControlStateNormal];

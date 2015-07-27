@@ -11,19 +11,18 @@
 @implementation MB_AlbumTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    
-//    _hub = [[RKNotificationHub alloc] initWithView:self.contentView];
-//    [_hub moveCircleByX:20 Y:20]; // moves the circle five pixels left and 5 down
-//    [_hub increment];
-//    //    [hub hideCount]; // uncomment for a blank badge
-//    [_hub pop];//缩放
-//    //    [hub blink];//闪烁
-//    //    [hub bump];//跳跃
-//    [_hub scaleCircleSizeBy:1.0];//缩放大小
     
     _tap = [[UITapGestureRecognizer alloc] init];
     [_imagesScrollView addGestureRecognizer:_tap];
+    
+    _tap1 = [[UITapGestureRecognizer alloc] init];
+    [_label1 addGestureRecognizer:_tap1];
+    _tap2 = [[UITapGestureRecognizer alloc] init];
+    [_label2 addGestureRecognizer:_tap2];
+    _tap3 = [[UITapGestureRecognizer alloc] init];
+    [_label3 addGestureRecognizer:_tap3];
+    _tap4 = [[UITapGestureRecognizer alloc] init];
+    [_label4 addGestureRecognizer:_tap4];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -37,18 +36,23 @@
     //添加影集的图片
     CGRect rect = _imagesScrollView.frame;
     
-    [_imagesScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    for (UIView *subView in _imagesScrollView.subviews) {
+        [subView removeFromSuperview];
+    }
+    
     for (int i = 0; i < ablum.mList.count; i ++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((CGRectGetHeight(rect) + 1) * i, 0, CGRectGetHeight(rect), CGRectGetHeight(rect))];
         NSString *imageName = [ablum.mList[i] objectForKey:@"url"];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
         imageView.backgroundColor = placeholderColor;
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
         [_imagesScrollView addSubview:imageView];
     }
     _imagesScrollView.bounces = YES;
     _imagesScrollView.alwaysBounceHorizontal = YES;
     _imagesScrollView.contentSize = CGSizeMake(CGRectGetHeight(rect) * ablum.mList.count + 1 * (ablum.mList.count - 1), CGRectGetHeight(rect));
+    _imagesScrollView.contentOffset = CGPointMake(0, 0);
     
     _nameLabel.text = ablum.name;
     _countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)ablum.mList.count];

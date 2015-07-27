@@ -10,6 +10,14 @@
 
 @implementation MB_User
 
+- (instancetype)init {
+    self =  [super init];
+    if (self) {
+        _likeType = LikedTypeNone;
+    }
+    return self;
+}
+
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     
 }

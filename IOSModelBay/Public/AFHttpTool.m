@@ -35,6 +35,7 @@
 #define kAddLikesUrl         @"user/addLikes.do"
 #define kUpdatePushKey       @"user/updatePushKey.do"
 #define kDeleteAblumUrl      @"ablum/deleAblum.do"
+#define kHasLikeUrl          @"user/hasLike.do"
 
 @implementation AFHttpTool
 
@@ -417,6 +418,18 @@ static AFHttpTool *httpTool = nil;
 {
     [self requestWihtMethod:RequestTypePost
                         url:kDeleteAblumUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//获取收藏关系
+- (void)getLikeTypeWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kHasLikeUrl
                      params:params
                     success:success
                     failure:failure];

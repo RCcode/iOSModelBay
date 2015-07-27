@@ -21,6 +21,9 @@ static NSString * const ReuseIdentifier = @"cell";
 //未登录时的提示，点击弹出登录界面
 @property (nonatomic, strong) MB_NotLoginView *notLoginView;
 
+//没有数据时的提示
+@property (nonatomic, strong) MB_NotLoginView *noResultView;
+
 //添加下拉刷新
 - (void)addHeaderRefreshForView:(UIScrollView *)scrollview
               WithActionHandler:(void (^)(void))actionHandler;

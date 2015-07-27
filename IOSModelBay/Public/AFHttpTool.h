@@ -143,4 +143,9 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                           failure:(void (^)(NSError* err))failure;
 
 
+//获取收藏关系
+- (void)getLikeTypeWithParameters:params
+                          success:(void (^)(id response))success
+                          failure:(void (^)(NSError* err))failure;
+
 @end

@@ -12,8 +12,8 @@
 #import "MB_MessageViewController.h"
 #import "MB_CollectViewController.h"
 #import "MB_UserInfoView.h"
-#import "MB_SettingViewController.h"
 #import "MB_CommentView.h"
+#import "MB_SettingViewController.h"
 #import "MB_UserDetailViewController.h"
 
 @import MessageUI;
@@ -46,7 +46,7 @@
     
     self.titleLabel.text = self.user.fname.uppercaseString;
     self.navigationItem.titleView = self.titleLabel;
-    if (self.comeFromType == ComeFromTypeUser) {
+    if (self.comeFromType == ComeFromTypeUser || self.comeFromType == ComeFromTypeAblum) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     }else {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_share"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
@@ -64,9 +64,16 @@
         [self.view addSubview:self.tableView];
         [self.view addSubview:self.commentView];
         
-        [self addChildViewControllers];
+        if (self.comeFromType == ComeFromTypeAblum) {
+            //请求用户基本信息
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self requestUserInfoWithFid:self.user.fid];
+            
+        }else {
+            [self addChildViewControllers];
+            [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+        }
         
-        [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
     }else {
         [self.view addSubview:self.notLoginView];
     }
@@ -357,6 +364,77 @@ static CGFloat startY;
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
+- (void)requestLikedTypeWithFid:(NSInteger)fid {
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":@(self.user.fid)};
+    [[AFHttpTool shareTool] getLikeTypeWithParameters:params success:^(id response) {
+        NSLog(@"liked: %@",response);
+        self.userInfoView.likeButton.hidden = NO;
+        [self.userInfoView.activeView stopAnimating];
+        if ([response[@"hasLike"] integerValue] == 1) {
+            //已收藏
+            self.userInfoView.likeButton.selected = YES;
+            self.userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+            self.userInfoView.likeButton.backgroundColor = colorWithHexString(@"#ff4f42");
+        }else{
+            //未收藏
+            self.userInfoView.likeButton.selected = NO;
+        }
+    } failure:^(NSError *err) {
+        
+    }];
+}
+
+- (void)requestUserInfoWithFid:(NSInteger)fid {
+    NSMutableDictionary *params = [@{@"fid":@(self.user.fid),
+                                     @"minId":@(0),
+                                     @"count":@(10)} mutableCopy];
+    
+    if ([userDefaults boolForKey:kIsLogin]) {
+        [params setObject:[userDefaults objectForKey:kID] forKey:@"id"];
+        [params setObject:[userDefaults objectForKey:kAccessToken] forKey:@"token"];
+    }
+    
+    [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
+        NSLog(@"find one %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if ([self statFromResponse:response] == 10000) {
+            NSArray *userList = response[@"list"];
+            if (userList == nil || [userList isKindOfClass:[NSNull class]] || userList.count <= 0) {
+                return;
+            }
+            
+            for (NSDictionary *dic in response[@"list"]) {
+                MB_User *user = [[MB_User alloc] init];
+                user.likeType = self.user.likeType;
+                [user setValuesForKeysWithDictionary:dic];
+                self.user = user;
+                
+                [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:self.user.fpic] placeholderImage:nil];
+                [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:self.user.fbackPic] placeholderImage:nil];
+                
+                NSMutableArray *careerArr = [NSMutableArray arrayWithCapacity:0];
+                for (NSString *career in [_user.fcareerId componentsSeparatedByString:@"|"]) {
+                    [careerArr addObject:[[MB_Utils shareUtil].careerDic objectForKey:career]?:@""];
+                }
+                _userInfoView.careerLabel.text = [careerArr componentsJoinedByString:@"  |  "];
+                
+                [self addChildViewControllers];
+                [self menuBtnOnClick:self.menuBtns[self.menuIndex]];
+            }
+            
+            [self.tableView reloadData];
+
+        }else if ([self statFromResponse:response] == 10501){
+            //没有用户
+        }
+    } failure:^(NSError *err) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+
+}
+
 
 - (void)loginSuccess:(NSNotification *)noti {
     if (self.type == ComeFromTypeSelf) {
@@ -385,14 +463,16 @@ static CGFloat startY;
 }
 
 - (void)loginOutSuccess:(NSNotification *)noti {
-    [self.tableView removeFromSuperview];
-    _tableView     = nil;
-    _commentView   = nil;
-    _userInfoView  = nil;
-    _containerView = nil;
-    _menuIndex     = 0;
-    
-    [self.view addSubview:self.notLoginView];
+    if (self.comeFromType == ComeFromTypeSelf) {
+        [self.tableView removeFromSuperview];
+        _tableView     = nil;
+        _commentView   = nil;
+        _userInfoView  = nil;
+        _containerView = nil;
+        _menuIndex     = 0;
+        
+        [self.view addSubview:self.notLoginView];
+    }
 }
 
 - (void)addChildViewControllers {
@@ -435,6 +515,7 @@ static CGFloat startY;
 
 //点击菜单按钮
 - (void)menuBtnOnClick:(UIButton *)btn {
+    [self.commentView.textField resignFirstResponder];
     
     for (UIButton *btn in self.menuBtns) {
         btn.selected = NO;
@@ -486,14 +567,21 @@ static CGFloat startY;
                                  @"fid":@(self.user.fid)};
         [[AFHttpTool shareTool] addLikesWithParameters:params success:^(id response) {
             NSLog(@"collect %@", response);
-//            if ([self statFromResponse:response] == 10000) {
-//                NSLog(@"关注成功");
-//            }
+            if ([self statFromResponse:response] == 10000 || [self statFromResponse:response] == 10201) {
+                NSLog(@"关注成功");
+                self.user.likeType = LikedTypeLiked;
+            }else {
+                button.selected = NO;
+                self.userInfoView.likeButton.layer.borderWidth = 1;
+                self.userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+            }
 //            if ([self statFromResponse:response] == 10201) {
 //                NSLog(@"已经关注");
 //            }
         } failure:^(NSError *err) {
-            
+            button.selected = NO;
+            self.userInfoView.likeButton.layer.borderWidth = 1;
+            self.userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
         }];
     }
 }
@@ -513,11 +601,11 @@ static CGFloat startY;
 
 //发送留言或回复
 - (void)sendButtonOnClick:(UIButton *)button {
+    [self.commentView.textField resignFirstResponder];
     if (self.comeFromType == ComeFromTypeUser) {
         MB_MessageViewController *messageVC = self.childViewControllers[3];
         [messageVC commentWitnComment:self.commentView.textField.text];
     }else {
-        [self hideCommentView];
         MB_MessageViewController *messageVC = self.childViewControllers[3];
         [messageVC replywithReply:self.commentView.textField.text];
     }
@@ -582,6 +670,7 @@ static CGFloat startY;
         if (self.comeFromType == ComeFromTypeSelf) {
             _userInfoView.inviteButton.hidden = YES;
             _userInfoView.likeButton.hidden = YES;
+            _userInfoView.activeView.hidden = YES;
 
         }else{
             if (self.user.state == 0 && self.user.uType == 1 && [[userDefaults objectForKey:kUtype] integerValue] == 1) {
@@ -589,6 +678,22 @@ static CGFloat startY;
             }else{
                 _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
                 _userInfoView.inviteButton.hidden = YES;
+                
+                if (self.user.likeType == LikedTypeNone) {
+                    [_userInfoView.activeView startAnimating];
+                    _userInfoView.likeButton.hidden = YES;
+                    [self requestLikedTypeWithFid:self.user.fid];
+                }else {
+                    [_userInfoView.activeView stopAnimating];
+                    _userInfoView.likeButton.selected = self.user.likeType;
+                    if (self.user.likeType == LikedTypeLiked) {
+                        _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+                        _userInfoView.likeButton.backgroundColor = colorWithHexString(@"#ff4f42");
+                    }else {
+                        _userInfoView.likeButton.layer.borderWidth = 1;
+                        _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+                    }
+                }
             }
         }
     }

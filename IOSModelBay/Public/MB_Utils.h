@@ -14,11 +14,11 @@
 
 //记录发现页面筛选条件:名字 性别 职业
 @property (nonatomic, strong) NSString  *fName;
-@property (nonatomic, assign) NSInteger fGender;
+@property (nonatomic, assign) NSInteger  fGender;
 @property (nonatomic, strong) NSString  *fCareerId;
 
 //记录排行页面筛选条件: 性别 职业
-@property (nonatomic, assign) NSInteger rGender;
+@property (nonatomic, assign) NSInteger  rGender;
 @property (nonatomic, strong) NSString  *rCareerId;
 
 //所有职业

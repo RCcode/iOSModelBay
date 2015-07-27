@@ -163,7 +163,7 @@ static CGFloat startY = 0;
             }
         }else{
             //向下拉
-            if (taleView.contentOffset.y == topViewHeight - 64) {
+            if (taleView.contentOffset.y == topViewHeight - 64 && scrollView.contentOffset.y < 0) {
                 [taleView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }
@@ -287,7 +287,7 @@ static CGFloat startY = 0;
     
     [self.dataArray addObject:@"Website"];
     
-    for (NSString *string in @[@"1", @"5"]) {
+    for (NSString *string in @[@"1", @"13"]) {
         if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:string]) {
             //模特
             [self.areaArray addObject:@"areaModel"];
@@ -295,7 +295,7 @@ static CGFloat startY = 0;
         }
     }
     
-    if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:@"6"]) {
+    if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:@"5"]) {
         [self.areaArray addObject:@"areaPhoto"];
     }
 }
@@ -390,6 +390,7 @@ static CGFloat startY = 0;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.sectionHeaderHeight = 10.5;
         _tableView.sectionFooterHeight = 0;
+        _tableView.allowsSelection = NO;
         
         _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);

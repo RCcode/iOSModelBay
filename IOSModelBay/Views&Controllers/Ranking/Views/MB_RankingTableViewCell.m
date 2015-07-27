@@ -49,6 +49,7 @@
         [_ablumScrollView addSubview:imageView];
     }
     _ablumScrollView.contentSize = CGSizeMake(user.urlArray.count * (imageWidth + 2) + 4, 0);
+    _ablumScrollView.contentOffset = CGPointMake(0, 0);
 }
 
 
