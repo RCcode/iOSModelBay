@@ -55,7 +55,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_CareerCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
-    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"in%ld",indexPath.row + 1]];
+    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"in%ld",(long)(indexPath.row + 1)]];
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     

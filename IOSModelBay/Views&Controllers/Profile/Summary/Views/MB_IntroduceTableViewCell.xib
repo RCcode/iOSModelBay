@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -22,15 +22,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFk-RL-LrL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u4d-wf-1ec">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ome-en-J4c">
                                 <rect key="frame" x="12" y="0.0" width="297" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="43" id="bd1-iO-SWf"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic-Italic" family="Century Gothic" pointSize="12"/>
                                 <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -38,13 +32,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="u4d-wf-1ec" secondAttribute="trailing" id="8GT-e8-NAV"/>
-                            <constraint firstItem="u4d-wf-1ec" firstAttribute="leading" secondItem="yFk-RL-LrL" secondAttribute="leading" id="BeX-Rc-EaT"/>
                             <constraint firstAttribute="bottom" secondItem="Ome-en-J4c" secondAttribute="bottom" id="FFM-Ra-he6"/>
                             <constraint firstItem="Ome-en-J4c" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" id="Ouc-al-DaL"/>
-                            <constraint firstAttribute="bottom" secondItem="u4d-wf-1ec" secondAttribute="bottom" id="Pce-2H-0ik"/>
                             <constraint firstAttribute="trailing" secondItem="Ome-en-J4c" secondAttribute="trailing" constant="11" id="Rak-77-Pab"/>
-                            <constraint firstItem="u4d-wf-1ec" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" id="bfx-rm-INA"/>
                             <constraint firstItem="Ome-en-J4c" firstAttribute="leading" secondItem="yFk-RL-LrL" secondAttribute="leading" constant="12" id="mk7-j7-8LP"/>
                         </constraints>
                     </view>
@@ -58,9 +48,14 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="dashImageView" destination="u4d-wf-1ec" id="ztA-jW-dhV"/>
                 <outlet property="label" destination="Ome-en-J4c" id="xrl-3o-bsd"/>
             </connections>
+            <point key="canvasLocation" x="321" y="418"/>
         </tableViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

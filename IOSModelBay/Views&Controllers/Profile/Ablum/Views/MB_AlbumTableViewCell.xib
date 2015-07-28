@@ -137,7 +137,7 @@
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd1-DZ-8pK">
                         <rect key="frame" x="275" y="369" width="21" height="22"/>
-                        <state key="normal" image="ic_share">
+                        <state key="normal" image="ic_delet_ablum">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -233,8 +233,8 @@
     </objects>
     <resources>
         <image name="ic_comment" width="21" height="21"/>
+        <image name="ic_delet_ablum" width="21" height="21"/>
         <image name="ic_img" width="16" height="16"/>
         <image name="ic_likes" width="21" height="21"/>
-        <image name="ic_share" width="21" height="21"/>
     </resources>
 </document>

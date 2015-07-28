@@ -62,7 +62,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_FilterCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     
-    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",indexPath.row + 1]];
+    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",(long)(indexPath.row + 1)]];
     
     if (indexPath.row == 0) {
         cell.nameLabel.text = LocalizedString(@"All", nil);

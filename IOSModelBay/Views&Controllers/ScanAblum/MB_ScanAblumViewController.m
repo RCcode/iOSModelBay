@@ -101,7 +101,7 @@
                 UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
                 [nextScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",page + 1 + 1, (unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page + 1 + 1), (unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -115,7 +115,7 @@
                 UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
                 [lastScroll addSubview:self.descView];
                 //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"%d/%lu",page - 1 + 1,(unsigned long)self.ablum.mList.count];
+                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page - 1 + 1),(unsigned long)self.ablum.mList.count];
                 //当前页回到顶端
                 UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
                 [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
