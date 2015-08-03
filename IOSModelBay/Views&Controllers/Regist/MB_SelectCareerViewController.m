@@ -136,9 +136,10 @@
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLoginInNotification object:nil];
                 [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-            }else if ([response[@"stat"] integerValue] == 10000) {
-                //已经注册
             }
+//            else if ([response[@"stat"] integerValue] == 1) {
+//                //已经注册
+//            }
         } failure:^(NSError *err) {
             [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
         }];

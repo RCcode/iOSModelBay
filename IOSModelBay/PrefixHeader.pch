@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 rcplatform. All rights reserved.
 //
 
+
 #ifndef IOSModelBay_PrefixHeader_pch
 #define IOSModelBay_PrefixHeader_pch
 
@@ -19,6 +20,7 @@
 #import "CMethods.h"
 #import "SVPullToRefresh.h"
 #import "AFHttpTool.h"
+#import "MB_CustomButton.h"
 #import "MB_BaseViewController.h"
 #import "MB_BaseNavigationViewController.h"
 

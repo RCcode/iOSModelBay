@@ -36,6 +36,8 @@
 #define kUpdatePushKey       @"user/updatePushKey.do"
 #define kDeleteAblumUrl      @"ablum/deleAblum.do"
 #define kHasLikeUrl          @"user/hasLike.do"
+#define kCancelLikeUrl       @"user/deleLikes.do"
+
 
 @implementation AFHttpTool
 
@@ -433,6 +435,32 @@ static AFHttpTool *httpTool = nil;
                      params:params
                     success:success
                     failure:failure];
+}
+
+
+//取消收藏用户
+- (void)cancelLikeWithParameters:params
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError* err))failure
+{
+    [self requestWihtMethod:RequestTypePost
+                        url:kCancelLikeUrl
+                     params:params
+                    success:success
+                    failure:failure];
+}
+
+//请求Instagram的用户信息
+- (void)instagramUserInfoWithUid:(NSInteger)uid
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError* err))failure {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/",@(uid)];
+    [manager GET:urlStr parameters:@{@"access_token":[userDefaults objectForKey:kAccessToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
 }
 
 @end

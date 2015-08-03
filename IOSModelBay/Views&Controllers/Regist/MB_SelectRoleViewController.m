@@ -11,11 +11,8 @@
 
 @interface MB_SelectRoleViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *labelPro;
-@property (weak, nonatomic) IBOutlet UIButton *buttonPro;
-@property (weak, nonatomic) IBOutlet UILabel *labelAud;
-@property (weak, nonatomic) IBOutlet UILabel *subLabelAud;
-@property (weak, nonatomic) IBOutlet UIButton *buttonAud;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
 @property (weak, nonatomic) IBOutlet UIView *VIew1;
 @property (weak, nonatomic) IBOutlet UIView *view2;
 
@@ -31,13 +28,10 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
 
-//    _buttonPro.layer.borderWidth = 1.5;
-//    _buttonPro.layer.borderColor = [UIColor whiteColor].CGColor;
-//    _buttonAud.layer.borderWidth = 1.5;
-//    _buttonAud.layer.borderColor = [UIColor whiteColor].CGColor;
-//    
-//    _labelPro.text = @"i am a \nprofessional";
-//    _labelAud.text = @"i am a \naudience";
+    if ([[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"zh-Hans"] || [[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"zh-Hant"]) {
+        self.imageView1.image = [UIImage imageNamed:@"select_zhuanye_cn"];
+        self.imageView2.image = [UIImage imageNamed:@"select_putong_cn"];
+    }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap1:)];
     [_VIew1 addGestureRecognizer:tap];
@@ -69,20 +63,5 @@
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (IBAction)professionalBtnOnClick:(UIButton *)sender{
-    //专业用户
-    MB_WriteInfoViewController *writeVC = [[MB_WriteInfoViewController alloc] init];
-    writeVC.roleType = RoleTypeProfessional;
-    [self.navigationController pushViewController:writeVC animated:YES];
-}
-
-- (IBAction)audinceBtnOnClick:(UIButton *)sender {
-    //观众
-    MB_WriteInfoViewController *writeVC = [[MB_WriteInfoViewController alloc] init];
-    writeVC.roleType = RoleTypeAudience;
-    [self.navigationController pushViewController:writeVC animated:YES];
-}
-
 
 @end

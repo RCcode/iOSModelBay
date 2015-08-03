@@ -95,6 +95,7 @@
 		CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD46C1321B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib */; };
 		CD48D3D61B469CAF0023ADAA /* MB_IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */; };
 		CD48D3D91B46A3240023ADAA /* MB_EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */; };
+		CD5D37B81B6F55A900E769CC /* MB_CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5D37B71B6F55A900E769CC /* MB_CustomButton.m */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
 		CD7964511B340EC400977A7F /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964451B340EC400977A7F /* UIDevice+DeviceInfo.m */; };
@@ -394,6 +395,8 @@
 		CD48D3D51B469CAF0023ADAA /* MB_IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_IndicatorView.m; sourceTree = "<group>"; };
 		CD48D3D71B46A3240023ADAA /* MB_EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_EditViewController.h; sourceTree = "<group>"; };
 		CD48D3D81B46A3240023ADAA /* MB_EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_EditViewController.m; sourceTree = "<group>"; };
+		CD5D37B61B6F55A900E769CC /* MB_CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_CustomButton.h; sourceTree = "<group>"; };
+		CD5D37B71B6F55A900E769CC /* MB_CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_CustomButton.m; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		CD7964411B340EC400977A7F /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		CD7964421B340EC400977A7F /* UIButton+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+helper.h"; sourceTree = "<group>"; };
@@ -1037,6 +1040,8 @@
 				CDD536DC1B340CB6008B436C /* MB_SettingViewController.m */,
 				CDA8A6121B57A46800865DEA /* MB_NotLoginView.h */,
 				CDA8A6131B57A46800865DEA /* MB_NotLoginView.m */,
+				CD5D37B61B6F55A900E769CC /* MB_CustomButton.h */,
+				CD5D37B71B6F55A900E769CC /* MB_CustomButton.m */,
 			);
 			path = "Views&Controllers";
 			sourceTree = "<group>";
@@ -1518,6 +1523,7 @@
 			files = (
 				CDC9AB9C1B21B3E300119C18 /* MB_Notice.m in Sources */,
 				CDA8A60B1B5791A000865DEA /* MB_EditTableViewCell.m in Sources */,
+				CD5D37B81B6F55A900E769CC /* MB_CustomButton.m in Sources */,
 				CD46C1271B3A6A59000E2F0C /* MB_Message.m in Sources */,
 				CDC9AB9B1B21B3E300119C18 /* MB_AddressBookPeople.m in Sources */,
 				9990C81A1B46D99000D2D496 /* MB_MessageReplyTableViewCell.m in Sources */,
@@ -1787,9 +1793,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1812,9 +1818,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IOSModelBay/PrefixHeader.pch";
 				INFOPLIST_FILE = IOSModelBay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

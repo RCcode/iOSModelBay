@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ome-en-J4c">
-                                <rect key="frame" x="12" y="0.0" width="297" height="65"/>
+                                <rect key="frame" x="12" y="8" width="297" height="49"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic-Italic" family="Century Gothic" pointSize="12"/>
                                 <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,8 +32,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Ome-en-J4c" secondAttribute="bottom" id="FFM-Ra-he6"/>
-                            <constraint firstItem="Ome-en-J4c" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" id="Ouc-al-DaL"/>
+                            <constraint firstAttribute="bottom" secondItem="Ome-en-J4c" secondAttribute="bottom" constant="8" id="FFM-Ra-he6"/>
+                            <constraint firstItem="Ome-en-J4c" firstAttribute="top" secondItem="yFk-RL-LrL" secondAttribute="top" constant="8" id="Ouc-al-DaL"/>
                             <constraint firstAttribute="trailing" secondItem="Ome-en-J4c" secondAttribute="trailing" constant="11" id="Rak-77-Pab"/>
                             <constraint firstItem="Ome-en-J4c" firstAttribute="leading" secondItem="yFk-RL-LrL" secondAttribute="leading" constant="12" id="mk7-j7-8LP"/>
                         </constraints>

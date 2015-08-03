@@ -229,10 +229,10 @@
 - (UIView *)footView {
     if (!_footView) {
         _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *button = [MB_CustomButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor      = colorWithHexString(@"#ff6358");
         button.titleLabel.textColor = colorWithHexString(@"#ffffff");
-        button.titleLabel.font      = [UIFont fontWithName:@"FuturaStd-Book" size:14];
+        button.titleLabel.font      = [UIFont fontWithName:@"FuturaStd-Book" size:15];
         button.frame                = CGRectMake(0, 21, kWindowWidth - 24, 43);
         if ([userDefaults boolForKey:kIsLogin]) {
             [button setTitle:LocalizedString(@"Logout", nil) forState:UIControlStateNormal];

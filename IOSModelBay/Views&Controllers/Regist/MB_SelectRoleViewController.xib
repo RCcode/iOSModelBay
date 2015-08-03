@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MB_SelectRoleViewController">
             <connections>
                 <outlet property="VIew1" destination="TDe-hy-cOC" id="X5T-2F-d7U"/>
+                <outlet property="imageView1" destination="ucx-fp-NuC" id="sPc-oF-WeI"/>
+                <outlet property="imageView2" destination="JRe-2Z-yTm" id="Je8-dX-Nlc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="view2" destination="11Q-wZ-Fed" id="n4S-dS-nDg"/>
             </connections>

@@ -16,9 +16,6 @@
 #import "MB_SettingViewController.h"
 #import "MB_UserDetailViewController.h"
 
-
-#import "MB_SelectRoleViewController.h"
-
 @import MessageUI;
 
 @interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -64,6 +61,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOutSuccess:) name:kLoginOutNotification object:nil];
     
     if ([userDefaults boolForKey:kIsLogin]) {
+        if (self.comeFromType == ComeFromTypeSelf) {
+            MB_User *user = [[MB_User alloc] init];
+            user.fid       = [[userDefaults objectForKey:kID] integerValue];
+            user.fname     = [userDefaults objectForKey:kName];
+            user.fcareerId = [userDefaults objectForKey:kCareer];
+            user.fbackPic  = [userDefaults objectForKey:kBackPic];
+            user.fpic      = [userDefaults objectForKey:kPic];
+            user.uid       = [[userDefaults objectForKey:kUid] integerValue];
+            user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
+            user.state     = 1;
+            self.user      = user;
+        }
+        
         [self.view addSubview:self.tableView];
         [self.view addSubview:self.commentView];
         
@@ -269,22 +279,26 @@ static CGFloat startY;
 
 #pragma mark - 键盘监听
 - (void)keyBoardWillShow:(NSNotification *)noti {
-    //滚到顶部
-    if (self.tableView.contentOffset.y != topViewHeight - 64) {
-        [self.tableView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
+    if ([userDefaults boolForKey:kIsLogin]) {
+        //滚到顶部
+        if (self.tableView.contentOffset.y != topViewHeight - 64) {
+            [self.tableView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
+        }
+        
+        CGRect rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        CGRect frame = self.commentView.frame;
+        frame.origin.y = CGRectGetMinY(rect) - CGRectGetHeight(frame);
+        self.commentView.frame = frame;
     }
-    
-    CGRect rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect frame = self.commentView.frame;
-    frame.origin.y = CGRectGetMinY(rect) - CGRectGetHeight(frame);
-    self.commentView.frame = frame;
 }
 
 - (void)keyBoardWillHide:(NSNotification *)noti {
-    if (self.hidesBottomBarWhenPushed) {
-        self.commentView.frame = CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60);
-    }else {
-        self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
+    if ([userDefaults boolForKey:kIsLogin]) {
+        if (self.hidesBottomBarWhenPushed) {
+            self.commentView.frame = CGRectMake(0, kWindowHeight - 60, kWindowWidth, 60);
+        }else {
+            self.commentView.frame = CGRectMake(0, kWindowHeight - 49 - 60, kWindowWidth, 60);
+        }
     }
 }
 
@@ -365,6 +379,7 @@ static CGFloat startY;
     MB_SettingViewController *inviteVC = [[MB_SettingViewController alloc] init];
     inviteVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:inviteVC animated:YES];
+    
 //    MB_SelectRoleViewController *select = [[MB_SelectRoleViewController alloc] init];
 //    select.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:select animated:YES];
@@ -472,11 +487,11 @@ static CGFloat startY;
 
 - (void)loginOutSuccess:(NSNotification *)noti {
     if (self.comeFromType == ComeFromTypeSelf) {
-        [self.tableView removeFromSuperview];
-        _tableView     = nil;
-        _commentView   = nil;
+        [_tableView removeFromSuperview];
         _userInfoView  = nil;
         _containerView = nil;
+        _tableView     = nil;
+        _commentView   = nil;
         _menuIndex     = 0;
         
         [self.view addSubview:self.notLoginView];
@@ -484,6 +499,10 @@ static CGFloat startY;
 }
 
 - (void)addChildViewControllers {
+    for (UIViewController *vc in self.childViewControllers) {
+        [vc removeFromParentViewController];
+    }
+    
     MB_UserDetailViewController *detailVC   = [[MB_UserDetailViewController alloc] init];
     MB_AblumViewController *ablumVC           = [[MB_AblumViewController alloc] init];
     MB_InstragramViewController *instragramVC = [[MB_InstragramViewController alloc] init];
@@ -566,6 +585,7 @@ static CGFloat startY;
 //收藏此用户
 - (void)collectionButtonOnClick:(UIButton *)button {
     if (!button.selected) {
+        //收藏
         button.selected = YES;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
         button.backgroundColor = colorWithHexString(@"#ff4f42");
@@ -580,16 +600,38 @@ static CGFloat startY;
                 self.user.likeType = LikedTypeLiked;
             }else {
                 button.selected = NO;
-                self.userInfoView.likeButton.layer.borderWidth = 1;
-                self.userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+                button.backgroundColor = [UIColor clearColor];
+                button.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
             }
 //            if ([self statFromResponse:response] == 10201) {
 //                NSLog(@"已经关注");
 //            }
         } failure:^(NSError *err) {
             button.selected = NO;
-            self.userInfoView.likeButton.layer.borderWidth = 1;
-            self.userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+            button.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+            button.backgroundColor = [UIColor clearColor];
+        }];
+    }else {
+        //取消收藏
+        button.selected = NO;
+        button.backgroundColor = [UIColor clearColor];
+        button.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                                 @"token":[userDefaults objectForKey:kAccessToken],
+                                 @"fid":@(self.user.fid)};
+        [[AFHttpTool shareTool] cancelLikeWithParameters:params success:^(id response) {
+            NSLog(@"cancel %@",response);
+            if ([self statFromResponse:response] == 10000) {
+                self.user.likeType = LikedTypeNotLiked;
+            }else {
+                button.selected = YES;
+                button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+                button.backgroundColor = colorWithHexString(@"#ff4f42");
+            }
+        } failure:^(NSError *err) {
+            button.selected = YES;
+            button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+            button.backgroundColor = colorWithHexString(@"#ff4f42");
         }];
     }
 }
@@ -640,7 +682,6 @@ static CGFloat startY;
         _tableView.dataSource      = self;
         _tableView.contentInset    = UIEdgeInsetsMake(64, 0, 0, 0);
         _tableView.tableHeaderView = self.userInfoView;
-        
     }
     return _tableView;
 }
@@ -652,8 +693,8 @@ static CGFloat startY;
         _userInfoView.clipsToBounds = YES;
         _userInfoView.userImageView.userInteractionEnabled = YES;
         _userInfoView.backImageView.userInteractionEnabled = YES;
-        [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:_user.fpic] placeholderImage:nil];
-        [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:_user.fbackPic] placeholderImage:nil];
+        [_userInfoView.userImageView sd_setImageWithURL:[NSURL URLWithString:self.user.fpic] placeholderImage:nil];
+        [_userInfoView.backImageView sd_setImageWithURL:[NSURL URLWithString:self.user.fbackPic] placeholderImage:nil];
         if (self.comeFromType == ComeFromTypeSelf) {
             //添加换背景手势
             UITapGestureRecognizer *tapBackPic = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeBackPic:)];

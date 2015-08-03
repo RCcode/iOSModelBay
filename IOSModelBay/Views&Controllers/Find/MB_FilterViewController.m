@@ -126,6 +126,7 @@
 //点击搜索
 - (void)handleTap:(UITapGestureRecognizer *)tap {
     MB_SearchViewController *searchVC = [[MB_SearchViewController alloc] init];
+    searchVC.searchType = SearchTypeUser;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

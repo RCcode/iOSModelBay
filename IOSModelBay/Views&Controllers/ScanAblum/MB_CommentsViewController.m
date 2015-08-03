@@ -104,22 +104,12 @@ static CGFloat const commentViewHeight = 50;
 
 
 #pragma mark - UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    if (textView.text && ![textView.text isEqualToString:@""]) {
-        self.sendButton.enabled = YES;
-    }else {
-        self.sendButton.enabled = NO;
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:LocalizedString(@"Add_Reply", nil)]) {
+        textView.text = @"";
     }
+    return YES;
 }
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView.text && ![textView.text isEqualToString:@""]) {
-        self.sendButton.enabled = YES;
-    }else {
-        self.sendButton.enabled = NO;
-    }
-}
-
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.text && ![textView.text isEqualToString:@""]) {
         self.sendButton.enabled = YES;
@@ -201,6 +191,7 @@ static CGFloat const commentViewHeight = 50;
 
 - (void)sendButtonOnClick:(UIButton *)button {
     [self.textView resignFirstResponder];
+    self.sendButton.enabled = NO;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
@@ -210,14 +201,16 @@ static CGFloat const commentViewHeight = 50;
                              @"comment":self.textView.text};
     [[AFHttpTool shareTool] commentAblumWithParameters:params success:^(id response) {
         NSLog(@"comment send  %@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
             self.textView.text = @"";
             [self requestCommentsListWithMinId:0];
         }else {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.sendButton.enabled = YES;
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        self.sendButton.enabled = YES;
     }];
 }
 
@@ -249,6 +242,7 @@ static CGFloat const commentViewHeight = 50;
 - (UITextView *)textView {
     if (_textView == nil) {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth - 50, commentViewHeight) textContainer:nil];
+        _textView.text = LocalizedString(@"Add_Reply", nil);
         _textView.backgroundColor = [UIColor colorWithRed:96/255.0 green:96/255.0 blue:96/255.0 alpha:1];
         _textView.font = [UIFont systemFontOfSize:15];
         _textView.delegate = self;

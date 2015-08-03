@@ -86,11 +86,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 - (void)configureCell2:(MB_IntroduceTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     if ([self.changeDetail.bio isEqualToString:@""]) {
-        if ([userDefaults objectForKey:kBio]) {
-            cell.label.text = [userDefaults objectForKey:kBio];
-        }else {
-            cell.label.text = LocalizedString(@"introduce", nil);
-        }
+        cell.label.text = LocalizedString(@"introduce", nil);
     }else {
         cell.label.text = self.changeDetail.bio;
     }
@@ -101,6 +97,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     NSString *title = self.areaArray[indexPath.row];
     cell.mainLabel.text = LocalizedString(title, nil);
     cell.sanjiaoImageView.hidden = YES;
+    cell.mainLabelWidth.constant = 100;
     
     if ([title isEqualToString:@"areaModel"]) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
@@ -130,6 +127,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     }else if (indexPath.section == 1){
         MB_SummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierSummary forIndexPath:indexPath];
         
+        cell.mainLabelWidth.constant = 80;
         cell.sanjiaoImageView.hidden = YES;
         
         NSString *keyName = self.dataArray[indexPath.row];
@@ -189,7 +187,6 @@ static CGFloat startY = 0;
                              @"fid":@(self.user.fid)};
     [[AFHttpTool shareTool] getUerDetailWithParameters:params success:^(id response) {
         NSLog(@"detail %@",response);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
         if ([self statFromResponse:response] == 10000) {
             
@@ -215,8 +212,35 @@ static CGFloat startY = 0;
                 }
             }
             
-            [self createMenuTitles];
-            [self.tableView reloadData];
+            //instagram的信息
+            if ([self.detail.website isEqualToString:@""] || [self.detail.bio isEqualToString:@""]) {
+                //请求Instagram的代替
+                [[AFHttpTool shareTool] instagramUserInfoWithUid:self.user.uid success:^(id response) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    NSLog(@"instagram user = %@",response);
+                    if ([self.detail.bio isEqualToString:@""]) {
+                        self.detail.bio = response[@"data"][@"bio"];
+                        self.changeDetail.bio = response[@"data"][@"bio"];
+                    }
+                    if ([self.detail.website isEqualToString:@""]) {
+                        self.detail.website = response[@"data"][@"website"];
+                        self.changeDetail.website = response[@"data"][@"website"];
+                    }
+                    
+                    [self createMenuTitles];
+                    [self.tableView reloadData];
+                    
+                } failure:^(NSError *err) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    NSLog(@"%@",err);
+                    [self createMenuTitles];
+                    [self.tableView reloadData];
+                }];
+            }else {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self createMenuTitles];
+                [self.tableView reloadData];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -355,13 +379,18 @@ static CGFloat startY = 0;
             break;
         case 15:
         {
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:detail.age];
-            NSDateFormatter *formattor = [[NSDateFormatter alloc] init];
-            [formattor setDateFormat:@"YYYY"];
-            NSString *str1 = [formattor stringFromDate:date];
-            NSString *str2 = [formattor stringFromDate:[NSDate date]];
-            NSString *age = [NSString stringWithFormat:@"%ld",(long)([str2 integerValue] - [str1 integerValue])];
-            return age;
+            if (detail.age == -1) {
+                return @"";
+            }else {
+                NSDate *date = [NSDate dateWithTimeIntervalSince1970:detail.age];
+                NSDateFormatter *formattor = [[NSDateFormatter alloc] init];
+                [formattor setDateFormat:@"YYYY"];
+                NSString *str1 = [formattor stringFromDate:date];
+                NSString *str2 = [formattor stringFromDate:[NSDate date]];
+                NSString *age = [NSString stringWithFormat:@"%ld",(long)([str2 integerValue] - [str1 integerValue])];
+                return age;
+            }
+            
             break;
         }
         case 16:
@@ -371,11 +400,11 @@ static CGFloat startY = 0;
             return detail.email;
             break;
         case 18:
-            if ([detail.website isEqualToString:@""]) {
-                return [userDefaults objectForKey:kWebsite];
-            }else{
+//            if ([detail.website isEqualToString:@""]) {
+//                return [userDefaults objectForKey:kWebsite];
+//            }else{
                 return detail.website;
-            }
+//            }
             break;
         default:
             return @"";

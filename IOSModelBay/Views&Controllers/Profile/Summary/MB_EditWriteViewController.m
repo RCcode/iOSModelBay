@@ -35,7 +35,9 @@
         [_hideButton setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
         [_hideButton setTitleColor:colorWithHexString(@"#8f8f8f") forState:UIControlStateNormal];
         [_hideButton setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
-        [_hideButton setTitle:LocalizedString(@"Only Professional", nil) forState:UIControlStateNormal];
+//        [_hideButton setTitle:LocalizedString(@"Only Professional", nil) forState:UIControlStateNormal];
+        [_hideButton setTitle:LocalizedString(@"Only Me", nil) forState:UIControlStateNormal];
+
         [_hideButton addTarget:self action:@selector(hideOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_hideButton];
         
@@ -44,7 +46,7 @@
         [_noHideButton setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
         [_noHideButton setTitleColor:colorWithHexString(@"#8f8f8f") forState:UIControlStateNormal];
         [_noHideButton setTitleColor:colorWithHexString(@"#ff4f42") forState:UIControlStateSelected];
-        [_noHideButton setTitle:LocalizedString(@"Only Me", nil) forState:UIControlStateNormal];
+        [_noHideButton setTitle:LocalizedString(@"Only Professional", nil) forState:UIControlStateNormal];
         [_noHideButton addTarget:self action:@selector(notHideOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_noHideButton];
         

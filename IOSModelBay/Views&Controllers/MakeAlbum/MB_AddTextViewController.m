@@ -7,7 +7,6 @@
 //
 
 #import "MB_AddTextViewController.h"
-#import "UIImage+Utility.h"
 #import "MB_LikersViewController.h"
 #import "MB_SelectPhotosViewController.h"
 #import "MB_ScanImageViewController.h"
@@ -80,6 +79,11 @@
 
     self.assertLibrary = [[ALAssetsLibrary alloc] init];
     [self refreshImagesContainerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -255,7 +259,7 @@
                              @"token":[userDefaults objectForKey:kAccessToken],//token
                              @"atype":@(1),//影集分类:0.拼图;1.相片集
                              @"name":self.addTitleTextField.text,//影集名称
-                             @"descr":self.addDescTextView.text,//影集描述
+                             @"descr":[self.addDescTextView.text isEqualToString:LocalizedString(@"Description", nil)]?@"":self.addDescTextView.text,//影集描述
                              @"cover":@"",//封面图片,当atype为0时为内容
                              @"mId":@(self.mId),//模特id
                              @"mName":self.mName,//模特名
@@ -273,66 +277,72 @@
             _manager = [AFHTTPRequestOperationManager manager];            
             for (NSURL *url in self.urlArray) {
                 [self.assertLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
-                    
-                    UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
-                    UIImage *scaleImage = [image rescaleImageToPX:480];
-                    NSLog(@"%@",NSStringFromCGSize(scaleImage.size));
-
-                    NSDictionary *uploadParams = @{@"id":[userDefaults objectForKey:kID],
-                                                   @"token":[userDefaults objectForKey:kAccessToken],
-                                                   @"ablId":response[@"ablId"],
-                                                   @"sort":@([self.urlArray indexOfObject:url])};
-                    NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"ablum/uploadPic.do"];
-                    
-                    AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                    @autoreleasepool {
+                        UIImage *scaleImage = [[UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage] rescaleImageToPX:480];
                         
-                        NSData *imageData = UIImageJPEGRepresentation(scaleImage, 0.7);
-                        [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%ld.jpg",(unsigned long)[self.urlArray indexOfObject:url]] mimeType:@"image/jpeg"];
+                        NSDictionary *uploadParams = @{@"id":[userDefaults objectForKey:kID],
+                                                       @"token":[userDefaults objectForKey:kAccessToken],
+                                                       @"ablId":response[@"ablId"],
+                                                       @"sort":@([self.urlArray indexOfObject:url])};
+                        NSString *url = [NSString stringWithFormat:@"%@%@",@"http://model.rcplatformhk.net/ModelBayWeb/",@"ablum/uploadPic.do"];
                         
-                    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        if (_manager.operationQueue.operationCount == 0) {
+                        AFHTTPRequestOperation *operation = [_manager POST:url parameters:uploadParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                             
-                            hud.detailsLabelText = LocalizedString(@"Uplaod Success", nil);
-                            [hud hide:YES afterDelay:0.7];
-                            [self.navigationController popToRootViewControllerAnimated:YES];
-                        }
-                        NSLog(@"success");
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"%@ failed", operation);
-                        
-                        if (_manager.operationQueue.operationCount == 0) {
+                            NSData *imageData = UIImageJPEGRepresentation(scaleImage, 0.7);
+                            [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%ld.jpg",(unsigned long)[self.urlArray indexOfObject:url]] mimeType:@"image/jpeg"];
                             
-                            hud.detailsLabelText = LocalizedString(@"Upload Success", nil);
-                            [hud hide:YES afterDelay:0.7];
-                            [self.navigationController popToRootViewControllerAnimated:YES];
-                        }
-                    }];
-                    
-                    __weak NSMutableDictionary *dic = self.progressDic;
-                    __weak NSNumber *index = [uploadParams objectForKey:@"sort"];
-                    __weak NSMutableArray *allArray = self.urlArray;
-                    __weak MBProgressHUD *weakHub = hud;
-                    [dic setObject:@(0) forKey:index];
-                    
-                    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+                        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            if (_manager.operationQueue.operationCount == 0) {
+                                
+                                hud.detailsLabelText = LocalizedString(@"Uplaod Success", nil);
+                                [hud hide:YES afterDelay:0.7];
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                //刷新相册列表
+                                [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshAblumNotification object:nil];
+                            }
+                            NSLog(@"success");
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"%@ failed", operation);
+                            
+                            if (_manager.operationQueue.operationCount == 0) {
+                                
+                                hud.detailsLabelText = LocalizedString(@"Upload Success", nil);
+                                [hud hide:YES afterDelay:0.7];
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                //刷新相册列表
+                                [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshAblumNotification object:nil];
+                                
+                            }
+                        }];
                         
-                        double progress = totalBytesWritten*1.0/totalBytesExpectedToWrite;
-                        NSLog(@"pro  %f",progress);
-                        [dic setObject:@(progress) forKey:index];
+                        __weak NSMutableDictionary *dic = self.progressDic;
+                        __weak NSNumber *index = [uploadParams objectForKey:@"sort"];
+                        __weak NSMutableArray *allArray = self.urlArray;
+                        __weak MBProgressHUD *weakHub = hud;
+                        [dic setObject:@(0) forKey:index];
                         
-                        NSArray *array = [dic allValues];
-                        
-                        double sum = 0;
-                        for (NSNumber *num in array) {
-                            sum += [num doubleValue];
-                        }
-                        NSLog(@"progressDic = %@",dic);
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            weakHub.progress = sum / allArray.count;
-                        });
-                        
-                    }];
+                        [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+                            
+                            double progress = totalBytesWritten*1.0/totalBytesExpectedToWrite;
+                            NSLog(@"pro  %f",progress);
+                            [dic setObject:@(progress) forKey:index];
+                            
+                            NSArray *array = [dic allValues];
+                            
+                            double sum = 0;
+                            for (NSNumber *num in array) {
+                                sum += [num doubleValue];
+                            }
+                            NSLog(@"progressDic = %@",dic);
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                weakHub.progress = sum / allArray.count;
+                            });
+                            
+                        }];
+                    }
                     
                 } failureBlock:^(NSError *error) {
                     

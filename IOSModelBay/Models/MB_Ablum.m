@@ -39,7 +39,7 @@
         _atype = [value integerValue];
     }
     if ([key isEqualToString:@"mId"]) {
-        _mkId = [value integerValue];
+        _mId = [value integerValue];
     }
     if ([key isEqualToString:@"pId"]) {
         _pId = [value integerValue];

@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text delegate:(id<NotLoginViewDelegate>)delegate{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+//        self.backgroundColor = [UIColor whiteColor];
         _delegate = delegate;
         _text     = text;
         

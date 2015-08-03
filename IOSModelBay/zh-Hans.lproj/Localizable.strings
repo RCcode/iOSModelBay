@@ -225,6 +225,7 @@
 
 "Send" = "Send";
 "Leave Message" = "Leave Message";
+"Add_Reply" = "评论";
 "Edit_detail" = "编辑";
 "introduce" = "介绍";
 "NoMore" = "没有更多";
@@ -232,4 +233,10 @@
 "max_select" = "最多选择3个";
 "min_select" = "至少选择1个";
 
+"Delete_Ablum" = "确定删除";
+"Delete_Y" = "删除";
+"Delete_N" = "取消";
+
+"Next" = "下一步";
+"Welcome" = "欢迎";
 

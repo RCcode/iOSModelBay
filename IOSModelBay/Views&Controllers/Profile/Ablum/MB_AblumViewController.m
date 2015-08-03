@@ -22,7 +22,7 @@
 static NSString * const ReuseIdentifierAblum = @"ablummm";
 static NSString * const ReuseIdentifierTemplate = @"template";
 
-@interface MB_AblumViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MB_AblumViewController ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIView *addView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -40,6 +40,8 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAblumList:) name:kRefreshAblumNotification object:nil];
+    
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
     if (userVC.comeFromType == ComeFromTypeSelf) {
         [self.view addSubview:self.addView];
@@ -50,6 +52,10 @@ static NSString * const ReuseIdentifierTemplate = @"template";
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self requestAblumListWithMinId:0];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -165,6 +171,40 @@ static CGFloat startY = 0;
 }
 
 
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        //不管服务器删除成功与否，先直接删除并记录id，下次请求如果还有的话就不显示
+        MB_Ablum *ablum = self.dataArray[actionSheet.tag];
+        [self.dataArray removeObject:ablum];
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:actionSheet.tag] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView reloadData];
+        
+        NSMutableArray *array = [[userDefaults objectForKey:kDeleteAblum] mutableCopy];
+        if (!array) {
+            array = [NSMutableArray arrayWithCapacity:0];
+        }
+        [array addObject:@(ablum.ablId)];
+        [userDefaults setObject:array forKey:kDeleteAblum];
+        
+        //服务器删除
+        NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                                 @"token":[userDefaults objectForKey:kAccessToken],
+                                 @"adlId":@(ablum.ablId)};
+        
+        [[AFHttpTool shareTool] deleteAblumWithParameters:params success:^(id response) {
+            NSLog(@"delete ablum: %@",response);
+            if ([self statFromResponse:response] == 10000) {
+                //            [self.dataArray removeObject:ablum];
+                //            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:button.tag] withRowAnimation:UITableViewRowAnimationLeft];
+                //            [self.tableView reloadData];
+            }
+        } failure:^(NSError *err) {
+            
+        }];
+    }
+}
+
 #pragma mark - private methods
 //添加上下拉刷新
 - (void)addPullRefresh
@@ -201,21 +241,40 @@ static CGFloat startY = 0;
             self.minId = [response[@"minId"] integerValue];
             if (response[@"list"] != nil && ![response[@"list"] isKindOfClass:[NSNull class]]) {
                 NSArray *array = response[@"list"];
+                
                 for (NSDictionary *dic in array) {
                     MB_Ablum *ablum = [[MB_Ablum alloc] init];
-                    [ablum setValuesForKeysWithDictionary:dic];
-                    [self.dataArray addObject:ablum];
+                    NSArray *array = [userDefaults objectForKey:kDeleteAblum];
+                    if (![array containsObject:@(ablum.ablId)]) {
+                        [ablum setValuesForKeysWithDictionary:dic];
+                        [self.dataArray addObject:ablum];
+                    }
                 }
-                [self.tableView reloadData];
             }
             
+            if (self.dataArray.count <= 0) {
+                self.tableView.backgroundView = self.noResultView;
+            }else {
+                self.tableView.backgroundView = nil;
+            }
+            
+            [self.tableView reloadData];
         }else if ([self statFromResponse:response] == 10004) {
-            [self showNoMoreMessageForview:self.tableView];
+            if (minId == 0) {
+                self.tableView.backgroundView = self.noResultView;
+            }else {
+                [self showNoMoreMessageForview:self.tableView];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
     }];
+}
+
+- (void)refreshAblumList:(NSNotification *)noti {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self requestAblumListWithMinId:0];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap{
@@ -279,27 +338,24 @@ static CGFloat startY = 0;
 - (void)likeButtonOnClick:(UIButton *)button {
 //    if (!button.selected) {
 //        button.selected = YES;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         MB_Ablum *ablum = self.dataArray[button.tag];
-        ablum.likes += 1;
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
-        //    MB_AlbumTableViewCell *cell = (MB_AlbumTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:button.tag]];
         NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
                                  @"token":[userDefaults objectForKey:kAccessToken],
                                  @"fid":@(ablum.uid),
                                  @"ablId":@(ablum.ablId)};
         [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
             NSLog(@"like send %@", response);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             if ([self statFromResponse:response] == 10000) {
-                
-            }else {
-                ablum.likes -= 1;
-//                button.selected = NO;
+                ablum.likes += 1;
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
+            }else {
+//                button.selected = NO;
             }
         } failure:^(NSError *err) {
 //            button.selected = NO;
-            ablum.likes -= 1;
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:button.tag]] withRowAnimation:UITableViewRowAnimationNone];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
 //    }
 }
@@ -322,21 +378,9 @@ static CGFloat startY = 0;
 
 //删除影集
 - (void)deleteButtonOnClick:(UIButton *)button {
-    MB_Ablum *ablum = self.dataArray[button.tag];
-    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
-                             @"token":[userDefaults objectForKey:kAccessToken],
-                             @"adlId":@(ablum.ablId)};
-    
-    [[AFHttpTool shareTool] deleteAblumWithParameters:params success:^(id response) {
-        NSLog(@"delete ablum: %@",response);
-        if ([self statFromResponse:response] == 10000) {
-            [self.dataArray removeObject:ablum];
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:button.tag] withRowAnimation:UITableViewRowAnimationLeft];
-            [self.tableView reloadData];
-        }
-    } failure:^(NSError *err) {
-        
-    }];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:LocalizedString(@"Delete_Ablum", nil) delegate:self cancelButtonTitle:LocalizedString(@"Delete_N", nil) destructiveButtonTitle:LocalizedString(@"Delete_Y", nil) otherButtonTitles:nil, nil];
+    actionSheet.tag = button.tag;
+    [actionSheet showInView:self.view];
 }
 
 //添加作品集

@@ -188,7 +188,8 @@ static CGFloat startY = 0;
         if ([self statFromResponse:response] == 10000) {
             NSArray *array = response[@"list"];
             if (array == nil || [array isKindOfClass:[NSNull class]]) {
-                [self showNoMoreMessageForview:self.tableView];
+//                [self showNoMoreMessageForview:self.tableView];
+                return ;
             }else {
                 if (minId == 0) {
                     [self.dataArray removeAllObjects];
@@ -200,10 +201,19 @@ static CGFloat startY = 0;
                     [message setValuesForKeysWithDictionary:dic];
                     [self. dataArray addObject:message];
                 }
+                if (self.dataArray.count <= 0) {
+                    self.tableView.backgroundView = self.noResultView;
+                }else {
+                    self.tableView.backgroundView = nil;
+                }
                 [self.tableView reloadData];
             }
         }else if ([self statFromResponse:response] == 10004) {
-            [self showNoMoreMessageForview:self.tableView];
+            if (minId == 0) {
+                self.tableView.backgroundView = self.noResultView;
+            }else {
+                [self showNoMoreMessageForview:self.tableView];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

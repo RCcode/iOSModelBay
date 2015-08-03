@@ -12,6 +12,7 @@
 #import "MB_InviteView.h"
 #import "MB_InviteViewController.h"
 #import "MB_UserViewController.h"
+#import "MB_AddTextViewController.h"
 
 @import MessageUI;
 
@@ -24,7 +25,7 @@
 @property (nonatomic, strong) UILabel *inviteLabel;
 
 @property (nonatomic, strong) UITableView   *listTableView;
-@property (nonatomic, strong) MB_InviteView *inviteView;
+//@property (nonatomic, strong) MB_InviteView *inviteView;
 
 @property (nonatomic, assign) NSInteger minId;//分页用的
 
@@ -51,7 +52,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,12 +83,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([self showLoginAlertIfNotLogin]) {
-        MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
-        userVC.user         = self.dataArray[indexPath.row];
-        userVC.comeFromType = ComeFromTypeUser;
-        userVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:userVC animated:YES];
+    self.textField.text = @"";
+    MB_User *user = self.dataArray[indexPath.row];
+    if (self.searchType == SearchTypeUser) {
+        if ([self showLoginAlertIfNotLogin]) {
+            MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
+            userVC.comeFromType = ComeFromTypeUser;
+            userVC.user  = user;
+            userVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:userVC animated:YES];
+        }
+    }else {
+        MB_Collect *selectUser = [[MB_Collect alloc] init];
+        selectUser.fid = user.fid;
+        selectUser.fname = user.fname;
+        self.selectUserVC.selectBlock(selectUser);
+        for (UIViewController *vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[MB_AddTextViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
     }
 }
 
@@ -104,34 +119,35 @@
     self.inviteLabel.text = [LocalizedString(@"Invite_xxxx", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:textField.text];
     
     //搜索用户
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self findUserListWithMinId:0];
     
     return YES;
 }
 
 
-#pragma mark - InviteViewDelegate
--(void)inviteRightViewOnClick:(UIButton *)button {
-    [self.inviteView removeFromSuperview];
-    
-    MB_InviteViewController *inviteVC = [[MB_InviteViewController alloc] init];
-    inviteVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:inviteVC animated:YES];
-}
-
--(void)textFieldReturnClick:(UITextField *)textField {
-    //邀请
-    [self.inviteView removeFromSuperview];
-
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-        [mailVC setToRecipients:@[textField.text]];
-        mailVC.mailComposeDelegate = self;
-        [self presentViewController:mailVC animated:YES completion:nil];
-    }else {
-        NSLog(@"不可以发邮件");
-    }
-}
+//#pragma mark - InviteViewDelegate
+//-(void)inviteRightViewOnClick:(UIButton *)button {
+//    [self.inviteView removeFromSuperview];
+//    
+//    MB_InviteViewController *inviteVC = [[MB_InviteViewController alloc] init];
+//    inviteVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:inviteVC animated:YES];
+//}
+//
+//-(void)textFieldReturnClick:(UITextField *)textField {
+//    //邀请
+//    [self.inviteView removeFromSuperview];
+//
+//    if ([MFMailComposeViewController canSendMail]) {
+//        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+//        [mailVC setToRecipients:@[textField.text]];
+//        mailVC.mailComposeDelegate = self;
+//        [self presentViewController:mailVC animated:YES completion:nil];
+//    }else {
+//        NSLog(@"不可以发邮件");
+//    }
+//}
 
 #pragma mark - MFMailComposeViewControllerDelegate
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
@@ -182,6 +198,7 @@
     
     [[AFHttpTool shareTool] findUserWithParameters:params success:^(id response) {
         NSLog(@"search list%@",response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.listTableView];
         if ([self statFromResponse:response] == 10000) {
             NSArray *userList = response[@"list"];
@@ -212,7 +229,8 @@
             }
         }
     } failure:^(NSError *err) {
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self endRefreshingForView:self.listTableView];
     }];
 }
 
@@ -227,13 +245,21 @@
 }
 
 - (void)inviteButtonOnClick:(UIButton *)button {
-    NSString *string = [LocalizedString(@"Enter_email", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:self.textField.text];
-    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:string];
-    [attribute addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#a8a8a8") range:NSMakeRange(0, string.length)];
+//    NSString *string = [LocalizedString(@"Enter_email", nil) stringByReplacingOccurrencesOfString:@"xxxx" withString:self.textField.text];
+//    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:string];
+//    [attribute addAttribute:NSForegroundColorAttributeName value:colorWithHexString(@"#a8a8a8") range:NSMakeRange(0, string.length)];
+//    
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.inviteView];
+//    self.inviteView.textField.attributedPlaceholder = attribute;
+//    [self.inviteView.textField becomeFirstResponder];
     
-    [[UIApplication sharedApplication].keyWindow addSubview:self.inviteView];
-    self.inviteView.textField.attributedPlaceholder = attribute;
-    [self.inviteView.textField becomeFirstResponder];
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+        mailVC.mailComposeDelegate = self;
+        [self presentViewController:mailVC animated:YES completion:nil];
+    }else {
+        NSLog(@"不可以发邮件");
+    }
 }
 
 
@@ -315,11 +341,11 @@
     return _listTableView;
 }
 
-- (MB_InviteView *)inviteView {
-    if (_inviteView == nil) {
-        _inviteView = [[MB_InviteView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) delegate:self];
-    }
-    return _inviteView;
-}
+//- (MB_InviteView *)inviteView {
+//    if (_inviteView == nil) {
+//        _inviteView = [[MB_InviteView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) delegate:self];
+//    }
+//    return _inviteView;
+//}
 
 @end

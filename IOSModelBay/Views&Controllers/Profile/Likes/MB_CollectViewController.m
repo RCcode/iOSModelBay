@@ -137,9 +137,18 @@ static CGFloat startY = 0;
                     [self. dataArray addObject:collect];
                 }
                 [self.collectView reloadData];
+                if (self.dataArray.count <= 0) {
+                    self.collectView.backgroundView = self.noResultView;
+                }else {
+                    self.collectView.backgroundView = nil;
+                }
             }
         }else if ([self statFromResponse:response] == 10004) {
-            [self showNoMoreMessageForview:self.collectView];
+            if (minId == 0) {
+                self.collectView.backgroundView = self.noResultView;
+            }else {
+                [self showNoMoreMessageForview:self.collectView];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

@@ -81,7 +81,7 @@
 
 - (UIButton *)loginBtn{
     if (_loginBtn == nil) {
-        _loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.skipBtn.frame) - kWindowHeight * 44 / 568, kWindowWidth, kWindowHeight * 44 / 568)];
+        _loginBtn = [[MB_CustomButton alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.skipBtn.frame) - kWindowHeight * 44 / 568, kWindowWidth, kWindowHeight * 44 / 568)];
         _loginBtn.backgroundColor = colorWithHexString(@"#2e5e86");
         _loginBtn.titleLabel.font = [UIFont fontWithName:@"FuturaStd-Medium" size:15];
         [_loginBtn setTitle:LocalizedString(@"login_insta", nil) forState:UIControlStateNormal];

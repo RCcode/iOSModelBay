@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) MB_User *user;
 
+- (void)requestAblumListWithMinId:(NSInteger)minId;
+
 @end

@@ -231,7 +231,7 @@
 
 - (MB_NotLoginView *)noResultView {
     if (_noResultView == nil) {
-        _noResultView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"NoMore", nil) delegate:self];
+        _noResultView = [[MB_NotLoginView alloc] initWithFrame:self.view.bounds text:LocalizedString(@"NoMore", nil) delegate:nil];
     }
     return _noResultView;
 }

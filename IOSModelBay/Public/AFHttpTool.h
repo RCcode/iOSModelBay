@@ -148,4 +148,14 @@ typedef NS_ENUM(NSInteger, RequestMethodType){
                           success:(void (^)(id response))success
                           failure:(void (^)(NSError* err))failure;
 
+//取消收藏用户
+- (void)cancelLikeWithParameters:params
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError* err))failure;
+
+//请求Instagram的用户信息
+- (void)instagramUserInfoWithUid:(NSInteger)uid
+                         success:(void (^)(id response))success
+                         failure:(void (^)(NSError* err))failure;
+
 @end

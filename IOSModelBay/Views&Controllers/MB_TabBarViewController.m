@@ -50,17 +50,17 @@
     
     MB_UserViewController *userVC = [[MB_UserViewController alloc] init];
     userVC.comeFromType = ComeFromTypeSelf;
-
-    MB_User *user = [[MB_User alloc] init];
-    user.fid       = [[userDefaults objectForKey:kID] integerValue];
-    user.fname     = [userDefaults objectForKey:kName];
-    user.fcareerId = [userDefaults objectForKey:kCareer];
-    user.fbackPic  = [userDefaults objectForKey:kBackPic];
-    user.fpic      = [userDefaults objectForKey:kPic];
-    user.uid       = [[userDefaults objectForKey:kUid] integerValue];
-    user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
-    user.state     = 1;
-    userVC.user    = user;
+    
+//    MB_User *user = [[MB_User alloc] init];
+//    user.fid       = [[userDefaults objectForKey:kID] integerValue];
+//    user.fname     = [userDefaults objectForKey:kName];
+//    user.fcareerId = [userDefaults objectForKey:kCareer];
+//    user.fbackPic  = [userDefaults objectForKey:kBackPic];
+//    user.fpic      = [userDefaults objectForKey:kPic];
+//    user.uid       = [[userDefaults objectForKey:kUid] integerValue];
+//    user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
+//    user.state     = 1;
+//    userVC.user    = user;
     
     MB_BaseNavigationViewController *userNC = [[MB_BaseNavigationViewController alloc] initWithRootViewController:userVC];
     

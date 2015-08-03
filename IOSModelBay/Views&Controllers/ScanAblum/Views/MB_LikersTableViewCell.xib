@@ -43,10 +43,10 @@
                         <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70E-94-dX3">
-                        <rect key="frame" x="218" y="23" width="90" height="21"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70E-94-dX3">
+                        <rect key="frame" x="308" y="23" width="0.0" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="90" id="w1P-1W-fKq"/>
+                            <constraint firstAttribute="width" id="w1P-1W-fKq"/>
                             <constraint firstAttribute="height" constant="21" id="xlG-hA-4tC"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="10"/>

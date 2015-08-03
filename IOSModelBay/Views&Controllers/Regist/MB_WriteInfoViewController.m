@@ -14,6 +14,7 @@
 @interface MB_WriteInfoViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
+@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTF;
 @property (weak, nonatomic) IBOutlet UIButton *maleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *femaleBtn;
@@ -27,12 +28,15 @@
     
     self.titleLabel.text = LocalizedString(@"Username", nil);
     self.navigationItem.titleView = self.titleLabel;
+    self.welcomeLabel.text = LocalizedString(@"Welcome", nil);
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     
     if (_roleType == RoleTypeProfessional) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"next" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Next", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
         _backImageView.image = [UIImage imageNamed:@"information_bg"];
+        [_maleBtn setTitle:LocalizedString(@"Men", nil) forState:UIControlStateNormal];
+        [_femaleBtn setTitle:LocalizedString(@"Women", nil) forState:UIControlStateNormal];
         _maleBtn.hidden = NO;
         _femaleBtn.hidden = NO;
         _maleBtn.selected = YES;
@@ -43,6 +47,7 @@
         _femaleBtn.hidden = YES;
     }
     
+    self.usernameTF.placeholder = LocalizedString(@"Username", nil);
     self.usernameTF.text = [userDefaults objectForKey:kUsername];
 }
 

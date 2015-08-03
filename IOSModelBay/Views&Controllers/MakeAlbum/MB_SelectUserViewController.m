@@ -8,10 +8,12 @@
 
 #import "MB_SelectUserViewController.h"
 #import "MB_UserTableViewCell.h"
+#import "MB_SearchViewController.h"
 
 @interface MB_SelectUserViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *searchView;
 @property (nonatomic, assign) NSInteger minId;
 
 @end
@@ -23,6 +25,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = colorWithHexString(@"#eeeeee");
+    [self.view addSubview:self.searchView];
     [self.view addSubview:self.tableView];
     
     [self addPullRefresh];
@@ -113,16 +116,45 @@
     }];
 }
 
+//点击搜索
+- (void)handleTap:(UITapGestureRecognizer *)tap {
+    MB_SearchViewController *searchVC = [[MB_SearchViewController alloc] init];
+    searchVC.searchType = SearchTypeAblum;
+    searchVC.selectUserVC = self;
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+
 
 #pragma mark - getters & setters
+- (UIView *)searchView {
+    if (_searchView == nil) {
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, 49)];
+        _searchView.backgroundColor = colorWithHexString(@"#444444");
+        //添加点击手势,点击跳到搜索界面
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [_searchView addGestureRecognizer:tap];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, (CGRectGetHeight(_searchView.frame) - 24) / 2, 24, 24)];
+        imageView.image = [UIImage imageNamed:@"ic_seach"];
+        [_searchView addSubview:imageView];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 12, 0, CGRectGetWidth(_searchView.frame) - CGRectGetMaxX(imageView.frame) - 12, CGRectGetHeight(_searchView.frame))];
+        label.font      = [UIFont systemFontOfSize:15];
+        label.text      = LocalizedString(@"Search name", nil);
+        label.textColor = [colorWithHexString(@"#ffffff") colorWithAlphaComponent:0.5];
+        [_searchView addSubview:label];
+    }
+    return _searchView;
+}
+
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), kWindowWidth, kWindowHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [UIView new];
         _tableView.tableFooterView = [UIView new];
-        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+//        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
         [_tableView registerNib:[UINib nibWithNibName:@"MB_UserTableViewCell" bundle:nil] forCellReuseIdentifier:ReuseIdentifier];
     }
     return _tableView;

@@ -45,6 +45,7 @@
 #define kBackPic @"backPic"
 #define kToken   @"token"
 
+#define kDeleteAblum @"deletedAblum"
 
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
@@ -64,5 +65,7 @@
 #define kLoginInNotification  @"loginInNotification"
 //退出登录通知
 #define kLoginOutNotification @"loginOutNotification"
+//刷新影集列表通知
+#define kRefreshAblumNotification @"refreshAblumNotification"
 
 #endif
