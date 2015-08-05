@@ -68,8 +68,6 @@
                     <constraint firstItem="Lex-hO-i2h" firstAttribute="centerY" secondItem="GQL-oa-Fkp" secondAttribute="centerY" id="E8g-Ji-Txo"/>
                     <constraint firstItem="Lex-hO-i2h" firstAttribute="leading" secondItem="c5d-tx-PZV" secondAttribute="trailing" constant="5" id="K0o-1E-JlS"/>
                     <constraint firstItem="oKJ-bU-QLx" firstAttribute="top" secondItem="GQL-oa-Fkp" secondAttribute="bottom" constant="9" id="KcB-iY-Vzn"/>
-                    <constraint firstItem="Lex-hO-i2h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5kR-jP-Zqb" secondAttribute="trailing" id="Qp2-xq-hWh"/>
-                    <constraint firstItem="Lex-hO-i2h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oKJ-bU-QLx" secondAttribute="trailing" id="RxX-JX-Fqd"/>
                     <constraint firstItem="oKJ-bU-QLx" firstAttribute="leading" secondItem="GQL-oa-Fkp" secondAttribute="leading" id="f3g-Fv-KL1"/>
                     <constraint firstItem="SM6-xb-lnM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ibi-sA-wT2"/>
                     <constraint firstItem="Lex-hO-i2h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5kR-jP-Zqb" secondAttribute="trailing" constant="5" id="jsq-bO-bkK"/>
@@ -79,12 +77,6 @@
                     <constraint firstItem="Lex-hO-i2h" firstAttribute="centerY" secondItem="c5d-tx-PZV" secondAttribute="centerY" id="wjc-ab-wXf"/>
                     <constraint firstItem="Lex-hO-i2h" firstAttribute="centerY" secondItem="5kR-jP-Zqb" secondAttribute="centerY" id="xyt-nZ-TAM"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Qp2-xq-hWh"/>
-                        <exclude reference="RxX-JX-Fqd"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="messageLabel" destination="oKJ-bU-QLx" id="vi6-Mi-4bx"/>

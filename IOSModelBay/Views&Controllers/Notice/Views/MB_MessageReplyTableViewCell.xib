@@ -111,13 +111,7 @@
                     <constraint firstItem="JDT-cL-JSn" firstAttribute="centerY" secondItem="gQp-dj-Urf" secondAttribute="centerY" id="hOs-o6-lSb"/>
                     <constraint firstItem="BWp-BC-VrE" firstAttribute="top" secondItem="5he-44-MyB" secondAttribute="top" id="l3L-lG-ew0"/>
                     <constraint firstItem="BWp-BC-VrE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="rQn-H3-T9O"/>
-                    <constraint firstItem="JDT-cL-JSn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="40i-Fo-CO8" secondAttribute="trailing" id="wre-Mh-VSd"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="wre-Mh-VSd"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <point key="canvasLocation" x="428" y="321"/>
         </tableViewCell>

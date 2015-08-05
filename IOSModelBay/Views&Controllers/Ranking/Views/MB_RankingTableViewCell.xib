@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FUTURASTD-BOOK.OTF">
@@ -123,27 +122,17 @@
                     <constraint firstItem="qQR-KI-WVX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Kat-Zc-DHT"/>
                     <constraint firstItem="HfZ-SQ-YfI" firstAttribute="top" secondItem="Oo9-TI-QDZ" secondAttribute="bottom" id="Muz-5N-tvg"/>
                     <constraint firstItem="i1X-xe-5eu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PVW-EG-L5C"/>
-                    <constraint firstItem="dff-fq-LBw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="X32-h2-Bkp"/>
                     <constraint firstAttribute="trailing" secondItem="HfZ-SQ-YfI" secondAttribute="trailing" id="XdN-qX-qSa"/>
                     <constraint firstItem="HfZ-SQ-YfI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ydk-yh-MHG"/>
                     <constraint firstItem="qQR-KI-WVX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZYT-pn-sXY"/>
-                    <constraint firstItem="dff-fq-LBw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bMF-bs-E9o"/>
                     <constraint firstItem="i1X-xe-5eu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bwb-xz-Laq"/>
                     <constraint firstItem="Oo9-TI-QDZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="ciV-Ec-sUr"/>
-                    <constraint firstAttribute="bottom" secondItem="qQR-KI-WVX" secondAttribute="bottom" id="fzl-bm-yiv"/>
                     <constraint firstAttribute="trailing" secondItem="qQR-KI-WVX" secondAttribute="trailing" id="g4w-RR-ZgB"/>
                     <constraint firstItem="dff-fq-LBw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="tFh-Dl-FPT"/>
                     <constraint firstAttribute="bottom" secondItem="HfZ-SQ-YfI" secondAttribute="bottom" constant="12" id="yLF-UR-f1g"/>
                     <constraint firstItem="HfZ-SQ-YfI" firstAttribute="top" secondItem="i1X-xe-5eu" secondAttribute="bottom" id="ysj-x3-pfM"/>
                     <constraint firstItem="dff-fq-LBw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zco-xV-duL"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="X32-h2-Bkp"/>
-                        <exclude reference="bMF-bs-E9o"/>
-                        <exclude reference="fzl-bm-yiv"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="ablumScrollView" destination="HfZ-SQ-YfI" id="Kko-gX-FRQ"/>

@@ -79,14 +79,8 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="22n-sS-jEa" secondAttribute="bottom" constant="9" id="qsS-2K-zyh"/>
                     <constraint firstItem="hHX-Lz-ROY" firstAttribute="centerY" secondItem="22n-sS-jEa" secondAttribute="centerY" id="uws-RL-udR"/>
                     <constraint firstItem="k6p-Z6-VXx" firstAttribute="leading" secondItem="EF9-tS-QYF" secondAttribute="trailing" id="wih-0s-JO1"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="22n-sS-jEa" secondAttribute="bottom" id="y8v-W7-npp"/>
                     <constraint firstAttribute="centerY" secondItem="k6p-Z6-VXx" secondAttribute="centerY" id="yFe-DA-826"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="y8v-W7-npp"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentLabel" destination="h5c-e3-pYa" id="kL1-gt-A0F"/>

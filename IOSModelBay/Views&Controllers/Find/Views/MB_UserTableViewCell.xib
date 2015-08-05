@@ -53,16 +53,10 @@
                     <constraint firstItem="EY9-yM-62m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="BLV-kw-uCT"/>
                     <constraint firstItem="EY9-yM-62m" firstAttribute="bottom" secondItem="KWt-cr-7Yk" secondAttribute="bottom" constant="2" id="II5-3v-0P3"/>
                     <constraint firstItem="PE6-l5-J5u" firstAttribute="leading" secondItem="KWt-cr-7Yk" secondAttribute="leading" id="P4t-zb-Szg"/>
-                    <constraint firstItem="KWt-cr-7Yk" firstAttribute="top" secondItem="PE6-l5-J5u" secondAttribute="bottom" constant="2" id="bWO-fv-B1l"/>
                     <constraint firstItem="PE6-l5-J5u" firstAttribute="leading" secondItem="EY9-yM-62m" secondAttribute="trailing" constant="15" id="h2S-Uz-67e"/>
                     <constraint firstItem="EY9-yM-62m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="kTX-xq-fqb"/>
                     <constraint firstItem="PE6-l5-J5u" firstAttribute="top" secondItem="EY9-yM-62m" secondAttribute="top" constant="2" id="vvF-ER-acK"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="bWO-fv-B1l"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>

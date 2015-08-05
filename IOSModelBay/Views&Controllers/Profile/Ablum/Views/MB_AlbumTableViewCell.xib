@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FUTURASTD-BOOK.OTF">
@@ -154,7 +153,6 @@
                     <constraint firstItem="7Uf-sQ-NoX" firstAttribute="top" secondItem="sLK-hi-R3u" secondAttribute="bottom" constant="15" id="8Hb-Th-NdN"/>
                     <constraint firstItem="j0n-H6-BJC" firstAttribute="bottom" secondItem="eYY-ao-7Mg" secondAttribute="bottom" id="8nU-Pj-Rgi"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7Uf-sQ-NoX" secondAttribute="bottom" constant="10" id="8zh-Dn-3jp"/>
-                    <constraint firstAttribute="trailing" secondItem="Rd1-DZ-8pK" secondAttribute="trailing" constant="24" id="C5V-VE-H03"/>
                     <constraint firstItem="eYY-ao-7Mg" firstAttribute="centerY" secondItem="SBs-EE-IrL" secondAttribute="centerY" id="DQh-go-N8N"/>
                     <constraint firstItem="A4C-4E-p0z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Dsj-Ic-8pf"/>
                     <constraint firstAttribute="trailing" secondItem="Rd1-DZ-8pK" secondAttribute="trailing" constant="24" id="FPy-eY-VLf"/>
@@ -165,7 +163,6 @@
                     <constraint firstItem="tkm-99-f6i" firstAttribute="leading" secondItem="pLf-T6-XGh" secondAttribute="leading" id="KbU-IQ-L2y"/>
                     <constraint firstAttribute="trailing" secondItem="J6Y-wI-2f4" secondAttribute="trailing" id="LEU-hf-pfG"/>
                     <constraint firstItem="J6Y-wI-2f4" firstAttribute="top" secondItem="MEq-1D-pOI" secondAttribute="bottom" constant="5" id="P3A-h7-fyd"/>
-                    <constraint firstItem="j0n-H6-BJC" firstAttribute="leading" secondItem="eYY-ao-7Mg" secondAttribute="leading" id="PdB-h6-wAm"/>
                     <constraint firstItem="4kF-yB-XJ7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Q4V-FH-pDJ"/>
                     <constraint firstItem="sgN-Zb-d1i" firstAttribute="top" secondItem="A4C-4E-p0z" secondAttribute="bottom" id="QlZ-gv-GMU"/>
                     <constraint firstItem="sLK-hi-R3u" firstAttribute="top" secondItem="7pt-eP-YpR" secondAttribute="bottom" constant="5" id="ROW-F4-YIv"/>
@@ -186,27 +183,15 @@
                     <constraint firstItem="eYY-ao-7Mg" firstAttribute="centerY" secondItem="7Uf-sQ-NoX" secondAttribute="centerY" id="hty-Dd-FpY"/>
                     <constraint firstItem="ySH-1u-JcM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iqe-XE-mnb"/>
                     <constraint firstItem="SBs-EE-IrL" firstAttribute="leading" secondItem="tkm-99-f6i" secondAttribute="trailing" constant="25" id="kY0-KR-05q"/>
-                    <constraint firstItem="sgN-Zb-d1i" firstAttribute="top" secondItem="Tke-xC-KO3" secondAttribute="bottom" constant="-29" id="nS4-Gl-NVt"/>
                     <constraint firstItem="sgN-Zb-d1i" firstAttribute="centerY" secondItem="8k6-1P-Qfj" secondAttribute="centerY" id="nqi-13-Ksa"/>
                     <constraint firstItem="7pt-eP-YpR" firstAttribute="top" secondItem="J6Y-wI-2f4" secondAttribute="bottom" constant="5" id="oeu-2Z-yaZ"/>
                     <constraint firstItem="ySH-1u-JcM" firstAttribute="top" secondItem="sgN-Zb-d1i" secondAttribute="bottom" id="orF-2j-l74"/>
                     <constraint firstItem="tkm-99-f6i" firstAttribute="trailing" secondItem="pLf-T6-XGh" secondAttribute="trailing" id="pSb-xE-Wac"/>
                     <constraint firstItem="4kF-yB-XJ7" firstAttribute="leading" secondItem="MEq-1D-pOI" secondAttribute="leading" id="phc-kx-xj4"/>
-                    <constraint firstItem="sgN-Zb-d1i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qYZ-Yn-rEA"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="7Uf-sQ-NoX" secondAttribute="bottom" constant="13" id="tKT-A4-L9z"/>
                     <constraint firstItem="Tke-xC-KO3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sgN-Zb-d1i" secondAttribute="trailing" id="vJz-VL-bCc"/>
                     <constraint firstItem="A4C-4E-p0z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xhJ-ey-Ktl"/>
                     <constraint firstItem="j0n-H6-BJC" firstAttribute="trailing" secondItem="eYY-ao-7Mg" secondAttribute="trailing" id="zP4-12-hGn"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="nS4-Gl-NVt"/>
-                        <exclude reference="qYZ-Yn-rEA"/>
-                        <exclude reference="tKT-A4-L9z"/>
-                        <exclude reference="PdB-h6-wAm"/>
-                        <exclude reference="C5V-VE-H03"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentButton" destination="j0n-H6-BJC" id="4cf-5J-9Ax"/>

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="GOTHIC.TTF">
@@ -52,16 +51,10 @@
                     <constraint firstItem="G4g-hf-Wre" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="30R-WO-ahv"/>
                     <constraint firstItem="C8w-gC-hgD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="37o-8W-JkX"/>
                     <constraint firstItem="C8w-gC-hgD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="4Fp-y9-b3j"/>
-                    <constraint firstItem="G4g-hf-Wre" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="In7-Bk-D8u"/>
                     <constraint firstAttribute="centerY" secondItem="UDx-ih-tIu" secondAttribute="centerY" id="XOL-Ka-gqy"/>
                     <constraint firstItem="G4g-hf-Wre" firstAttribute="top" secondItem="C8w-gC-hgD" secondAttribute="bottom" constant="7" id="kBI-AM-GVL"/>
                     <constraint firstAttribute="trailing" secondItem="UDx-ih-tIu" secondAttribute="trailing" constant="12" id="l27-Bj-Seo"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="In7-Bk-D8u"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="emailLabel" destination="G4g-hf-Wre" id="jNS-1J-6Ug"/>
