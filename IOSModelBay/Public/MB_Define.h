@@ -22,9 +22,17 @@
 #define kUmengAppKey  @"556e66fd67e58ee877006d64"
 #define kFlurryAppKey @"JVB6C3SPS7K7NPNN86ZH"
 
-//#define kAppID     @"878086629"
 //#define kMoreAppID 20051
 //#define kAdmobID   @"ca-app-pub-3747943735238482/3196343450"
+
+#define kAppID               @"1007018487"
+#define kAppStoreScoreURLPre @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
+#define kAppStoreScoreURL [NSString stringWithFormat:@"%@%@", kAppStoreScoreURLPre, kAppID]
+
+#define kFeedbackEmail           @"rcplatform.help@gmail.com"
+#define kFollwUsInstagramAccount @"modelbayapp"
+#define kFollwUsInstagramURL     @"http://www.instagram.com/modelbayapp"
+#define kFollowUsFacebookUrl     @"https://www.facebook.com/pages/ModelBay/832690196767719"
 
 //Instragram平台用户信息
 #define kUid         @"uid"
@@ -67,5 +75,10 @@
 #define kLoginOutNotification @"loginOutNotification"
 //刷新影集列表通知
 #define kRefreshAblumNotification @"refreshAblumNotification"
+
+//收藏次数
+#define kCollectCount @"collectCount"
+//评分提示弹出次数
+#define kRateAlertShowCount  @"rateAlertShowCount"
 
 #endif

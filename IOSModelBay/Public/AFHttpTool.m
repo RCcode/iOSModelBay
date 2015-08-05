@@ -455,7 +455,7 @@ static AFHttpTool *httpTool = nil;
                          success:(void (^)(id response))success
                          failure:(void (^)(NSError* err))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *urlStr = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/",@(uid)];
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@",@(uid)];
     [manager GET:urlStr parameters:@{@"access_token":[userDefaults objectForKey:kAccessToken]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

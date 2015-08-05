@@ -12,11 +12,6 @@
 
 @import MessageUI;
 
-#define kFeedbackEmail           @"rcplatform.help@gmail.com"
-#define kFollwUsInstagramAccount @"modelbayapp"
-#define kFollwUsInstagramURL     @"http://www.instagram.com/modelbayapp"
-#define kFollowUsFacebookUrl     @"https://www.facebook.com/pages/ModelBay/832690196767719"
-
 @interface MB_SettingViewController ()<UITableViewDataSource, UITableViewDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *listTableView;
@@ -82,7 +77,7 @@
             {
                 // app名称 版本
                 NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-                NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+//                NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
                 NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
                 
                 //设备型号 系统版本
@@ -99,7 +94,7 @@
                 //本地语言
                 NSString *language = [[NSLocale preferredLanguages] firstObject];
                 
-                NSString *diveceInfo = [NSString stringWithFormat:@"%@ %@, %@, %@ %@, %@", app_Name, app_Version, deviceName, deviceSystemName, deviceSystemVer, language];
+                NSString *diveceInfo = [NSString stringWithFormat:@" %@, %@, %@ %@, %@", app_Version, deviceName, deviceSystemName, deviceSystemVer, language];
                 
                 //直接发邮件
                 MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];

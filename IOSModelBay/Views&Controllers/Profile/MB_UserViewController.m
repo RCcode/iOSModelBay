@@ -18,7 +18,7 @@
 
 @import MessageUI;
 
-@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface MB_UserViewController ()<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UIDocumentInteractionControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) MB_UserInfoView *userInfoView;//上部用户信息视图
 @property (nonatomic, strong) UIView          *menuView;//选项菜单
@@ -72,6 +72,8 @@
             user.uType     = [[userDefaults objectForKey:kUtype] integerValue];
             user.state     = 1;
             self.user      = user;
+            self.titleLabel.text = self.user.fname.uppercaseString;
+            self.navigationItem.titleView = self.titleLabel;
         }
         
         [self.view addSubview:self.tableView];
@@ -201,73 +203,26 @@ static CGFloat startY;
 }
 
 
-//#pragma mark - UIActionSheetDelegate
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    if (buttonIndex == 0) {
-//        //通过Instragram
-//
-//        UIGraphicsBeginImageContext(self.view.frame.size);
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        [self.view.layer renderInContext:context];
-//        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//        
-//        NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
-//        if (![[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"没有安装Instragram" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//            [alertView show];
-//            return;
-//        }else {
-//            //保存本地 如果已存在，则删除
-//            if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath]){
-//                [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
-//            }
-//            
-//            NSData *imageData = UIImageJPEGRepresentation(img, 0.8);
-//            [imageData writeToFile:kToInstagramPath atomically:YES];
-//            NSLog(@"kToInstagramPath = %@",kToInstagramPath);
-//            
-//            //分享
-//            NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
-//            _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-//            _documetnInteractionController.delegate = self;
-//            _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
-//            _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
-//            [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
-//        }
-//    }else if (buttonIndex == 1) {
-//        //通过邮件
-//        if ([MFMailComposeViewController canSendMail]) {
-//            MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-//            mailVC.mailComposeDelegate = self;
-//            [self presentViewController:mailVC animated:YES completion:nil];
-//        }else {
-//            NSLog(@"不可以发邮件");
-//        }
-//    }
-//}
-//
-//
-//#pragma mark - MFMailComposeViewControllerDelegate
-//- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-//    switch (result) {
-//        case MFMailComposeResultCancelled:
-//            
-//            break;
-//        case MFMailComposeResultSaved:
-//            
-//            break;
-//        case MFMailComposeResultFailed:
-//            NSLog(@"mail error %@",error);
-//            break;
-//        case MFMailComposeResultSent:
-//            
-//            break;
-//        default:
-//            break;
-//    }
-//    [controller dismissViewControllerAnimated:YES completion:nil];
-//}
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            
+            break;
+        case MFMailComposeResultSaved:
+            
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"mail error %@",error);
+            break;
+        case MFMailComposeResultSent:
+            
+            break;
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 #pragma mark - UITextFieldDelegate
@@ -369,6 +324,62 @@ static CGFloat startY;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            //评分
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreScoreURL]];
+            break;
+        case 1:
+        {
+            //反馈
+            // app名称 版本
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//            NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            
+            //设备型号 系统版本
+            NSString *deviceName = doDevicePlatform();
+            NSString *deviceSystemName = [[UIDevice currentDevice] systemName];
+            NSString *deviceSystemVer = [[UIDevice currentDevice] systemVersion];
+            
+            //设备分辨率
+            //            CGFloat scale = [UIScreen mainScreen].scale;
+            //            CGFloat resolutionW = [UIScreen mainScreen].bounds.size.width * scale;
+            //            CGFloat resolutionH = [UIScreen mainScreen].bounds.size.height * scale;
+            //            NSString *resolution = [NSString stringWithFormat:@"%.f * %.f", resolutionW, resolutionH];
+            
+            //本地语言
+            NSString *language = [[NSLocale preferredLanguages] firstObject];
+            
+            NSString *diveceInfo = [NSString stringWithFormat:@"%@, %@, %@ %@, %@", app_Version, deviceName, deviceSystemName, deviceSystemVer, language];
+            
+            //直接发邮件
+            MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+            if(!picker) break;
+            picker.mailComposeDelegate =self;
+            NSString *subject = [NSString stringWithFormat:@"ModelBay %@ (iOS)", LocalizedString(@"Feedback", nil)];
+            [picker setSubject:subject];
+            [picker setToRecipients:@[kFeedbackEmail]];
+            [picker setMessageBody:diveceInfo isHTML:NO];
+            [self presentViewController:picker animated:YES completion:nil];
+            
+            break;
+        }
+        case 2:
+        {
+            //取消,取消下次再弹出
+            NSInteger collectCount = [userDefaults integerForKey:kCollectCount];
+            [userDefaults setInteger:collectCount - 1 forKey:kCollectCount];
+            [userDefaults synchronize];
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 #pragma mark - private methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton{
@@ -587,6 +598,24 @@ static CGFloat startY;
     if (!button.selected) {
         //收藏
         [MobClick event:@"Others" label:@"other_favor"];
+        
+        NSInteger collectCount = [userDefaults integerForKey:kCollectCount];
+        NSLog(@"collectCount = %ld",collectCount);
+        if (!collectCount) {
+            collectCount =1;
+            [userDefaults setInteger:collectCount forKey:kCollectCount];
+            [userDefaults synchronize];
+        }else {
+            collectCount +=1;
+            [userDefaults setInteger:collectCount forKey:kCollectCount];
+            [userDefaults synchronize];
+        }
+        
+        //评分提醒，每收藏3个人就弹一次，最多弹三次
+        if (collectCount <= 9 && collectCount % 3 == 0) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:LocalizedString(@"Rate_Message", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:LocalizedString(@"Rate_Rate", nil),LocalizedString(@"Rate_FeedBack", nil),LocalizedString(@"Rate_Cancel", nil), nil];
+            [alert show];
+        }
 
         button.selected = YES;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
