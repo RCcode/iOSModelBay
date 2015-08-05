@@ -12,15 +12,6 @@
 
 - (void)awakeFromNib {
     
-//    for (NSString *fa in [UIFont familyNames]) {
-//        for (NSString *name in [UIFont fontNamesForFamilyName:fa]) {
-//            NSLog(@"%@",name);
-//        }
-//    }
-    
-    _inviteButton.layer.borderWidth = 1;
-    _inviteButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
-    
     _likeButton.layer.borderWidth = 1;
     _likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
 }

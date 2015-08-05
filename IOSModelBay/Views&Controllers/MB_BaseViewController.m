@@ -23,6 +23,10 @@
 @implementation MB_BaseViewController
 
 #pragma mark - life cycle
+//- (void)dealloc {
+//    NSLog(@"%@",NSStringFromClass([self class]));
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

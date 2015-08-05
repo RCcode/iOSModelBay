@@ -17,7 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel            *careerLabel;
 @property (weak, nonatomic) IBOutlet UIButton           *likeButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activeView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *likeLeading;
-@property (weak, nonatomic) IBOutlet UIButton           *inviteButton;
 
 @end

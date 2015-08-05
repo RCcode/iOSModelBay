@@ -30,7 +30,6 @@
 		CD00CBF41B5F4987001F43A8 /* MB_UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD00CBF31B5F4987001F43A8 /* MB_UserDetailViewController.m */; };
 		CD00CBF81B5F7E48001F43A8 /* MB_ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD00CBF61B5F7E48001F43A8 /* MB_ImageTableViewCell.m */; };
 		CD00CBF91B5F7E48001F43A8 /* MB_ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD00CBF71B5F7E48001F43A8 /* MB_ImageTableViewCell.xib */; };
-		CD05755E1B3416180015BBDA /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0574ED1B3416180015BBDA /* libGoogleAdMobAds.a */; };
 		CD05755F1B3416180015BBDA /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0574F01B3416180015BBDA /* AFHTTPRequestOperation.m */; };
 		CD0575601B3416180015BBDA /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0574F21B3416180015BBDA /* AFHTTPRequestOperationManager.m */; };
 		CD0575611B3416180015BBDA /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0574F41B3416180015BBDA /* AFHTTPSessionManager.m */; };
@@ -51,15 +50,6 @@
 		CD0575701B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575161B3416180015BBDA /* UITableView+FDTemplateLayoutCell.m */; };
 		CD0575711B3416180015BBDA /* libFlurry_6.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0575191B3416180015BBDA /* libFlurry_6.3.0.a */; };
 		CD0575731B3416180015BBDA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CD05751F1B3416180015BBDA /* MBProgressHUD.m */; };
-		CD0575741B3416180015BBDA /* RC_AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575221B3416180015BBDA /* RC_AppInfo.m */; };
-		CD0575751B3416180015BBDA /* RC_GetPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575241B3416180015BBDA /* RC_GetPath.m */; };
-		CD0575761B3416180015BBDA /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575271B3416180015BBDA /* RC_moreAPPsLib.m */; };
-		CD0575771B3416180015BBDA /* RC_moreAPPsLibBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD0575281B3416180015BBDA /* RC_moreAPPsLibBundle.bundle */; };
-		CD0575781B3416180015BBDA /* RC_MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD05752A1B3416180015BBDA /* RC_MoreTableViewCell.m */; };
-		CD0575791B3416180015BBDA /* RC_MoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD05752B1B3416180015BBDA /* RC_MoreTableViewCell.xib */; };
-		CD05757A1B3416180015BBDA /* RC_PopUpADView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD05752D1B3416180015BBDA /* RC_PopUpADView.m */; };
-		CD05757B1B3416180015BBDA /* RC_PopUpADView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD05752E1B3416180015BBDA /* RC_PopUpADView.xib */; };
-		CD05757C1B3416180015BBDA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575311B3416180015BBDA /* Reachability.m */; };
 		CD05757D1B3416180015BBDA /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575341B3416180015BBDA /* MKAnnotationView+WebCache.m */; };
 		CD05757E1B3416180015BBDA /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575361B3416180015BBDA /* NSData+ImageContentType.m */; };
 		CD05757F1B3416180015BBDA /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0575381B3416180015BBDA /* SDImageCache.m */; };
@@ -240,34 +230,6 @@
 		CD00CBF51B5F7E48001F43A8 /* MB_ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MB_ImageTableViewCell.h; sourceTree = "<group>"; };
 		CD00CBF61B5F7E48001F43A8 /* MB_ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MB_ImageTableViewCell.m; sourceTree = "<group>"; };
 		CD00CBF71B5F7E48001F43A8 /* MB_ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MB_ImageTableViewCell.xib; sourceTree = "<group>"; };
-		CD0574D01B3416180015BBDA /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
-		CD0574D11B3416180015BBDA /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
-		CD0574D21B3416180015BBDA /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
-		CD0574D31B3416180015BBDA /* DFPSwipeableBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPSwipeableBannerView.h; sourceTree = "<group>"; };
-		CD0574D41B3416180015BBDA /* GADAdSizeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSizeDelegate.h; sourceTree = "<group>"; };
-		CD0574D51B3416180015BBDA /* GADAppEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAppEventDelegate.h; sourceTree = "<group>"; };
-		CD0574D61B3416180015BBDA /* GADSwipeableBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSwipeableBannerViewDelegate.h; sourceTree = "<group>"; };
-		CD0574D81B3416180015BBDA /* GADCustomEventBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventBanner.h; sourceTree = "<group>"; };
-		CD0574D91B3416180015BBDA /* GADCustomEventBannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventBannerDelegate.h; sourceTree = "<group>"; };
-		CD0574DA1B3416180015BBDA /* GADCustomEventExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventExtras.h; sourceTree = "<group>"; };
-		CD0574DB1B3416180015BBDA /* GADCustomEventInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitial.h; sourceTree = "<group>"; };
-		CD0574DC1B3416180015BBDA /* GADCustomEventInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitialDelegate.h; sourceTree = "<group>"; };
-		CD0574DD1B3416180015BBDA /* GADCustomEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventRequest.h; sourceTree = "<group>"; };
-		CD0574DF1B3416180015BBDA /* GADSearchBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchBannerView.h; sourceTree = "<group>"; };
-		CD0574E01B3416180015BBDA /* GADSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchRequest.h; sourceTree = "<group>"; };
-		CD0574E11B3416180015BBDA /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		CD0574E21B3416180015BBDA /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		CD0574E31B3416180015BBDA /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		CD0574E41B3416180015BBDA /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		CD0574E51B3416180015BBDA /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		CD0574E61B3416180015BBDA /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
-		CD0574E71B3416180015BBDA /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
-		CD0574E81B3416180015BBDA /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		CD0574E91B3416180015BBDA /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		CD0574EA1B3416180015BBDA /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
-		CD0574EB1B3416180015BBDA /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		CD0574EC1B3416180015BBDA /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		CD0574ED1B3416180015BBDA /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		CD0574EF1B3416180015BBDA /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		CD0574F01B3416180015BBDA /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		CD0574F11B3416180015BBDA /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -310,22 +272,6 @@
 		CD0575191B3416180015BBDA /* libFlurry_6.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.3.0.a; sourceTree = "<group>"; };
 		CD05751E1B3416180015BBDA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CD05751F1B3416180015BBDA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		CD0575211B3416180015BBDA /* RC_AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_AppInfo.h; sourceTree = "<group>"; };
-		CD0575221B3416180015BBDA /* RC_AppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_AppInfo.m; sourceTree = "<group>"; };
-		CD0575231B3416180015BBDA /* RC_GetPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_GetPath.h; sourceTree = "<group>"; };
-		CD0575241B3416180015BBDA /* RC_GetPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_GetPath.m; sourceTree = "<group>"; };
-		CD0575251B3416180015BBDA /* RC_MoreAppDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreAppDefines.h; sourceTree = "<group>"; };
-		CD0575261B3416180015BBDA /* RC_moreAPPsLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_moreAPPsLib.h; sourceTree = "<group>"; };
-		CD0575271B3416180015BBDA /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
-		CD0575281B3416180015BBDA /* RC_moreAPPsLibBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RC_moreAPPsLibBundle.bundle; sourceTree = "<group>"; };
-		CD0575291B3416180015BBDA /* RC_MoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreTableViewCell.h; sourceTree = "<group>"; };
-		CD05752A1B3416180015BBDA /* RC_MoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_MoreTableViewCell.m; sourceTree = "<group>"; };
-		CD05752B1B3416180015BBDA /* RC_MoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RC_MoreTableViewCell.xib; sourceTree = "<group>"; };
-		CD05752C1B3416180015BBDA /* RC_PopUpADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_PopUpADView.h; sourceTree = "<group>"; };
-		CD05752D1B3416180015BBDA /* RC_PopUpADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_PopUpADView.m; sourceTree = "<group>"; };
-		CD05752E1B3416180015BBDA /* RC_PopUpADView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RC_PopUpADView.xib; sourceTree = "<group>"; };
-		CD0575301B3416180015BBDA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		CD0575311B3416180015BBDA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CD0575331B3416180015BBDA /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		CD0575341B3416180015BBDA /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		CD0575351B3416180015BBDA /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -579,7 +525,6 @@
 				CD05758F1B3416180015BBDA /* libMobClickLibrary.a in Frameworks */,
 				6F8387F31B1D8C29002D2ED3 /* StoreKit.framework in Frameworks */,
 				6F8387F11B1D8C23002D2ED3 /* MessageUI.framework in Frameworks */,
-				CD05755E1B3416180015BBDA /* libGoogleAdMobAds.a in Frameworks */,
 				6F8387EF1B1D8C18002D2ED3 /* CoreGraphics.framework in Frameworks */,
 				6F8387ED1B1D8C13002D2ED3 /* AVFoundation.framework in Frameworks */,
 				CD0575711B3416180015BBDA /* libFlurry_6.3.0.a in Frameworks */,
@@ -686,85 +631,15 @@
 		CD0574CC1B3416180015BBDA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				CD0574CD1B3416180015BBDA /* AdMob */,
 				CD0574EE1B3416180015BBDA /* AFNetworking */,
 				CD0575141B3416180015BBDA /* FDTemplateLayoutCell */,
 				CD0575171B3416180015BBDA /* FlurryAnalytics */,
 				CD05751D1B3416180015BBDA /* MBProgressHUD */,
-				CD0575201B3416180015BBDA /* MoreApp */,
-				CD05752F1B3416180015BBDA /* Reachability */,
 				CD0575321B3416180015BBDA /* SDWebImage */,
 				CD0575541B3416180015BBDA /* SVPullToRefresh */,
 				CD05755A1B3416180015BBDA /* Umeng */,
 			);
 			path = SDK;
-			sourceTree = "<group>";
-		};
-		CD0574CD1B3416180015BBDA /* AdMob */ = {
-			isa = PBXGroup;
-			children = (
-				CD0574CE1B3416180015BBDA /* Add-ons */,
-				CD0574E11B3416180015BBDA /* GADAdMobExtras.h */,
-				CD0574E21B3416180015BBDA /* GADAdNetworkExtras.h */,
-				CD0574E31B3416180015BBDA /* GADAdSize.h */,
-				CD0574E41B3416180015BBDA /* GADBannerView.h */,
-				CD0574E51B3416180015BBDA /* GADBannerViewDelegate.h */,
-				CD0574E61B3416180015BBDA /* GADInAppPurchase.h */,
-				CD0574E71B3416180015BBDA /* GADInAppPurchaseDelegate.h */,
-				CD0574E81B3416180015BBDA /* GADInterstitial.h */,
-				CD0574E91B3416180015BBDA /* GADInterstitialDelegate.h */,
-				CD0574EA1B3416180015BBDA /* GADModules.h */,
-				CD0574EB1B3416180015BBDA /* GADRequest.h */,
-				CD0574EC1B3416180015BBDA /* GADRequestError.h */,
-				CD0574ED1B3416180015BBDA /* libGoogleAdMobAds.a */,
-			);
-			path = AdMob;
-			sourceTree = "<group>";
-		};
-		CD0574CE1B3416180015BBDA /* Add-ons */ = {
-			isa = PBXGroup;
-			children = (
-				CD0574CF1B3416180015BBDA /* DoubleClick */,
-				CD0574D71B3416180015BBDA /* Mediation */,
-				CD0574DE1B3416180015BBDA /* Search */,
-			);
-			path = "Add-ons";
-			sourceTree = "<group>";
-		};
-		CD0574CF1B3416180015BBDA /* DoubleClick */ = {
-			isa = PBXGroup;
-			children = (
-				CD0574D01B3416180015BBDA /* DFPBannerView.h */,
-				CD0574D11B3416180015BBDA /* DFPExtras.h */,
-				CD0574D21B3416180015BBDA /* DFPInterstitial.h */,
-				CD0574D31B3416180015BBDA /* DFPSwipeableBannerView.h */,
-				CD0574D41B3416180015BBDA /* GADAdSizeDelegate.h */,
-				CD0574D51B3416180015BBDA /* GADAppEventDelegate.h */,
-				CD0574D61B3416180015BBDA /* GADSwipeableBannerViewDelegate.h */,
-			);
-			path = DoubleClick;
-			sourceTree = "<group>";
-		};
-		CD0574D71B3416180015BBDA /* Mediation */ = {
-			isa = PBXGroup;
-			children = (
-				CD0574D81B3416180015BBDA /* GADCustomEventBanner.h */,
-				CD0574D91B3416180015BBDA /* GADCustomEventBannerDelegate.h */,
-				CD0574DA1B3416180015BBDA /* GADCustomEventExtras.h */,
-				CD0574DB1B3416180015BBDA /* GADCustomEventInterstitial.h */,
-				CD0574DC1B3416180015BBDA /* GADCustomEventInterstitialDelegate.h */,
-				CD0574DD1B3416180015BBDA /* GADCustomEventRequest.h */,
-			);
-			path = Mediation;
-			sourceTree = "<group>";
-		};
-		CD0574DE1B3416180015BBDA /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				CD0574DF1B3416180015BBDA /* GADSearchBannerView.h */,
-				CD0574E01B3416180015BBDA /* GADSearchRequest.h */,
-			);
-			path = Search;
 			sourceTree = "<group>";
 		};
 		CD0574EE1B3416180015BBDA /* AFNetworking */ = {
@@ -843,36 +718,6 @@
 				CD05751F1B3416180015BBDA /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		CD0575201B3416180015BBDA /* MoreApp */ = {
-			isa = PBXGroup;
-			children = (
-				CD0575211B3416180015BBDA /* RC_AppInfo.h */,
-				CD0575221B3416180015BBDA /* RC_AppInfo.m */,
-				CD0575231B3416180015BBDA /* RC_GetPath.h */,
-				CD0575241B3416180015BBDA /* RC_GetPath.m */,
-				CD0575251B3416180015BBDA /* RC_MoreAppDefines.h */,
-				CD0575261B3416180015BBDA /* RC_moreAPPsLib.h */,
-				CD0575271B3416180015BBDA /* RC_moreAPPsLib.m */,
-				CD0575281B3416180015BBDA /* RC_moreAPPsLibBundle.bundle */,
-				CD0575291B3416180015BBDA /* RC_MoreTableViewCell.h */,
-				CD05752A1B3416180015BBDA /* RC_MoreTableViewCell.m */,
-				CD05752B1B3416180015BBDA /* RC_MoreTableViewCell.xib */,
-				CD05752C1B3416180015BBDA /* RC_PopUpADView.h */,
-				CD05752D1B3416180015BBDA /* RC_PopUpADView.m */,
-				CD05752E1B3416180015BBDA /* RC_PopUpADView.xib */,
-			);
-			path = MoreApp;
-			sourceTree = "<group>";
-		};
-		CD05752F1B3416180015BBDA /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				CD0575301B3416180015BBDA /* Reachability.h */,
-				CD0575311B3416180015BBDA /* Reachability.m */,
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		CD0575321B3416180015BBDA /* SDWebImage */ = {
@@ -1476,7 +1321,6 @@
 				CD390F761B34216700254740 /* MB_LikersTableViewCell.xib in Resources */,
 				9990C81D1B46EF5800D2D496 /* FUTURASTD-MEDIUM.OTF in Resources */,
 				CD9D8E931B4523D0000E1C8D /* GOTHICB.TTF in Resources */,
-				CD05757B1B3416180015BBDA /* RC_PopUpADView.xib in Resources */,
 				CD9D8E961B4540F1000E1C8D /* FUTURASTD-BOOK.OTF in Resources */,
 				CD9CF2511B467A6000FF4588 /* ACASLONPRO-REGULAR.OTF in Resources */,
 				6F55A4B51B1D7567006DA537 /* Images.xcassets in Resources */,
@@ -1484,7 +1328,6 @@
 				CDD537571B340CB6008B436C /* MB_SummaryTableViewCell.xib in Resources */,
 				CDD537541B340CB6008B436C /* MB_ReplyTableViewCell.xib in Resources */,
 				CD9D8E911B4523D0000E1C8D /* GOTHIC.TTF in Resources */,
-				CD0575791B3416180015BBDA /* RC_MoreTableViewCell.xib in Resources */,
 				CDD1174B1B3A4D44002BD897 /* MB_NoticeTableViewCell.xib in Resources */,
 				CDD5375A1B340CB6008B436C /* MB_RankingTableViewCell.xib in Resources */,
 				CDD5374C1B340CB6008B436C /* MB_LikeCollectViewCell.xib in Resources */,
@@ -1498,7 +1341,6 @@
 				CDD5374E1B340CB6008B436C /* MB_UserInfoView.xib in Resources */,
 				CDD537521B340CB6008B436C /* MB_MsgTableViewCell.xib in Resources */,
 				CD9D8E9B1B45433D000E1C8D /* MB_IntroduceTableViewCell.xib in Resources */,
-				CD0575771B3416180015BBDA /* RC_moreAPPsLibBundle.bundle in Resources */,
 				CD46C1341B3A946F000E2F0C /* MB_selectPhotosCollectViewCell.xib in Resources */,
 				CDD5375D1B340CB6008B436C /* MB_SelectRoleViewController.xib in Resources */,
 				CDD537461B340CB6008B436C /* MB_AlbumTableViewCell.xib in Resources */,
@@ -1530,7 +1372,6 @@
 				CDD537421B340CB6008B436C /* MB_TabBarViewController.m in Sources */,
 				CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */,
 				CDD5374F1B340CB6008B436C /* MB_UserViewController.m in Sources */,
-				CD0575781B3416180015BBDA /* RC_MoreTableViewCell.m in Sources */,
 				CD7965F41B34154100977A7F /* MB_Utils.m in Sources */,
 				CD05757F1B3416180015BBDA /* SDImageCache.m in Sources */,
 				CD0575691B3416180015BBDA /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -1538,10 +1379,8 @@
 				CD0575731B3416180015BBDA /* MBProgressHUD.m in Sources */,
 				CD46C12D1B3A86D7000E2F0C /* MB_AddAblumMenuView.m in Sources */,
 				CD0575891B3416180015BBDA /* UIImage+WebP.m in Sources */,
-				CD0575751B3416180015BBDA /* RC_GetPath.m in Sources */,
 				CD48D3D61B469CAF0023ADAA /* MB_IndicatorView.m in Sources */,
 				CD0575861B3416180015BBDA /* UIButton+WebCache.m in Sources */,
-				CD05757A1B3416180015BBDA /* RC_PopUpADView.m in Sources */,
 				CDC76B791B32662200C391E5 /* MB_InstragramModel.m in Sources */,
 				CDD537441B340CB6008B436C /* MB_AblumViewController.m in Sources */,
 				CD48D3D91B46A3240023ADAA /* MB_EditViewController.m in Sources */,
@@ -1592,7 +1431,6 @@
 				CD05758D1B3416180015BBDA /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				CD0575681B3416180015BBDA /* AFNetworkActivityIndicatorManager.m in Sources */,
 				CD05756B1B3416180015BBDA /* UIButton+AFNetworking.m in Sources */,
-				CD0575761B3416180015BBDA /* RC_moreAPPsLib.m in Sources */,
 				CDD1174F1B3A5036002BD897 /* MB_MessageTableViewCell.m in Sources */,
 				CDD537471B340CB6008B436C /* MB_SignalImageTableViewCell.m in Sources */,
 				CD9D8E9A1B45433D000E1C8D /* MB_IntroduceTableViewCell.m in Sources */,
@@ -1614,7 +1452,6 @@
 				CDD537351B340CB6008B436C /* MB_UserCollectViewCell.m in Sources */,
 				CD05757D1B3416180015BBDA /* MKAnnotationView+WebCache.m in Sources */,
 				CDD537491B340CB6008B436C /* MB_InstragramViewController.m in Sources */,
-				CD0575741B3416180015BBDA /* RC_AppInfo.m in Sources */,
 				CDD537551B340CB6008B436C /* MB_UserSummaryViewController.m in Sources */,
 				CD0575881B3416180015BBDA /* UIImage+MultiFormat.m in Sources */,
 				CD05758A1B3416180015BBDA /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1651,7 +1488,6 @@
 				CD7964511B340EC400977A7F /* UIDevice+DeviceInfo.m in Sources */,
 				CDD5373E1B340CB6008B436C /* MB_InviteViewController.m in Sources */,
 				CD05757E1B3416180015BBDA /* NSData+ImageContentType.m in Sources */,
-				CD05757C1B3416180015BBDA /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1803,9 +1640,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/Umeng",
-					"$(PROJECT_DIR)/IOSModelBay/SDK/adMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/flurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/SDK/AdMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/FlurryAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1818,6 +1653,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: song li (JHFP6D5S69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: song li (JHFP6D5S69)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1828,9 +1664,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/Umeng",
-					"$(PROJECT_DIR)/IOSModelBay/SDK/adMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/flurryAnalytics",
-					"$(PROJECT_DIR)/IOSModelBay/SDK/AdMob",
 					"$(PROJECT_DIR)/IOSModelBay/SDK/FlurryAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";

@@ -88,6 +88,7 @@
     filterVC.hidesBottomBarWhenPushed = YES;
     filterVC.CompleteHandler = ^(){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.collectView setContentOffset:CGPointMake(0, -64)];
         [self findUserListWithMinId:0];
     };
     [self.navigationController pushViewController:filterVC animated:YES];
@@ -114,6 +115,7 @@
     NSMutableDictionary *params = [@{@"fgender":@([MB_Utils shareUtil].fGender),
                                      @"fcareerId":[MB_Utils shareUtil].fCareerId,
                                      @"minId":@(minId),
+                                     @"uType":@(1),//查找用户类型，-1所有的，1专业，0观众
                                      @"count":@(10)} mutableCopy];
     
     if ([userDefaults boolForKey:kIsLogin]) {

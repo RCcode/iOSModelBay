@@ -339,7 +339,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             return [MB_Utils shareUtil].experience[[detail.experience integerValue]];
             break;
         case 13:
-            return [MB_Utils shareUtil].gender[detail.gender];
+            return [MB_Utils shareUtil].gender[detail.gender + 1];
             break;
         case 14:
             return [MB_Utils shareUtil].country[[detail.country integerValue]];
@@ -410,7 +410,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             return [detail.experience integerValue];
             break;
         case 13:
-            return detail.gender;
+            return detail.gender + 1;
             break;
         case 14:
             return [detail.country integerValue];
@@ -468,8 +468,8 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             [self.detailDic setObject:[NSString stringWithFormat:@"%ld",(long)optionIndex] forKey:@"experience"];
             break;
         case 13:
-            self.changeDetail.gender = optionIndex;
-            [self.detailDic setObject:@(optionIndex) forKey:@"gender"];
+            self.changeDetail.gender = optionIndex - 1;
+            [self.detailDic setObject:@(optionIndex - 1) forKey:@"gender"];
             break;
         case 14:
             self.changeDetail.country = [NSString stringWithFormat:@"%ld",(long)optionIndex];

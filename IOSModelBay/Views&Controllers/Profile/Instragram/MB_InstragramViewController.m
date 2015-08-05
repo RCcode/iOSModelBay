@@ -181,7 +181,7 @@ static CGFloat startY = 0;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"instragram %@",responseObject);
+//        NSLog(@"instragram %@",responseObject);
         [self endRefreshingForView:self.collectView];
         
         NSArray *dataArr = responseObject[@"data"];

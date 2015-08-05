@@ -68,61 +68,61 @@
 }
 
 
-#pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)gestureRecognizer;
-        CGPoint point = [pan translationInView:pan.view];
-        if (fabs(point.x) > fabs(point.y)) {
-            return YES;
-        }else {
-            return NO;
-        }
-    }else {
-        return NO;
-    }
-}
+//#pragma mark - UIGestureRecognizerDelegate
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+//    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+//        UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)gestureRecognizer;
+//        CGPoint point = [pan translationInView:pan.view];
+//        if (fabs(point.x) > fabs(point.y)) {
+//            return YES;
+//        }else {
+//            return NO;
+//        }
+//    }else {
+//        return NO;
+//    }
+//}
 
 
-#pragma mark - private methods
-- (void)handlePan:(UIPanGestureRecognizer *)pan
-{
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        CGPoint point = [pan translationInView:pan.view];
-        
-        UIScrollView *view = (UIScrollView *)pan.view;
-        NSInteger page = view.contentOffset.x / view.frame.size.width;
-        if (point.x < 0) {
-            if (page + 1 < self.ablum.mList.count) {
-                //横向滚动视图滚动到下一页
-                [view setContentOffset:CGPointMake((page + 1) * view.frame.size.width, 0) animated:NO];
-                //影集描述跟着移动到下一页
-                [self.descView removeFromSuperview];
-                UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
-                [nextScroll addSubview:self.descView];
-                //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page + 1 + 1), (unsigned long)self.ablum.mList.count];
-                //当前页回到顶端
-                UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
-                [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
-            }
-        }else {
-            if (page - 1 >= 0) {
-                //横向滚动视图滚动到上一页
-                [view setContentOffset:CGPointMake((page - 1) * view.frame.size.width, 0) animated:NO];
-                //影集描述跟着移动到上一页
-                [self.descView removeFromSuperview];
-                UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
-                [lastScroll addSubview:self.descView];
-                //修改标题
-                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page - 1 + 1),(unsigned long)self.ablum.mList.count];
-                //当前页回到顶端
-                UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
-                [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
-            }
-        }
-    }
-}
+//#pragma mark - private methods
+//- (void)handlePan:(UIPanGestureRecognizer *)pan
+//{
+//    if (pan.state == UIGestureRecognizerStateEnded) {
+//        CGPoint point = [pan translationInView:pan.view];
+//        
+//        UIScrollView *view = (UIScrollView *)pan.view;
+//        NSInteger page = view.contentOffset.x / view.frame.size.width;
+//        if (point.x < 0) {
+//            if (page + 1 < self.ablum.mList.count) {
+//                //横向滚动视图滚动到下一页
+//                [view setContentOffset:CGPointMake((page + 1) * view.frame.size.width, 0) animated:NO];
+//                //影集描述跟着移动到下一页
+//                [self.descView removeFromSuperview];
+//                UIScrollView *nextScroll = (UIScrollView *)[view viewWithTag:page + 1 + startTag];
+//                [nextScroll addSubview:self.descView];
+//                //修改标题
+//                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page + 1 + 1), (unsigned long)self.ablum.mList.count];
+//                //当前页回到顶端
+//                UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
+//                [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
+//            }
+//        }else {
+//            if (page - 1 >= 0) {
+//                //横向滚动视图滚动到上一页
+//                [view setContentOffset:CGPointMake((page - 1) * view.frame.size.width, 0) animated:NO];
+//                //影集描述跟着移动到上一页
+//                [self.descView removeFromSuperview];
+//                UIScrollView *lastScroll = (UIScrollView *)[view viewWithTag:page - 1 + startTag];
+//                [lastScroll addSubview:self.descView];
+//                //修改标题
+//                self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page - 1 + 1),(unsigned long)self.ablum.mList.count];
+//                //当前页回到顶端
+//                UIScrollView *scroll = (UIScrollView *)[view viewWithTag:page + startTag];
+//                [scroll setContentOffset:CGPointMake(0, 0) animated:NO];
+//            }
+//        }
+//    }
+//}
 
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barButton {
     [self.navigationController popViewControllerAnimated:YES];
@@ -134,7 +134,7 @@
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
-        _scrollView.scrollEnabled = NO;
+        _scrollView.pagingEnabled = YES;
         
         //创建子滚动视图
         for (int i = 0; i < self.ablum.mList.count; i++) {
@@ -152,32 +152,26 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:nil];
             [scrollView addSubview:imageView];
             
-            //开始影集描述先加在第一页
-            if (i == 0) {
-                CGRect rect = self.descView.frame;
-                rect.origin.y = CGRectGetMaxY(imageView.frame);
-                self.descView.frame = rect;
-                [scrollView addSubview:self.descView];
-            }
-            scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(imageView.frame) + CGRectGetHeight(self.descView.frame));
+            MB_AblumDescView *descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame), kWindowWidth, 300) ablum:self.ablum];
+            descView.delegate = self;
+            
+            [scrollView addSubview:descView];
+
+            scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(imageView.frame) + CGRectGetHeight(descView.frame));
         }
         
         _scrollView.contentSize = CGSizeMake(self.ablum.mList.count * kWindowWidth, CGRectGetHeight(_scrollView.frame));
-        //pan手势 用于横向的滚动视图换页
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        pan.delegate = self;
-        [_scrollView addGestureRecognizer:pan];
     }
     return _scrollView;
 }
 
 //影集描述信息
-- (UIView *)descView {
-    if (_descView == nil) {
-        _descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 300) ablum:self.ablum];
-        _descView.delegate = self;
-    }
-    return _descView;
-}
+//- (UIView *)descView {
+//    if (_descView == nil) {
+//        _descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 300) ablum:self.ablum];
+//        _descView.delegate = self;
+//    }
+//    return _descView;
+//}
 
 @end

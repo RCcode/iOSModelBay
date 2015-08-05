@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "Flurry.h"
-#import "RC_moreAPPsLib.h"
 #import "MB_TabBarViewController.h"
 
 @interface AppDelegate ()

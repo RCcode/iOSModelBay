@@ -31,6 +31,11 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 @implementation MB_UserDetailViewController
 
 #pragma mark - life cycle
+- (void)dealloc {
+    _tableView.delegate = nil;
+    _tableView = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -85,6 +90,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 }
 
 - (void)configureCell2:(MB_IntroduceTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([self.changeDetail.bio isEqualToString:@""]) {
         cell.label.text = LocalizedString(@"introduce", nil);
     }else {
@@ -98,6 +104,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     cell.mainLabel.text = LocalizedString(title, nil);
     cell.sanjiaoImageView.hidden = YES;
     cell.mainLabelWidth.constant = 100;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if ([title isEqualToString:@"areaModel"]) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
@@ -129,6 +136,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         
         cell.mainLabelWidth.constant = 80;
         cell.sanjiaoImageView.hidden = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         NSString *keyName = self.dataArray[indexPath.row];
         cell.mainLabel.text = LocalizedString(keyName, nil);
@@ -141,6 +149,21 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         [self configureCell:cell atIndexPath:indexPath];
         
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+   
+    if (indexPath.section == 1) {
+        NSString *title = self.dataArray[indexPath.row];
+        NSInteger index = [[MB_Utils shareUtil].mapArray indexOfObject:title];
+        if (index == 18) {
+            //点击网站打开链接
+            if (![self.detail.website isEqualToString:@""]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.detail.website]];
+            }
+        }
     }
 }
 
@@ -325,6 +348,7 @@ static CGFloat startY = 0;
 }
 
 - (void)editButtonOnClick:(UIButton *)button {
+    [MobClick event:@"Others" label:@"other_unfavor"];
     
     MB_UserSummaryViewController *summaryVC = [[MB_UserSummaryViewController alloc] init];
     summaryVC.user = self.user;
@@ -372,7 +396,7 @@ static CGFloat startY = 0;
             return [MB_Utils shareUtil].experience[[detail.experience integerValue]];
             break;
         case 13:
-            return [MB_Utils shareUtil].gender[detail.gender];
+            return [MB_Utils shareUtil].gender[detail.gender + 1];
             break;
         case 14:
             return [MB_Utils shareUtil].country[[detail.country integerValue]];
@@ -419,7 +443,6 @@ static CGFloat startY = 0;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.sectionHeaderHeight = 10.5;
         _tableView.sectionFooterHeight = 0;
-        _tableView.allowsSelection = NO;
         
         _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);

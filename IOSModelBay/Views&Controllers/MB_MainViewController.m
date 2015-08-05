@@ -40,16 +40,15 @@
 
 #pragma mark - private methods
 - (void)loginBtnOnClick:(UIButton *)btn{
+    [MobClick event:@"Startup" label:@"startup_signup"];
+    
     [self presentLoginViewController];
 }
 
 - (void)skipBtnOnClick:(UIButton *)btn{
-//    if (self.presentingViewController) {
+    [MobClick event:@"Startup" label:@"startup_skip"];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
-//    }else {
-//        MB_TabBarViewController *tabVC = [[MB_TabBarViewController alloc] init];
-//        [self presentViewController:tabVC animated:YES completion:nil];
-//    }
 }
 
 

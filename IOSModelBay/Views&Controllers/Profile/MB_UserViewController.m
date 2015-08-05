@@ -586,6 +586,8 @@ static CGFloat startY;
 - (void)collectionButtonOnClick:(UIButton *)button {
     if (!button.selected) {
         //收藏
+        [MobClick event:@"Others" label:@"other_favor"];
+
         button.selected = YES;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
         button.backgroundColor = colorWithHexString(@"#ff4f42");
@@ -613,6 +615,8 @@ static CGFloat startY;
         }];
     }else {
         //取消收藏
+        [MobClick event:@"Others" label:@"other_unfavor"];
+
         button.selected = NO;
         button.backgroundColor = [UIColor clearColor];
         button.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
@@ -633,19 +637,6 @@ static CGFloat startY;
             button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
             button.backgroundColor = colorWithHexString(@"#ff4f42");
         }];
-    }
-}
-
-//邀请此用户
-- (void)inviteButtonOnClick:(UIButton *)button {
-//    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Instra",@"mail", nil];
-//    [action showInView:self.view];
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-        mailVC.mailComposeDelegate = self;
-        [self presentViewController:mailVC animated:YES completion:nil];
-    }else {
-        NSLog(@"不可以发邮件");
     }
 }
 
@@ -714,34 +705,24 @@ static CGFloat startY;
         [_userInfoView.likeButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateNormal];
         [_userInfoView.likeButton setTitle:LocalizedString(@"Favor", nil) forState:UIControlStateSelected];
         [_userInfoView.likeButton addTarget:self action:@selector(collectionButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_userInfoView.inviteButton addTarget:self action:@selector(inviteButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         if (self.comeFromType == ComeFromTypeSelf) {
-            _userInfoView.inviteButton.hidden = YES;
             _userInfoView.likeButton.hidden = YES;
             _userInfoView.activeView.hidden = YES;
-
         }else{
-            if (self.user.state == 0 && self.user.uType == 1 && [[userDefaults objectForKey:kUtype] integerValue] == 1) {
-                _userInfoView.inviteButton.hidden = NO;
-            }else{
-                _userInfoView.likeLeading.constant = (kWindowWidth - 110) / 2;
-                _userInfoView.inviteButton.hidden = YES;
-                
-                if (self.user.likeType == LikedTypeNone) {
-                    [_userInfoView.activeView startAnimating];
-                    _userInfoView.likeButton.hidden = YES;
-                    [self requestLikedTypeWithFid:self.user.fid];
+            if (self.user.likeType == LikedTypeNone) {
+                [_userInfoView.activeView startAnimating];
+                _userInfoView.likeButton.hidden = YES;
+                [self requestLikedTypeWithFid:self.user.fid];
+            }else {
+                [_userInfoView.activeView stopAnimating];
+                _userInfoView.likeButton.selected = self.user.likeType;
+                if (self.user.likeType == LikedTypeLiked) {
+                    _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
+                    _userInfoView.likeButton.backgroundColor = colorWithHexString(@"#ff4f42");
                 }else {
-                    [_userInfoView.activeView stopAnimating];
-                    _userInfoView.likeButton.selected = self.user.likeType;
-                    if (self.user.likeType == LikedTypeLiked) {
-                        _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
-                        _userInfoView.likeButton.backgroundColor = colorWithHexString(@"#ff4f42");
-                    }else {
-                        _userInfoView.likeButton.layer.borderWidth = 1;
-                        _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
-                    }
+                    _userInfoView.likeButton.layer.borderWidth = 1;
+                    _userInfoView.likeButton.layer.borderColor = [colorWithHexString(@"#222222") colorWithAlphaComponent:0.9].CGColor;
                 }
             }
         }

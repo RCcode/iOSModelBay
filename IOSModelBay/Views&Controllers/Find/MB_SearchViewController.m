@@ -43,6 +43,7 @@
     
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.listTableView];
+    [self addPullRefresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -225,7 +226,7 @@
                 [self.dataArray removeAllObjects];
                 [self.listTableView reloadData];
             }else {
-//                [self showNoMoreMessageForview:self.collectView];
+                [self showNoMoreMessageForview:self.listTableView];
             }
         }
     } failure:^(NSError *err) {

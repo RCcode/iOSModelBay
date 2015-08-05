@@ -261,6 +261,8 @@ static CGFloat startY = 0;
             [self.tableView reloadData];
         }else if ([self statFromResponse:response] == 10004) {
             if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                [self.tableView reloadData];
                 self.tableView.backgroundView = self.noResultView;
             }else {
                 [self showNoMoreMessageForview:self.tableView];
@@ -396,6 +398,8 @@ static CGFloat startY = 0;
 //        self.menuView.frame = CGRectMake(0, kWindowHeight - rect.size.height, kWindowWidth, rect.size.height);
 //    }];
     
+    [MobClick event:@"Others" label:@"other_upload"];
+
     MB_SelectPhotosViewController *vc = [[MB_SelectPhotosViewController alloc] init];
     vc.type = SelectTypeAll;
     vc.hidesBottomBarWhenPushed = YES;

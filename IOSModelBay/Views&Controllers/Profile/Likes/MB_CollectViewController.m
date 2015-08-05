@@ -66,6 +66,7 @@
     user.state = collect.state;
     user.uType = collect.utype;
     user.uid = collect.fuid;
+    user.liked = LikedTypeNone;
     userVC.user = user;
     [self.navigationController pushViewController:userVC animated:YES];
 }
@@ -145,6 +146,8 @@ static CGFloat startY = 0;
             }
         }else if ([self statFromResponse:response] == 10004) {
             if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                [self.collectView reloadData];
                 self.collectView.backgroundView = self.noResultView;
             }else {
                 [self showNoMoreMessageForview:self.collectView];

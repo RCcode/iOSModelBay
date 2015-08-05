@@ -108,6 +108,7 @@
     filterVC.type = FilterTypeRanking;
     filterVC.CompleteHandler = ^(){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.tableView setContentOffset:CGPointMake(0, -64)];
         [self requestRankingListWithMinId:0];
     };
     filterVC.hidesBottomBarWhenPushed = YES;

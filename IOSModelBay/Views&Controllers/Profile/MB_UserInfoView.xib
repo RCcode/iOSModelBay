@@ -8,7 +8,6 @@
         <mutableArray key="FUTURASTD-BOOK.OTF">
             <string>FuturaStd-Book</string>
             <string>FuturaStd-Book</string>
-            <string>FuturaStd-Book</string>
         </mutableArray>
         <mutableArray key="GOTHIC.TTF">
             <string>CenturyGothic</string>
@@ -50,7 +49,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTh-XV-FcM">
-                    <rect key="frame" x="32" y="142" width="110" height="26"/>
+                    <rect key="frame" x="105" y="142" width="110" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="S00-CQ-TWs"/>
                         <constraint firstAttribute="height" constant="26" id="pbW-by-Uag"/>
@@ -66,25 +65,8 @@
                     </state>
                 </button>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sQM-b2-Fpu">
-                    <rect key="frame" x="77" y="145" width="20" height="20"/>
+                    <rect key="frame" x="150" y="145" width="20" height="20"/>
                 </activityIndicatorView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-fY-XbY">
-                    <rect key="frame" x="178" y="142" width="110" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="26" id="FUw-SE-B4A"/>
-                        <constraint firstAttribute="width" constant="110" id="YAm-5U-GZV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="FuturaStd-Book" family="Futura Std" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                    <state key="normal" title="INVITATION">
-                        <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" title="INVITATION">
-                        <color key="titleColor" red="1" green="0.30980392156862746" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.98144756848265868" green="1" blue="0.24735261430375044" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -98,14 +80,11 @@
                 <constraint firstAttribute="trailing" secondItem="fRf-1J-0Zg" secondAttribute="trailing" id="ILa-g7-hVL"/>
                 <constraint firstAttribute="bottom" secondItem="rCG-wP-EdG" secondAttribute="bottom" id="IfG-2C-iAG"/>
                 <constraint firstItem="sQM-b2-Fpu" firstAttribute="centerX" secondItem="kTh-XV-FcM" secondAttribute="centerX" id="Pzq-KR-9MM"/>
-                <constraint firstAttribute="trailing" secondItem="2cr-fY-XbY" secondAttribute="trailing" constant="32" id="S6C-te-AqZ"/>
                 <constraint firstItem="fRf-1J-0Zg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V6J-hr-2hD"/>
-                <constraint firstItem="2cr-fY-XbY" firstAttribute="top" secondItem="8Ju-Ry-0tj" secondAttribute="bottom" constant="14" id="Zo8-kt-sMi"/>
                 <constraint firstItem="kTh-XV-FcM" firstAttribute="top" secondItem="8Ju-Ry-0tj" secondAttribute="bottom" constant="14" id="e7j-Y8-mxQ"/>
                 <constraint firstAttribute="trailing" secondItem="rCG-wP-EdG" secondAttribute="trailing" id="fNY-DT-Fq3"/>
                 <constraint firstAttribute="centerX" secondItem="WoQ-Lz-vR7" secondAttribute="centerX" id="gaL-rn-wKJ"/>
                 <constraint firstItem="8Ju-Ry-0tj" firstAttribute="top" secondItem="fRf-1J-0Zg" secondAttribute="bottom" constant="9" id="inm-SO-EQg"/>
-                <constraint firstItem="kTh-XV-FcM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="kCf-oT-OjS"/>
                 <constraint firstAttribute="trailing" secondItem="BcB-64-HJg" secondAttribute="trailing" id="kZs-Lh-OeI"/>
                 <constraint firstAttribute="trailing" secondItem="BcB-64-HJg" secondAttribute="trailing" id="noP-UP-UyI"/>
                 <constraint firstItem="fRf-1J-0Zg" firstAttribute="top" secondItem="WoQ-Lz-vR7" secondAttribute="bottom" constant="13" id="o6X-Jc-iti"/>
@@ -113,7 +92,7 @@
                 <constraint firstAttribute="bottom" secondItem="BcB-64-HJg" secondAttribute="bottom" id="tYg-bS-Uj6"/>
                 <constraint firstAttribute="bottom" secondItem="BcB-64-HJg" secondAttribute="bottom" id="tex-0f-Ob0"/>
                 <constraint firstItem="8Ju-Ry-0tj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v2l-mO-o5C"/>
-                <constraint firstItem="2cr-fY-XbY" firstAttribute="height" secondItem="kTh-XV-FcM" secondAttribute="height" id="yK5-Om-1w2"/>
+                <constraint firstAttribute="centerX" secondItem="kTh-XV-FcM" secondAttribute="centerX" id="xeY-rX-nww"/>
                 <constraint firstItem="rCG-wP-EdG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zTa-2m-9T3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -122,9 +101,7 @@
                 <outlet property="backImageView" destination="BcB-64-HJg" id="thd-OA-B5f"/>
                 <outlet property="careerLabel" destination="8Ju-Ry-0tj" id="OM1-s1-f6e"/>
                 <outlet property="coverView" destination="rCG-wP-EdG" id="wB0-96-eeZ"/>
-                <outlet property="inviteButton" destination="2cr-fY-XbY" id="9WD-W6-WgQ"/>
                 <outlet property="likeButton" destination="kTh-XV-FcM" id="Zj5-bp-6Gd"/>
-                <outlet property="likeLeading" destination="kCf-oT-OjS" id="gSH-Lj-TDZ"/>
                 <outlet property="nameLabel" destination="fRf-1J-0Zg" id="IBv-nP-slc"/>
                 <outlet property="userImageView" destination="WoQ-Lz-vR7" id="dHt-BR-peO"/>
             </connections>

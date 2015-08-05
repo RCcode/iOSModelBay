@@ -79,6 +79,22 @@
 //        [na popToRootViewControllerAnimated:YES];
 //        return;
 //    }
+    switch (button.tag - baseTag) {
+        case 0:
+            [MobClick event:@"Home" label:@"home_discover"];
+            break;
+        case 1:
+            [MobClick event:@"Home" label:@"home_ranking"];
+            break;
+        case 2:
+            [MobClick event:@"Home" label:@"home_activity"];
+            break;
+        case 3:
+            [MobClick event:@"Home" label:@"home_my"];
+            break;
+        default:
+            break;
+    }
     self.selectedButton.selected = NO;
     button.selected     = YES;
     self.selectedButton = button;

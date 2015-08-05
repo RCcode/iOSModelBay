@@ -247,6 +247,8 @@
 }
 
 - (void)rightBarButtonOnClick:(UIBarButtonItem *)barButton {
+    [MobClick event:@"Others" label:@"other_upload_done"];
+
     [self.addTitleTextField resignFirstResponder];
     [self.addDescTextView resignFirstResponder];
     //显示进度

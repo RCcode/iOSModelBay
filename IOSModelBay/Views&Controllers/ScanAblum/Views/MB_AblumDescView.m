@@ -134,7 +134,9 @@
         }
         
         //调整总大小
-        self.frame = CGRectMake(0, 0, kWindowWidth, CGRectGetMaxY(descLabel4.frame) + 24);
+        frame.size.height =CGRectGetMaxY(descLabel4.frame) + 24;
+        self.frame = frame;
+//        self.frame = CGRectMake(0, 0, kWindowWidth, CGRectGetMaxY(descLabel4.frame) + 24);
     }
     return self;
 }

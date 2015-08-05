@@ -240,16 +240,21 @@ static NSString * const ReuseIdentifierReply   = @"reply";
             [self.tableView reloadData];
         }else if ([self statFromResponse:response] == 10004) {
             //无记录
-            [self showNoMoreMessageForview:self.tableView];
+            if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                self.tableView.backgroundView = self.noResultView;
+            }else {
+                [self showNoMoreMessageForview:self.tableView];
+            }
         }
     } failure:^(NSError *err) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.tableView];
-        if (self.dataArray.count <= 0) {
-            self.tableView.backgroundView = self.noResultView;
-        }else {
-            self.tableView.backgroundView = nil;
-        }
+//        if (self.dataArray.count <= 0) {
+//            self.tableView.backgroundView = self.noResultView;
+//        }else {
+//            self.tableView.backgroundView = nil;
+//        }
     }];
 }
 

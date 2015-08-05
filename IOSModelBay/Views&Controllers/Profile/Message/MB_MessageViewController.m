@@ -210,6 +210,8 @@ static CGFloat startY = 0;
             }
         }else if ([self statFromResponse:response] == 10004) {
             if (minId == 0) {
+                [self.dataArray removeAllObjects];
+                [self.tableView reloadData];
                 self.tableView.backgroundView = self.noResultView;
             }else {
                 [self showNoMoreMessageForview:self.tableView];

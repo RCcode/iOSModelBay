@@ -184,7 +184,7 @@
         }
         _sexView.backgroundColor = [UIColor whiteColor];
         
-        NSArray *titleArray = @[LocalizedString(@"All", nil),LocalizedString(@"Men", nil),LocalizedString(@"Women", nil),];
+        NSArray *titleArray = @[LocalizedString(@"All", nil), LocalizedString(@"Women", nil),LocalizedString(@"Men", nil)];
         CGFloat btnWidth = kWindowWidth/3;
         for (int i = 0; i < 3; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
