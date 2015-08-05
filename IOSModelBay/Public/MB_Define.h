@@ -80,5 +80,7 @@
 #define kCollectCount @"collectCount"
 //评分提示弹出次数
 #define kRateAlertShowCount  @"rateAlertShowCount"
+//是否可以弹出评分提示
+#define kCanshowRateAlert    @"canshowRateAlert"
 
 #endif

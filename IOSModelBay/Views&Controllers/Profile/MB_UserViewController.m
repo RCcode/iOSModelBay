@@ -331,6 +331,8 @@ static CGFloat startY;
         case 0:
             //评分
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreScoreURL]];
+            [userDefaults setBool:NO forKey:kCanshowRateAlert];
+            [userDefaults synchronize];
             break;
         case 1:
         {
@@ -366,14 +368,15 @@ static CGFloat startY;
             [picker setMessageBody:diveceInfo isHTML:NO];
             [self presentViewController:picker animated:YES completion:nil];
             
+            [userDefaults setBool:NO forKey:kCanshowRateAlert];
+            [userDefaults synchronize];
+
             break;
         }
         case 2:
         {
-            //取消,取消下次再弹出
-            NSInteger collectCount = [userDefaults integerForKey:kCollectCount];
-            [userDefaults setInteger:collectCount - 1 forKey:kCollectCount];
-            [userDefaults synchronize];
+            //取消,下5次再弹出
+            
             break;
         }
         default:
@@ -600,22 +603,24 @@ static CGFloat startY;
         [MobClick event:@"Others" label:@"other_favor"];
         
         NSInteger collectCount = [userDefaults integerForKey:kCollectCount];
-        NSLog(@"collectCount = %ld",collectCount);
-        if (!collectCount) {
-            collectCount =1;
-            [userDefaults setInteger:collectCount forKey:kCollectCount];
-            [userDefaults synchronize];
-        }else {
-            collectCount +=1;
-            [userDefaults setInteger:collectCount forKey:kCollectCount];
+        NSInteger alertCount = [userDefaults integerForKey:kRateAlertShowCount];
+        
+        //一开始设置弹出标识为YES
+        if (![userDefaults boolForKey:kCanshowRateAlert] && collectCount == 0) {
+            [userDefaults setBool:YES forKey:kCanshowRateAlert];
+        }
+        [userDefaults setInteger:++collectCount forKey:kCollectCount];
+        [userDefaults synchronize];
+        
+        //评分提醒，每收藏5个人就弹一次，最多弹三次
+        if ([userDefaults boolForKey:kCanshowRateAlert] && collectCount % 5 == 0 && alertCount < 3) {
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:LocalizedString(@"Rate_Message", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:LocalizedString(@"Rate_Rate", nil),LocalizedString(@"Rate_FeedBack", nil),LocalizedString(@"Rate_Cancel", nil), nil];
+            [alert show];
+            
+            [userDefaults setInteger:++alertCount forKey:kRateAlertShowCount];
             [userDefaults synchronize];
         }
         
-        //评分提醒，每收藏3个人就弹一次，最多弹三次
-        if (collectCount <= 9 && collectCount % 3 == 0) {
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:LocalizedString(@"Rate_Message", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:LocalizedString(@"Rate_Rate", nil),LocalizedString(@"Rate_FeedBack", nil),LocalizedString(@"Rate_Cancel", nil), nil];
-            [alert show];
-        }
 
         button.selected = YES;
         button.layer.borderColor = [colorWithHexString(@"#ff4f42") colorWithAlphaComponent:0.9].CGColor;
