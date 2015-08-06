@@ -78,6 +78,7 @@ static AFHttpTool *httpTool = nil;
                      if (failure) {
                          NSLog(@"error == %@",error);
                          failure(error);
+                         [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
                      }
                  }];
                 break;
@@ -94,6 +95,7 @@ static AFHttpTool *httpTool = nil;
                       if (failure) {
                           NSLog(@"error == %@",error);
                           failure(error);
+                          [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
                       }
                   }];
                 break;

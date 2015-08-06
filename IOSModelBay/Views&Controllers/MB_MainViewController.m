@@ -63,8 +63,9 @@
         
         for (int i = 0; i < 5; i++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kWindowWidth, 0, kWindowWidth, CGRectGetHeight(_backScrollView.frame))];
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bg%d",i + 1]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bg%d.jpg",i + 1]];
             [_backScrollView addSubview:imageView];
+            
         }
     }
     return _backScrollView;

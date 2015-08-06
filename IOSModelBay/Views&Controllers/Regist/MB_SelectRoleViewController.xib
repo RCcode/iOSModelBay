@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDe-hy-cOC">
                     <rect key="frame" x="0.0" y="64" width="320" height="252"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_zhuanye" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-fp-NuC">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_zhuanye.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-fp-NuC">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="252"/>
                         </imageView>
                     </subviews>
@@ -37,7 +37,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11Q-wZ-Fed">
                     <rect key="frame" x="0.0" y="316" width="320" height="252"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_putong" translatesAutoresizingMaskIntoConstraints="NO" id="JRe-2Z-yTm">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_putong.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JRe-2Z-yTm">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="252"/>
                         </imageView>
                     </subviews>
@@ -65,8 +65,8 @@
         </view>
     </objects>
     <resources>
-        <image name="select_putong" width="320" height="252"/>
-        <image name="select_zhuanye" width="320" height="252"/>
+        <image name="select_putong.jpg" width="320" height="252"/>
+        <image name="select_zhuanye.jpg" width="320" height="252"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

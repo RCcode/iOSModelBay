@@ -193,7 +193,6 @@ static CGFloat startY = 0;
             self.maxId = responseObject[@"pagination"][@"next_max_id"];
         }
         
-        //下拉刷新则清空数组
         if (maxId == nil) {
             [self.dataArray removeAllObjects];
         }
@@ -210,6 +209,7 @@ static CGFloat startY = 0;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
+        [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
     }];
 }
 

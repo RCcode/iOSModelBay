@@ -17,6 +17,14 @@
 @property (nonatomic, strong) NSMutableArray *sexBtnArray;
 @property (nonatomic, strong) UICollectionView *collectView;
 
+
+//记录原始值 返回的时候取消改动
+@property (nonatomic, strong) NSString  *fName;
+@property (nonatomic, assign) NSInteger  fGender;
+@property (nonatomic, strong) NSString  *fCareerId;
+@property (nonatomic, assign) NSInteger  rGender;
+@property (nonatomic, strong) NSString  *rCareerId;
+
 @end
 
 @implementation MB_FilterViewController
@@ -31,6 +39,13 @@
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
+    
+    
+    self.fName = [MB_Utils shareUtil].fName;
+    self.fGender = [MB_Utils shareUtil].fGender;
+    self.fCareerId = [MB_Utils shareUtil].fCareerId;
+    self.rGender = [MB_Utils shareUtil].rGender;
+    self.rCareerId = [MB_Utils shareUtil].rCareerId;
     
     if (self.type == FilterTypeFind) {
         [self.view addSubview:self.searchView];
@@ -62,7 +77,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MB_FilterCollectViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ReuseIdentifier forIndexPath:indexPath];
     
-    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld",(long)(indexPath.row + 1)]];
+    cell.backImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ins%ld.jpg",(long)(indexPath.row + 1)]];
     
     if (indexPath.row == 0) {
         cell.nameLabel.text = LocalizedString(@"All", nil);
@@ -145,6 +160,12 @@
 }
 
 - (void)leftBarBtnOnCLick:(UIBarButtonItem *)barBtn {
+    [MB_Utils shareUtil].fName = self.fName;
+    [MB_Utils shareUtil].fGender = self.fGender;
+    [MB_Utils shareUtil].fCareerId = self.fCareerId;
+    [MB_Utils shareUtil].rGender = self.rGender;
+    [MB_Utils shareUtil].rCareerId = self.rCareerId;
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

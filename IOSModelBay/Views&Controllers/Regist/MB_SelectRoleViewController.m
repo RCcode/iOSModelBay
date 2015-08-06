@@ -29,8 +29,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarBtnOnCLick:)];
 
     if ([[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"zh-Hans"] || [[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"zh-Hant"]) {
-        self.imageView1.image = [UIImage imageNamed:@"select_zhuanye_cn"];
-        self.imageView2.image = [UIImage imageNamed:@"select_putong_cn"];
+        self.imageView1.image = [UIImage imageNamed:@"select_zhuanye_cn.jpg"];
+        self.imageView2.image = [UIImage imageNamed:@"select_putong_cn.jpg"];
     }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap1:)];

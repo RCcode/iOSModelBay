@@ -34,7 +34,7 @@
     
     if (_roleType == RoleTypeProfessional) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Next", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
-        _backImageView.image = [UIImage imageNamed:@"information_bg"];
+        _backImageView.image = [UIImage imageNamed:@"information_bg.jpg"];
         [_maleBtn setTitle:LocalizedString(@"Men", nil) forState:UIControlStateNormal];
         [_femaleBtn setTitle:LocalizedString(@"Women", nil) forState:UIControlStateNormal];
         _maleBtn.hidden = NO;
@@ -42,7 +42,7 @@
         _maleBtn.selected = YES;
     }else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
-        _backImageView.image = [UIImage imageNamed:@"information_bg2"];
+        _backImageView.image = [UIImage imageNamed:@"information_bg2.jpg"];
         _maleBtn.hidden = YES;
         _femaleBtn.hidden = YES;
     }

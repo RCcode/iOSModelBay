@@ -210,21 +210,25 @@ NSString *LocalizedString(NSString *translation_key, id none)
     NSString *language = @"en";
     
     //只适配这么些种语言，其余一律用en
-    if([CURR_LANG isEqualToString:@"zh-Hans"] ||
-       [CURR_LANG isEqualToString:@"zh-Hant"] ||
-       [CURR_LANG isEqualToString:@"de"] ||
-       [CURR_LANG isEqualToString:@"es"] ||
-       [CURR_LANG isEqualToString:@"fr"] ||
-       [CURR_LANG isEqualToString:@"it"] ||
-       [CURR_LANG isEqualToString:@"js"] ||
-       [CURR_LANG isEqualToString:@"ko"] ||
-       [CURR_LANG isEqualToString:@"ja"] ||
-       [CURR_LANG isEqualToString:@"pt"] ||
-       [CURR_LANG isEqualToString:@"pt-PT"] ||
-       [CURR_LANG isEqualToString:@"id"] ||
-       [CURR_LANG isEqualToString:@"th"] ||
-       [CURR_LANG isEqualToString:@"ru"] ||
-       [CURR_LANG isEqualToString:@"ar"]){
+//    if([CURR_LANG isEqualToString:@"zh-Hans"] ||
+//       [CURR_LANG isEqualToString:@"zh-Hant"] ||
+//       [CURR_LANG isEqualToString:@"de"] ||
+//       [CURR_LANG isEqualToString:@"es"] ||
+//       [CURR_LANG isEqualToString:@"fr"] ||
+//       [CURR_LANG isEqualToString:@"it"] ||
+//       [CURR_LANG isEqualToString:@"js"] ||
+//       [CURR_LANG isEqualToString:@"ko"] ||
+//       [CURR_LANG isEqualToString:@"ja"] ||
+//       [CURR_LANG isEqualToString:@"pt"] ||
+//       [CURR_LANG isEqualToString:@"pt-PT"] ||
+//       [CURR_LANG isEqualToString:@"id"] ||
+//       [CURR_LANG isEqualToString:@"th"] ||
+//       [CURR_LANG isEqualToString:@"ru"] ||
+//       [CURR_LANG isEqualToString:@"ar"]){
+//        language = CURR_LANG;
+//    }
+    
+    if([CURR_LANG isEqualToString:@"zh-Hans"]){
         language = CURR_LANG;
     }
     
