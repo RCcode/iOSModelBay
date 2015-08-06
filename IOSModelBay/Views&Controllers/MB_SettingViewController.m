@@ -97,14 +97,19 @@
                 NSString *diveceInfo = [NSString stringWithFormat:@" %@, %@, %@ %@, %@", app_Version, deviceName, deviceSystemName, deviceSystemVer, language];
                 
                 //直接发邮件
-                MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-                if(!picker) break;
-                picker.mailComposeDelegate =self;
-                NSString *subject = [NSString stringWithFormat:@"ModelBay %@ (iOS)", LocalizedString(@"Feedback", nil)];
-                [picker setSubject:subject];
-                [picker setToRecipients:@[kFeedbackEmail]];
-                [picker setMessageBody:diveceInfo isHTML:NO];
-                [self presentViewController:picker animated:YES completion:nil];
+                if ([MFMailComposeViewController canSendMail]) {
+                    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+                    if(!picker) break;
+                    picker.mailComposeDelegate =self;
+                    NSString *subject = [NSString stringWithFormat:@"ModelBay %@ (iOS)", LocalizedString(@"Feedback", nil)];
+                    [picker setSubject:subject];
+                    [picker setToRecipients:@[kFeedbackEmail]];
+                    [picker setMessageBody:diveceInfo isHTML:NO];
+                    [self presentViewController:picker animated:YES completion:nil];
+                }else {
+//                    [MB_Utils showAlertViewWithMessage:LocalizedString(@"Cant_Mail", nil)];
+                    [MB_Utils showPromptWithText:LocalizedString(@"Cant_Mail", nil)];
+                }
                 
                 break;
             }

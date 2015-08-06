@@ -145,7 +145,8 @@
         [mailVC setToRecipients:@[people.email]];
         [self presentViewController:mailVC animated:YES completion:nil];
     }else {
-        NSLog(@"不可以发邮件");
+//        [MB_Utils showAlertViewWithMessage:LocalizedString(@"Cant_Mail", nil)];
+        [MB_Utils showPromptWithText:LocalizedString(@"Cant_Mail", nil)];
     }
 }
 

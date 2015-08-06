@@ -11,14 +11,15 @@
 #import "MB_UserViewController.h"
 #import "MB_UserDetail.h"
 
+typedef void(^SaveSuccessBlock)(void);
 @interface MB_UserSummaryViewController : MB_BaseViewController
 
 @property (nonatomic, strong) NSMutableArray *areaArray;//专注领域(包括模特或者摄影师或者没有)
-
-//@property (nonatomic, assign) ComeFromType comeFromType;
 @property (nonatomic, strong) MB_User *user;
 
 @property (nonatomic, strong) MB_UserDetail *detail;
 @property (nonatomic, strong) MB_UserDetail *changeDetail;
+
+@property (nonatomic, copy) SaveSuccessBlock saveSuccessBlock;
 
 @end

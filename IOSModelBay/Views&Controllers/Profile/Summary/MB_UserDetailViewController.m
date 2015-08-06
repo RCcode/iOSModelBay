@@ -103,7 +103,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     NSString *title = self.areaArray[indexPath.row];
     cell.mainLabel.text = LocalizedString(title, nil);
     cell.sanjiaoImageView.hidden = YES;
-    cell.mainLabelWidth.constant = 100;
+    cell.mainLabelWidth.constant = 120;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if ([title isEqualToString:@"areaModel"]) {
@@ -355,8 +355,11 @@ static CGFloat startY = 0;
     summaryVC.dataArray = self.dataArray;
     summaryVC.areaArray = self.areaArray;
     summaryVC.detail = self.detail;
-    summaryVC.changeDetail = self.detail;
+    summaryVC.changeDetail = self.changeDetail;
     summaryVC.hidesBottomBarWhenPushed = YES;
+    summaryVC.saveSuccessBlock = ^(){
+        [self.tableView reloadData];
+    };
     [self.navigationController pushViewController:summaryVC animated:YES];
 }
 

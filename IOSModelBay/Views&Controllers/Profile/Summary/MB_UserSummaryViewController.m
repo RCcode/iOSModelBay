@@ -86,7 +86,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 {
     NSString *title = self.areaArray[indexPath.row];
     cell.mainLabel.text = LocalizedString(title, nil);
-    cell.mainLabelWidth.constant = 100;
+    cell.mainLabelWidth.constant = 120;
     
     if ([title isEqualToString:@"areaModel"]) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
@@ -262,7 +262,11 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 editVC.name = EditNameAreaPhoto;
                 editVC.selectArray = self.changeDetail.arrayPhoto;
                 editVC.block = ^(NSMutableArray *array) {
-                    self.changeDetail.arrayPhoto = array;
+                    NSMutableArray *aArray = [NSMutableArray arrayWithCapacity:0];
+                    for (NSString *aString in array) {
+                        [aArray addObject:@([aString integerValue] + 100)];
+                    }
+                    self.changeDetail.arrayPhoto = aArray;
                     
                     NSMutableArray *allArray = [NSMutableArray arrayWithCapacity:0];
                     [allArray addObjectsFromArray:self.changeDetail.arrayModel];
@@ -295,6 +299,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     [[AFHttpTool shareTool] updateUserDetailWithParameters:self.detailDic success:^(id response) {
         NSLog(@"update user detail %@",response);
         if ([self statFromResponse:response] == 10000) {
+            self.saveSuccessBlock();
             [self.navigationController popViewControllerAnimated:YES];
         }else {
 

@@ -40,6 +40,8 @@
     self.navigationItem.titleView = self.titleLabel;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_screening"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnOnCLick:)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginInNotification object:nil];
+    
     if (![userDefaults boolForKey:kIsLogin]) {
         //如果没有登录, 设置自动弹出登录页面
         self.showLoginAuto = YES;
@@ -162,6 +164,12 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
     }];
+}
+
+- (void)loginSuccess:(NSNotification *)noti {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.collectView.contentOffset = CGPointMake(0, -64);
+    [self findUserListWithMinId:0];
 }
 
 

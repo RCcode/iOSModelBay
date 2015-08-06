@@ -244,3 +244,5 @@
 "Rate_Rate" = "评5星";
 "Rate_FeedBack" = "反馈";
 "Rate_Cancel" = "下次再说";
+
+"Cant_Mail" = "无法启动邮件";

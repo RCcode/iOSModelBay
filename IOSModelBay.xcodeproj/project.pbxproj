@@ -123,7 +123,6 @@
 		CD63F6AC1B73417100A4BB45 /* in4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6611B73417100A4BB45 /* in4@2x.jpg */; };
 		CD63F6AD1B73417100A4BB45 /* in4@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6621B73417100A4BB45 /* in4@3x.jpg */; };
 		CD63F6AE1B73417100A4BB45 /* in5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6631B73417100A4BB45 /* in5@2x.jpg */; };
-		CD63F6AF1B73417100A4BB45 /* in5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6641B73417100A4BB45 /* in5@3x.png */; };
 		CD63F6B01B73417100A4BB45 /* in6@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6651B73417100A4BB45 /* in6@2x.jpg */; };
 		CD63F6B11B73417100A4BB45 /* in6@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6661B73417100A4BB45 /* in6@3x.jpg */; };
 		CD63F6B21B73417100A4BB45 /* in7@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6671B73417100A4BB45 /* in7@2x.jpg */; };
@@ -160,6 +159,7 @@
 		CD63F6D11B73417100A4BB45 /* ins8@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6871B73417100A4BB45 /* ins8@3x.jpg */; };
 		CD63F6D21B73417100A4BB45 /* ins9@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6881B73417100A4BB45 /* ins9@2x.jpg */; };
 		CD63F6D31B73417100A4BB45 /* ins9@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD63F6891B73417100A4BB45 /* ins9@3x.jpg */; };
+		CD76C9D81B73487A0012ABB1 /* in5@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD76C9D71B73487A0012ABB1 /* in5@3x.jpg */; };
 		CD79644F1B340EC400977A7F /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964411B340EC400977A7F /* NSString+Helper.m */; };
 		CD7964501B340EC400977A7F /* UIButton+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964431B340EC400977A7F /* UIButton+helper.m */; };
 		CD7964511B340EC400977A7F /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7964451B340EC400977A7F /* UIDevice+DeviceInfo.m */; };
@@ -454,7 +454,6 @@
 		CD63F6611B73417100A4BB45 /* in4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in4@2x.jpg"; sourceTree = "<group>"; };
 		CD63F6621B73417100A4BB45 /* in4@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in4@3x.jpg"; sourceTree = "<group>"; };
 		CD63F6631B73417100A4BB45 /* in5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in5@2x.jpg"; sourceTree = "<group>"; };
-		CD63F6641B73417100A4BB45 /* in5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "in5@3x.png"; sourceTree = "<group>"; };
 		CD63F6651B73417100A4BB45 /* in6@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in6@2x.jpg"; sourceTree = "<group>"; };
 		CD63F6661B73417100A4BB45 /* in6@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in6@3x.jpg"; sourceTree = "<group>"; };
 		CD63F6671B73417100A4BB45 /* in7@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in7@2x.jpg"; sourceTree = "<group>"; };
@@ -491,6 +490,7 @@
 		CD63F6871B73417100A4BB45 /* ins8@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ins8@3x.jpg"; sourceTree = "<group>"; };
 		CD63F6881B73417100A4BB45 /* ins9@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ins9@2x.jpg"; sourceTree = "<group>"; };
 		CD63F6891B73417100A4BB45 /* ins9@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ins9@3x.jpg"; sourceTree = "<group>"; };
+		CD76C9D71B73487A0012ABB1 /* in5@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "in5@3x.jpg"; sourceTree = "<group>"; };
 		CD7964401B340EC400977A7F /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		CD7964411B340EC400977A7F /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		CD7964421B340EC400977A7F /* UIButton+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+helper.h"; sourceTree = "<group>"; };
@@ -996,7 +996,7 @@
 				CD63F6611B73417100A4BB45 /* in4@2x.jpg */,
 				CD63F6621B73417100A4BB45 /* in4@3x.jpg */,
 				CD63F6631B73417100A4BB45 /* in5@2x.jpg */,
-				CD63F6641B73417100A4BB45 /* in5@3x.png */,
+				CD76C9D71B73487A0012ABB1 /* in5@3x.jpg */,
 				CD63F6651B73417100A4BB45 /* in6@2x.jpg */,
 				CD63F6661B73417100A4BB45 /* in6@3x.jpg */,
 				CD63F6671B73417100A4BB45 /* in7@2x.jpg */,
@@ -1571,7 +1571,6 @@
 			files = (
 				CD63F6C31B73417100A4BB45 /* ins1@3x.jpg in Resources */,
 				CD00CBF91B5F7E48001F43A8 /* MB_ImageTableViewCell.xib in Resources */,
-				CD63F6AF1B73417100A4BB45 /* in5@3x.png in Resources */,
 				CD63F6961B73417100A4BB45 /* select_putong@2x.jpg in Resources */,
 				CDA8A6071B57864700865DEA /* MB_AddressBookTableViewCell.xib in Resources */,
 				CD63F6C11B73417100A4BB45 /* ins14@3x.jpg in Resources */,
@@ -1658,6 +1657,7 @@
 				CD63F68A1B73417100A4BB45 /* bg1@2x.jpg in Resources */,
 				CDD537481B340CB6008B436C /* MB_SignalImageTableViewCell.xib in Resources */,
 				CD9D8E941B4523D0000E1C8D /* GOTHICI.TTF in Resources */,
+				CD76C9D81B73487A0012ABB1 /* in5@3x.jpg in Resources */,
 				CDD5374E1B340CB6008B436C /* MB_UserInfoView.xib in Resources */,
 				CDD537521B340CB6008B436C /* MB_MsgTableViewCell.xib in Resources */,
 				CD63F6A81B73417100A4BB45 /* in2@2x.jpg in Resources */,
