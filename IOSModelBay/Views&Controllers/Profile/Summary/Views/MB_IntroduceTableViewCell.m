@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.layoutMargins = UIEdgeInsetsZero;
+//    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 - (void)layoutSubviews {

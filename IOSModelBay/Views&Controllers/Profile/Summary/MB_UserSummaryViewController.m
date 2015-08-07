@@ -497,7 +497,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         _tableView.sectionFooterHeight = 0;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         
-        _tableView.layoutMargins = UIEdgeInsetsZero;
+//        _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorColor = colorWithHexString(@"#eeeeee");
         _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -10.5);

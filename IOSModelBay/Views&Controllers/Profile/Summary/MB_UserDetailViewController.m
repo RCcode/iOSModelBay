@@ -287,7 +287,7 @@ static CGFloat startY = 0;
     }
     
     //模特，新面孔
-    for (NSString *string in @[@"1", @"2"]) {
+    for (NSString *string in @[@"01", @"13"]) {
         if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:string]) {
             for (NSString *string in @[@"Height", @"Weight", @"Chest", @"Waist", @"Hips", @"Eye Color", @"Skin Color", @"Hair Color", @"Shoes", @"Dress", @"Experiences"]) {
                 if (![self.dataArray containsObject:string]) {
@@ -300,7 +300,7 @@ static CGFloat startY = 0;
     
     
     //演员，歌手，舞者
-    for (NSString *string in @[@"2", @"3"]) {
+    for (NSString *string in @[@"02", @"03"]) {
         if ([[self.user.fcareerId componentsSeparatedByString:@"|"] containsObject:string]) {
             for (NSString *string in @[@"Height", @"Weight", @"Chest", @"Waist", @"Hips", @"Eye Color", @"Skin Color", @"Hair Color", @"Experiences"]) {
                 if (![self.dataArray containsObject:string]) {
@@ -334,7 +334,7 @@ static CGFloat startY = 0;
     
     [self.dataArray addObject:@"Website"];
     
-    for (NSString *string in @[@"1", @"13"]) {
+    for (NSString *string in @[@"01", @"13"]) {
         if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:string]) {
             //模特
             [self.areaArray addObject:@"areaModel"];
@@ -342,7 +342,7 @@ static CGFloat startY = 0;
         }
     }
     
-    if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:@"5"]) {
+    if ([[self.detail.careerId componentsSeparatedByString:@"|"] containsObject:@"05"]) {
         [self.areaArray addObject:@"areaPhoto"];
     }
 }
@@ -447,7 +447,7 @@ static CGFloat startY = 0;
         _tableView.sectionHeaderHeight = 10.5;
         _tableView.sectionFooterHeight = 0;
         
-        _tableView.layoutMargins = UIEdgeInsetsZero;
+//        _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorColor = colorWithHexString(@"#eeeeee");
         _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -10.5);

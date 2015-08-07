@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.layoutMargins = UIEdgeInsetsZero;
+//    self.layoutMargins = UIEdgeInsetsZero;
     
 //    _mylayer = [CAShapeLayer layer];
 //    _mylayer.lineWidth = 1;

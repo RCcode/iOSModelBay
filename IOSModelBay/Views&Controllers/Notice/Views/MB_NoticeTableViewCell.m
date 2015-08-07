@@ -11,7 +11,7 @@
 @implementation MB_NoticeTableViewCell
 
 - (void)awakeFromNib {
-    self.layoutMargins = UIEdgeInsetsZero;
+//    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

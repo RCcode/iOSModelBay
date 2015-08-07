@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    self.layoutMargins = UIEdgeInsetsZero;
+//    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

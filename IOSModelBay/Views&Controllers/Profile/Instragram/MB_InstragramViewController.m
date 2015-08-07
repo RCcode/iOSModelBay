@@ -209,7 +209,7 @@ static CGFloat startY = 0;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
-        [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
+//        [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
     }];
 }
 
