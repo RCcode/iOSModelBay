@@ -11,7 +11,7 @@
 #import "MB_TabBarViewController.h"
 #import "MB_MainViewController.h"
 
-@interface MB_WriteInfoViewController ()
+@interface MB_WriteInfoViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
@@ -57,6 +57,11 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 //点击男性

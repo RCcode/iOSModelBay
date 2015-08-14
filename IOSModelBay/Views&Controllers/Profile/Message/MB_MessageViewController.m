@@ -231,7 +231,7 @@ static CGFloat startY = 0;
         userVC.comeFromType = ComeFromTypeUser;
         userVC.hidesBottomBarWhenPushed = YES;
         MB_User *user = [[MB_User alloc] init];
-        user.fid = message.fid;
+        user.fid = message.uid;
         user.fname = message.fname;
         user.fpic = message.fpic;
         user.fbackPic = message.fbackPic;
@@ -290,12 +290,18 @@ static CGFloat startY = 0;
     
     MB_Message *message = self.dataArray[self.replyIndex];
 
+//    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
+//                             @"token":[userDefaults objectForKey:kAccessToken],
+//                             @"ucid":@(message.ucid),//评论id
+//                             @"fid":@(message.fid),//评论用户id
+//                             @"reply":reply//评论
+//                            };
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
                              @"token":[userDefaults objectForKey:kAccessToken],
                              @"ucid":@(message.ucid),//评论id
-                             @"fid":@(message.fid),//评论用户id
+                             @"fid":@(message.uid),//评论用户id
                              @"reply":reply//评论
-                            };
+                             };
     [[AFHttpTool shareTool] replyMessageWithParameters:params success:^(id response) {
         NSLog(@"reply %@",response);
         if ([self statFromResponse:response] == 10000) {

@@ -513,6 +513,7 @@ static CGFloat startY;
         _commentView   = nil;
         _menuIndex     = 0;
         
+        self.titleLabel.text = @"";
         [self.view addSubview:self.notLoginView];
     }
 }
@@ -681,6 +682,10 @@ static CGFloat startY;
 
 //发送留言或回复
 - (void)sendButtonOnClick:(UIButton *)button {
+    if ([self.commentView.textField.text isEqualToString:@""]) {
+        return;
+    }
+    
     [self.commentView.textField resignFirstResponder];
     if (self.comeFromType == ComeFromTypeUser) {
         MB_MessageViewController *messageVC = self.childViewControllers[3];

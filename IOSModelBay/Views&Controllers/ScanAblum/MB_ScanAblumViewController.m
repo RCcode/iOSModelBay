@@ -67,6 +67,13 @@
     }
 }
 
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    //修改标题
+    NSInteger page = scrollView.contentOffset.x / scrollView.frame.size.width;
+    self.titleLabel.text = [NSString stringWithFormat:@"%ld/%lu",(long)(page + 1), (unsigned long)self.ablum.mList.count];
+}
+
 
 //#pragma mark - UIGestureRecognizerDelegate
 //- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
@@ -84,7 +91,7 @@
 //}
 
 
-//#pragma mark - private methods
+#pragma mark - private methods
 //- (void)handlePan:(UIPanGestureRecognizer *)pan
 //{
 //    if (pan.state == UIGestureRecognizerStateEnded) {
@@ -135,6 +142,7 @@
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
         _scrollView.pagingEnabled = YES;
+        _scrollView.delegate = self;
         
         //创建子滚动视图
         for (int i = 0; i < self.ablum.mList.count; i++) {
