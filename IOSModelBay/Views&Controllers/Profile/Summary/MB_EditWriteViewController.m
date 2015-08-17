@@ -29,7 +29,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_back"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonOnClick:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:LocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemOnClick:)];
     
-    if (self.index != 18) {
+    if (self.index != 18 &&self.index != 0) {
         _hideButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_hideButton setImage:[UIImage imageNamed:@"ic_wz"] forState:UIControlStateNormal];
         [_hideButton setImage:[UIImage imageNamed:@"ic_cz"] forState:UIControlStateSelected];
@@ -50,7 +50,11 @@
         [_noHideButton addTarget:self action:@selector(notHideOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_noHideButton];
         
-        _hideButton.selected = YES;
+        if (self.hide) {
+            _hideButton.selected = YES;
+        }else {
+            _noHideButton.selected = YES;
+        }
     }
     
     switch (self.index) {
@@ -69,7 +73,7 @@
         }
         case 0://bio
         {
-            _textView = [[UITextView alloc] initWithFrame:CGRectMake(12, 100, kWindowWidth - 24, 216)];
+            _textView = [[UITextView alloc] initWithFrame:CGRectMake(12, 80, kWindowWidth - 24, 150)];
             _textView.delegate = self;
             _textView.font = [UIFont fontWithName:@"FuturaStd-Book" size:14];
             _textView.textColor = colorWithHexString(@"#9a9a9a");
@@ -108,9 +112,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-
-//#pragma mark - UITextViewDelegate
 
 
 #pragma mark - private methods

@@ -15,6 +15,8 @@ typedef void(^TextBlock)(NSInteger index, NSString *text, BOOL hide);
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSString *text;
 
+@property (nonatomic, assign) BOOL hide;//是否公开 0分享 1否
+
 @property (nonatomic, copy) TextBlock blcok;
 
 @end

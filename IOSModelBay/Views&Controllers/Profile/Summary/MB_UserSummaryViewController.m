@@ -160,8 +160,10 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
                     editVC.text = [NSString stringWithFormat:@"%ld",(long)self.changeDetail.age];
                     editVC.index = 15;
+                    editVC.hide = self.changeDetail.btype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.age = [text integerValue];
+                        self.changeDetail.btype = hide;
                         [self.detailDic setObject:@([text integerValue]) forKey:@"birth"];
                         [self.detailDic setObject:hide?@(1):@(0) forKey:@"btype"];
                         [self.tableView reloadData];
@@ -175,8 +177,10 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
                     editVC.text = self.changeDetail.contact;
                     editVC.index = 16;
+                    editVC.hide = self.changeDetail.ctype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.contact = text;
+                        self.changeDetail.ctype = hide;
                         [self.detailDic setObject:text forKey:@"contact"];
                         [self.detailDic setObject:hide?@(1):@(0) forKey:@"ctype"];
                         [self.tableView reloadData];
@@ -190,8 +194,10 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     MB_EditWriteViewController *editVC = [[MB_EditWriteViewController alloc] init];
                     editVC.text = self.changeDetail.email;
                     editVC.index = 17;
+                    editVC.hide = self.changeDetail.etype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.email = text;
+                        self.changeDetail.etype = hide;
                         [self.detailDic setObject:text forKey:@"email"];
                         [self.detailDic setObject:hide?@(1):@(0) forKey:@"etype"];
                         [self.tableView reloadData];
@@ -260,7 +266,13 @@ static NSString * const ReuseIdentifierSummary = @"summary";
             }else if ([title isEqualToString:@"areaPhoto"]){
                 //修改专注领域(摄影师)
                 editVC.name = EditNameAreaPhoto;
-                editVC.selectArray = self.changeDetail.arrayPhoto;
+                
+                NSMutableArray *bArray = [NSMutableArray arrayWithCapacity:0];
+                for (NSString *aString in self.changeDetail.arrayPhoto) {
+                    [bArray addObject:@([aString integerValue] - 100)];
+                }
+                editVC.selectArray = bArray;
+                
                 editVC.block = ^(NSMutableArray *array) {
                     NSMutableArray *aArray = [NSMutableArray arrayWithCapacity:0];
                     for (NSString *aString in array) {
@@ -497,7 +509,6 @@ static NSString * const ReuseIdentifierSummary = @"summary";
         _tableView.sectionFooterHeight = 0;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
         
-//        _tableView.layoutMargins = UIEdgeInsetsZero;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorColor = colorWithHexString(@"#eeeeee");
         _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -10.5);
@@ -522,12 +533,5 @@ static NSString * const ReuseIdentifierSummary = @"summary";
     }
     return _detailDic;
 }
-
-//- (NSMutableArray *)areaArray {
-//    if (!_areaArray) {
-//        _areaArray = [NSMutableArray arrayWithCapacity:0];
-//    }
-//    return _areaArray;
-//}
 
 @end
