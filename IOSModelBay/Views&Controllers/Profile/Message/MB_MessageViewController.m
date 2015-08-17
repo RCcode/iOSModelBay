@@ -253,14 +253,15 @@ static CGFloat startY = 0;
 }
 
 - (void)commentWitnComment:(NSString *)comment {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    [MBProgressHUD showHUDAddedTo:userVC.view animated:YES];
     NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],//用户id
                              @"token":[userDefaults objectForKey:kAccessToken],
                              @"fid":@(userVC.user.fid),//评论用户id
                              @"comment":comment};
     [[AFHttpTool shareTool] addMessageWithParameters:params success:^(id response) {
         NSLog(@"coment %@",response);
+        [MBProgressHUD hideHUDForView:userVC.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
 //            [MB_Utils showPromptWithText:@"success"];
 //            [self requestMessageListWithMinId:0];
@@ -274,19 +275,20 @@ static CGFloat startY = 0;
 //            [self.dataArray addObject:message];
 //            [self.tableView reloadData];
             [userVC clearCommentText];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [self requestMessageListWithMinId:0];
         }else {
 //            [MB_Utils showPromptWithText:@"failed"];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     } failure:^(NSError *err) {
 //        [MB_Utils showPromptWithText:@"failed"];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:userVC.view animated:YES];
     }];
 }
 
 - (void)replywithReply:(NSString *)reply {
     MB_UserViewController *userVC = (MB_UserViewController *)self.parentViewController;
+    [MBProgressHUD showHUDAddedTo:userVC.view animated:YES];
     
     MB_Message *message = self.dataArray[self.replyIndex];
 
@@ -304,6 +306,7 @@ static CGFloat startY = 0;
                              };
     [[AFHttpTool shareTool] replyMessageWithParameters:params success:^(id response) {
         NSLog(@"reply %@",response);
+        [MBProgressHUD hideHUDForView:userVC.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
             [userVC clearCommentText];
             message.reply = reply;
@@ -318,6 +321,7 @@ static CGFloat startY = 0;
         }
     } failure:^(NSError *err) {
 //        [MB_Utils showPromptWithText:@"failed"];
+        [MBProgressHUD hideHUDForView:userVC.view animated:YES];
     }];
 }
 
