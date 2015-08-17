@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -83,7 +83,7 @@
                     <constraint firstItem="ILe-cK-nSu" firstAttribute="leading" secondItem="mJl-5C-GS1" secondAttribute="trailing" constant="5" id="KNU-cD-fH6"/>
                     <constraint firstItem="rYa-hH-McZ" firstAttribute="leading" secondItem="2zU-qS-WqE" secondAttribute="leading" id="Ngq-xq-lXD"/>
                     <constraint firstItem="rYa-hH-McZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="O30-6F-EdM"/>
-                    <constraint firstItem="loP-py-K1M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="32K-sZ-NiF" secondAttribute="trailing" id="Pq6-r9-uRO"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="32K-sZ-NiF" secondAttribute="trailing" constant="20" id="Phq-8b-iMR"/>
                     <constraint firstItem="loP-py-K1M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rYa-hH-McZ" secondAttribute="trailing" id="QYq-AK-EyP"/>
                     <constraint firstItem="h5b-2j-MKp" firstAttribute="centerY" secondItem="rYa-hH-McZ" secondAttribute="centerY" id="W1e-FY-f2d"/>
                     <constraint firstItem="ILe-cK-nSu" firstAttribute="centerY" secondItem="mJl-5C-GS1" secondAttribute="centerY" id="WEl-xs-cJu"/>
