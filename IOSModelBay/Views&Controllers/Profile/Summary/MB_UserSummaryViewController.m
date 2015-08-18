@@ -269,7 +269,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                 
                 NSMutableArray *bArray = [NSMutableArray arrayWithCapacity:0];
                 for (NSString *aString in self.changeDetail.arrayPhoto) {
-                    [bArray addObject:@([aString integerValue] - 100)];
+                    [bArray addObject:[NSString stringWithFormat:@"%ld",[aString integerValue] - 100]];
                 }
                 editVC.selectArray = bArray;
                 

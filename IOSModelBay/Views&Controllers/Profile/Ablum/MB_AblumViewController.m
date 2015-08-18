@@ -382,7 +382,8 @@ static CGFloat startY = 0;
 - (void)deleteButtonOnClick:(UIButton *)button {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:LocalizedString(@"Delete_Ablum", nil) delegate:self cancelButtonTitle:LocalizedString(@"Delete_N", nil) destructiveButtonTitle:LocalizedString(@"Delete_Y", nil) otherButtonTitles:nil, nil];
     actionSheet.tag = button.tag;
-    [actionSheet showInView:self.view];
+//    [actionSheet showInView:self.view];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
 //添加作品集
