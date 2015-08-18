@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, NoticeType) {
 //动态
 @interface MB_Notice : NSObject
 
-@property (nonatomic, assign) NSInteger mid;      //用于分页
+@property (nonatomic, assign) NSInteger  mid;      //用于分页
 @property (nonatomic, assign) NoticeType mtype;   //消息类型:0.收藏;1.相片提起;2.赞相片;3.评论相片;4.留言;5.回复留言
 @property (nonatomic, assign) NSInteger fid;      //消息用户id
 @property (nonatomic, strong) NSString *fname;    //消息用户名
@@ -35,6 +35,6 @@ typedef NS_ENUM(NSInteger, NoticeType) {
 @property (nonatomic, assign) NSInteger utype;//用户类型: 0,浏览;1:专业
 @property (nonatomic, assign) NSInteger state;//是否本平台用户:0.不是;1.是
 
-@property (nonatomic, assign) NSInteger fuid;//用户id(第三方用户标识)
+@property (nonatomic, assign) NSInteger fuid; //用户id(第三方用户标识)
 
 @end
