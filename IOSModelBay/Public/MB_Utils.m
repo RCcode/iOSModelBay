@@ -102,7 +102,7 @@ static MB_Utils *util = nil;
 
 + (void)showAlertViewWithMessage:(NSString *)string {
     if (string != nil && ![string isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:string delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:string delegate:self cancelButtonTitle:LocalizedString(@"Select_confire", nil) otherButtonTitles:nil, nil];
         [alert show];
     }
 }
