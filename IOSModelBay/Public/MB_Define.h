@@ -22,7 +22,7 @@
 #define kUmengAppKey  @"556e66fd67e58ee877006d64"
 #define kFlurryAppKey @"JVB6C3SPS7K7NPNN86ZH"
 
-//#define kMoreAppID 20051
+#define kMoreAppID 24001
 //#define kAdmobID   @"ca-app-pub-3747943735238482/3196343450"
 
 #define kAppID               @"1007018487"
