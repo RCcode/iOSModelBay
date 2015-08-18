@@ -24,8 +24,11 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
 #pragma mark - life cycle
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.optionIndex - 1 inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+    if (self.optionIndex > 1) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.optionIndex - 1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }
 }
 
 - (void)viewDidLoad {
@@ -150,8 +153,6 @@ static NSString * const ReuseIdentifierColor = @"ReuseIdentifierColor";
         _tableView.dataSource = self;
         _tableView.backgroundColor = colorWithHexString(@"#eeeeee");
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-//        _tableView.sectionHeaderHeight = 10.5;
-//        _tableView.sectionFooterHeight = 0;
         
 //        _tableView.layoutMargins = UIEdgeInsetsZero;
 //        _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
