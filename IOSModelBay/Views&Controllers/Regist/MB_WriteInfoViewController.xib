@@ -35,11 +35,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
-                    <rect key="frame" x="60" y="292" width="60" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="R8b-dZ-H9u"/>
-                    </constraints>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDL-ZM-yAR">
+                    <rect key="frame" x="0.0" y="292" width="155" height="19"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Male" image="ic_wz">
@@ -53,11 +50,8 @@
                         <action selector="maleBtnOnClick:" destination="-1" eventType="touchUpInside" id="ds1-YK-WS3"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-98-MXj">
-                    <rect key="frame" x="183" y="292" width="77" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="77" id="FJz-eb-vgn"/>
-                    </constraints>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-98-MXj">
+                    <rect key="frame" x="165" y="292" width="155" height="19"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Female" image="ic_wz">
@@ -98,12 +92,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="XGz-98-MXj" firstAttribute="top" secondItem="ffE-vm-eJq" secondAttribute="bottom" constant="42" id="8Wa-ya-KaL"/>
+                <constraint firstItem="XGz-98-MXj" firstAttribute="leading" secondItem="sDL-ZM-yAR" secondAttribute="trailing" constant="10" id="Afz-cf-wso"/>
                 <constraint firstItem="ffE-vm-eJq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="41" id="Dyr-af-deW"/>
                 <constraint firstItem="PM0-AH-06t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="148" id="GC7-nN-pjm"/>
                 <constraint firstItem="ffE-vm-eJq" firstAttribute="top" secondItem="PM0-AH-06t" secondAttribute="bottom" constant="43" id="MpI-ej-Qws"/>
+                <constraint firstItem="XGz-98-MXj" firstAttribute="width" secondItem="sDL-ZM-yAR" secondAttribute="width" id="Vn0-Qq-Li7"/>
                 <constraint firstItem="4rA-AG-fMS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="XGG-tD-ZB9"/>
-                <constraint firstAttribute="trailing" secondItem="XGz-98-MXj" secondAttribute="trailing" constant="60" id="XlL-Ts-yj9"/>
-                <constraint firstItem="sDL-ZM-yAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="hse-NP-hKr"/>
+                <constraint firstAttribute="trailing" secondItem="XGz-98-MXj" secondAttribute="trailing" id="XlL-Ts-yj9"/>
+                <constraint firstItem="sDL-ZM-yAR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hse-NP-hKr"/>
                 <constraint firstItem="4rA-AG-fMS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lkl-Kl-eKG"/>
                 <constraint firstAttribute="centerX" secondItem="PM0-AH-06t" secondAttribute="centerX" id="nMc-h3-L40"/>
                 <constraint firstAttribute="trailing" secondItem="4rA-AG-fMS" secondAttribute="trailing" id="pMS-Vl-nnB"/>
