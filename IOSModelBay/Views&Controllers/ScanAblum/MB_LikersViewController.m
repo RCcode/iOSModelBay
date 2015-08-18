@@ -117,8 +117,12 @@
             if (minId == 0) {
                 [self.dataArray removeAllObjects];
             }
-            self.minId = [response[@"minId"] integerValue];
             NSArray *array = response[@"list"];
+            
+            if (array == nil || [array isKindOfClass:[NSNull class]]) {
+                return;
+            }
+            self.minId = [response[@"minId"] integerValue];
             for (NSDictionary *dic in array) {
                 MB_Liker *liker = [[MB_Liker alloc] init];
                 [liker setValuesForKeysWithDictionary:dic];
