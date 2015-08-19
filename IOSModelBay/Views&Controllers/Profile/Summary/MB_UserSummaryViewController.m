@@ -300,6 +300,9 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
 #pragma mark - privtate methods
 - (void)leftBarButtonOnClick:(UIBarButtonItem *)barButton {
+    if (self.detailDic.allKeys.count > 3) {
+        self.saveSuccessBlock();
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

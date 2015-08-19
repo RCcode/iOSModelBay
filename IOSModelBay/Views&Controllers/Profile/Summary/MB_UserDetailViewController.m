@@ -358,7 +358,8 @@ static CGFloat startY = 0;
     summaryVC.changeDetail = self.changeDetail;
     summaryVC.hidesBottomBarWhenPushed = YES;
     summaryVC.saveSuccessBlock = ^(){
-        [self.tableView reloadData];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self requestUserDetail];
     };
     [self.navigationController pushViewController:summaryVC animated:YES];
 }
