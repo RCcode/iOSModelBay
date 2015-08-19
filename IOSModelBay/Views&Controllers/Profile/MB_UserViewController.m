@@ -125,22 +125,28 @@
 
 
 #pragma mark - UIScrollViewDelegate
-static CGFloat startY;
+static CGFloat startY = -64;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
         startY = scrollView.contentOffset.y;
     }
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView == self.tableView) {
-//        if (scrollView.contentOffset.y - startY > 0) {
-//            self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-//        }else{
-//            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-//        }
-//    }
-//}
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView) {
+        if (scrollView.contentOffset.y - startY > 0) {
+            //向上拉
+            if (scrollView.contentOffset.y != topViewHeight - 64) {
+                [scrollView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
+            }
+        }else{
+            //向下拉
+            if (scrollView.contentOffset.y != -64) {
+                [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
+            }
+        }
+    }
+}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
@@ -148,13 +154,11 @@ static CGFloat startY;
             if (scrollView.contentOffset.y - startY > 0) {
                 //向上拉
                 if (scrollView.contentOffset.y != topViewHeight - 64) {
-                    NSLog(@"dddddd");
                     [scrollView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
                 }
             }else{
                 //向下拉
                 if (scrollView.contentOffset.y != -64) {
-                    NSLog(@"aaaaaa");
                     [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
                 }
             }
@@ -167,13 +171,11 @@ static CGFloat startY;
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (scrollView.contentOffset.y != topViewHeight - 64) {
-                NSLog(@"dddddd");
                 [scrollView setContentOffset:CGPointMake(0, topViewHeight - 64) animated:YES];
             }
         }else{
             //向下拉
             if (scrollView.contentOffset.y != -64) {
-                NSLog(@"aaaaaa");
                 [scrollView setContentOffset:CGPointMake(0, -64) animated:YES];
             }
         }

@@ -317,6 +317,7 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 
         }
     } failure:^(NSError *err) {
+        
     }];
 }
 
@@ -530,6 +531,10 @@ static NSString * const ReuseIdentifierSummary = @"summary";
 - (NSMutableDictionary *)detailDic {
     if (!_detailDic) {
         _detailDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        
+        [self.detailDic setObject:@(-1) forKey:@"btype"];
+        [self.detailDic setObject:@(-1) forKey:@"ctype"];
+        [self.detailDic setObject:@(-1) forKey:@"etype"];
     }
     return _detailDic;
 }
