@@ -279,7 +279,7 @@ static CGFloat startY = 0;
     [self.dataArray addObject:@"Country"];
     
     if (self.comeFromType == ComeFromTypeUser) {
-        if (self.detail.btype == 0) {
+        if (self.detail.btype == 1) {
             [self.dataArray addObject:@"Age"];
         }
     }else {
@@ -321,10 +321,10 @@ static CGFloat startY = 0;
     
     //最后加这几种
     if (self.comeFromType == ComeFromTypeUser) {
-        if (self.detail.ctype == 0) {
+        if (self.detail.ctype == 1) {
             [self.dataArray addObject:@"Contracts"];
         }
-        if (self.detail.etype == 0) {
+        if (self.detail.etype == 1) {
             [self.dataArray addObject:@"Email"];
         }
     }else{

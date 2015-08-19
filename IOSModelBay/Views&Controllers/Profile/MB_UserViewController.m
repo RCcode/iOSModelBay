@@ -134,6 +134,9 @@ static CGFloat startY = -64;
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
+        if (scrollView.contentOffset.y == topViewHeight - 64 || scrollView.contentOffset.y == -64) {
+            return;
+        }
         if (scrollView.contentOffset.y - startY > 0) {
             //向上拉
             if (scrollView.contentOffset.y != topViewHeight - 64) {

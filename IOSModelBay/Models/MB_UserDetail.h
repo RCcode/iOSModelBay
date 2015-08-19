@@ -20,11 +20,11 @@
 @property (nonatomic, assign) NSInteger gender;//性别:0.女;1.男;
 @property (nonatomic, strong) NSString *country;//国家
 @property (nonatomic, assign) NSInteger age;//年龄
-@property (nonatomic, assign) NSInteger btype;//分享年龄:0.是;1.否
+@property (nonatomic, assign) NSInteger btype;//分享年龄:1.是;0.否
 @property (nonatomic, strong) NSString *contact;//联系方式
-@property (nonatomic, assign) NSInteger ctype;//分享联系方式:0.是;1.否
+@property (nonatomic, assign) NSInteger ctype;//分享联系方式:1.是;0.否
 @property (nonatomic, strong) NSString *email;//邮箱
-@property (nonatomic, assign) NSInteger etype;//分享邮箱：0是；1否
+@property (nonatomic, assign) NSInteger etype;//分享邮箱：1是；0否
 @property (nonatomic, strong) NSString *website;//网站
 @property (nonatomic, strong) NSString *experience;//经验
 @property (nonatomic, assign) NSInteger height;//身高cm

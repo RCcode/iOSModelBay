@@ -51,9 +51,9 @@
         [self.view addSubview:_noHideButton];
         
         if (self.hide) {
-            _hideButton.selected = YES;
-        }else {
             _noHideButton.selected = YES;
+        }else {
+            _hideButton.selected = YES;
         }
     }
     

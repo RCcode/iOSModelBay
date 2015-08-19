@@ -163,9 +163,9 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     editVC.hide = self.changeDetail.btype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.age = [text integerValue];
-                        self.changeDetail.btype = hide;
+                        self.changeDetail.btype = !hide;
                         [self.detailDic setObject:@([text integerValue]) forKey:@"birth"];
-                        [self.detailDic setObject:hide?@(1):@(0) forKey:@"btype"];
+                        [self.detailDic setObject:hide?@(0):@(1) forKey:@"btype"];
                         [self.tableView reloadData];
                     };
                     [self.navigationController pushViewController:editVC animated:YES];
@@ -180,9 +180,9 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     editVC.hide = self.changeDetail.ctype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.contact = text;
-                        self.changeDetail.ctype = hide;
+                        self.changeDetail.ctype = !hide;
                         [self.detailDic setObject:text forKey:@"contact"];
-                        [self.detailDic setObject:hide?@(1):@(0) forKey:@"ctype"];
+                        [self.detailDic setObject:hide?@(0):@(1) forKey:@"ctype"];
                         [self.tableView reloadData];
                 };
                     [self.navigationController pushViewController:editVC animated:YES];
@@ -197,9 +197,9 @@ static NSString * const ReuseIdentifierSummary = @"summary";
                     editVC.hide = self.changeDetail.etype;
                     editVC.blcok = ^(NSInteger index, NSString *text,BOOL hide){
                         self.changeDetail.email = text;
-                        self.changeDetail.etype = hide;
+                        self.changeDetail.etype = !hide;
                         [self.detailDic setObject:text forKey:@"email"];
-                        [self.detailDic setObject:hide?@(1):@(0) forKey:@"etype"];
+                        [self.detailDic setObject:hide?@(0):@(1) forKey:@"etype"];
                         [self.tableView reloadData];
                     };
                     [self.navigationController pushViewController:editVC animated:YES];
