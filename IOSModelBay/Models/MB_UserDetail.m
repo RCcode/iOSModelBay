@@ -16,7 +16,7 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
-        if ([key isEqualToString:@"id"] || [key isEqualToString:@"state"] || [key isEqualToString:@"height"] || [key isEqualToString:@"weight"] ||[key isEqualToString:@"chest"] ||[key isEqualToString:@"waist"] ||[key isEqualToString:@"hips"]||[key isEqualToString:@"age"] ||[key isEqualToString:@"gender"]) {
+        if ([key isEqualToString:@"id"] || [key isEqualToString:@"state"] || [key isEqualToString:@"height"] || [key isEqualToString:@"weight"] ||[key isEqualToString:@"chest"] ||[key isEqualToString:@"waist"] ||[key isEqualToString:@"hips"]||[key isEqualToString:@"age"] ||[key isEqualToString:@"gender"] || [key isEqualToString:@"btype"] || [key isEqualToString:@"ctype"] || [key isEqualToString:@"etype"]) {
             [self setValue:@(0) forKey:key];
         }else {
             [self setValue:@"" forKey:key];
@@ -52,6 +52,15 @@
     }
     if ([key isEqualToString:@"hips"]) {
         _hips = [value integerValue];
+    }
+    if ([key isEqualToString:@"btype"]) {
+        _btype = [value integerValue];
+    }
+    if ([key isEqualToString:@"ctype"]) {
+        _ctype = [value integerValue];
+    }
+    if ([key isEqualToString:@"etype"]) {
+        _etype = [value integerValue];
     }
 }
 
