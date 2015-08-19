@@ -190,7 +190,7 @@
 "Setting" = "Setting";
 
 "Contracts" = "Contracts";
-"Only Professional" = "Only Professional";
+"Only Professional" = "Public";
 "Only Me" = "Only Me";
 "General" = "General";
 "Date of birth" = "Date of birth";
@@ -245,7 +245,7 @@
 
 "Welcome" = "Welcome";
 
-"Rate_Message" = "Please give us 5 star rating if you enjoy using ModelBay, or tell us what to improve.";
+"Rate_Message" = "Please give uFons 5 star rating if you enjoy using ModelBay, or tell us what to improve.";
 "Rate_Rate" = "Rate 5 Star";
 "Rate_FeedBack" = "Feedback";
 "Rate_Cancel" = "Later";
