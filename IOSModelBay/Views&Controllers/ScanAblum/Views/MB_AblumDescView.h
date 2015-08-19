@@ -14,6 +14,7 @@
 @optional
 
 - (void)likeButtonOnClick:(UIButton *)button;
+- (void)likeCountLabelClick:(UITapGestureRecognizer *)tap;
 - (void)commentButtonOnClick:(UIButton *)button;
 - (void)shareButtonOnClick:(UIButton *)button;
 - (void)moreButtonOnClick:(UIButton *)button;
@@ -23,6 +24,7 @@
 @interface MB_AblumDescView : UIView
 
 @property (nonatomic, strong) UIButton *likeButton;
+@property (nonatomic, strong) UILabel *likeCountLabel;
 @property (nonatomic, strong) UIButton *commentButton;
 @property (nonatomic, strong) UIButton *shareButton;
 @property (nonatomic, strong) UIButton *moreButton;

@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIScrollView     *scrollView;
 @property (nonatomic, strong) MB_AblumDescView *descView;//影集信息
 
+@property (nonatomic, strong) NSMutableArray *descViewArray;
+
 @end
 
 @implementation MB_ScanAblumViewController
@@ -42,6 +44,29 @@
 
 #pragma mark - AblumDescViewDelegate
 - (void)likeButtonOnClick:(UIButton *)button {
+    //赞相册
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSDictionary *params = @{@"id":[userDefaults objectForKey:kID],
+                             @"token":[userDefaults objectForKey:kAccessToken],
+                             @"fid":@(self.ablum.uid),
+                             @"ablId":@(self.ablum.ablId)};
+    [[AFHttpTool shareTool] likeAblumWithParameters:params success:^(id response) {
+        NSLog(@"like send %@", response);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if ([self statFromResponse:response] == 10000) {
+            self.ablum.likes += 1;
+            for (MB_AblumDescView *descView in self.descViewArray) {
+                descView.likeCountLabel.text = [NSString stringWithFormat:@"%ld",self.ablum.likes];
+            }
+        }else {
+            
+        }
+    } failure:^(NSError *err) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
+
+- (void)likeCountLabelClick:(UITapGestureRecognizer *)tap {
     MB_LikersViewController *likersVC = [[MB_LikersViewController alloc] init];
     likersVC.ablum = self.ablum;
     [self.navigationController pushViewController:likersVC animated:YES];
@@ -164,6 +189,7 @@
             descView.delegate = self;
             
             [scrollView addSubview:descView];
+            [self.descViewArray addObject:descView];
 
             scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(imageView.frame) + CGRectGetHeight(descView.frame));
         }
@@ -173,13 +199,11 @@
     return _scrollView;
 }
 
-//影集描述信息
-//- (UIView *)descView {
-//    if (_descView == nil) {
-//        _descView = [[MB_AblumDescView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 300) ablum:self.ablum];
-//        _descView.delegate = self;
-//    }
-//    return _descView;
-//}
+- (NSMutableArray *)descViewArray {
+    if (!_descViewArray) {
+        _descViewArray = [NSMutableArray arrayWithCapacity:1];
+    }
+    return _descViewArray;
+}
 
 @end

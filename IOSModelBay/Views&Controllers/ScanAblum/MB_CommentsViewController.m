@@ -95,7 +95,7 @@ static CGFloat const commentViewHeight = 50;
         user.fbackPic  = comment.fbackPic;
         user.uType     = comment.utype;
         user.state     = comment.state;
-        user.fcareerId = comment.careerId;
+        user.fcareerId = comment.fcareerId;
         user.uid       = comment.fuid;
         userVC.user    = user;
         [self.navigationController pushViewController:userVC animated:YES];

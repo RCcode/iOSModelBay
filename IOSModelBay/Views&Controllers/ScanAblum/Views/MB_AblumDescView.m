@@ -14,18 +14,25 @@
     self = [super initWithFrame:frame];
     if (self) {
         _ablum = ablum;
+        
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         _likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeButton.frame = CGRectMake(10, 23, (kWindowWidth - 60) / 4, 21);
-        _likeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _likeButton.frame = CGRectMake(10, 23, 21, 21);
+//        _likeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_likeButton setImage:[UIImage imageNamed:@"ic_likes"] forState:UIControlStateNormal];
-        NSString *likeTitle = [NSString stringWithFormat:@" %ld",(long)ablum.likes];
-        [_likeButton setTitle:likeTitle forState:UIControlStateNormal];
         [_likeButton addTarget:self action:@selector(likesButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_likeButton];
         
+        _likeCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_likeButton.frame) + 3, 23, 30, 21)];
+        _likeCountLabel.userInteractionEnabled = YES;
+        _likeCountLabel.text = [NSString stringWithFormat:@" %ld",(long)ablum.likes];
+        _likeCountLabel.textColor = [UIColor whiteColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeCountLabelClick:)];
+        [_likeCountLabel addGestureRecognizer:tap];
+        [self addSubview:_likeCountLabel];
+        
         _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _commentButton.frame = CGRectMake(CGRectGetMaxX(_likeButton.frame), 23, kWindowWidth - 60 - CGRectGetMaxX(_likeButton.frame), 21);
+        _commentButton.frame = CGRectMake(CGRectGetMaxX(_likeCountLabel.frame) + 5, 23, kWindowWidth - 60 - CGRectGetMaxX(_likeButton.frame), 21);
         _commentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         NSString *commentTitle = [NSString stringWithFormat:@" %ld",(long)ablum.comments];
         [_commentButton setTitle:commentTitle forState:UIControlStateNormal];
@@ -144,6 +151,12 @@
 - (void)likesButtonOnClick:(UIButton *)button {
     if ([_delegate respondsToSelector:@selector(likeButtonOnClick:)]) {
         [_delegate likeButtonOnClick:button];
+    }
+}
+
+- (void)likeCountLabelClick:(UITapGestureRecognizer *)tap {
+    if ([_delegate respondsToSelector:@selector(likeCountLabelClick:)]) {
+        [_delegate likeCountLabelClick:tap];
     }
 }
 

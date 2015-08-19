@@ -31,12 +31,16 @@ static NSString * const ReuseIdentifierTemplate = @"template";
 //@property (nonatomic, strong) UIView *coverView;
 //@property (nonatomic, strong) MB_AddAblumMenuView *menuView;
 
-
 @end
 
 @implementation MB_AblumViewController
 
 #pragma mark - life cycle
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

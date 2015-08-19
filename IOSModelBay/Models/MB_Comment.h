@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *fbackPic;//赞用户头像
 @property (nonatomic, assign) NSInteger utype;//用户类型: 0,浏览;1:专业
 @property (nonatomic, assign) NSInteger state;//是否本平台用户:0.不是;1.是
-@property (nonatomic, strong) NSString *careerId;//职业id,竖线分割:1|2|3
+@property (nonatomic, strong) NSString *fcareerId;//职业id,竖线分割:1|2|3
 
 @property (nonatomic, assign) NSInteger fuid;//用户id(第三方用户标识)
 

@@ -74,7 +74,7 @@
         user.uType     = liker.utype;
         user.fbackPic  = liker.fbackPic;
         user.state     = liker.state;
-        user.fcareerId = liker.careerId;
+        user.fcareerId = liker.fcareerId;
         user.uid       = liker.fuid;
         userVC.user    = user;
         [self.navigationController pushViewController:userVC animated:YES];
