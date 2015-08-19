@@ -204,6 +204,7 @@ static CGFloat const commentViewHeight = 50;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([self statFromResponse:response] == 10000) {
             self.textView.text = @"";
+            self.ablum.comments += 1;
             [self requestCommentsListWithMinId:0];
         }else {
             self.sendButton.enabled = YES;
