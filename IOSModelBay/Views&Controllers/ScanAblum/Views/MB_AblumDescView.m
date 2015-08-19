@@ -33,6 +33,7 @@
         
         _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentButton.frame = CGRectMake(CGRectGetMaxX(_likeCountLabel.frame) + 5, 23, kWindowWidth - 60 - CGRectGetMaxX(_likeButton.frame), 21);
+        _commentButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         _commentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         NSString *commentTitle = [NSString stringWithFormat:@" %ld",(long)ablum.comments];
         [_commentButton setTitle:commentTitle forState:UIControlStateNormal];

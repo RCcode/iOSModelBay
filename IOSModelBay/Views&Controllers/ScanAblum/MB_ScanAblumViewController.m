@@ -25,6 +25,14 @@
 @implementation MB_ScanAblumViewController
 
 #pragma mark - life cycle
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    for (MB_AblumDescView *descView in self.descViewArray) {
+        [descView.commentButton setTitle:[NSString stringWithFormat:@"%ld",self.ablum.comments] forState:UIControlStateNormal];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
