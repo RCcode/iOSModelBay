@@ -404,6 +404,7 @@
         MB_ScanImageViewController *scanVC = [[MB_ScanImageViewController alloc] init];
         [self.assertLibrary assetForURL:self.urlArray[tap.view.tag] resultBlock:^(ALAsset *asset) {
             scanVC.image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage];
+            
         } failureBlock:^(NSError *error) {
             
         }];

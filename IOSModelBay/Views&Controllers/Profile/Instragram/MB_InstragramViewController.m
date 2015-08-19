@@ -20,6 +20,8 @@ static NSString * const ReuseIdentifierInstagram = @"instagram";
 @property (nonatomic, strong) NSString *maxId;
 @property (nonatomic, assign) BOOL noMore;
 
+@property (nonatomic, assign) BOOL isLoadingMore;
+
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -27,6 +29,17 @@ static NSString * const ReuseIdentifierInstagram = @"instagram";
 @implementation MB_InstragramViewController
 
 #pragma mark - life cycle
+
+- (void)dealloc {
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
+    _tableView = nil;
+    _collectView.dataSource = nil;
+    _collectView.delegate = self;
+    _collectView = nil;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -89,11 +102,28 @@ static NSString * const ReuseIdentifierInstagram = @"instagram";
     if (indexPath.row == self.dataArray.count) {
         MB_ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierInstagram forIndexPath:indexPath];
         cell.instaImageView.image = nil;
-        [MBProgressHUD showHUDAddedTo:cell.instaImageView animated:YES];
+        if (self.noMore) {
+            for (UIView *view in cell.instaImageView.subviews) {
+                if ([view isKindOfClass:[MBProgressHUD class]]) {
+                    [view removeFromSuperview];
+                }
+            }
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:cell.instaImageView animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = LocalizedString(@"NoMore", nil);
+            hud.labelFont = [UIFont systemFontOfSize:17.0];
+
+        }else {
+            [MBProgressHUD showHUDAddedTo:cell.instaImageView animated:YES];
+        }
         return cell;
     }else {
         MB_ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifierInstagram forIndexPath:indexPath];
-        [MBProgressHUD hideHUDForView:cell.instaImageView animated:YES];
+        for (UIView *view in cell.instaImageView.subviews) {
+            if ([view isKindOfClass:[MBProgressHUD class]]) {
+                [view removeFromSuperview];
+            }
+        }
         MB_InstragramModel *model = self.dataArray[indexPath.row];
         [cell.instaImageView sd_setImageWithURL:[NSURL URLWithString:model.images[@"standard_resolution"][@"url"]] placeholderImage:nil];
         cell.contentView.transform = CGAffineTransformMakeRotation(M_PI_2);
@@ -139,9 +169,22 @@ static CGFloat startY = 0;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView == self.tableView) {
         if (scrollView.contentOffset.y / kWindowWidth == self.dataArray.count) {
-            [self requestInstragramMediasListWithMaxId:self.maxId];
+            if (self.noMore) {
+                //没有更多了
+                return;
+            }else{
+                if (self.isLoadingMore) {
+                    return;
+                }else {
+                    [self requestInstragramMediasListWithMaxId:self.maxId];
+                }
+            }
+            
         }else {
-            [self.collectView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:scrollView.contentOffset.y / kWindowWidth inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            NSInteger page = scrollView.contentOffset.y / kWindowWidth;
+            if (page > 0 && page < self.dataArray.count) {
+                [self.collectView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:page inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+            }
         }
     }
 }
@@ -171,6 +214,7 @@ static CGFloat startY = 0;
 }
 
 - (void)requestInstragramMediasListWithMaxId:(NSString *)maxId {
+    self.isLoadingMore = YES;
     NSString *url = [NSString stringWithFormat:@"https://api.instagram.com/v1/users/%@/media/recent/",self.uid];
     NSMutableDictionary *params = [@{@"access_token":[userDefaults objectForKey:kAccessToken],
                                      @"count": @(18)} mutableCopy];
@@ -205,11 +249,11 @@ static CGFloat startY = 0;
         }
         [self.collectView reloadData];
         [self.tableView reloadData];
-        
+        self.isLoadingMore = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self endRefreshingForView:self.collectView];
-//        [MB_Utils showPromptWithText:LocalizedString(@"Loading_failed", nil)];
+        self.isLoadingMore = NO;
     }];
 }
 

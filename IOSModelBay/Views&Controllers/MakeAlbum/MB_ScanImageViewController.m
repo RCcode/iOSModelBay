@@ -10,6 +10,8 @@
 
 @interface MB_ScanImageViewController ()
 
+@property (nonatomic, strong) UIImageView *imageView;
+
 @end
 
 @implementation MB_ScanImageViewController
@@ -26,12 +28,16 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_delet"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonOnClick:)];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
-    imageView.image = self.image;
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view addSubview:imageView];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeight - 64)];
+    _imageView.image = self.image;
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:_imageView];
 }
 
+- (void)setImage:(UIImage *)image {
+    _image = image;
+    _imageView.image = image;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
